@@ -1,0 +1,19 @@
+{
+  "servers": {
+    "mcp-unity": {
+      "type": "stdio",
+      "command": "node",
+      "args": [
+        "E:/Github/OSCAR-MIKE/Library/PackageCache/com.gamelovers.mcp-unity@d50c83a273d8/Server~/build/index.js"
+      ]
+    }
+  },
+  "mcpServers": {
+    "mcp-unity": {
+      "command": "node",
+      "args": [
+        "E:/Github/OSCAR-MIKE/Library/PackageCache/com.gamelovers.mcp-unity@d50c83a273d8/Server~/build/index.js"
+      ]
+    }
+  }
+}

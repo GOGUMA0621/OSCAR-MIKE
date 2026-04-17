@@ -327,7 +327,10 @@ namespace OskarMike.Network
             var initialized = await UgsServiceManager.Instance.EnsureInitializedAsync();
             if (!initialized)
             {
-                SessionStartFailed?.Invoke("Failed to initialize Unity Gaming Services.");
+                var reason = UgsServiceManager.Instance.LastInitializationError;
+                SessionStartFailed?.Invoke(string.IsNullOrWhiteSpace(reason)
+                    ? "Failed to initialize Unity Gaming Services."
+                    : reason);
             }
 
             return initialized;

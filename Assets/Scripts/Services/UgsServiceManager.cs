@@ -8,6 +8,8 @@ namespace OskarMike.Services
 {
     public class UgsServiceManager : MonoBehaviour
     {
+        private const string ProjectNotLinkedMessage = "Unity Dashboard Project ID is not linked. Open Project Settings > Services and link this project before using Relay/UGS.";
+
         public static UgsServiceManager Instance { get; private set; }
 
         [Header("UGS")]
@@ -20,6 +22,7 @@ namespace OskarMike.Services
         public bool IsInitialized => UnityServices.State == ServicesInitializationState.Initialized;
         public bool IsSignedIn => AuthenticationService.Instance.IsSignedIn;
         public string PlayerId => AuthenticationService.Instance.PlayerId;
+        public string LastInitializationError { get; private set; }
 
         private void Awake()
         {
@@ -43,6 +46,15 @@ namespace OskarMike.Services
         {
             try
             {
+                if (string.IsNullOrWhiteSpace(Application.cloudProjectId))
+                {
+                    LastInitializationError = ProjectNotLinkedMessage;
+                    InitializationFailed?.Invoke(LastInitializationError);
+                    Debug.LogError($"[UgsServiceManager] {LastInitializationError}");
+                    initializationTask = null;
+                    return false;
+                }
+
                 if (UnityServices.State == ServicesInitializationState.Uninitialized)
                 {
                     var options = new InitializationOptions();
@@ -59,11 +71,13 @@ namespace OskarMike.Services
                     await AuthenticationService.Instance.SignInAnonymouslyAsync();
                 }
 
+                LastInitializationError = string.Empty;
                 return true;
             }
             catch (Exception exception)
             {
-                InitializationFailed?.Invoke(exception.Message);
+                LastInitializationError = exception.Message;
+                InitializationFailed?.Invoke(LastInitializationError);
                 Debug.LogError($"[UgsServiceManager] Initialization failed: {exception}");
                 initializationTask = null;
                 return false;
