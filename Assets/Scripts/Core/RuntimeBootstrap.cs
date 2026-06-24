@@ -9,6 +9,7 @@ namespace OskarMike.Core
         [SerializeField] private bool createGameManagerIfMissing = true;
         [SerializeField] private bool createSessionManagerIfMissing = true;
         [SerializeField] private bool createUgsServiceManagerIfMissing = true;
+        [SerializeField] private bool createLoadingScreenIfMissing = true;
 
         private void Awake()
         {
@@ -28,6 +29,12 @@ namespace OskarMike.Core
             {
                 var ugsManagerObject = new GameObject("UgsServiceManager");
                 ugsManagerObject.AddComponent<UgsServiceManager>();
+            }
+
+            if (createLoadingScreenIfMissing && LoadingScreenManager.Instance == null)
+            {
+                var loaderObject = new GameObject("LoadingScreenManager");
+                loaderObject.AddComponent<LoadingScreenManager>();
             }
         }
     }

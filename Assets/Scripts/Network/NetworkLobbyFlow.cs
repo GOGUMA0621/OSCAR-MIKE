@@ -1,5 +1,7 @@
-using OskarMike.Network;
+using OskarMike.Core;
+using Unity.Netcode;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace OskarMike.Network
 {
@@ -34,7 +36,30 @@ namespace OskarMike.Network
                 return;
             }
 
-            networkManager.SceneManager.LoadScene(gameSceneName, UnityEngine.SceneManagement.LoadSceneMode.Single);
+            // 로딩 화면 표시
+            var loader = LoadingScreenManager.Instance;
+            if (loader != null)
+            {
+                loader.ShowLoading($"'{gameSceneName}' 로딩 중...");
+                loader.SetProgress(0f);
+            }
+
+            // 네트워크 씬 로드 이벤트 구독
+            networkManager.SceneManager.OnSceneEvent += HandleSceneEvent;
+            networkManager.SceneManager.LoadScene(gameSceneName, LoadSceneMode.Single);
+        }
+
+        private void HandleSceneEvent(SceneEvent sceneEvent)
+        {
+            var loader = LoadingScreenManager.Instance;
+
+            switch (sceneEvent.SceneEventType)
+            {
+                case SceneEventType.LoadEventCompleted:
+                case SceneEventType.SynchronizeComplete:
+                    if (loader != null) loader.HideLoading();
+                    break;
+            }
         }
     }
 }

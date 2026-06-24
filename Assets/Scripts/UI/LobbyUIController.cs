@@ -8,7 +8,7 @@ namespace OskarMike.UI
 {
     public class LobbyUIController : MonoBehaviour
     {
-        [Header("UI")]
+        [Header("UI References")]
         [SerializeField] private TextMeshProUGUI playerListText;
         [SerializeField] private TextMeshProUGUI sessionStateText;
         [SerializeField] private TextMeshProUGUI joinCodeText;
@@ -21,8 +21,27 @@ namespace OskarMike.UI
         [Header("Flow")]
         [SerializeField] private NetworkLobbyFlow lobbyFlow;
 
+        public void SetPlayerListText(TextMeshProUGUI v) { playerListText = v; }
+        public void SetSessionStateText(TextMeshProUGUI v) { sessionStateText = v; }
+        public void SetJoinCodeText(TextMeshProUGUI v) { joinCodeText = v; }
+        public void SetLocalReadyStateText(TextMeshProUGUI v) { localReadyStateText = v; }
+        public void SetReadyButtonLabel(TextMeshProUGUI v) { readyButtonLabel = v; }
+        public void SetStartGameButton(Button v) { startGameButton = v; }
+        public void SetReadyButton(Button v) { readyButton = v; }
+    public void SetLeaveButton(Button v) { leaveButton = v; }
+    public void SetNetworkLobbyFlow(NetworkLobbyFlow v) { lobbyFlow = v; }
+
+    private void Awake()
+        {
+            if (lobbyFlow == null)
+                lobbyFlow = FindFirstObjectByType<NetworkLobbyFlow>();
+        }
+
         private void OnEnable()
         {
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
+
             if (NetworkSessionManager.Instance != null)
             {
                 NetworkSessionManager.Instance.ClientConnected += HandleClientChanged;
@@ -30,22 +49,7 @@ namespace OskarMike.UI
                 NetworkSessionManager.Instance.JoinCodeChanged += HandleJoinCodeChanged;
                 NetworkSessionManager.Instance.ReadyStatesChanged += HandleReadyStatesChanged;
             }
-
-            if (startGameButton != null)
-            {
-                startGameButton.onClick.AddListener(OnClickStartGame);
-            }
-
-            if (leaveButton != null)
-            {
-                leaveButton.onClick.AddListener(OnClickLeave);
-            }
-
-            if (readyButton != null)
-            {
-                readyButton.onClick.AddListener(OnClickReadyToggle);
-            }
-
+            BindButtons();
             RefreshView();
         }
 
@@ -58,126 +62,79 @@ namespace OskarMike.UI
                 NetworkSessionManager.Instance.JoinCodeChanged -= HandleJoinCodeChanged;
                 NetworkSessionManager.Instance.ReadyStatesChanged -= HandleReadyStatesChanged;
             }
-
-            if (startGameButton != null)
-            {
-                startGameButton.onClick.RemoveListener(OnClickStartGame);
-            }
-
-            if (leaveButton != null)
-            {
-                leaveButton.onClick.RemoveListener(OnClickLeave);
-            }
-
-            if (readyButton != null)
-            {
-                readyButton.onClick.RemoveListener(OnClickReadyToggle);
-            }
+            UnbindButtons();
         }
 
-        private void HandleClientChanged(ulong _)
+        private void BindButtons()
         {
-            RefreshView();
+            if (startGameButton != null) startGameButton.onClick.AddListener(OnClickStartGame);
+            if (leaveButton != null) leaveButton.onClick.AddListener(OnClickLeave);
+            if (readyButton != null) readyButton.onClick.AddListener(OnClickReadyToggle);
         }
 
-        private void HandleJoinCodeChanged(string _)
+        private void UnbindButtons()
         {
-            RefreshView();
+            if (startGameButton != null) startGameButton.onClick.RemoveListener(OnClickStartGame);
+            if (leaveButton != null) leaveButton.onClick.RemoveListener(OnClickLeave);
+            if (readyButton != null) readyButton.onClick.RemoveListener(OnClickReadyToggle);
         }
 
-        private void HandleReadyStatesChanged()
-        {
-            RefreshView();
-        }
+        private void HandleClientChanged(ulong _) => RefreshView();
+        private void HandleJoinCodeChanged(string _) => RefreshView();
+        private void HandleReadyStatesChanged() => RefreshView();
 
         private void RefreshView()
         {
             var session = NetworkSessionManager.Instance;
+
             if (session == null)
             {
-                if (sessionStateText != null)
-                {
-                    sessionStateText.text = "Session: Offline";
-                }
-
-                if (playerListText != null)
-                {
-                    playerListText.text = "No active session.";
-                }
-
+                if (sessionStateText != null) sessionStateText.text = "세션: 오프라인";
+                if (playerListText != null) playerListText.text = "활성 세션이 없습니다.";
                 return;
             }
 
             if (sessionStateText != null)
-            {
-                sessionStateText.text = session.IsHost ? "Session: Host" : "Session: Client";
-            }
+                sessionStateText.text = session.IsHost ? "세션: 호스트" : "세션: 클라이언트";
 
             if (playerListText != null)
             {
                 var ordered = session.ConnectedClientIds.OrderBy(id => id);
-                playerListText.text = "Players\n" + string.Join(
-                    "\n",
-                    ordered.Select(id => $"- Client {id} ({(session.IsClientReady(id) ? "Ready" : "Not Ready")})"));
+                playerListText.text = "플레이어\n" + string.Join("\n",
+                    ordered.Select(id => $"- 클라이언트 {id} ({(session.IsClientReady(id) ? "준비" : "대기")})"));
             }
 
             if (startGameButton != null)
-            {
                 startGameButton.interactable = session.IsHost && session.CanStartGame();
-            }
 
             if (joinCodeText != null)
-            {
                 joinCodeText.text = string.IsNullOrWhiteSpace(session.CurrentJoinCode)
-                    ? "Join Code: -"
-                    : $"Join Code: {session.CurrentJoinCode}";
-            }
+                    ? "참가 코드: -" : $"참가 코드: {session.CurrentJoinCode}";
 
             if (readyButton != null)
-            {
                 readyButton.interactable = session.IsClient;
-            }
 
-            var isLocalReady = session.IsLocalClientReady();
+            var ready = session.IsLocalClientReady();
             if (localReadyStateText != null)
-            {
-                localReadyStateText.text = isLocalReady ? "You: Ready" : "You: Not Ready";
-            }
-
+                localReadyStateText.text = ready ? "상태: 준비됨" : "상태: 준비 안됨";
             if (readyButtonLabel != null)
-            {
-                readyButtonLabel.text = isLocalReady ? "Set Not Ready" : "Set Ready";
-            }
+                readyButtonLabel.text = ready ? "준비 취소" : "준비";
         }
 
         private void OnClickStartGame()
         {
-            if (lobbyFlow != null)
-            {
-                lobbyFlow.RequestStartGameFromLobby();
-            }
+            if (lobbyFlow != null) lobbyFlow.RequestStartGameFromLobby();
         }
 
         private void OnClickLeave()
         {
-            if (NetworkSessionManager.Instance != null)
-            {
-                NetworkSessionManager.Instance.ShutdownSession();
-            }
-
-            if (GameManager.Instance != null)
-            {
-                GameManager.Instance.LoadMainMenu();
-            }
+            NetworkSessionManager.Instance?.ShutdownSession();
+            GameManager.Instance?.LoadMainMenu();
         }
 
         private void OnClickReadyToggle()
         {
-            if (NetworkSessionManager.Instance == null)
-            {
-                return;
-            }
-
+            if (NetworkSessionManager.Instance == null) return;
             NetworkSessionManager.Instance.ToggleLocalReady();
             RefreshView();
         }

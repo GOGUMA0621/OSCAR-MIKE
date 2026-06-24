@@ -119,10 +119,11 @@ namespace OskarMike.UI
         {
             SetStatus("Entering lobby...");
 
-            if (GameManager.Instance != null)
+            if (NetworkSessionManager.Instance != null && NetworkSessionManager.Instance.IsHost)
             {
-                GameManager.Instance.LoadLobby();
+                NetworkSessionManager.Instance.LoadLobbyScene();
             }
+            // Clients receive the lobby scene load automatically via NGO scene synchronization.
         }
 
         private void HandleSessionStartFailed(string reason)

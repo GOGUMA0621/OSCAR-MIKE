@@ -8,6 +8,7 @@ using Unity.Netcode.Transports.UTP;
 using UnityEngine;
 using Unity.Services.Relay;
 using Unity.Services.Relay.Models;
+using UnityEngine.SceneManagement;
 
 namespace OskarMike.Network
 {
@@ -241,6 +242,22 @@ namespace OskarMike.Network
             {
                 networkManager.Shutdown();
             }
+        }
+
+        public void LoadLobbyScene()
+        {
+            if (networkManager == null || !networkManager.IsServer)
+            {
+                Debug.LogWarning("[NetworkSessionManager] Only server can load lobby scene via NetworkSceneManager.");
+                return;
+            }
+
+            var sceneName = GameManager.Instance != null
+                ? GameManager.Instance.LobbySceneName
+                : "Lobby";
+
+            Debug.Log($"[NetworkSessionManager] Loading lobby scene '{sceneName}' via NetworkSceneManager.");
+            networkManager.SceneManager.LoadScene(sceneName, LoadSceneMode.Single);
         }
 
         public bool CanStartGame()

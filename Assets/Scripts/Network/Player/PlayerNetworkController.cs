@@ -147,12 +147,8 @@ namespace OskarMike.Network.Player
                 else if (localCamera != null)
                     cameraBaseLocalPos = localCamera.transform.localPosition;
 
-#if ENABLE_INPUT_SYSTEM
-                if (playerInput != null) playerInput.enabled = true;
-                BindInputActions();
-                Cursor.lockState = CursorLockMode.Locked;
-                Cursor.visible   = false;
-#endif
+                NetworkManager.SceneManager.OnSceneEvent += HandleSceneEvent;
+                RefreshGameplayState();
             }
             else
             {
@@ -171,12 +167,11 @@ namespace OskarMike.Network.Player
 
             if (IsOwner)
             {
-                Cursor.lockState = CursorLockMode.None;
-                Cursor.visible   = true;
+                if (NetworkManager != null && NetworkManager.SceneManager != null)
+                    NetworkManager.SceneManager.OnSceneEvent -= HandleSceneEvent;
+                DisableGameplayInput();
             }
-#if ENABLE_INPUT_SYSTEM
-            ClearInputActions();
-#endif
+
             base.OnNetworkDespawn();
         }
 
@@ -391,6 +386,55 @@ namespace OskarMike.Network.Player
             PlayerPosture.Prone  => heightProne,
             _                    => heightStand
         };
+
+        // ══════════════════════════════════════════════════
+        // 게임플레이 입력 (씬 전환 시 호출)
+        // ══════════════════════════════════════════════════
+
+        public void RefreshGameplayState()
+        {
+            if (!IsOwner) return;
+
+            if (IsInGameplayScene())
+                EnableGameplayInput();
+            else
+                DisableGameplayInput();
+        }
+
+        public void EnableGameplayInput()
+        {
+#if ENABLE_INPUT_SYSTEM
+            if (playerInput != null) playerInput.enabled = true;
+            BindInputActions();
+            Cursor.lockState = CursorLockMode.Locked;
+            Cursor.visible   = false;
+#endif
+        }
+
+        public void DisableGameplayInput()
+        {
+#if ENABLE_INPUT_SYSTEM
+            if (playerInput != null) playerInput.enabled = false;
+            ClearInputActions();
+#endif
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible   = true;
+        }
+
+        private static bool IsInGameplayScene()
+        {
+            var activeScene = UnityEngine.SceneManagement.SceneManager.GetActiveScene().name;
+            return activeScene == "GameMap" || activeScene == "Hideout";
+        }
+
+        private void HandleSceneEvent(SceneEvent sceneEvent)
+        {
+            if (sceneEvent.SceneEventType == SceneEventType.LoadComplete
+                || sceneEvent.SceneEventType == SceneEventType.SynchronizeComplete)
+            {
+                RefreshGameplayState();
+            }
+        }
 
         // ══════════════════════════════════════════════════
         // Ready 상태
