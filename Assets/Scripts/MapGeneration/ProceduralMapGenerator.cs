@@ -11,7 +11,15 @@ namespace OskarMike.MapGeneration
         public int seed = 0;
         public float cellSize = 4f;
         public float roomPadding = 1f;
+
+        [Header("Room Spacing (grid cells)")]
+        [Min(1)] public int minRoomGap = 3;
+        [Min(1)] public int maxRoomRange = 12;
+
+        [Header("Corridor")]
         public float corridorWidth = 2.5f;
+        public float corridorFloorY = -0.25f;
+        [Min(0.1f)] public float corridorThickness = 0.5f;
         public Material corridorMaterial;
 
         [Header("Placeholder (used when prefab is null)")]
@@ -144,8 +152,8 @@ namespace OskarMike.MapGeneration
             for (int attempt = 0; attempt < maxAttempts; attempt++)
             {
                 var anchor = placedRooms[rng.Next(placedRooms.Count)];
-                int dx = rng.Next(3, 12) * (rng.Next(2) == 0 ? 1 : -1);
-                int dz = rng.Next(3, 12) * (rng.Next(2) == 0 ? 1 : -1);
+                int dx = rng.Next(minRoomGap, maxRoomRange + 1) * (rng.Next(2) == 0 ? 1 : -1);
+                int dz = rng.Next(minRoomGap, maxRoomRange + 1) * (rng.Next(2) == 0 ? 1 : -1);
 
                 var gridPos = new Vector2Int(
                     anchor.gridPos.x + anchor.size.x / 2 + dx,
@@ -280,8 +288,8 @@ namespace OskarMike.MapGeneration
             var seg = GameObject.CreatePrimitive(PrimitiveType.Cube);
             seg.name = "CorridorSeg";
             seg.transform.SetParent(parent);
-            seg.transform.position = new Vector3(mid.x, -0.25f, mid.z);
-            seg.transform.localScale = new Vector3(corridorWidth, 0.5f, length);
+            seg.transform.position = new Vector3(mid.x, corridorFloorY, mid.z);
+            seg.transform.localScale = new Vector3(corridorWidth, corridorThickness, length);
             seg.transform.rotation = Quaternion.LookRotation(dir);
 
             var renderer = seg.GetComponent<MeshRenderer>();
