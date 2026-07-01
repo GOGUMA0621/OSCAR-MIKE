@@ -5,25 +5,56 @@ namespace OskarMike.MapGeneration
 {
     public class ProceduralMapGenerator : MonoBehaviour
     {
+        public enum RoomPlacementShape
+        {
+            DiagonalOnly,
+            CardinalOnly,
+            Mixed
+        }
+
+        public enum CorridorCrossingPolicy
+        {
+            Allow,
+            Block
+        }
+
         [Header("Settings")]
         public RoomPool roomPool;
         [Min(1)] public int roomCount = 10;
         public int seed = 0;
+        [Min(0.01f)]
         public float cellSize = 4f;
+        [Min(0f)]
         public float roomPadding = 1f;
 
         [Header("Room Spacing (grid cells)")]
         [Min(1)] public int minRoomGap = 3;
         [Min(1)] public int maxRoomRange = 12;
 
+        [Header("Layout Shape")]
+        public RoomPlacementShape placementShape = RoomPlacementShape.DiagonalOnly;
+        [Range(0f, 1f)] public float cardinalPlacementChance = 0.5f;
+
         [Header("Corridor")]
+        [Min(0.01f)]
         public float corridorWidth = 2.5f;
-        public float corridorFloorY = -0.25f;
-        [Min(0.1f)] public float corridorThickness = 0.5f;
+        public float corridorFloorY = 0f;
         public Material corridorMaterial;
+        [Min(0f)]
+        public float minStraight = 2f;
+        public CorridorCrossingPolicy corridorCrossingPolicy = CorridorCrossingPolicy.Allow;
+
+        [Header("Corridor Walls")]
+        public bool generateCorridorWalls = true;
+        [Min(0.01f)] public float corridorWallHeight = 2.5f;
+        public Material corridorWallMaterial;
+
+        [Header("Debug")]
+        public bool debugLogging = false;
 
         [Header("Placeholder (used when prefab is null)")]
         public bool usePlaceholdersForMissingPrefabs = true;
+        [Min(0.01f)]
         public float placeholderHeight = 4f;
 
         [System.Serializable]
@@ -31,6 +62,7 @@ namespace OskarMike.MapGeneration
         {
             public RoomConfig config;
             public Vector3 worldPos;
+            // Center grid coordinate of the room. Convert with GridToWorldCenter().
             public Vector2Int gridPos;
             public Vector2Int size;
             public GameObject instance;
@@ -39,11 +71,29 @@ namespace OskarMike.MapGeneration
         [System.Serializable]
         public struct CorridorData
         {
-            public Vector3 start;
-            public Vector3 corner;
-            public Vector3 end;
+            public Vector3 start;       // room A door
+            public Vector3 extendStart; // minStraight out from room A
+            public Vector3 corner;      // L-turn point
+            public Vector3 extendEnd;   // minStraight out from room B
+            public Vector3 end;         // room B door
             public float width;
             public GameObject instance;
+        }
+
+        private struct GenerationStats
+        {
+            public int targetRooms;
+            public int effectiveSeed;
+            public int roomRequests;
+            public int roomSuccesses;
+            public int roomFailures;
+            public int candidateAttempts;
+            public int diagonalCandidates;
+            public int cardinalCandidates;
+            public int roomOverlapRejects;
+            public int corridorOverlapRejects;
+            public int corridorBlockedRejects;
+            public int corridorCrossingRejects;
         }
 
         public List<PlacedRoomData> placedRooms = new List<PlacedRoomData>();
@@ -54,14 +104,16 @@ namespace OskarMike.MapGeneration
         [ContextMenu("Generate Map")]
         public void Generate()
         {
-            ClearMap();
-            rng = seed != 0 ? new System.Random(seed) : new System.Random();
-
-            if (roomPool == null || roomPool.rooms.Count == 0)
-            {
-                Debug.LogError("[MapGen] RoomPool is empty or not assigned.");
+            if (!ValidateSettings())
                 return;
-            }
+
+            ClearMap();
+            var stats = new GenerationStats
+            {
+                targetRooms = roomCount,
+                effectiveSeed = seed != 0 ? seed : System.Environment.TickCount
+            };
+            rng = new System.Random(stats.effectiveSeed);
 
             var root = new GameObject("GeneratedMap").transform;
 
@@ -74,13 +126,143 @@ namespace OskarMike.MapGeneration
             for (int i = 1; i < roomCount; i++)
             {
                 var config = roomPool.PickRandom(rng);
-                if (TryPlaceRoom(config, root, out var result))
+                stats.roomRequests++;
+                if (TryPlaceRoom(config, root, ref stats, out var result))
                 {
                     placedRooms.Add(result);
+                    stats.roomSuccesses++;
+                }
+                else
+                {
+                    stats.roomFailures++;
                 }
             }
 
-            Debug.Log($"[MapGen] Generated {placedRooms.Count} rooms, {corridors.Count} corridors.");
+            BuildCorridorFloor(root);
+
+            LogGenerationSummary(stats);
+        }
+
+        private void OnValidate()
+        {
+            roomCount = Mathf.Max(1, roomCount);
+            cellSize = Mathf.Max(0.01f, cellSize);
+            roomPadding = Mathf.Max(0f, roomPadding);
+            minRoomGap = Mathf.Max(1, minRoomGap);
+            maxRoomRange = Mathf.Max(minRoomGap, maxRoomRange);
+            cardinalPlacementChance = Mathf.Clamp01(cardinalPlacementChance);
+            corridorWidth = Mathf.Max(0.01f, corridorWidth);
+            minStraight = Mathf.Max(0f, minStraight);
+            corridorWallHeight = Mathf.Max(0.01f, corridorWallHeight);
+            placeholderHeight = Mathf.Max(0.01f, placeholderHeight);
+        }
+
+        private bool ValidateSettings()
+        {
+            if (roomCount < 1)
+            {
+                Debug.LogError("[MapGen] roomCount must be at least 1.");
+                return false;
+            }
+
+            if (cellSize <= 0f)
+            {
+                Debug.LogError("[MapGen] cellSize must be greater than 0.");
+                return false;
+            }
+
+            if (roomPadding < 0f)
+            {
+                Debug.LogError("[MapGen] roomPadding cannot be negative.");
+                return false;
+            }
+
+            if (minRoomGap < 1)
+            {
+                Debug.LogError("[MapGen] minRoomGap must be at least 1.");
+                return false;
+            }
+
+            if (maxRoomRange < minRoomGap)
+            {
+                Debug.LogError($"[MapGen] maxRoomRange ({maxRoomRange}) must be greater than or equal to minRoomGap ({minRoomGap}).");
+                return false;
+            }
+
+            if (cardinalPlacementChance < 0f || cardinalPlacementChance > 1f)
+            {
+                Debug.LogError("[MapGen] cardinalPlacementChance must be between 0 and 1.");
+                return false;
+            }
+
+            if (corridorWidth <= 0f)
+            {
+                Debug.LogError("[MapGen] corridorWidth must be greater than 0.");
+                return false;
+            }
+
+            if (minStraight < 0f)
+            {
+                Debug.LogError("[MapGen] minStraight cannot be negative.");
+                return false;
+            }
+
+            if (corridorWallHeight <= 0f)
+            {
+                Debug.LogError("[MapGen] corridorWallHeight must be greater than 0.");
+                return false;
+            }
+
+            if (placeholderHeight <= 0f)
+            {
+                Debug.LogError("[MapGen] placeholderHeight must be greater than 0.");
+                return false;
+            }
+
+            if (roomPool == null)
+            {
+                Debug.LogError("[MapGen] RoomPool is not assigned.");
+                return false;
+            }
+
+            if (roomPool.rooms == null || roomPool.rooms.Count == 0)
+            {
+                Debug.LogError("[MapGen] RoomPool is empty.");
+                return false;
+            }
+
+            int totalWeight = 0;
+            for (int i = 0; i < roomPool.rooms.Count; i++)
+            {
+                RoomConfig config = roomPool.rooms[i];
+                if (config == null)
+                {
+                    Debug.LogError($"[MapGen] RoomPool contains a null room at index {i}.");
+                    return false;
+                }
+
+                if (config.size.x < 1 || config.size.y < 1)
+                {
+                    Debug.LogError($"[MapGen] RoomConfig '{config.name}' must have a positive size. Current size: {config.size}.");
+                    return false;
+                }
+
+                if (config.weight < 1)
+                {
+                    Debug.LogError($"[MapGen] RoomConfig '{config.name}' must have weight >= 1. Current weight: {config.weight}.");
+                    return false;
+                }
+
+                totalWeight += config.weight;
+            }
+
+            if (totalWeight <= 0)
+            {
+                Debug.LogError("[MapGen] RoomPool total weight must be greater than 0.");
+                return false;
+            }
+
+            return true;
         }
 
         [ContextMenu("Clear Map")]
@@ -94,7 +276,7 @@ namespace OskarMike.MapGeneration
 
         private PlacedRoomData PlaceRoom(RoomConfig config, Vector2Int gridPos, Transform parent)
         {
-            Vector3 worldPos = new Vector3(gridPos.x * cellSize, 0f, gridPos.y * cellSize);
+            Vector3 worldPos = GridToWorldCenter(gridPos);
             GameObject instance;
 
             if (config.prefab != null)
@@ -127,9 +309,8 @@ namespace OskarMike.MapGeneration
             go.name = $"Room_{config.name}_{center.x}_{center.z}";
             go.transform.SetParent(parent);
             go.transform.position = center;
-            float sx = config.size.x * cellSize;
-            float sz = config.size.y * cellSize;
-            go.transform.localScale = new Vector3(sx, placeholderHeight, sz);
+            Vector3 roomSize = GetRoomWorldSize(config.size);
+            go.transform.localScale = new Vector3(roomSize.x, placeholderHeight, roomSize.z);
 
             var renderer = go.GetComponent<MeshRenderer>();
             renderer.sharedMaterial = new Material(Shader.Find("Universal Render Pipeline/Lit"))
@@ -143,96 +324,210 @@ namespace OskarMike.MapGeneration
             return go;
         }
 
-        private bool TryPlaceRoom(RoomConfig config, Transform parent, out PlacedRoomData result)
+        private bool TryPlaceRoom(RoomConfig config, Transform parent, ref GenerationStats stats, out PlacedRoomData result)
         {
             const int maxAttempts = 60;
-            float roomW = config.size.x * cellSize;
-            float roomD = config.size.y * cellSize;
+            float halfW = corridorWidth * 0.5f;
 
             for (int attempt = 0; attempt < maxAttempts; attempt++)
             {
-                var anchor = placedRooms[rng.Next(placedRooms.Count)];
-                int dx = rng.Next(minRoomGap, maxRoomRange + 1) * (rng.Next(2) == 0 ? 1 : -1);
-                int dz = rng.Next(minRoomGap, maxRoomRange + 1) * (rng.Next(2) == 0 ? 1 : -1);
-
-                var gridPos = new Vector2Int(
-                    anchor.gridPos.x + anchor.size.x / 2 + dx,
-                    anchor.gridPos.y + anchor.size.y / 2 + dz);
+                stats.candidateAttempts++;
+                int anchorIdx = rng.Next(placedRooms.Count);
+                var anchor = placedRooms[anchorIdx];
+                Vector2Int gridPos = GetCandidateGridCenter(anchor, out bool usedCardinalPlacement);
+                if (usedCardinalPlacement)
+                    stats.cardinalCandidates++;
+                else
+                    stats.diagonalCandidates++;
 
                 // Bounds check
-                Vector3 center = new Vector3(gridPos.x * cellSize, 0f, gridPos.y * cellSize);
-                Vector3 halfSize = new Vector3(roomW * 0.5f + roomPadding, placeholderHeight * 0.5f, roomD * 0.5f + roomPadding);
-                var newBounds = new Bounds(center, halfSize * 2f);
+                Vector3 center = GridToWorldCenter(gridPos);
+                Bounds newBounds = CreateRoomBounds(center, config.size);
+                Vector3 paddedHalfSize = newBounds.extents;
 
                 bool overlaps = false;
                 foreach (var existing in placedRooms)
                 {
-                    float ew = existing.size.x * cellSize;
-                    float ed = existing.size.y * cellSize;
-                    var eb = new Bounds(existing.worldPos, new Vector3(ew + roomPadding * 2f, placeholderHeight, ed + roomPadding * 2f));
+                    Bounds eb = CreateRoomBounds(existing.worldPos, existing.size);
                     if (newBounds.Intersects(eb))
                     {
                         overlaps = true;
                         break;
                     }
                 }
-                if (overlaps) continue;
-
-                // Find nearest door pair and create L-shaped corridor
-                Vector3? doorA = GetClosestDoor(anchor, center);
-                Vector3? doorB = GetClosestDoor(config, center, anchor.worldPos);
-
-                if (doorA == null || doorB == null)
+                if (overlaps)
                 {
-                    result = PlaceRoom(config, gridPos, parent);
-                    return true;
+                    stats.roomOverlapRejects++;
+                    continue;
                 }
 
-                var dA = doorA.Value;
-                var dB = doorB.Value;
+                // Check room doesn't overlap existing corridor floors
+                overlaps = RoomOverlapsAnyCorridor(center, paddedHalfSize, halfW);
+                if (overlaps)
+                {
+                    stats.corridorOverlapRejects++;
+                    continue;
+                }
 
-                // Build L-shaped corridor (two possible corner points)
-                Vector3 corner1 = new Vector3(dB.x, 0f, dA.z);
-                Vector3 corner2 = new Vector3(dA.x, 0f, dB.z);
+                // Find nearest door pair and create L-shaped corridor
+                Vector3 dA = GetClosestDoor(anchor, center);
+                Vector3 dB = GetClosestDoor(config, center, anchor.worldPos);
 
-                // Pick the shorter path that doesn't overlap
-                float len1 = Vector3.Distance(dA, corner1) + Vector3.Distance(corner1, dB);
-                float len2 = Vector3.Distance(dA, corner2) + Vector3.Distance(corner2, dB);
+                // Extend outward from each room door before turning
+                Vector3 doorNormA = (dA - anchor.worldPos);
+                doorNormA.y = 0f;
+                doorNormA.Normalize();
+                float effectiveMinStraight = GetEffectiveMinStraight();
+                Vector3 extA = dA + doorNormA * effectiveMinStraight;
+
+                Vector3 doorNormB = (dB - center);
+                doorNormB.y = 0f;
+                doorNormB.Normalize();
+                Vector3 extB = dB + doorNormB * effectiveMinStraight;
+
+                // Build L-shaped corridor between extended positions
+                Vector3 corner1 = new Vector3(extB.x, 0f, extA.z);
+                Vector3 corner2 = new Vector3(extA.x, 0f, extB.z);
+
+                float len1 = Vector3.Distance(extA, corner1) + Vector3.Distance(corner1, extB);
+                float len2 = Vector3.Distance(extA, corner2) + Vector3.Distance(corner2, extB);
                 Vector3 corner = len1 <= len2 ? corner1 : corner2;
+
+                if (corridorCrossingPolicy == CorridorCrossingPolicy.Block && CorridorCrossesAnyExisting(dA, extA, corner, extB, dB))
+                {
+                    stats.corridorCrossingRejects++;
+                    continue;
+                }
+
+                // Check corridor doesn't intersect any other room (exclude anchor)
+                bool corridorBlocked = false;
+                foreach (var existing in placedRooms)
+                {
+                    if (existing.gridPos == anchor.gridPos && existing.worldPos == anchor.worldPos)
+                        continue;
+                    if (CorridorIntersectsRoom(dA, extA, corner, extB, dB, halfW, existing))
+                    {
+                        corridorBlocked = true;
+                        break;
+                    }
+                }
+                if (corridorBlocked)
+                {
+                    stats.corridorBlockedRejects++;
+                    continue;
+                }
 
                 result = PlaceRoom(config, gridPos, parent);
 
-                var corridor = BuildCorridor(dA, corner, dB, parent);
+                var corridor = BuildCorridor(dA, extA, corner, extB, dB, parent);
                 corridors.Add(corridor);
+
+                if (debugLogging)
+                {
+                    string placementKind = usedCardinalPlacement ? "cardinal" : "diagonal";
+                    Debug.Log($"[MapGen] Placed '{config.name}' at grid={gridPos}, world={center}, anchor='{anchor.config.name}', placement={placementKind}, attempt={attempt + 1}/{maxAttempts}.");
+                }
 
                 return true;
             }
+
+            if (debugLogging)
+                Debug.LogWarning($"[MapGen] Failed to place '{config.name}' after {maxAttempts} attempts.");
 
             result = default;
             return false;
         }
 
+        private Vector3 GridToWorldCenter(Vector2Int gridPos)
+        {
+            return new Vector3(gridPos.x * cellSize, 0f, gridPos.y * cellSize);
+        }
+
+        private float GetEffectiveMinStraight()
+        {
+            return Mathf.Max(minStraight, corridorWidth * 0.5f);
+        }
+
+        private Vector3 GetRoomWorldSize(Vector2Int roomSize)
+        {
+            return new Vector3(roomSize.x * cellSize, placeholderHeight, roomSize.y * cellSize);
+        }
+
+        private Bounds CreateRoomBounds(Vector3 center, Vector2Int roomSize)
+        {
+            Vector3 worldSize = GetRoomWorldSize(roomSize);
+            worldSize.x += roomPadding * 2f;
+            worldSize.z += roomPadding * 2f;
+            return new Bounds(center, worldSize);
+        }
+
+        private Vector2Int GetCandidateGridCenter(PlacedRoomData anchor, out bool usedCardinalPlacement)
+        {
+            usedCardinalPlacement = ShouldUseCardinalPlacement();
+            if (usedCardinalPlacement)
+                return anchor.gridPos + GetRandomCardinalOffset();
+
+            return anchor.gridPos + GetRandomDiagonalOffset();
+        }
+
+        private void LogGenerationSummary(GenerationStats stats)
+        {
+            float successRate = stats.roomRequests > 0
+                ? (float)stats.roomSuccesses / stats.roomRequests * 100f
+                : 100f;
+
+            Debug.Log(
+                $"[MapGen] Generated {placedRooms.Count}/{stats.targetRooms} rooms, {corridors.Count} corridors. " +
+                $"Seed={stats.effectiveSeed}, shape={placementShape}, cardinalChance={cardinalPlacementChance:0.##}, " +
+                $"success={stats.roomSuccesses}/{stats.roomRequests} ({successRate:0.#}%).");
+
+            if (stats.roomFailures > 0 || debugLogging)
+            {
+                Debug.Log(
+                    $"[MapGen] Placement stats: failures={stats.roomFailures}, attempts={stats.candidateAttempts}, " +
+                    $"candidates(cardinal={stats.cardinalCandidates}, diagonal={stats.diagonalCandidates}), " +
+                    $"rejects(roomOverlap={stats.roomOverlapRejects}, corridorOverlap={stats.corridorOverlapRejects}, " +
+                    $"corridorBlocked={stats.corridorBlockedRejects}, corridorCrossing={stats.corridorCrossingRejects}).");
+            }
+        }
+
+        private bool ShouldUseCardinalPlacement()
+        {
+            switch (placementShape)
+            {
+                case RoomPlacementShape.CardinalOnly:
+                    return true;
+                case RoomPlacementShape.Mixed:
+                    return rng.NextDouble() < cardinalPlacementChance;
+                case RoomPlacementShape.DiagonalOnly:
+                default:
+                    return false;
+            }
+        }
+
+        private Vector2Int GetRandomDiagonalOffset()
+        {
+            int dx = GetRandomSignedGridDistance();
+            int dz = GetRandomSignedGridDistance();
+            return new Vector2Int(dx, dz);
+        }
+
+        private Vector2Int GetRandomCardinalOffset()
+        {
+            int distance = GetRandomSignedGridDistance();
+            bool useX = rng.Next(2) == 0;
+            return useX ? new Vector2Int(distance, 0) : new Vector2Int(0, distance);
+        }
+
+        private int GetRandomSignedGridDistance()
+        {
+            int distance = rng.Next(minRoomGap, maxRoomRange + 1);
+            return distance * (rng.Next(2) == 0 ? 1 : -1);
+        }
+
         private Vector3 GetClosestDoor(PlacedRoomData room, Vector3 target)
         {
-            if (room.instance == null)
-                return GetPlaceholderDoorPosition(room, target);
-
-            var markers = room.instance.GetComponentsInChildren<DoorMarker>();
-            if (markers.Length == 0)
-                return GetPlaceholderDoorPosition(room, target);
-
-            Vector3 closest = markers[0].transform.position;
-            float minDist = Vector3.Distance(closest, target);
-            for (int i = 1; i < markers.Length; i++)
-            {
-                float d = Vector3.Distance(markers[i].transform.position, target);
-                if (d < minDist)
-                {
-                    minDist = d;
-                    closest = markers[i].transform.position;
-                }
-            }
-            return closest;
+            return GetPlaceholderDoorPosition(room, target);
         }
 
         private Vector3 GetClosestDoor(RoomConfig config, Vector3 roomCenter, Vector3 target)
@@ -260,39 +555,89 @@ namespace OskarMike.MapGeneration
                 return center + new Vector3(0f, 0f, Mathf.Sign(local.z) * hd);
         }
 
-        private CorridorData BuildCorridor(Vector3 start, Vector3 corner, Vector3 end, Transform parent)
+        private CorridorData BuildCorridor(Vector3 start, Vector3 extendStart, Vector3 corner, Vector3 extendEnd, Vector3 end, Transform parent)
         {
-            var root = new GameObject("Corridor").transform;
-            root.SetParent(parent);
-
-            BuildCorridorSegment(start, corner, root);
-            BuildCorridorSegment(corner, end, root);
-
             return new CorridorData
             {
                 start = start,
+                extendStart = extendStart,
                 corner = corner,
+                extendEnd = extendEnd,
                 end = end,
                 width = corridorWidth,
-                instance = root.gameObject
+                instance = null
             };
         }
 
-        private void BuildCorridorSegment(Vector3 from, Vector3 to, Transform parent)
+        // ── corridor floor mesh ──
+
+        private void BuildCorridorFloor(Transform parent)
         {
-            Vector3 dir = to - from;
-            float length = dir.magnitude;
-            if (length < 0.01f) return;
+            if (corridors.Count == 0) return;
 
-            Vector3 mid = (from + to) * 0.5f;
-            var seg = GameObject.CreatePrimitive(PrimitiveType.Cube);
-            seg.name = "CorridorSeg";
-            seg.transform.SetParent(parent);
-            seg.transform.position = new Vector3(mid.x, corridorFloorY, mid.z);
-            seg.transform.localScale = new Vector3(corridorWidth, corridorThickness, length);
-            seg.transform.rotation = Quaternion.LookRotation(dir);
+            var verts = new List<Vector3>();
+            var tris = new List<int>();
+            var uvs = new List<Vector2>();
+            var normals = new List<Vector3>();
+            var vcache = new VertexCache(verts, uvs, normals);
+            var wallVerts = new List<Vector3>();
+            var wallTris = new List<int>();
+            var wallUvs = new List<Vector2>();
+            var wallNormals = new List<Vector3>();
+            var wallCache = new VertexCache(wallVerts, wallUvs, wallNormals);
+            float bot = corridorFloorY;
+            float halfW = corridorWidth * 0.5f;
 
-            var renderer = seg.GetComponent<MeshRenderer>();
+            for (int ci = 0; ci < corridors.Count; ci++)
+            {
+                var corr = corridors[ci];
+                if (debugLogging)
+                    Debug.Log($"[Floor] Corridor {ci}: start={corr.start} extA={corr.extendStart} corner={corr.corner} extB={corr.extendEnd} end={corr.end}");
+
+                BuildCorridorFloorQuads(vcache, tris, corr, halfW, bot);
+
+                // 벽: 짧은 miter edge 방식 (계단식 꺾임 방지)
+                if (generateCorridorWalls)
+                {
+                    Vector3[] rawPoints = { corr.start, corr.extendStart, corr.corner, corr.extendEnd, corr.end };
+                    List<Vector3> points = SimplifyCorridorPoints(rawPoints);
+                    BuildCorridorEdges(points, halfW, out var left, out var right);
+                    AddCorridorWalls(wallCache, wallTris, left, right, bot, corridorWallHeight);
+                }
+
+            }
+
+            if (debugLogging) Debug.Log($"[Floor] Total: {verts.Count} verts, {tris.Count / 3} tris");
+
+            if (verts.Count == 0) return;
+
+            // Fix triangle winding — all must face up (backward merge / door turn quads can invert)
+            Vector3[] varr = verts.ToArray();
+            for (int i = 0; i < tris.Count; i += 3)
+            {
+                Vector3 a = varr[tris[i]];
+                Vector3 b = varr[tris[i + 1]];
+                Vector3 c = varr[tris[i + 2]];
+                if (Vector3.Cross(b - a, c - a).y < 0f)
+                {
+                    int tmp = tris[i + 1];
+                    tris[i + 1] = tris[i + 2];
+                    tris[i + 2] = tmp;
+                }
+            }
+
+            var mesh = new Mesh();
+            mesh.vertices = varr;
+            mesh.triangles = tris.ToArray();
+            mesh.normals = normals.ToArray();
+            mesh.uv = uvs.ToArray();
+            mesh.RecalculateBounds();
+
+            var go = new GameObject("CorridorFloor");
+            go.transform.SetParent(parent);
+            go.AddComponent<MeshFilter>().sharedMesh = mesh;
+
+            var renderer = go.AddComponent<MeshRenderer>();
             if (corridorMaterial != null)
                 renderer.sharedMaterial = corridorMaterial;
             else
@@ -303,7 +648,522 @@ namespace OskarMike.MapGeneration
                 };
             }
 
-            DestroyImmediate(seg.GetComponent<BoxCollider>());
+            if (generateCorridorWalls && wallVerts.Count > 0)
+                BuildCorridorWallObject(parent, wallVerts, wallTris, wallUvs, wallNormals);
+        }
+
+        private void BuildCorridorWallObject(Transform parent, List<Vector3> verts, List<int> tris, List<Vector2> uvs, List<Vector3> normals)
+        {
+            var mesh = new Mesh();
+            mesh.vertices = verts.ToArray();
+            mesh.triangles = tris.ToArray();
+            mesh.normals = normals.ToArray();
+            mesh.uv = uvs.ToArray();
+            mesh.RecalculateBounds();
+
+            var go = new GameObject("CorridorWalls");
+            go.transform.SetParent(parent);
+            go.AddComponent<MeshFilter>().sharedMesh = mesh;
+
+            var renderer = go.AddComponent<MeshRenderer>();
+            if (corridorWallMaterial != null)
+                renderer.sharedMaterial = corridorWallMaterial;
+            else
+            {
+                renderer.sharedMaterial = new Material(Shader.Find("Universal Render Pipeline/Lit"))
+                {
+                    color = new Color(0.28f, 0.28f, 0.26f)
+                };
+            }
+        }
+
+        // ── vertex dedup cache ──
+
+        private struct VertexCache
+        {
+            private readonly Dictionary<VertexKey, int> _map;
+            private readonly List<Vector3> _verts;
+            private readonly List<Vector2> _uvs;
+            private readonly List<Vector3> _normals;
+            private const float Snap = 0.001f;
+
+            public int Count => _verts.Count;
+
+            public VertexCache(List<Vector3> verts, List<Vector2> uvs, List<Vector3> normals)
+            {
+                _map = new Dictionary<VertexKey, int>();
+                _verts = verts;
+                _uvs = uvs;
+                _normals = normals;
+            }
+
+            public int Add(Vector3 v, Vector2 uv, Vector3 n)
+            {
+                var key = new VertexKey(
+                    (long)Mathf.Round(v.x / Snap),
+                    (long)Mathf.Round(v.y / Snap),
+                    (long)Mathf.Round(v.z / Snap));
+                if (_map.TryGetValue(key, out int idx))
+                    return idx;
+                idx = _verts.Count;
+                _verts.Add(v);
+                _uvs.Add(uv);
+                _normals.Add(n);
+                _map[key] = idx;
+                return idx;
+            }
+
+            private struct VertexKey
+            {
+                private readonly long _x;
+                private readonly long _y;
+                private readonly long _z;
+
+                public VertexKey(long x, long y, long z)
+                {
+                    _x = x;
+                    _y = y;
+                    _z = z;
+                }
+
+                public override bool Equals(object obj)
+                {
+                    if (!(obj is VertexKey other))
+                        return false;
+
+                    return _x == other._x && _y == other._y && _z == other._z;
+                }
+
+                public override int GetHashCode()
+                {
+                    unchecked
+                    {
+                        int hash = 17;
+                        hash = hash * 31 + _x.GetHashCode();
+                        hash = hash * 31 + _y.GetHashCode();
+                        hash = hash * 31 + _z.GetHashCode();
+                        return hash;
+                    }
+                }
+            }
+        }
+
+        // ── mesh helpers ──
+
+        private static List<Vector3> SimplifyCorridorPoints(Vector3[] rawPoints)
+        {
+            var points = new List<Vector3>();
+            for (int i = 0; i < rawPoints.Length; i++)
+            {
+                if (points.Count == 0 || Vector3.Distance(points[^1], rawPoints[i]) >= 0.01f)
+                    points.Add(rawPoints[i]);
+            }
+
+            for (int i = points.Count - 2; i > 0; i--)
+            {
+                Vector3 prev = points[i - 1];
+                Vector3 current = points[i];
+                Vector3 next = points[i + 1];
+                if (AreCollinearXZ(prev, current, next))
+                    points.RemoveAt(i);
+            }
+
+            return points;
+        }
+
+        private static bool AreCollinearXZ(Vector3 a, Vector3 b, Vector3 c)
+        {
+            Vector3 ab = b - a;
+            Vector3 bc = c - b;
+            ab.y = 0f;
+            bc.y = 0f;
+            if (ab.sqrMagnitude < 0.0001f || bc.sqrMagnitude < 0.0001f)
+                return true;
+
+            return Mathf.Abs(Vector3.Cross(ab.normalized, bc.normalized).y) <= 0.001f;
+        }
+
+        private static void BuildCorridorFloorQuads(VertexCache cache, List<int> tris,
+            CorridorData corr, float halfW, float bot)
+        {
+            Vector3[] points = { corr.start, corr.extendStart, corr.corner, corr.extendEnd, corr.end };
+            List<Vector3> simplified = SimplifyCorridorPoints(points);
+            BuildCorridorEdges(simplified, halfW, out var left, out var right);
+
+            if (left.Count < 2 || right.Count != left.Count)
+                return;
+
+            for (int i = 0; i < left.Count - 1; i++)
+            {
+                if (Vector3.Distance(left[i], left[i + 1]) < 0.01f
+                    || Vector3.Distance(right[i], right[i + 1]) < 0.01f)
+                    continue;
+
+                AddFloorQuadCorners(cache, tris, left[i], right[i], right[i + 1], left[i + 1], bot);
+            }
+        }
+
+        // 벽 전용 edge 생성. 꺾임점은 miter로 이어서 계단식 벽을 방지하되,
+        // miter 길이를 제한해서 긴 대각선 spike가 생기지 않게 한다.
+        private static void BuildCorridorEdges(List<Vector3> points, float halfW,
+            out List<Vector3> left, out List<Vector3> right)
+        {
+            left = new List<Vector3>(points.Count);
+            right = new List<Vector3>(points.Count);
+
+            if (points.Count < 2)
+                return;
+
+            for (int i = 0; i < points.Count; i++)
+            {
+                if (i == 0)
+                {
+                    Vector3 dir = GetSegmentDirection(points[0], points[1]);
+                    Vector3 side = Vector3.Cross(Vector3.up, dir) * halfW;
+                    left.Add(points[i] - side);
+                    right.Add(points[i] + side);
+                }
+                else if (i == points.Count - 1)
+                {
+                    Vector3 dir = GetSegmentDirection(points[i - 1], points[i]);
+                    Vector3 side = Vector3.Cross(Vector3.up, dir) * halfW;
+                    left.Add(points[i] - side);
+                    right.Add(points[i] + side);
+                }
+                else
+                {
+                    Vector3 prevDir = GetSegmentDirection(points[i - 1], points[i]);
+                    Vector3 nextDir = GetSegmentDirection(points[i], points[i + 1]);
+                    Vector3 prevSide = Vector3.Cross(Vector3.up, prevDir) * halfW;
+                    Vector3 nextSide = Vector3.Cross(Vector3.up, nextDir) * halfW;
+
+                    left.Add(GetClampedOffsetLineIntersection(points[i], prevDir, -prevSide, nextDir, -nextSide, halfW));
+                    right.Add(GetClampedOffsetLineIntersection(points[i], prevDir, prevSide, nextDir, nextSide, halfW));
+                }
+            }
+        }
+
+        private static void AddCorridorWalls(VertexCache cache, List<int> tris,
+            List<Vector3> left, List<Vector3> right, float floorY, float wallHeight)
+        {
+            if (left.Count < 2 || right.Count != left.Count)
+                return;
+
+            for (int i = 0; i < left.Count - 1; i++)
+            {
+                AddWallPlane(cache, tris,
+                    new Vector3(left[i + 1].x, left[i + 1].y, left[i + 1].z),
+                    new Vector3(left[i].x, left[i].y, left[i].z),
+                    floorY, wallHeight);
+
+                AddWallPlane(cache, tris,
+                    new Vector3(right[i].x, right[i].y, right[i].z),
+                    new Vector3(right[i + 1].x, right[i + 1].y, right[i + 1].z),
+                    floorY, wallHeight);
+            }
+        }
+
+        private static void AddWallPlane(VertexCache cache, List<int> tris,
+            Vector3 a, Vector3 b, float floorY, float wallHeight)
+        {
+            if (Vector3.Distance(a, b) <= 0.01f)
+                return;
+
+            Vector3 bottomA = WithY(a, floorY);
+            Vector3 bottomB = WithY(b, floorY);
+            Vector3 topB = WithY(b, floorY + wallHeight);
+            Vector3 topA = WithY(a, floorY + wallHeight);
+            AddQuad(cache, tris, bottomA, bottomB, topB, topA);
+            AddQuad(cache, tris, bottomB, bottomA, topA, topB);
+        }
+
+        private static Vector3 WithY(Vector3 value, float y)
+        {
+            value.y = y;
+            return value;
+        }
+
+        private static void AddQuad(VertexCache cache, List<int> tris,
+            Vector3 a, Vector3 b, Vector3 c, Vector3 d)
+        {
+            Vector3 normal = Vector3.Cross(b - a, c - a).normalized;
+            if (normal.sqrMagnitude <= 0.0001f)
+                normal = Vector3.up;
+
+            float width = Vector3.Distance(a, b);
+            float height = Vector3.Distance(b, c);
+            int i0 = cache.Add(a, new Vector2(0f, 0f), normal);
+            int i1 = cache.Add(b, new Vector2(width, 0f), normal);
+            int i2 = cache.Add(c, new Vector2(width, height), normal);
+            int i3 = cache.Add(d, new Vector2(0f, height), normal);
+
+            tris.Add(i0); tris.Add(i2); tris.Add(i1);
+            tris.Add(i0); tris.Add(i3); tris.Add(i2);
+        }
+
+        private static Vector3 GetSegmentDirection(Vector3 from, Vector3 to)
+        {
+            Vector3 direction = to - from;
+            direction.y = 0f;
+            return direction.sqrMagnitude <= 0.0001f ? Vector3.forward : direction.normalized;
+        }
+
+        private static Vector3 GetClampedOffsetLineIntersection(Vector3 center,
+            Vector3 previousDirection, Vector3 previousOffset,
+            Vector3 nextDirection, Vector3 nextOffset, float halfW)
+        {
+            Vector2 p = new Vector2(center.x + previousOffset.x, center.z + previousOffset.z);
+            Vector2 r = new Vector2(previousDirection.x, previousDirection.z);
+            Vector2 q = new Vector2(center.x + nextOffset.x, center.z + nextOffset.z);
+            Vector2 s = new Vector2(nextDirection.x, nextDirection.z);
+
+            float cross = Cross2D(r, s);
+            if (Mathf.Abs(cross) <= 0.001f)
+            {
+                Vector3 averaged = center + (previousOffset + nextOffset) * 0.5f;
+                averaged.y = center.y;
+                return averaged;
+            }
+
+            Vector2 qMinusP = q - p;
+            float t = Cross2D(qMinusP, s) / cross;
+            Vector2 intersection = p + r * t;
+            Vector3 result = new Vector3(intersection.x, center.y, intersection.y);
+            return ClampWallMiter(center, result, halfW);
+        }
+
+        private static Vector3 ClampWallMiter(Vector3 center, Vector3 point, float halfW)
+        {
+            float maxMiterLength = halfW * 1.41421356f + 0.01f;
+            Vector3 offset = point - center;
+            offset.y = 0f;
+            if (offset.sqrMagnitude <= maxMiterLength * maxMiterLength)
+                return point;
+
+            Vector3 clamped = center + offset.normalized * maxMiterLength;
+            clamped.y = center.y;
+            return clamped;
+        }
+
+        private static float Cross2D(Vector2 a, Vector2 b)
+        {
+            return a.x * b.y - a.y * b.x;
+        }
+
+        private static void AddFloorQuad(VertexCache cache, List<int> tris,
+            Vector3 from, Vector3 to, Vector3 right, float halfW, float bot)
+        {
+            if (Vector3.Distance(from, to) < 0.01f)
+                return;
+
+            AddFloorQuadCorners(cache, tris,
+                from - right * halfW,
+                from + right * halfW,
+                to + right * halfW,
+                to - right * halfW,
+                bot);
+        }
+
+        private static void AddFloorQuadCorners(VertexCache cache, List<int> tris,
+            Vector3 bl, Vector3 br, Vector3 tr, Vector3 tl, float bot)
+        {
+            Vector3 n = Vector3.up;
+            float width = Vector3.Distance(bl, br);
+            float length = Vector3.Distance(bl, tl);
+            int i0 = cache.Add(new Vector3(bl.x, bot, bl.z), new Vector2(0f, 0f), n);
+            int i1 = cache.Add(new Vector3(br.x, bot, br.z), new Vector2(width, 0f), n);
+            int i2 = cache.Add(new Vector3(tr.x, bot, tr.z), new Vector2(width, length), n);
+            int i3 = cache.Add(new Vector3(tl.x, bot, tl.z), new Vector2(0f, length), n);
+
+            tris.Add(i0); tris.Add(i2); tris.Add(i1);
+            tris.Add(i0); tris.Add(i3); tris.Add(i2);
+        }
+
+        // ── corridor-room intersection ──
+
+        private bool CorridorIntersectsRoom(Vector3 dA, Vector3 extA, Vector3 corner, Vector3 extB, Vector3 dB, float halfW, PlacedRoomData room)
+        {
+            Vector3 halfExtents = new Vector3(
+                room.size.x * cellSize * 0.5f + roomPadding,
+                placeholderHeight * 0.5f,
+                room.size.y * cellSize * 0.5f + roomPadding);
+
+            float minX = room.worldPos.x - halfExtents.x;
+            float maxX = room.worldPos.x + halfExtents.x;
+            float minZ = room.worldPos.z - halfExtents.z;
+            float maxZ = room.worldPos.z + halfExtents.z;
+
+            Vector3[][] segs = {
+                new[] { dA, extA },
+                new[] { extA, corner },
+                new[] { corner, extB },
+                new[] { extB, dB }
+            };
+
+            foreach (var seg in segs)
+            {
+                if (SegCenterlineIntersectsRect(seg[0], seg[1],
+                    minX - halfW, minZ - halfW,
+                    maxX + halfW, maxZ + halfW))
+                    return true;
+            }
+
+            return false;
+        }
+
+        private bool RoomOverlapsAnyCorridor(Vector3 center, Vector3 halfSize, float halfW)
+        {
+            float rMinX = center.x - halfSize.x;
+            float rMaxX = center.x + halfSize.x;
+            float rMinZ = center.z - halfSize.z;
+            float rMaxZ = center.z + halfSize.z;
+
+            foreach (var c in corridors)
+            {
+                Vector3[] pts = { c.start, c.extendStart, c.corner, c.extendEnd, c.end };
+                for (int i = 0; i < 4; i++)
+                {
+                    if (Vector3.Distance(pts[i], pts[i + 1]) < 0.01f) continue;
+                    Vector3 dir = (pts[i + 1] - pts[i]).normalized;
+                    Vector3 right = Vector3.Cross(Vector3.up, dir);
+                    Vector3 bl = pts[i] - right * halfW;
+                    Vector3 br = pts[i] + right * halfW;
+                    Vector3 tl = pts[i + 1] - right * halfW;
+                    Vector3 tr = pts[i + 1] + right * halfW;
+                    float qMinX = Mathf.Min(bl.x, br.x, tl.x, tr.x);
+                    float qMaxX = Mathf.Max(bl.x, br.x, tl.x, tr.x);
+                    float qMinZ = Mathf.Min(bl.z, br.z, tl.z, tr.z);
+                    float qMaxZ = Mathf.Max(bl.z, br.z, tl.z, tr.z);
+                    if (qMinX < rMaxX && qMaxX > rMinX && qMinZ < rMaxZ && qMaxZ > rMinZ)
+                        return true;
+                }
+            }
+            return false;
+        }
+
+        private bool CorridorCrossesAnyExisting(Vector3 dA, Vector3 extA, Vector3 corner, Vector3 extB, Vector3 dB)
+        {
+            Vector3[] newPts = { dA, extA, corner, extB, dB };
+            foreach (var existing in corridors)
+            {
+                Vector3[] existingPts = { existing.start, existing.extendStart, existing.corner, existing.extendEnd, existing.end };
+                for (int i = 0; i < newPts.Length - 1; i++)
+                {
+                    Vector3 a = newPts[i];
+                    Vector3 b = newPts[i + 1];
+                    if (Vector3.Distance(a, b) < 0.01f)
+                        continue;
+
+                    for (int j = 0; j < existingPts.Length - 1; j++)
+                    {
+                        Vector3 c = existingPts[j];
+                        Vector3 d = existingPts[j + 1];
+                        if (Vector3.Distance(c, d) < 0.01f)
+                            continue;
+
+                        if (SegmentsShareEndpoint(a, b, c, d))
+                            continue;
+
+                        if (SegmentsIntersectXZ(a, b, c, d))
+                            return true;
+                    }
+                }
+            }
+
+            return false;
+        }
+
+        private static bool SegmentsShareEndpoint(Vector3 a, Vector3 b, Vector3 c, Vector3 d)
+        {
+            const float endpointTolerance = 0.01f;
+            return DistanceSqXZ(a, c) <= endpointTolerance * endpointTolerance
+                || DistanceSqXZ(a, d) <= endpointTolerance * endpointTolerance
+                || DistanceSqXZ(b, c) <= endpointTolerance * endpointTolerance
+                || DistanceSqXZ(b, d) <= endpointTolerance * endpointTolerance;
+        }
+
+        private static bool SegmentsIntersectXZ(Vector3 a, Vector3 b, Vector3 c, Vector3 d)
+        {
+            Vector2 p1 = new Vector2(a.x, a.z);
+            Vector2 q1 = new Vector2(b.x, b.z);
+            Vector2 p2 = new Vector2(c.x, c.z);
+            Vector2 q2 = new Vector2(d.x, d.z);
+
+            float o1 = Orientation(p1, q1, p2);
+            float o2 = Orientation(p1, q1, q2);
+            float o3 = Orientation(p2, q2, p1);
+            float o4 = Orientation(p2, q2, q1);
+
+            if (o1 * o2 < 0f && o3 * o4 < 0f)
+                return true;
+
+            return ApproximatelyZero(o1) && PointOnSegment(p2, p1, q1)
+                || ApproximatelyZero(o2) && PointOnSegment(q2, p1, q1)
+                || ApproximatelyZero(o3) && PointOnSegment(p1, p2, q2)
+                || ApproximatelyZero(o4) && PointOnSegment(q1, p2, q2);
+        }
+
+        private static float Orientation(Vector2 a, Vector2 b, Vector2 c)
+        {
+            return (b.x - a.x) * (c.y - a.y) - (b.y - a.y) * (c.x - a.x);
+        }
+
+        private static bool PointOnSegment(Vector2 p, Vector2 a, Vector2 b)
+        {
+            const float tolerance = 0.001f;
+            return p.x >= Mathf.Min(a.x, b.x) - tolerance
+                && p.x <= Mathf.Max(a.x, b.x) + tolerance
+                && p.y >= Mathf.Min(a.y, b.y) - tolerance
+                && p.y <= Mathf.Max(a.y, b.y) + tolerance;
+        }
+
+        private static bool ApproximatelyZero(float value)
+        {
+            return Mathf.Abs(value) <= 0.001f;
+        }
+
+        private static float DistanceSqXZ(Vector3 a, Vector3 b)
+        {
+            float dx = a.x - b.x;
+            float dz = a.z - b.z;
+            return dx * dx + dz * dz;
+        }
+
+        private static bool SegCenterlineIntersectsRect(Vector3 from, Vector3 to,
+            float rMinX, float rMinZ, float rMaxX, float rMaxZ)
+        {
+            Vector3 d = to - from;
+            if (d.sqrMagnitude < 0.0001f) return false;
+
+            float dx = d.x;
+            float dz = d.z;
+            float tMin = 0f, tMax = 1f;
+
+            // Liang-Barsky against X slabs
+            if (dx != 0f)
+            {
+                float t1 = (rMinX - from.x) / dx;
+                float t2 = (rMaxX - from.x) / dx;
+                if (dx < 0f) { float tmp = t1; t1 = t2; t2 = tmp; }
+                tMin = Mathf.Max(tMin, t1);
+                tMax = Mathf.Min(tMax, t2);
+                if (tMin > tMax) return false;
+            }
+            else if (from.x < rMinX || from.x > rMaxX) return false;
+
+            // Liang-Barsky against Z slabs
+            if (dz != 0f)
+            {
+                float t1 = (rMinZ - from.z) / dz;
+                float t2 = (rMaxZ - from.z) / dz;
+                if (dz < 0f) { float tmp = t1; t1 = t2; t2 = tmp; }
+                tMin = Mathf.Max(tMin, t1);
+                tMax = Mathf.Min(tMax, t2);
+                if (tMin > tMax) return false;
+            }
+            else if (from.z < rMinZ || from.z > rMaxZ) return false;
+
+            return true;
         }
     }
 }
