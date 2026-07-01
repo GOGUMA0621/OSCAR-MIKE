@@ -14,4 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::OskarMike.MapGeneration.RoomConfig
   prefab: {fileID: 0}
   size: {x: 1, y: 1}
-  weight: 1
+  weight: 3
