@@ -94,4 +94,7 @@ Lobby UI → Start → NetworkLobbyFlow.RequestStartGameFromLobby()
 
 ## Delivery Notes
 - Preserve existing skeleton; extend incrementally. Prefer additive changes over rewrites.
+- Before implementing, re-check this `AGENTS.md` and apply its project rules to the change.
+- Do not directly edit scripts that are not clearly user-created/user-modified for the current work. Prefer additive changes: create a new partial/companion script or component and wire it through scene/prefab references instead.
+- Use C# `partial` only when the target class already supports partial definitions; otherwise use a separate MonoBehaviour/helper component and connect it without rewriting the original script.
 - Validate behavior after each networking/UI flow change (see Regression Checklist above).
