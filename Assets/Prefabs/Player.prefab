@@ -144,6 +144,7 @@ GameObject:
   - component: {fileID: 457072284656485375}
   - component: {fileID: 7312233110375231782}
   - component: {fileID: 59669700148261852}
+  - component: {fileID: 7025091736550813081}
   - component: {fileID: 8156523762465580135}
   m_Layer: 0
   m_Name: Player
@@ -357,12 +358,67 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::OskarMike.Network.Player.PlayerNetworkController
   ShowTopMostFoldoutHeaderGroup: 1
-  moveSpeed: 4.5
-  gravity: -9.81
-  moveActionName: Move
+  speedWalkStand: 4.5
+  speedSprintStand: 8
+  speedWalkCrouch: 2.5
+  speedWalkProne: 1.2
+  jumpHeight: 1.2
+  gravity: -15
+  groundAcceleration: 28
+  groundDeceleration: 34
+  airAcceleration: 8
+  heightStand: 2
+  heightCrouch: 1.2
+  heightProne: 0.6
+  postureTransitionSpeed: 8
+  sprintGraceTime: 0.25
+  slideDuration: 0.75
+  slideStartSpeedMultiplier: 1.05
+  diveDuration: 0.6
+  diveStartSpeedMultiplier: 1.1
+  diveRecoveryLockout: 0.35
+  vaultMinHeight: 0.4
+  vaultDuration: 0.45
+  vaultForwardOffset: 0.9
+  vaultArcHeight: 0.35
+  parkourMaxHeight: 1
+  parkourCheckDistance: 0.6
+  parkourLayerMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
   mouseSensitivity: 100
-  lookActionName: Look
   cameraHolder: {fileID: 0}
+  swayAmplitude: 0.03
+  swayFrequency: 8
+  moveActionName: Move
+  lookActionName: Look
+  jumpActionName: Jump
+  sprintActionName: Sprint
+  crouchActionName: Crouch
+  proneActionName: Prone
+--- !u!114 &7025091736550813081
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8097309021167318534}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 63a4f2b2b84d3674886d8bc09b48e626, type: 3}
+  m_Name:
+  m_EditorClassIdentifier: Assembly-CSharp::OskarMike.Network.Player.PlayerStamina
+  maxStamina: 100
+  recoverRate: 10
+  drainSprint: 15
+  drainOverweightWalk: 5
+  costJump: 10
+  costParkour: 12
+  costSlide: 14
+  costDive: 18
+  recoveryDelayAfterAction: 0.75
+  lowStaminaThreshold: 0.2
+  postSprintSwayTime: 2
 --- !u!114 &8156523762465580135
 MonoBehaviour:
   m_ObjectHideFlags: 0

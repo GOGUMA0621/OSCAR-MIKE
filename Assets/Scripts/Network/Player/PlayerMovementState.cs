@@ -20,4 +20,17 @@ namespace OskarMike.Network.Player
         Walk    = 1,
         Sprint  = 2
     }
+
+    /// <summary>
+    /// 일반 이동을 잠시 대체하거나 보조하는 플레이어 액션 상태.
+    /// </summary>
+    public enum PlayerActionState : byte
+    {
+        None     = 0,
+        Jumping  = 1,
+        Falling  = 2,
+        Vaulting = 3,
+        Diving   = 4,
+        Sliding  = 5
+    }
 }
