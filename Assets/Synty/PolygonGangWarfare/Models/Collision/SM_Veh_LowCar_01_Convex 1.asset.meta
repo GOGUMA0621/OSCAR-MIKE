@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: acc405c5940aaba4e8f8e04ae0cda181
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 43035286514109330
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 150589
+  packageName: POLYGON - Gang Warfare Pack - Art by Synty
+  packageVersion: 1.7.2
+  assetPath: Assets/Synty/PolygonGangWarfare/Models/Collision/SM_Veh_LowCar_01_Convex
+    1.asset
+  uploadId: 975930

@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 333b2a60746aa274aa92db04ee793c40
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 43828890794301262
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 150589
+  packageName: POLYGON - Gang Warfare Pack - Art by Synty
+  packageVersion: 1.7.2
+  assetPath: Assets/Synty/PolygonGangWarfare/Models/Collision/SM_Prop_CardboardBox_Stack_01_Convex.asset
+  uploadId: 975930

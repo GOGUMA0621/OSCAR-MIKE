@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: a6663ac34054a1b43acb99bccd1239ca
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 1110770581427935793
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 252731
+  packageName: POLYGON - Casino Pack - Art by Synty
+  packageVersion: 1.9.2
+  assetPath: Assets/Synty/PolygonCasino/Models/Collision/Convex/SM_Prop_Balloon_Shapes_01_Convex.asset
+  uploadId: 974002

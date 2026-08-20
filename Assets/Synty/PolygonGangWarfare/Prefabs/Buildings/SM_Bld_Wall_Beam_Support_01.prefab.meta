@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: d13e4e3671d991444b3a1de4a6c14ab6
+timeCreated: 1562644607
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 100100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 150589
+  packageName: POLYGON - Gang Warfare Pack - Art by Synty
+  packageVersion: 1.7.2
+  assetPath: Assets/Synty/PolygonGangWarfare/Prefabs/Buildings/SM_Bld_Wall_Beam_Support_01.prefab
+  uploadId: 975930

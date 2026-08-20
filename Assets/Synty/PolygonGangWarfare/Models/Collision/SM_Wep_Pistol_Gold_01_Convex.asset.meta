@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: ea23f9125f0d3704e97280541ee3704d
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 43595029473611552
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 150589
+  packageName: POLYGON - Gang Warfare Pack - Art by Synty
+  packageVersion: 1.7.2
+  assetPath: Assets/Synty/PolygonGangWarfare/Models/Collision/SM_Wep_Pistol_Gold_01_Convex.asset
+  uploadId: 975930

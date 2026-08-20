@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 5c607ef73c34da9479b0b5bf16e7990d
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 43934307232828474
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 150589
+  packageName: POLYGON - Gang Warfare Pack - Art by Synty
+  packageVersion: 1.7.2
+  assetPath: Assets/Synty/PolygonGangWarfare/Models/Collision/SM_Prop_Barrel_PlasticLid_01_Convex.asset
+  uploadId: 975930

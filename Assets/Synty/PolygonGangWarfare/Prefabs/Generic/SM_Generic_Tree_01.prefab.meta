@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: f8f2b7c7f1c00814a8d42543a96a025a
+timeCreated: 1562644923
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 100100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 150589
+  packageName: POLYGON - Gang Warfare Pack - Art by Synty
+  packageVersion: 1.7.2
+  assetPath: Assets/Synty/PolygonGangWarfare/Prefabs/Generic/SM_Generic_Tree_01.prefab
+  uploadId: 975930

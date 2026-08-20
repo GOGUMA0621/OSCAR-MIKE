@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: b030224ce96a82a45972f1e621d2d12b
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 43294087027415218
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 150589
+  packageName: POLYGON - Gang Warfare Pack - Art by Synty
+  packageVersion: 1.7.2
+  assetPath: Assets/Synty/PolygonGangWarfare/Models/Collision/SM_Prop_Grass_Cracks_03_Convex.asset
+  uploadId: 975930

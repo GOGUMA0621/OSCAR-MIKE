@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: e34f30a1d055ae348bce6209f544adaf
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 43222226589301668
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 150589
+  packageName: POLYGON - Gang Warfare Pack - Art by Synty
+  packageVersion: 1.7.2
+  assetPath: Assets/Synty/PolygonGangWarfare/Models/Collision/SM_Wep_Pistol_Revolver_01_Convex.asset
+  uploadId: 975930

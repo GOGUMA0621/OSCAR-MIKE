@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: aa6bd3078e0eeae458eaf02e5d35a9f3
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 43553588432883552
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 150589
+  packageName: POLYGON - Gang Warfare Pack - Art by Synty
+  packageVersion: 1.7.2
+  assetPath: Assets/Synty/PolygonGangWarfare/Models/Collision/SM_Bld_Walkway_Stairs_01_Convex.asset
+  uploadId: 975930

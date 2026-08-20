@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: b2d70d687657de24b807cebf841b751b
+timeCreated: 1563230293
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 2100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 150589
+  packageName: POLYGON - Gang Warfare Pack - Art by Synty
+  packageVersion: 1.7.2
+  assetPath: Assets/Synty/PolygonGangWarfare/Materials/FX/Blank_Grey_01.mat
+  uploadId: 975930

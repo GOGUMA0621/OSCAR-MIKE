@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: a1906b0e9bbb35a4685e9cb5ca2e7ee2
+timeCreated: 1562647344
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 100100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 150589
+  packageName: POLYGON - Gang Warfare Pack - Art by Synty
+  packageVersion: 1.7.2
+  assetPath: Assets/Synty/PolygonGangWarfare/Prefabs/Props/SM_Prop_Toy_Samurai_Full_Unpainted_01.prefab
+  uploadId: 975930

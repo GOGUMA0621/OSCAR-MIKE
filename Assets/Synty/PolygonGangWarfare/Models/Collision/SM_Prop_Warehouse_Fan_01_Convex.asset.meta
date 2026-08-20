@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: aa81f374ce6fa434c91384793740a5ca
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 43232642367672484
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 150589
+  packageName: POLYGON - Gang Warfare Pack - Art by Synty
+  packageVersion: 1.7.2
+  assetPath: Assets/Synty/PolygonGangWarfare/Models/Collision/SM_Prop_Warehouse_Fan_01_Convex.asset
+  uploadId: 975930

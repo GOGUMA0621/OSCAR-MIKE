@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: a0e3942dc65927c449c05c3e181c3d10
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 43960876311281742
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 150589
+  packageName: POLYGON - Gang Warfare Pack - Art by Synty
+  packageVersion: 1.7.2
+  assetPath: Assets/Synty/PolygonGangWarfare/Models/Collision/SM_Prop_Lab_Bulb_02_Convex.asset
+  uploadId: 975930

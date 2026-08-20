@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 66ae97e7b91d20240af83e61aecb8935
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 43530506108283910
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 150589
+  packageName: POLYGON - Gang Warfare Pack - Art by Synty
+  packageVersion: 1.7.2
+  assetPath: Assets/Synty/PolygonGangWarfare/Models/Collision/SM_Wep_KuckleDuster_02_Convex.asset
+  uploadId: 975930
