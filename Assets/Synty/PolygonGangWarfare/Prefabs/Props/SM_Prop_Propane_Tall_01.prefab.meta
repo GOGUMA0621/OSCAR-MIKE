@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 1afa1867ded60d64c96cd54f8090fe93
+timeCreated: 1562644599
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 100100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 150589
+  packageName: POLYGON - Gang Warfare Pack - Art by Synty
+  packageVersion: 1.7.2
+  assetPath: Assets/Synty/PolygonGangWarfare/Prefabs/Props/SM_Prop_Propane_Tall_01.prefab
+  uploadId: 975930

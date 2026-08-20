@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: e37849b499693b74dabb4d74392ec1fb
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 43066837985207574
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 150589
+  packageName: POLYGON - Gang Warfare Pack - Art by Synty
+  packageVersion: 1.7.2
+  assetPath: Assets/Synty/PolygonGangWarfare/Models/Collision/SM_Prop_Pills_04_Convex.asset
+  uploadId: 975930

@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: bdb895d646bf0fd499ae8d7681125b17
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 43809385142646464
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 150589
+  packageName: POLYGON - Gang Warfare Pack - Art by Synty
+  packageVersion: 1.7.2
+  assetPath: Assets/Synty/PolygonGangWarfare/Models/Collision/SM_Prop_Security_Camera_01_Convex.asset
+  uploadId: 975930

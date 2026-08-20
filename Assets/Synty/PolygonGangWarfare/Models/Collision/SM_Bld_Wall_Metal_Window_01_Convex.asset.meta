@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 97691fc9686b3b44d9a369629f526bd2
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 43707111377952334
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 150589
+  packageName: POLYGON - Gang Warfare Pack - Art by Synty
+  packageVersion: 1.7.2
+  assetPath: Assets/Synty/PolygonGangWarfare/Models/Collision/SM_Bld_Wall_Metal_Window_01_Convex.asset
+  uploadId: 975930

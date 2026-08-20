@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 78f92080d07a40a4ba9badbfafc745a8
+timeCreated: 1562644601
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 100100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 150589
+  packageName: POLYGON - Gang Warfare Pack - Art by Synty
+  packageVersion: 1.7.2
+  assetPath: Assets/Synty/PolygonGangWarfare/Prefabs/Props/SM_Prop_Warehouse_Light_01.prefab
+  uploadId: 975930

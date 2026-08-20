@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 9673fac9f0d81f948902dbefa5f52b5e
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 43733200109944738
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 150589
+  packageName: POLYGON - Gang Warfare Pack - Art by Synty
+  packageVersion: 1.7.2
+  assetPath: Assets/Synty/PolygonGangWarfare/Models/Collision/SM_Generic_Cloud_01_Convex.asset
+  uploadId: 975930

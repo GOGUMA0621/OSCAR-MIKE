@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: d1d2a96a9fbbc6d4ebc40a558b89e570
+timeCreated: 1562902721
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 100100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 150589
+  packageName: POLYGON - Gang Warfare Pack - Art by Synty
+  packageVersion: 1.7.2
+  assetPath: Assets/Synty/PolygonGangWarfare/Prefabs/FX/FX_Bullet_Shells_01.prefab
+  uploadId: 975930

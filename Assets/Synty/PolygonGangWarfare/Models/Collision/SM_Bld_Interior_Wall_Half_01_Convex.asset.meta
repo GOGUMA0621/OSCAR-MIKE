@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: ba38d5568899fdb45b31c6e46bcd2b1d
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 43378606633041936
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 150589
+  packageName: POLYGON - Gang Warfare Pack - Art by Synty
+  packageVersion: 1.7.2
+  assetPath: Assets/Synty/PolygonGangWarfare/Models/Collision/SM_Bld_Interior_Wall_Half_01_Convex.asset
+  uploadId: 975930

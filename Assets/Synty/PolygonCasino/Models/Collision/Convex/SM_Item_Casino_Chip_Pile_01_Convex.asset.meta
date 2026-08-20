@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: b392c2f3c12583e4c95a8a8774080b5a
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 5202085309587600285
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 252731
+  packageName: POLYGON - Casino Pack - Art by Synty
+  packageVersion: 1.9.2
+  assetPath: Assets/Synty/PolygonCasino/Models/Collision/Convex/SM_Item_Casino_Chip_Pile_01_Convex.asset
+  uploadId: 974002

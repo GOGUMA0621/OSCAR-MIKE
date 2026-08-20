@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 0a0d82a5b563ad44e8a399200b40ed90
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 43841146633508468
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 150589
+  packageName: POLYGON - Gang Warfare Pack - Art by Synty
+  packageVersion: 1.7.2
+  assetPath: Assets/Synty/PolygonGangWarfare/Models/Collision/SM_Bld_Floor_Drain_01_Convex.asset
+  uploadId: 975930

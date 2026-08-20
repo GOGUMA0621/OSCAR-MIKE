@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 532a388bc13d74541949570063053349
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 43554687235093830
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 150589
+  packageName: POLYGON - Gang Warfare Pack - Art by Synty
+  packageVersion: 1.7.2
+  assetPath: Assets/Synty/PolygonGangWarfare/Models/Collision/SM_Wep_Knife_04_Convex.asset
+  uploadId: 975930

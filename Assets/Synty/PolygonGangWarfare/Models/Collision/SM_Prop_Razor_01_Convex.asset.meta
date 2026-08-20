@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 56fde8c8dd696bc449d9ed2dc4ac396c
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 43088031242031770
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 150589
+  packageName: POLYGON - Gang Warfare Pack - Art by Synty
+  packageVersion: 1.7.2
+  assetPath: Assets/Synty/PolygonGangWarfare/Models/Collision/SM_Prop_Razor_01_Convex.asset
+  uploadId: 975930

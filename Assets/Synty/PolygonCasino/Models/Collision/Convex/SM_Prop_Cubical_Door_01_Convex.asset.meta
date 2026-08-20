@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: e957d52e646f0dd488c4bffa647dc0ee
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 5437175780752917761
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 252731
+  packageName: POLYGON - Casino Pack - Art by Synty
+  packageVersion: 1.9.2
+  assetPath: Assets/Synty/PolygonCasino/Models/Collision/Convex/SM_Prop_Cubical_Door_01_Convex.asset
+  uploadId: 974002

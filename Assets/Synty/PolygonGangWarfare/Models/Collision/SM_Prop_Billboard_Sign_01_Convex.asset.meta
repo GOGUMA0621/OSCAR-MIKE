@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 6d2d80326e6f831459bdd7ead999bf2d
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 43274460855015292
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 150589
+  packageName: POLYGON - Gang Warfare Pack - Art by Synty
+  packageVersion: 1.7.2
+  assetPath: Assets/Synty/PolygonGangWarfare/Models/Collision/SM_Prop_Billboard_Sign_01_Convex.asset
+  uploadId: 975930

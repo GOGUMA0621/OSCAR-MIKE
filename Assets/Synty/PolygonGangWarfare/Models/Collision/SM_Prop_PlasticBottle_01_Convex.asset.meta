@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: d1bb747a067c8b049ab9560756799195
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 43654594669349148
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 150589
+  packageName: POLYGON - Gang Warfare Pack - Art by Synty
+  packageVersion: 1.7.2
+  assetPath: Assets/Synty/PolygonGangWarfare/Models/Collision/SM_Prop_PlasticBottle_01_Convex.asset
+  uploadId: 975930

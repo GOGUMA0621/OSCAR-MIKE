@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: d0fb66ff63dbd3941b01dcd3c396786f
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 11400000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 252731
+  packageName: POLYGON - Casino Pack - Art by Synty
+  packageVersion: 1.9.2
+  assetPath: Assets/Synty/PolygonGeneric/Models/Collision/SM_Gen_Prop_Coin_Stack_02_Convex.asset
+  uploadId: 974002

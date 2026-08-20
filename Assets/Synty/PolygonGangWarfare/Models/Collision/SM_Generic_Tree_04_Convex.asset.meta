@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 900de44836280714780249e3fed09e29
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 43766381760022244
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 150589
+  packageName: POLYGON - Gang Warfare Pack - Art by Synty
+  packageVersion: 1.7.2
+  assetPath: Assets/Synty/PolygonGangWarfare/Models/Collision/SM_Generic_Tree_04_Convex.asset
+  uploadId: 975930

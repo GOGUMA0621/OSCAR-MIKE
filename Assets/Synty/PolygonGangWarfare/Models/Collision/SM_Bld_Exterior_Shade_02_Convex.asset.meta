@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: a60bc91370b420c44a126dcec8a179c1
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 43691577838537388
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 150589
+  packageName: POLYGON - Gang Warfare Pack - Art by Synty
+  packageVersion: 1.7.2
+  assetPath: Assets/Synty/PolygonGangWarfare/Models/Collision/SM_Bld_Exterior_Shade_02_Convex.asset
+  uploadId: 975930

@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 813cd89efc21a774e92190286b16783f
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 43535128616132116
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 150589
+  packageName: POLYGON - Gang Warfare Pack - Art by Synty
+  packageVersion: 1.7.2
+  assetPath: Assets/Synty/PolygonGangWarfare/Models/Collision/SM_Prop_Table_Metal_Preset_06_Convex.asset
+  uploadId: 975930

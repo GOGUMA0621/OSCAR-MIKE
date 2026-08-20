@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: f2b1c1e8ece6b214a90b0caf7ba0f5ed
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 43437734868575640
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 150589
+  packageName: POLYGON - Gang Warfare Pack - Art by Synty
+  packageVersion: 1.7.2
+  assetPath: Assets/Synty/PolygonGangWarfare/Models/Collision/SM_Prop_Dumpster_01_Convex.asset
+  uploadId: 975930

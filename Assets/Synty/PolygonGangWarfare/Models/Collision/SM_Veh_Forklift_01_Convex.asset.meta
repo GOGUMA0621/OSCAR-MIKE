@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 8f140bfddcafa6a4f88df9c52bf0ee0c
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 43681544155075722
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 150589
+  packageName: POLYGON - Gang Warfare Pack - Art by Synty
+  packageVersion: 1.7.2
+  assetPath: Assets/Synty/PolygonGangWarfare/Models/Collision/SM_Veh_Forklift_01_Convex.asset
+  uploadId: 975930

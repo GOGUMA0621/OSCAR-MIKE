@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: b7875e96153cb9f4c8e7b99ec8597458
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 43016758872909320
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 150589
+  packageName: POLYGON - Gang Warfare Pack - Art by Synty
+  packageVersion: 1.7.2
+  assetPath: Assets/Synty/PolygonGangWarfare/Models/Collision/SM_Prop_Warehouse_Light_Chain_01_Convex.asset
+  uploadId: 975930

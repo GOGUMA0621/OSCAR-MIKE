@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: b2e6c9e8525cf6f41887bdb0becd4d6c
+timeCreated: 1562644600
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 100100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 150589
+  packageName: POLYGON - Gang Warfare Pack - Art by Synty
+  packageVersion: 1.7.2
+  assetPath: Assets/Synty/PolygonGangWarfare/Prefabs/Buildings/SM_Bld_Roof_Flat_Closed_01.prefab
+  uploadId: 975930

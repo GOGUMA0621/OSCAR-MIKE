@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 50cae0d7ff7a24d4b9237783b89a7f87
+timeCreated: 1562642851
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 100100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 150589
+  packageName: POLYGON - Gang Warfare Pack - Art by Synty
+  packageVersion: 1.7.2
+  assetPath: Assets/Synty/PolygonGangWarfare/Prefabs/Weapons/SM_Wep_KuckleDuster_02.prefab
+  uploadId: 975930

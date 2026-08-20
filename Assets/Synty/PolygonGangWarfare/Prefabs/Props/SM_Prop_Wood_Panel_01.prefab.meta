@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 6254c57dc5a8a4c4187f5b742f1c6e9f
+timeCreated: 1562805444
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 100100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 150589
+  packageName: POLYGON - Gang Warfare Pack - Art by Synty
+  packageVersion: 1.7.2
+  assetPath: Assets/Synty/PolygonGangWarfare/Prefabs/Props/SM_Prop_Wood_Panel_01.prefab
+  uploadId: 975930
