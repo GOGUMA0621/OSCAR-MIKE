@@ -158,7 +158,7 @@ Material:
     - _Side_Offset: {r: 0, g: 0, b: 0, a: 0}
     - _Sides_Color: {r: 0.4509804, g: 0.4509804, b: 0.4509804, a: 0}
     - _Sides_Offset: {r: 0, g: 0, b: 0, a: 0}
-    - _Top_Color: {r: 0.21471167, g: 0.23584908, b: 0.22969094, a: 1}
+    - _Top_Color: {r: 0.08552862, g: 0.5849056, b: 0.4383493, a: 1}
     - _Top_Offset: {r: 0, g: 0, b: 0, a: 0}
   m_BuildTextureStacks: []
   m_AllowLocking: 1

@@ -116,6 +116,17 @@ namespace OskarMike.Network.Player
         public bool          IsReady  => isReady.Value;
         public PlayerPosture Posture  => netPosture.Value;
 
+        /// <summary>
+        /// 서버 권한 이동 발판이 플레이어를 자식화하지 않고 함께 운반할 때 사용한다.
+        /// </summary>
+        public void ApplyServerPlatformMotion(Vector3 platformDelta)
+        {
+            if (!IsServer || characterController == null || !characterController.enabled)
+                return;
+
+            characterController.Move(platformDelta);
+        }
+
         // ══════════════════════════════════════════════════
         // Unity 생명주기
         // ══════════════════════════════════════════════════
