@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: ff3eba7321f355344a0ffdf29f5513ae
+timeCreated: 1595301617
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 100100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 176304
+  packageName: POLYGON - Military Pack - Art by Synty
+  packageVersion: 1.10.4
+  assetPath: Assets/Synty/PolygonMilitary/Prefabs/Weapons/Modular/Attachments/SM_Wep_Mod_MuzzleBrake_04.prefab
+  uploadId: 976012

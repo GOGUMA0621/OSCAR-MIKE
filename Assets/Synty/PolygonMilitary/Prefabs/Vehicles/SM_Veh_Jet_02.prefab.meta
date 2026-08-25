@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 5b18cab0a26e423478d4923c9368f24b
+timeCreated: 1595476753
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 100100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 176304
+  packageName: POLYGON - Military Pack - Art by Synty
+  packageVersion: 1.10.4
+  assetPath: Assets/Synty/PolygonMilitary/Prefabs/Vehicles/SM_Veh_Jet_02.prefab
+  uploadId: 976012

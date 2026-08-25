@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 36724cfab0147c04cbacae761b6a3364
+timeCreated: 1595388176
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 100100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 176304
+  packageName: POLYGON - Military Pack - Art by Synty
+  packageVersion: 1.10.4
+  assetPath: Assets/Synty/PolygonMilitary/Prefabs/Weapons/SM_Wep_Flashbang_01.prefab
+  uploadId: 976012

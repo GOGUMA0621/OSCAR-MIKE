@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 2d882ac5afbda6f4496c2244d9939edf
+timeCreated: 1590726955
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 100100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 176304
+  packageName: POLYGON - Military Pack - Art by Synty
+  packageVersion: 1.10.4
+  assetPath: Assets/Synty/PolygonMilitary/Prefabs/Buildings/SM_Bld_Shop_01.prefab
+  uploadId: 976012

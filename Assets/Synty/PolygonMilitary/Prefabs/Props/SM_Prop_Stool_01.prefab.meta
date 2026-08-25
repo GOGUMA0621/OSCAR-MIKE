@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 0e00c912fa7886943a0a4c1cc706c044
+timeCreated: 1592890129
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 100100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 176304
+  packageName: POLYGON - Military Pack - Art by Synty
+  packageVersion: 1.10.4
+  assetPath: Assets/Synty/PolygonMilitary/Prefabs/Props/SM_Prop_Stool_01.prefab
+  uploadId: 976012

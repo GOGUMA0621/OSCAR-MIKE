@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: c325caaab4c8d794eb81d0af017d8257
+timeCreated: 1595369831
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 100100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 176304
+  packageName: POLYGON - Military Pack - Art by Synty
+  packageVersion: 1.10.4
+  assetPath: Assets/Synty/PolygonMilitary/Prefabs/Characters/Attachments/SM_Chr_Attach_Hair_Male_06.prefab
+  uploadId: 976012

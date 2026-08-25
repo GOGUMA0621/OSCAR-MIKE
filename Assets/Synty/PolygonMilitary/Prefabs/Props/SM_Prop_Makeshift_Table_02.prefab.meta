@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: ffd1c4464e66ad04598af82cbd136e1c
+timeCreated: 1592890123
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 100100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 176304
+  packageName: POLYGON - Military Pack - Art by Synty
+  packageVersion: 1.10.4
+  assetPath: Assets/Synty/PolygonMilitary/Prefabs/Props/SM_Prop_Makeshift_Table_02.prefab
+  uploadId: 976012

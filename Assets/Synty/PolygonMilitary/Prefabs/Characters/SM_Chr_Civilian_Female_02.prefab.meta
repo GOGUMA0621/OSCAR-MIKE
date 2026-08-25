@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: e7f01cfa5815e034e9547eea0477b7b5
+timeCreated: 1594960711
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 100100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 176304
+  packageName: POLYGON - Military Pack - Art by Synty
+  packageVersion: 1.10.4
+  assetPath: Assets/Synty/PolygonMilitary/Prefabs/Characters/SM_Chr_Civilian_Female_02.prefab
+  uploadId: 976012

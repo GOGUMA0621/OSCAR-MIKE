@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: fcb6a2467e43aee419ec8de51b8a73f7
+timeCreated: 1596420435
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 43366499237245542
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 176304
+  packageName: POLYGON - Military Pack - Art by Synty
+  packageVersion: 1.10.4
+  assetPath: Assets/Synty/PolygonMilitary/Models/CollisionConvex/SM_Prop_Gold_Cup_02_Convex.asset
+  uploadId: 976012

@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: b612728b113694c4ab51d8f78c5d8615
+timeCreated: 1596421494
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 43500003357500784
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 176304
+  packageName: POLYGON - Military Pack - Art by Synty
+  packageVersion: 1.10.4
+  assetPath: Assets/Synty/PolygonMilitary/Models/CollisionConvex/SM_Prop_Dumbbell_01_Convex.asset
+  uploadId: 976012

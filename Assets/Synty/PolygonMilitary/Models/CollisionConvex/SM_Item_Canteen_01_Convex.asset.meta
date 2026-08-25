@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 7717cb3e5357a7a48ba1cfe6b4528f2b
+timeCreated: 1596421865
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 43552327013696272
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 176304
+  packageName: POLYGON - Military Pack - Art by Synty
+  packageVersion: 1.10.4
+  assetPath: Assets/Synty/PolygonMilitary/Models/CollisionConvex/SM_Item_Canteen_01_Convex.asset
+  uploadId: 976012

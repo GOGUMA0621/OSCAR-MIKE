@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: dc21154f7ac1cd54284bee6e5bfc229f
+timeCreated: 1595547323
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 2100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 176304
+  packageName: POLYGON - Military Pack - Art by Synty
+  packageVersion: 1.10.4
+  assetPath: Assets/Synty/PolygonMilitary/Materials/Misc/Camo_Netting_01.mat
+  uploadId: 976012

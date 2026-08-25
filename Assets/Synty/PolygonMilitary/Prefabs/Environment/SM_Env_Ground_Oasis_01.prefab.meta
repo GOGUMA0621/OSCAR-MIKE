@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: b0606126c1b101a4d8633d181b9776d8
+timeCreated: 1593122365
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 100100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 176304
+  packageName: POLYGON - Military Pack - Art by Synty
+  packageVersion: 1.10.4
+  assetPath: Assets/Synty/PolygonMilitary/Prefabs/Environment/SM_Env_Ground_Oasis_01.prefab
+  uploadId: 976012

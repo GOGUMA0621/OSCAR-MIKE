@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: c3ce97d94e57a1349b449868f4a25a14
+timeCreated: 1594960707
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 100100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 176304
+  packageName: POLYGON - Military Pack - Art by Synty
+  packageVersion: 1.10.4
+  assetPath: Assets/Synty/PolygonMilitary/Prefabs/Characters/SM_Chr_Leader_Male_01.prefab
+  uploadId: 976012

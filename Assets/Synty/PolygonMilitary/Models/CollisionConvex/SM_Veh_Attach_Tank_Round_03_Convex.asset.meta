@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 20c2cba46282370478f2e1250aecb57a
+timeCreated: 1596423138
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 43513328906550358
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 176304
+  packageName: POLYGON - Military Pack - Art by Synty
+  packageVersion: 1.10.4
+  assetPath: Assets/Synty/PolygonMilitary/Models/CollisionConvex/SM_Veh_Attach_Tank_Round_03_Convex.asset
+  uploadId: 976012

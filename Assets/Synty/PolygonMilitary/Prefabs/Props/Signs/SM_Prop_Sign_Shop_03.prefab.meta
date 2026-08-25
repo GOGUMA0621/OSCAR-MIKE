@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 1c40e800302243f47b91e48e21405a27
+timeCreated: 1591313253
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 100100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 176304
+  packageName: POLYGON - Military Pack - Art by Synty
+  packageVersion: 1.10.4
+  assetPath: Assets/Synty/PolygonMilitary/Prefabs/Props/Signs/SM_Prop_Sign_Shop_03.prefab
+  uploadId: 976012

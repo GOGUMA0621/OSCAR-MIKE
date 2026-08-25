@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: b7a8977681f021d49a916f349a411a10
+timeCreated: 1595468023
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 100100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 176304
+  packageName: POLYGON - Military Pack - Art by Synty
+  packageVersion: 1.10.4
+  assetPath: Assets/Synty/PolygonMilitary/Prefabs/Props/Rugs/SM_Prop_Rug_Hanging_01.prefab
+  uploadId: 976012

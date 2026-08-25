@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 6eff9fce27eb9f84fa786e06a31f6da4
+timeCreated: 1596420680
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 43387175246216352
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 176304
+  packageName: POLYGON - Military Pack - Art by Synty
+  packageVersion: 1.10.4
+  assetPath: Assets/Synty/PolygonMilitary/Models/CollisionConvex/SM_Prop_Makeshift_Table_03_Convex.asset
+  uploadId: 976012

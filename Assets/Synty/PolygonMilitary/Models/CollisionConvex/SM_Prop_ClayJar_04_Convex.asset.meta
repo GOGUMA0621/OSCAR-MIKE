@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 93106af86a933b545a70a92fa76d7589
+timeCreated: 1596420694
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 43200442261526628
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 176304
+  packageName: POLYGON - Military Pack - Art by Synty
+  packageVersion: 1.10.4
+  assetPath: Assets/Synty/PolygonMilitary/Models/CollisionConvex/SM_Prop_ClayJar_04_Convex.asset
+  uploadId: 976012

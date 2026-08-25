@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 5d4139f3c80bb30448f4904992ca0007
+timeCreated: 1596422049
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 43804371634938182
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 176304
+  packageName: POLYGON - Military Pack - Art by Synty
+  packageVersion: 1.10.4
+  assetPath: Assets/Synty/PolygonMilitary/Models/CollisionConvex/SM_Wep_Machete_01_Convex.asset
+  uploadId: 976012

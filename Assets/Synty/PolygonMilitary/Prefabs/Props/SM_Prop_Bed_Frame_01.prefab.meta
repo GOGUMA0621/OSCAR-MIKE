@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: abf189c3357148c4a9c2f6afa8517280
+timeCreated: 1592868127
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 100100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 176304
+  packageName: POLYGON - Military Pack - Art by Synty
+  packageVersion: 1.10.4
+  assetPath: Assets/Synty/PolygonMilitary/Prefabs/Props/SM_Prop_Bed_Frame_01.prefab
+  uploadId: 976012

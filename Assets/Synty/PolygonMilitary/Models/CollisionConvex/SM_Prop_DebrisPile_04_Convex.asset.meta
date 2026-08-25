@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 73b87851c4f19b14b998fca00316021f
+timeCreated: 1596421178
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 43031487758130106
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 176304
+  packageName: POLYGON - Military Pack - Art by Synty
+  packageVersion: 1.10.4
+  assetPath: Assets/Synty/PolygonMilitary/Models/CollisionConvex/SM_Prop_DebrisPile_04_Convex.asset
+  uploadId: 976012

@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 39a9e7b17f7bbee4d865ada395fe34a9
+timeCreated: 1591313248
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 100100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 176304
+  packageName: POLYGON - Military Pack - Art by Synty
+  packageVersion: 1.10.4
+  assetPath: Assets/Synty/PolygonMilitary/Prefabs/Props/SM_Prop_PowerBox_04.prefab
+  uploadId: 976012

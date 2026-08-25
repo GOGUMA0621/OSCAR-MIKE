@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: a55b6f59070a9364b84322c251aa4044
+timeCreated: 1591239686
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 100100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 176304
+  packageName: POLYGON - Military Pack - Art by Synty
+  packageVersion: 1.10.4
+  assetPath: Assets/Synty/PolygonMilitary/Prefabs/Props/Pipeline/SM_Prop_Pipeline_SmokeStack_Background_01.prefab
+  uploadId: 976012

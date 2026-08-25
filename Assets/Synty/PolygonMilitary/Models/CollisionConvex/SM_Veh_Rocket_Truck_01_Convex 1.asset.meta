@@ -1,0 +1,17 @@
+fileFormatVersion: 2
+guid: 8ab75f3af75ffca42a3b435b105bac80
+timeCreated: 1596423716
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 43652772035364166
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 176304
+  packageName: POLYGON - Military Pack - Art by Synty
+  packageVersion: 1.10.4
+  assetPath: Assets/Synty/PolygonMilitary/Models/CollisionConvex/SM_Veh_Rocket_Truck_01_Convex
+    1.asset
+  uploadId: 976012

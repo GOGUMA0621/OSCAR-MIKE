@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 61d905d0c11cea64a907a3ddf626a6b6
+timeCreated: 1596421177
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 43352060394905050
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 176304
+  packageName: POLYGON - Military Pack - Art by Synty
+  packageVersion: 1.10.4
+  assetPath: Assets/Synty/PolygonMilitary/Models/CollisionConvex/SM_Prop_Rubble_Pile_02_Convex.asset
+  uploadId: 976012

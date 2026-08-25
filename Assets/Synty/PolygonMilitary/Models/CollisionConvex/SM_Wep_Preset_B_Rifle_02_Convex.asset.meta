@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 3f5aa69383ddfbe40959fca3a19302d1
+timeCreated: 1596422945
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 43091554480588320
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 176304
+  packageName: POLYGON - Military Pack - Art by Synty
+  packageVersion: 1.10.4
+  assetPath: Assets/Synty/PolygonMilitary/Models/CollisionConvex/SM_Wep_Preset_B_Rifle_02_Convex.asset
+  uploadId: 976012

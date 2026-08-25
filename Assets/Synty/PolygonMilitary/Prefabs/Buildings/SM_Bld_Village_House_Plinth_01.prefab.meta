@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: d00bd8d82dff2d44caf33bcba5377d1d
+timeCreated: 1590618595
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 100100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 176304
+  packageName: POLYGON - Military Pack - Art by Synty
+  packageVersion: 1.10.4
+  assetPath: Assets/Synty/PolygonMilitary/Prefabs/Buildings/SM_Bld_Village_House_Plinth_01.prefab
+  uploadId: 976012

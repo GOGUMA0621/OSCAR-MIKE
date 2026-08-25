@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 126e0c778bce3524396517c9c5852d06
+timeCreated: 1596420536
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 43146472907360758
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 176304
+  packageName: POLYGON - Military Pack - Art by Synty
+  packageVersion: 1.10.4
+  assetPath: Assets/Synty/PolygonMilitary/Models/CollisionConvex/SM_Prop_Wood_Plinth_01_Clean_Convex.asset
+  uploadId: 976012

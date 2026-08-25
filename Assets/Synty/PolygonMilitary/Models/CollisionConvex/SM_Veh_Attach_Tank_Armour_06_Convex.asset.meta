@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: e07d9df357b40304885eb45d485cc6ca
+timeCreated: 1596423128
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 43857736794073796
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 176304
+  packageName: POLYGON - Military Pack - Art by Synty
+  packageVersion: 1.10.4
+  assetPath: Assets/Synty/PolygonMilitary/Models/CollisionConvex/SM_Veh_Attach_Tank_Armour_06_Convex.asset
+  uploadId: 976012

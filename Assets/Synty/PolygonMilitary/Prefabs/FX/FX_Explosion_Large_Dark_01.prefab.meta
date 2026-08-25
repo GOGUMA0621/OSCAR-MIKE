@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 8baff3207836e304f95274c39c8d572c
+timeCreated: 1595480310
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 100100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 176304
+  packageName: POLYGON - Military Pack - Art by Synty
+  packageVersion: 1.10.4
+  assetPath: Assets/Synty/PolygonMilitary/Prefabs/FX/FX_Explosion_Large_Dark_01.prefab
+  uploadId: 976012

@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 3b6b31171d1e5f04d8ff2da4b49abb97
+timeCreated: 1596420539
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 43793657922923880
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 176304
+  packageName: POLYGON - Military Pack - Art by Synty
+  packageVersion: 1.10.4
+  assetPath: Assets/Synty/PolygonMilitary/Models/CollisionConvex/SM_Prop_DownPipe_Connector_03_Convex.asset
+  uploadId: 976012

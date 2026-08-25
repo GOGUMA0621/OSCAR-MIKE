@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 73d73cdb3a1360d49b375bdbb4280f0f
+timeCreated: 1595301627
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 100100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 176304
+  packageName: POLYGON - Military Pack - Art by Synty
+  packageVersion: 1.10.4
+  assetPath: Assets/Synty/PolygonMilitary/Prefabs/Weapons/Modular/Weapon_B/SM_Wep_Mod_B_Mag_02.prefab
+  uploadId: 976012

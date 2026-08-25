@@ -10,8 +10,8 @@ ScriptedImporter:
   script: {fileID: 11500000, guid: 625f186215c104763be7675aa2d941aa, type: 3}
 AssetOrigin:
   serializedVersion: 1
-  productId: 252731
-  packageName: POLYGON - Casino Pack - Art by Synty
-  packageVersion: 1.9.2
+  productId: 176304
+  packageName: POLYGON - Military Pack - Art by Synty
+  packageVersion: 1.10.4
   assetPath: Assets/Synty/PolygonGeneric/Shaders/Skybox_Generic.shadergraph
-  uploadId: 974002
+  uploadId: 976012

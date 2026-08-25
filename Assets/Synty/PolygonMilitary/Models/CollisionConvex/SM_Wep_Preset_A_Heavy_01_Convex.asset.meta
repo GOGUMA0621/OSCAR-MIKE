@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 190891349cce0994d9e7d180c5de87c7
+timeCreated: 1596422943
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 43493000525390224
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 176304
+  packageName: POLYGON - Military Pack - Art by Synty
+  packageVersion: 1.10.4
+  assetPath: Assets/Synty/PolygonMilitary/Models/CollisionConvex/SM_Wep_Preset_A_Heavy_01_Convex.asset
+  uploadId: 976012

@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 0d1c914d7d492324d91a93739aaa253d
+timeCreated: 1596420703
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 43294433770745030
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 176304
+  packageName: POLYGON - Military Pack - Art by Synty
+  packageVersion: 1.10.4
+  assetPath: Assets/Synty/PolygonMilitary/Models/CollisionConvex/SM_Prop_Street_Light_02_Convex.asset
+  uploadId: 976012

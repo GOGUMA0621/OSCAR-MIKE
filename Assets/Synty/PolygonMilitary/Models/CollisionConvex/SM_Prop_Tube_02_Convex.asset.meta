@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: e76642ffbc2970b4291b33ffa6d670f4
+timeCreated: 1596420608
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 43681205910467204
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 176304
+  packageName: POLYGON - Military Pack - Art by Synty
+  packageVersion: 1.10.4
+  assetPath: Assets/Synty/PolygonMilitary/Models/CollisionConvex/SM_Prop_Tube_02_Convex.asset
+  uploadId: 976012

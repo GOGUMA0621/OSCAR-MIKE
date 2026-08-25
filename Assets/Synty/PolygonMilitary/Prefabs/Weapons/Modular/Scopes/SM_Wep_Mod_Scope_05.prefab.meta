@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: cf1516e386eb306499452820da21ee93
+timeCreated: 1595302478
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 100100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 176304
+  packageName: POLYGON - Military Pack - Art by Synty
+  packageVersion: 1.10.4
+  assetPath: Assets/Synty/PolygonMilitary/Prefabs/Weapons/Modular/Scopes/SM_Wep_Mod_Scope_05.prefab
+  uploadId: 976012

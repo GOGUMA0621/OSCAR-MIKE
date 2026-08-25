@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 4406e4fbe35bf254f98fb5e244bba3f0
+timeCreated: 1595468023
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 100100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 176304
+  packageName: POLYGON - Military Pack - Art by Synty
+  packageVersion: 1.10.4
+  assetPath: Assets/Synty/PolygonMilitary/Prefabs/Props/SM_Bld_Shops_ClothCover_Large_01.prefab
+  uploadId: 976012

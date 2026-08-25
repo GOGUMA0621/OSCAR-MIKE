@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 8330a0afc3749bd4191f5d22f1e11b5e
+timeCreated: 1595540973
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 100100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 176304
+  packageName: POLYGON - Military Pack - Art by Synty
+  packageVersion: 1.10.4
+  assetPath: Assets/Synty/PolygonMilitary/Prefabs/Props/SM_Prop_Pillow_04.prefab
+  uploadId: 976012

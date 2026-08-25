@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: d56d56ac896262d4da89b4f8d634870a
+timeCreated: 1596424741
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 43377310430535850
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 176304
+  packageName: POLYGON - Military Pack - Art by Synty
+  packageVersion: 1.10.4
+  assetPath: Assets/Synty/PolygonMilitary/Models/CollisionConvex/SM_Bld_Village_ClothCover_Small_04_Convex.asset
+  uploadId: 976012

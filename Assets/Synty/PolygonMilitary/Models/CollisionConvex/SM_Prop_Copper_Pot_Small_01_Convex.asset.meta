@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: fc2c95b646162454b9f993700d073306
+timeCreated: 1596420695
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 43466035882979886
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 176304
+  packageName: POLYGON - Military Pack - Art by Synty
+  packageVersion: 1.10.4
+  assetPath: Assets/Synty/PolygonMilitary/Models/CollisionConvex/SM_Prop_Copper_Pot_Small_01_Convex.asset
+  uploadId: 976012

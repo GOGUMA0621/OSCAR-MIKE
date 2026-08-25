@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 8fe83d357ba25ed4baca737b0c4e5417
+timeCreated: 1596420438
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 43329081060712070
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 176304
+  packageName: POLYGON - Military Pack - Art by Synty
+  packageVersion: 1.10.4
+  assetPath: Assets/Synty/PolygonMilitary/Models/CollisionConvex/SM_Prop_Airconditioner_02_Convex.asset
+  uploadId: 976012

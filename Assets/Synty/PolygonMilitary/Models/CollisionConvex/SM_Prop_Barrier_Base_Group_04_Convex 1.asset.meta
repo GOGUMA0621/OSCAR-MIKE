@@ -1,0 +1,17 @@
+fileFormatVersion: 2
+guid: 469cb330a8583b04e98dabb6ec1e9150
+timeCreated: 1596421563
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 43309870758708124
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 176304
+  packageName: POLYGON - Military Pack - Art by Synty
+  packageVersion: 1.10.4
+  assetPath: Assets/Synty/PolygonMilitary/Models/CollisionConvex/SM_Prop_Barrier_Base_Group_04_Convex
+    1.asset
+  uploadId: 976012

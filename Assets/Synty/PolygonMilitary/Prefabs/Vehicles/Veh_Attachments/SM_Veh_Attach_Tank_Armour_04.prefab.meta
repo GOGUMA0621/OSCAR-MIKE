@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 984a8b3d54f6a244387d5430b37b9218
+timeCreated: 1595285719
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 100100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 176304
+  packageName: POLYGON - Military Pack - Art by Synty
+  packageVersion: 1.10.4
+  assetPath: Assets/Synty/PolygonMilitary/Prefabs/Vehicles/Veh_Attachments/SM_Veh_Attach_Tank_Armour_04.prefab
+  uploadId: 976012

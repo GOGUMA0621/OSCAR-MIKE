@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: b39dc479e7eda6e42a90478615e7825b
+timeCreated: 1595369824
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 100100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 176304
+  packageName: POLYGON - Military Pack - Art by Synty
+  packageVersion: 1.10.4
+  assetPath: Assets/Synty/PolygonMilitary/Prefabs/Characters/Attachments/SM_Chr_Attach_Holster_01.prefab
+  uploadId: 976012

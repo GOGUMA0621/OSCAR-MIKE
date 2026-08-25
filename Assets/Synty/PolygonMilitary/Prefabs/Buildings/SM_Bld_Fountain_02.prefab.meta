@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: d3cf38ca3a4f5014ca06c291c73806bd
+timeCreated: 1592948507
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 100100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 176304
+  packageName: POLYGON - Military Pack - Art by Synty
+  packageVersion: 1.10.4
+  assetPath: Assets/Synty/PolygonMilitary/Prefabs/Buildings/SM_Bld_Fountain_02.prefab
+  uploadId: 976012

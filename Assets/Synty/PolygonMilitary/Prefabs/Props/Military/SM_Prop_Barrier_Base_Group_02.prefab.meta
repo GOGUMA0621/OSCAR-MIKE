@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: a1b4e8a719a023141b004ab174989f10
+timeCreated: 1593048723
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 100100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 176304
+  packageName: POLYGON - Military Pack - Art by Synty
+  packageVersion: 1.10.4
+  assetPath: Assets/Synty/PolygonMilitary/Prefabs/Props/Military/SM_Prop_Barrier_Base_Group_02.prefab
+  uploadId: 976012

@@ -1,0 +1,17 @@
+fileFormatVersion: 2
+guid: 3d88c8a9d4ae76b4a958ea6d13e91a01
+timeCreated: 1596425054
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 43081241701722348
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 176304
+  packageName: POLYGON - Military Pack - Art by Synty
+  packageVersion: 1.10.4
+  assetPath: Assets/Synty/PolygonMilitary/Models/CollisionConvex/SM_Bld_Ruins_04_Convex
+    1.asset
+  uploadId: 976012

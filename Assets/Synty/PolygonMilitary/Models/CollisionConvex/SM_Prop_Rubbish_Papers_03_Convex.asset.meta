@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 5aaf8e4603c9e1d40b2dd74c1dd39bca
+timeCreated: 1596420462
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 43049801964789388
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 176304
+  packageName: POLYGON - Military Pack - Art by Synty
+  packageVersion: 1.10.4
+  assetPath: Assets/Synty/PolygonMilitary/Models/CollisionConvex/SM_Prop_Rubbish_Papers_03_Convex.asset
+  uploadId: 976012

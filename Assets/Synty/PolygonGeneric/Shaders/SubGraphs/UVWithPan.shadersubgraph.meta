@@ -10,8 +10,8 @@ ScriptedImporter:
   script: {fileID: 11500000, guid: 60072b568d64c40a485e0fc55012dc9f, type: 3}
 AssetOrigin:
   serializedVersion: 1
-  productId: 252731
-  packageName: POLYGON - Casino Pack - Art by Synty
-  packageVersion: 1.9.2
+  productId: 176304
+  packageName: POLYGON - Military Pack - Art by Synty
+  packageVersion: 1.10.4
   assetPath: Assets/Synty/PolygonGeneric/Shaders/SubGraphs/UVWithPan.shadersubgraph
-  uploadId: 974002
+  uploadId: 976012

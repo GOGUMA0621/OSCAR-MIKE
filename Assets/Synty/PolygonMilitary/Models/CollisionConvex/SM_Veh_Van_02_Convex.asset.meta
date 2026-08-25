@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: b5d0abd4ada29594ea508d915d0cd57d
+timeCreated: 1596423396
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 43726530712738044
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 176304
+  packageName: POLYGON - Military Pack - Art by Synty
+  packageVersion: 1.10.4
+  assetPath: Assets/Synty/PolygonMilitary/Models/CollisionConvex/SM_Veh_Van_02_Convex.asset
+  uploadId: 976012

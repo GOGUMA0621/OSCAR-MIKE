@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 5b900d0f20faa1e45b2c5a5ce121c092
+timeCreated: 1596423127
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 43201874356197988
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 176304
+  packageName: POLYGON - Military Pack - Art by Synty
+  packageVersion: 1.10.4
+  assetPath: Assets/Synty/PolygonMilitary/Models/CollisionConvex/SM_Veh_Heli_Attach_Missile_01_Convex.asset
+  uploadId: 976012

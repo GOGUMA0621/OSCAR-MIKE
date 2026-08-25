@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 614ba9953fa840f47b38c0085697b274
+timeCreated: 1596423131
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 43613353257965206
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 176304
+  packageName: POLYGON - Military Pack - Art by Synty
+  packageVersion: 1.10.4
+  assetPath: Assets/Synty/PolygonMilitary/Models/CollisionConvex/SM_Veh_Attach_Cloth_04_Convex.asset
+  uploadId: 976012

@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: aae4fd6e1e251cc45b5404c9a1597891
+timeCreated: 1594951678
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 100100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 176304
+  packageName: POLYGON - Military Pack - Art by Synty
+  packageVersion: 1.10.4
+  assetPath: Assets/Synty/PolygonMilitary/Prefabs/Props/Military/SM_Prop_AmmoBox_04.prefab
+  uploadId: 976012

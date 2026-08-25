@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 865f0abfbd1a4694197cc5b9f7ff1696
+timeCreated: 1596422265
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 43290475426138724
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 176304
+  packageName: POLYGON - Military Pack - Art by Synty
+  packageVersion: 1.10.4
+  assetPath: Assets/Synty/PolygonMilitary/Models/CollisionConvex/SM_Generic_TreeStump_01_Convex.asset
+  uploadId: 976012

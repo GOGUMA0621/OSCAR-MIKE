@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 371d141581ee97a4ca10ae095fac97d7
+timeCreated: 1596422746
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 43437180079537368
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 176304
+  packageName: POLYGON - Military Pack - Art by Synty
+  packageVersion: 1.10.4
+  assetPath: Assets/Synty/PolygonMilitary/Models/CollisionConvex/SM_Veh_Light_Tank_01_Destroyed_Convex.asset
+  uploadId: 976012

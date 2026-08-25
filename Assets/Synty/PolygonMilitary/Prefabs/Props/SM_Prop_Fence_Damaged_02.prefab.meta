@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: a0a2ced67ceb3a94db47362ab833b5c8
+timeCreated: 1593038936
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 100100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 176304
+  packageName: POLYGON - Military Pack - Art by Synty
+  packageVersion: 1.10.4
+  assetPath: Assets/Synty/PolygonMilitary/Prefabs/Props/SM_Prop_Fence_Damaged_02.prefab
+  uploadId: 976012

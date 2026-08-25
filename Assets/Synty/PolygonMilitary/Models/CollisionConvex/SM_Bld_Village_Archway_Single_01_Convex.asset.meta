@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 6a06e730ef7ba0f4cb789c30ce179429
+timeCreated: 1596424729
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 43178578191470410
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 176304
+  packageName: POLYGON - Military Pack - Art by Synty
+  packageVersion: 1.10.4
+  assetPath: Assets/Synty/PolygonMilitary/Models/CollisionConvex/SM_Bld_Village_Archway_Single_01_Convex.asset
+  uploadId: 976012

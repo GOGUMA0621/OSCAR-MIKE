@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: ac052c7c987f15b4d9ac8fb529460046
+timeCreated: 1590729913
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 100100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 176304
+  packageName: POLYGON - Military Pack - Art by Synty
+  packageVersion: 1.10.4
+  assetPath: Assets/Synty/PolygonMilitary/Prefabs/Buildings/SM_Bld_Door_Garage_01.prefab
+  uploadId: 976012

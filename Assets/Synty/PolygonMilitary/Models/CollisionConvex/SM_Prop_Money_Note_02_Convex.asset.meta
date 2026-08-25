@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 15f08ef6c51d0a14db76f4c41baced9b
+timeCreated: 1596420460
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 43350413772186870
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 176304
+  packageName: POLYGON - Military Pack - Art by Synty
+  packageVersion: 1.10.4
+  assetPath: Assets/Synty/PolygonMilitary/Models/CollisionConvex/SM_Prop_Money_Note_02_Convex.asset
+  uploadId: 976012

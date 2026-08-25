@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 8d51736ca7579574ca9b8b6902be3292
+timeCreated: 1596420661
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 43808139408444332
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 176304
+  packageName: POLYGON - Military Pack - Art by Synty
+  packageVersion: 1.10.4
+  assetPath: Assets/Synty/PolygonMilitary/Models/CollisionConvex/SM_Prop_TentPole_01_Convex.asset
+  uploadId: 976012
