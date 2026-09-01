@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 9411de7b234f55048b9a4489a6da2ad1
+timeCreated: 1590552600
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 100100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 176304
+  packageName: POLYGON - Military Pack - Art by Synty
+  packageVersion: 1.10.4
+  assetPath: Assets/Synty/PolygonMilitary/Prefabs/Buildings/SM_Bld_Village_House_03.prefab
+  uploadId: 976012

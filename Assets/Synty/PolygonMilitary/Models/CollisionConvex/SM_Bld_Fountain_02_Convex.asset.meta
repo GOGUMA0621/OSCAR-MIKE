@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: f826d0326d9ad8a46886bcb1192efd68
+timeCreated: 1596424725
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 43799358276870556
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 176304
+  packageName: POLYGON - Military Pack - Art by Synty
+  packageVersion: 1.10.4
+  assetPath: Assets/Synty/PolygonMilitary/Models/CollisionConvex/SM_Bld_Fountain_02_Convex.asset
+  uploadId: 976012

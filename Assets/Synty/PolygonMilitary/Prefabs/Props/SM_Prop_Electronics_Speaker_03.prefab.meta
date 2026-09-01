@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: fa04b70b4efa0294ca259980c12a9945
+timeCreated: 1592948505
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 100100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 176304
+  packageName: POLYGON - Military Pack - Art by Synty
+  packageVersion: 1.10.4
+  assetPath: Assets/Synty/PolygonMilitary/Prefabs/Props/SM_Prop_Electronics_Speaker_03.prefab
+  uploadId: 976012

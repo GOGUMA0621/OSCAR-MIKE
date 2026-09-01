@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 075be9c6d93b2e940b3562708bb6cc80
+timeCreated: 1596422753
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 43482176046017210
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 176304
+  packageName: POLYGON - Military Pack - Art by Synty
+  packageVersion: 1.10.4
+  assetPath: Assets/Synty/PolygonMilitary/Models/CollisionConvex/SM_Veh_Car_Medium_Destroyed_01_Convex.asset
+  uploadId: 976012

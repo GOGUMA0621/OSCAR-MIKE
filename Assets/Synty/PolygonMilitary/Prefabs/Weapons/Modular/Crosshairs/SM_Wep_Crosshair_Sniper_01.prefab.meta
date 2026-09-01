@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: ee551a0f4b53a4e4d8291d8851d896dc
+timeCreated: 1595301644
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 100100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 176304
+  packageName: POLYGON - Military Pack - Art by Synty
+  packageVersion: 1.10.4
+  assetPath: Assets/Synty/PolygonMilitary/Prefabs/Weapons/Modular/Crosshairs/SM_Wep_Crosshair_Sniper_01.prefab
+  uploadId: 976012

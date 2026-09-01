@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: fc4ea8dde55d52749ad4008bab72656c
+timeCreated: 1592868127
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 100100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 176304
+  packageName: POLYGON - Military Pack - Art by Synty
+  packageVersion: 1.10.4
+  assetPath: Assets/Synty/PolygonMilitary/Prefabs/Items/SM_Item_Tape_01.prefab
+  uploadId: 976012

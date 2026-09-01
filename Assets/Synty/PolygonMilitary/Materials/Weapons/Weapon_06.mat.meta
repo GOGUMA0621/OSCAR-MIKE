@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 97b40eca161983040b04238ff477e49d
+timeCreated: 1590445039
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 2100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 176304
+  packageName: POLYGON - Military Pack - Art by Synty
+  packageVersion: 1.10.4
+  assetPath: Assets/Synty/PolygonMilitary/Materials/Weapons/Weapon_06.mat
+  uploadId: 976012

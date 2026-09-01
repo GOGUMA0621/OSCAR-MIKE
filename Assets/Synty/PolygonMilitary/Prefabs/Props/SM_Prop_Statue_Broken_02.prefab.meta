@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: effce615dade00b4ebbbc63d7409ca7e
+timeCreated: 1594873113
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 100100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 176304
+  packageName: POLYGON - Military Pack - Art by Synty
+  packageVersion: 1.10.4
+  assetPath: Assets/Synty/PolygonMilitary/Prefabs/Props/SM_Prop_Statue_Broken_02.prefab
+  uploadId: 976012

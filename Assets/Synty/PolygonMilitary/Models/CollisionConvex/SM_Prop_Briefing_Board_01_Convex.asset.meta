@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 266d8c887e4e1a346bfc087bfa4da4e6
+timeCreated: 1596421426
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 43373253679741698
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 176304
+  packageName: POLYGON - Military Pack - Art by Synty
+  packageVersion: 1.10.4
+  assetPath: Assets/Synty/PolygonMilitary/Models/CollisionConvex/SM_Prop_Briefing_Board_01_Convex.asset
+  uploadId: 976012

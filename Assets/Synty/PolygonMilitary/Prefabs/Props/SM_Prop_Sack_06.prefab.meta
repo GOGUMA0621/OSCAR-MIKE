@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 27953735d1d24eb49852f9001af5e975
+timeCreated: 1592890142
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 100100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 176304
+  packageName: POLYGON - Military Pack - Art by Synty
+  packageVersion: 1.10.4
+  assetPath: Assets/Synty/PolygonMilitary/Prefabs/Props/SM_Prop_Sack_06.prefab
+  uploadId: 976012

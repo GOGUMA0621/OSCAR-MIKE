@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: b937e5e4e89dd1d40b9be7a9aa56f3dd
+timeCreated: 1590552607
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 100100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 176304
+  packageName: POLYGON - Military Pack - Art by Synty
+  packageVersion: 1.10.4
+  assetPath: Assets/Synty/PolygonMilitary/Prefabs/Buildings/SM_Bld_Village_Hatch_01.prefab
+  uploadId: 976012

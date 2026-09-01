@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 22d23a7e0f1f1f3478f4b06ef25caddc
+timeCreated: 1592890138
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 100100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 176304
+  packageName: POLYGON - Military Pack - Art by Synty
+  packageVersion: 1.10.4
+  assetPath: Assets/Synty/PolygonMilitary/Prefabs/Props/SM_Prop_Gold_Plate_01.prefab
+  uploadId: 976012

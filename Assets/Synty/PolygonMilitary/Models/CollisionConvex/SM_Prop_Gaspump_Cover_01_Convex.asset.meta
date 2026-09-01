@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: c7317673158ecbe4a91a7f86cf5c3998
+timeCreated: 1596420634
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 43697017080919270
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 176304
+  packageName: POLYGON - Military Pack - Art by Synty
+  packageVersion: 1.10.4
+  assetPath: Assets/Synty/PolygonMilitary/Models/CollisionConvex/SM_Prop_Gaspump_Cover_01_Convex.asset
+  uploadId: 976012

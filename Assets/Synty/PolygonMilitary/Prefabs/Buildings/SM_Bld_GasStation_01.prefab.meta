@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: e927b4c822e05b1458cfdf087756b34a
+timeCreated: 1591155679
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 100100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 176304
+  packageName: POLYGON - Military Pack - Art by Synty
+  packageVersion: 1.10.4
+  assetPath: Assets/Synty/PolygonMilitary/Prefabs/Buildings/SM_Bld_GasStation_01.prefab
+  uploadId: 976012

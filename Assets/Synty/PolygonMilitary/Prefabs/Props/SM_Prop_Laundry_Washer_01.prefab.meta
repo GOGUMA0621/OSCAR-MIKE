@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 6b8e7ff5ed945054092ddfa609863eec
+timeCreated: 1592962799
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 100100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 176304
+  packageName: POLYGON - Military Pack - Art by Synty
+  packageVersion: 1.10.4
+  assetPath: Assets/Synty/PolygonMilitary/Prefabs/Props/SM_Prop_Laundry_Washer_01.prefab
+  uploadId: 976012

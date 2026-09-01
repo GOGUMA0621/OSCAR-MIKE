@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 2d09ba762e2fea74da10afd35c4759fc
+timeCreated: 1591313251
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 100100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 176304
+  packageName: POLYGON - Military Pack - Art by Synty
+  packageVersion: 1.10.4
+  assetPath: Assets/Synty/PolygonMilitary/Prefabs/Props/SM_Prop_Powerline_05.prefab
+  uploadId: 976012

@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: b54fecdce6ad92f45b95a4716864eb53
+timeCreated: 1596420591
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 43310306719088528
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 176304
+  packageName: POLYGON - Military Pack - Art by Synty
+  packageVersion: 1.10.4
+  assetPath: Assets/Synty/PolygonMilitary/Models/CollisionConvex/SM_Prop_Electronics_VCR_03_Convex.asset
+  uploadId: 976012

@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 7c3c72839485bd54c98b15b3eee509ac
+timeCreated: 1596420662
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 43736017682975724
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 176304
+  packageName: POLYGON - Military Pack - Art by Synty
+  packageVersion: 1.10.4
+  assetPath: Assets/Synty/PolygonMilitary/Models/CollisionConvex/SM_Prop_Gold_Plates_Preset_08_Convex.asset
+  uploadId: 976012

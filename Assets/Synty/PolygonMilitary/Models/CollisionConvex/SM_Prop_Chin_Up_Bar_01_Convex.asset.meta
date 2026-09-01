@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 48d8ba69c27e8c2428969422bbf85a2c
+timeCreated: 1596420726
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 43240424991861904
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 176304
+  packageName: POLYGON - Military Pack - Art by Synty
+  packageVersion: 1.10.4
+  assetPath: Assets/Synty/PolygonMilitary/Models/CollisionConvex/SM_Prop_Chin_Up_Bar_01_Convex.asset
+  uploadId: 976012

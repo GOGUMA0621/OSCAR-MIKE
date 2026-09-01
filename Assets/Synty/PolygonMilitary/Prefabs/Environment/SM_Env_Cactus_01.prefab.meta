@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 468a0a241bb2fca448b4211a1d7f5d63
+timeCreated: 1591072078
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 100100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 176304
+  packageName: POLYGON - Military Pack - Art by Synty
+  packageVersion: 1.10.4
+  assetPath: Assets/Synty/PolygonMilitary/Prefabs/Environment/SM_Env_Cactus_01.prefab
+  uploadId: 976012

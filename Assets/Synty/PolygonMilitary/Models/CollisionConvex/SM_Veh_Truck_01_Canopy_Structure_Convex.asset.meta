@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: cf0a5c2092d3e774785ad0dd02219443
+timeCreated: 1596423399
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 43723589669469096
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 176304
+  packageName: POLYGON - Military Pack - Art by Synty
+  packageVersion: 1.10.4
+  assetPath: Assets/Synty/PolygonMilitary/Models/CollisionConvex/SM_Veh_Truck_01_Canopy_Structure_Convex.asset
+  uploadId: 976012

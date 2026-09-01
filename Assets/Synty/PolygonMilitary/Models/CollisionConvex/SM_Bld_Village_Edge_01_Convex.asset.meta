@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 5415eecc5187d644abfd354e33d96334
+timeCreated: 1596424715
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 43323385859997756
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 176304
+  packageName: POLYGON - Military Pack - Art by Synty
+  packageVersion: 1.10.4
+  assetPath: Assets/Synty/PolygonMilitary/Models/CollisionConvex/SM_Bld_Village_Edge_01_Convex.asset
+  uploadId: 976012

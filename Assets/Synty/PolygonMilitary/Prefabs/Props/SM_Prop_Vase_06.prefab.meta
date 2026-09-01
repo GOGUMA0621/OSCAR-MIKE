@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: d5218303a4d88ed4fb0e28a776b88ee0
+timeCreated: 1592890139
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 100100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 176304
+  packageName: POLYGON - Military Pack - Art by Synty
+  packageVersion: 1.10.4
+  assetPath: Assets/Synty/PolygonMilitary/Prefabs/Props/SM_Prop_Vase_06.prefab
+  uploadId: 976012

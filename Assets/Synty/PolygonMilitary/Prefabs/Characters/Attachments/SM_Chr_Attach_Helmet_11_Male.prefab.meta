@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 1bb17dd9c89366b479c39a1fe97d5860
+timeCreated: 1595369824
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 100100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 176304
+  packageName: POLYGON - Military Pack - Art by Synty
+  packageVersion: 1.10.4
+  assetPath: Assets/Synty/PolygonMilitary/Prefabs/Characters/Attachments/SM_Chr_Attach_Helmet_11_Male.prefab
+  uploadId: 976012

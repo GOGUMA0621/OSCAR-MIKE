@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 62adb5e2e2e9b78458385cff46277ff9
+timeCreated: 1594008791
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 100100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 176304
+  packageName: POLYGON - Military Pack - Art by Synty
+  packageVersion: 1.10.4
+  assetPath: Assets/Synty/PolygonMilitary/Prefabs/Vehicles/SM_Veh_TransportPlane_01.prefab
+  uploadId: 976012

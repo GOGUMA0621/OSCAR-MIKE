@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 1993f4950d04c8a41a68e77e7cd42117
+timeCreated: 1596421978
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 43785063159107058
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 176304
+  packageName: POLYGON - Military Pack - Art by Synty
+  packageVersion: 1.10.4
+  assetPath: Assets/Synty/PolygonMilitary/Models/CollisionConvex/SM_Prop_Pipeline_SmokeStack_04_Convex.asset
+  uploadId: 976012

@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: f7db12a237698ae4cb39117707db0a4c
+timeCreated: 1596420598
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 43950615027388820
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 176304
+  packageName: POLYGON - Military Pack - Art by Synty
+  packageVersion: 1.10.4
+  assetPath: Assets/Synty/PolygonMilitary/Models/CollisionConvex/SM_Prop_BloodPool_01_Convex.asset
+  uploadId: 976012

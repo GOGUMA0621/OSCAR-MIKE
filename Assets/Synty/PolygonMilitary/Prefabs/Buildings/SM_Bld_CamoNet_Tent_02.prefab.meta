@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 74532852b1095844f8c4e855630cae28
+timeCreated: 1595553328
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 100100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 176304
+  packageName: POLYGON - Military Pack - Art by Synty
+  packageVersion: 1.10.4
+  assetPath: Assets/Synty/PolygonMilitary/Prefabs/Buildings/SM_Bld_CamoNet_Tent_02.prefab
+  uploadId: 976012

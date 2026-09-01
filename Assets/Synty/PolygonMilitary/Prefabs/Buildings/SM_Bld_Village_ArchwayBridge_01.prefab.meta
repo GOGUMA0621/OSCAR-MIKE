@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 538ad010d67870741ba1edd5702669e8
+timeCreated: 1590552607
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 100100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 176304
+  packageName: POLYGON - Military Pack - Art by Synty
+  packageVersion: 1.10.4
+  assetPath: Assets/Synty/PolygonMilitary/Prefabs/Buildings/SM_Bld_Village_ArchwayBridge_01.prefab
+  uploadId: 976012

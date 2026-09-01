@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 6d6c8e275e70fd54ab2ef8416afa8f2e
+timeCreated: 1596422387
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 43207711824935764
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 176304
+  packageName: POLYGON - Military Pack - Art by Synty
+  packageVersion: 1.10.4
+  assetPath: Assets/Synty/PolygonMilitary/Models/CollisionConvex/SM_Env_Sidewalk_Straight_02_Convex.asset
+  uploadId: 976012

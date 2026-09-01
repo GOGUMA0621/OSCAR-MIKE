@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 5b25a11d14c846b4a91647a4bce60060
+timeCreated: 1595301621
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 100100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 176304
+  packageName: POLYGON - Military Pack - Art by Synty
+  packageVersion: 1.10.4
+  assetPath: Assets/Synty/PolygonMilitary/Prefabs/Weapons/Modular/Weapon_B/SM_Wep_Mod_B_Stock_Bullpup_01.prefab
+  uploadId: 976012

@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: b8b410502480e50428dd53e25db4a731
+timeCreated: 1593042108
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 100100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 176304
+  packageName: POLYGON - Military Pack - Art by Synty
+  packageVersion: 1.10.4
+  assetPath: Assets/Synty/PolygonMilitary/Prefabs/Props/Military/SM_Prop_Missile_02.prefab
+  uploadId: 976012

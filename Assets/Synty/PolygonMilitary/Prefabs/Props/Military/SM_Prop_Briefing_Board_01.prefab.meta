@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: b3dce0d949bc52144b3d0a47f6cf60be
+timeCreated: 1592868133
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 100100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 176304
+  packageName: POLYGON - Military Pack - Art by Synty
+  packageVersion: 1.10.4
+  assetPath: Assets/Synty/PolygonMilitary/Prefabs/Props/Military/SM_Prop_Briefing_Board_01.prefab
+  uploadId: 976012

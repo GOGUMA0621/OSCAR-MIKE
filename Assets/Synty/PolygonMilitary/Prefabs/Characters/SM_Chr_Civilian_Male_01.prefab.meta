@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 2d9d9f6bc980c014c8edc9898911a4c7
+timeCreated: 1594960710
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 100100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 176304
+  packageName: POLYGON - Military Pack - Art by Synty
+  packageVersion: 1.10.4
+  assetPath: Assets/Synty/PolygonMilitary/Prefabs/Characters/SM_Chr_Civilian_Male_01.prefab
+  uploadId: 976012

@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: bfdfb82c9fb773c43ab776ec7ef9d363
+timeCreated: 1595285715
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 100100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 176304
+  packageName: POLYGON - Military Pack - Art by Synty
+  packageVersion: 1.10.4
+  assetPath: Assets/Synty/PolygonMilitary/Prefabs/Vehicles/SM_Veh_Tank_German_01.prefab
+  uploadId: 976012

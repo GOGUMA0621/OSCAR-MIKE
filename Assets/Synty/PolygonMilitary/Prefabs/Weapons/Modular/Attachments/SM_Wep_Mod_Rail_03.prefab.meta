@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: f6ab1428298419b489302d0a6147fa67
+timeCreated: 1595301616
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 100100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 176304
+  packageName: POLYGON - Military Pack - Art by Synty
+  packageVersion: 1.10.4
+  assetPath: Assets/Synty/PolygonMilitary/Prefabs/Weapons/Modular/Attachments/SM_Wep_Mod_Rail_03.prefab
+  uploadId: 976012

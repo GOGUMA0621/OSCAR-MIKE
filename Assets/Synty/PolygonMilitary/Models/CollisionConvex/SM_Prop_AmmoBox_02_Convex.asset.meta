@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 075e249526020984db46225eea5cdc26
+timeCreated: 1596421411
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 43704849753855050
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 176304
+  packageName: POLYGON - Military Pack - Art by Synty
+  packageVersion: 1.10.4
+  assetPath: Assets/Synty/PolygonMilitary/Models/CollisionConvex/SM_Prop_AmmoBox_02_Convex.asset
+  uploadId: 976012

@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 141fedd5b6671a14fa15e4c690e8a2f0
+timeCreated: 1596420491
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 43726983786834330
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 176304
+  packageName: POLYGON - Military Pack - Art by Synty
+  packageVersion: 1.10.4
+  assetPath: Assets/Synty/PolygonMilitary/Models/CollisionConvex/SM_Prop_Tire_01_Convex.asset
+  uploadId: 976012

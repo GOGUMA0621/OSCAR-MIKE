@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: b628f72bba8c0b94eb8d9f9b8638ca82
+timeCreated: 1591047366
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 100100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 176304
+  packageName: POLYGON - Military Pack - Art by Synty
+  packageVersion: 1.10.4
+  assetPath: Assets/Synty/PolygonMilitary/Prefabs/Environment/SM_Env_Ground_White_01.prefab
+  uploadId: 976012

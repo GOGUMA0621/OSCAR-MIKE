@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 48b4d2b2f226d904ea7c8f3594bf25e2
+timeCreated: 1590729903
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 100100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 176304
+  packageName: POLYGON - Military Pack - Art by Synty
+  packageVersion: 1.10.4
+  assetPath: Assets/Synty/PolygonMilitary/Prefabs/Buildings/SM_Bld_Door_Cage_01.prefab
+  uploadId: 976012

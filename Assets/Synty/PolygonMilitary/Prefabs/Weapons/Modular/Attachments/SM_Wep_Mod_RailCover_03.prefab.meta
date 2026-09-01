@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 1da526f8d887ff54a9927cb45e9b5f70
+timeCreated: 1595301626
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 100100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 176304
+  packageName: POLYGON - Military Pack - Art by Synty
+  packageVersion: 1.10.4
+  assetPath: Assets/Synty/PolygonMilitary/Prefabs/Weapons/Modular/Attachments/SM_Wep_Mod_RailCover_03.prefab
+  uploadId: 976012

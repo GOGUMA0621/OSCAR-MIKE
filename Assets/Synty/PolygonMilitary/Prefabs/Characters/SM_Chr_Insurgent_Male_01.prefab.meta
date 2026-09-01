@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 03a2f20bebe15b24f9de251ef3c70abd
+timeCreated: 1594960708
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 100100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 176304
+  packageName: POLYGON - Military Pack - Art by Synty
+  packageVersion: 1.10.4
+  assetPath: Assets/Synty/PolygonMilitary/Prefabs/Characters/SM_Chr_Insurgent_Male_01.prefab
+  uploadId: 976012

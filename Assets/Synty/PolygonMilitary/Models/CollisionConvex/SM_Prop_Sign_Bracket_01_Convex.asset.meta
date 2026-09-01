@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: a36165554ddc4ef48b8c77cf9daf9d01
+timeCreated: 1596420329
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 43079417957371266
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 176304
+  packageName: POLYGON - Military Pack - Art by Synty
+  packageVersion: 1.10.4
+  assetPath: Assets/Synty/PolygonMilitary/Models/CollisionConvex/SM_Prop_Sign_Bracket_01_Convex.asset
+  uploadId: 976012

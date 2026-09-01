@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: cc62330e12d36f74f94baf4ce87f4b64
+timeCreated: 1595468021
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 100100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 176304
+  packageName: POLYGON - Military Pack - Art by Synty
+  packageVersion: 1.10.4
+  assetPath: Assets/Synty/PolygonMilitary/Prefabs/Props/Rugs/SM_Prop_Rug_Pile_01.prefab
+  uploadId: 976012

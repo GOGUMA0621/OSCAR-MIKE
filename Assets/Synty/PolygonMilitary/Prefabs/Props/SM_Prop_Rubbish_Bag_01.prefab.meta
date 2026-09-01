@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: f46b87870f4a02f4294ae9e1dd6e843a
+timeCreated: 1594963622
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 100100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 176304
+  packageName: POLYGON - Military Pack - Art by Synty
+  packageVersion: 1.10.4
+  assetPath: Assets/Synty/PolygonMilitary/Prefabs/Props/SM_Prop_Rubbish_Bag_01.prefab
+  uploadId: 976012

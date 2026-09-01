@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: c2d14c7d798af3145922385135bb3c97
+timeCreated: 1595301648
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 100100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 176304
+  packageName: POLYGON - Military Pack - Art by Synty
+  packageVersion: 1.10.4
+  assetPath: Assets/Synty/PolygonMilitary/Prefabs/Weapons/Modular/Crosshairs/SM_Wep_Crosshair_06.prefab
+  uploadId: 976012

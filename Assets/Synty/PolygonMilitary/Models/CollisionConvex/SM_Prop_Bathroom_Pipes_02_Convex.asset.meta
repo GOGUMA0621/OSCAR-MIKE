@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 65ccd6ac511257b4cbc15c7d8bd03418
+timeCreated: 1596420579
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 43409240838970420
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 176304
+  packageName: POLYGON - Military Pack - Art by Synty
+  packageVersion: 1.10.4
+  assetPath: Assets/Synty/PolygonMilitary/Models/CollisionConvex/SM_Prop_Bathroom_Pipes_02_Convex.asset
+  uploadId: 976012

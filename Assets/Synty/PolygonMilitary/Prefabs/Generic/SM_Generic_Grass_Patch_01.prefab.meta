@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: c027efb01e9a4ee42bee11e64b0879c2
+timeCreated: 1590460272
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 100100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 176304
+  packageName: POLYGON - Military Pack - Art by Synty
+  packageVersion: 1.10.4
+  assetPath: Assets/Synty/PolygonMilitary/Prefabs/Generic/SM_Generic_Grass_Patch_01.prefab
+  uploadId: 976012

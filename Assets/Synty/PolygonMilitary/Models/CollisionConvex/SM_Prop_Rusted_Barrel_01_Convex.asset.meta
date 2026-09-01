@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: b18bc4c0802fa2b42869ef3f8f3bfc8f
+timeCreated: 1596420600
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 43474792253278862
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 176304
+  packageName: POLYGON - Military Pack - Art by Synty
+  packageVersion: 1.10.4
+  assetPath: Assets/Synty/PolygonMilitary/Models/CollisionConvex/SM_Prop_Rusted_Barrel_01_Convex.asset
+  uploadId: 976012

@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 56c2a56349a838c4eb746a4a756405f8
+timeCreated: 1596423117
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 43714536533701050
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 176304
+  packageName: POLYGON - Military Pack - Art by Synty
+  packageVersion: 1.10.4
+  assetPath: Assets/Synty/PolygonMilitary/Models/CollisionConvex/SM_Veh_Attach_Winch_01_Convex.asset
+  uploadId: 976012

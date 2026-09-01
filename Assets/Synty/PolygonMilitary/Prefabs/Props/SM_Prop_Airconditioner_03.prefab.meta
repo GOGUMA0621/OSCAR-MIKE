@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: cceb442e1c340cb44a114fc5c119fbbc
+timeCreated: 1591313245
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 100100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 176304
+  packageName: POLYGON - Military Pack - Art by Synty
+  packageVersion: 1.10.4
+  assetPath: Assets/Synty/PolygonMilitary/Prefabs/Props/SM_Prop_Airconditioner_03.prefab
+  uploadId: 976012

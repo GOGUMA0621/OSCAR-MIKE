@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 2a3058870f788314eb770dfcf057fec1
+timeCreated: 1596420489
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 43487258481488720
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 176304
+  packageName: POLYGON - Military Pack - Art by Synty
+  packageVersion: 1.10.4
+  assetPath: Assets/Synty/PolygonMilitary/Models/CollisionConvex/SM_Prop_Statue_Broken_01_Convex.asset
+  uploadId: 976012

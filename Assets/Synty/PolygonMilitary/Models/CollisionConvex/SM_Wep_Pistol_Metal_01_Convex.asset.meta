@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: dfc537ca394c7ed45992e70cb94a9445
+timeCreated: 1596422042
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 43260915479693258
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 176304
+  packageName: POLYGON - Military Pack - Art by Synty
+  packageVersion: 1.10.4
+  assetPath: Assets/Synty/PolygonMilitary/Models/CollisionConvex/SM_Wep_Pistol_Metal_01_Convex.asset
+  uploadId: 976012

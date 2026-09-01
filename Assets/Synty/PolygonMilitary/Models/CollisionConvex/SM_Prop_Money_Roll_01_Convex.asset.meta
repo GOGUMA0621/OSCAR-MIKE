@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 8f6fbc50aaf72a24a83eb0b2f5bf1d96
+timeCreated: 1596420421
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 43073380474791604
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 176304
+  packageName: POLYGON - Military Pack - Art by Synty
+  packageVersion: 1.10.4
+  assetPath: Assets/Synty/PolygonMilitary/Models/CollisionConvex/SM_Prop_Money_Roll_01_Convex.asset
+  uploadId: 976012

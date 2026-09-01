@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: ba23c58a33a4d3e4fb0f3a41e22b371f
+timeCreated: 1596421432
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 43111986444084042
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 176304
+  packageName: POLYGON - Military Pack - Art by Synty
+  packageVersion: 1.10.4
+  assetPath: Assets/Synty/PolygonMilitary/Models/CollisionConvex/SM_Prop_Bed_SleepingBag_Roll_01_Convex.asset
+  uploadId: 976012

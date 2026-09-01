@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: a877d025259373b4fbbfebf5f2cdb673
+timeCreated: 1596420445
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 43198069524858304
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 176304
+  packageName: POLYGON - Military Pack - Art by Synty
+  packageVersion: 1.10.4
+  assetPath: Assets/Synty/PolygonMilitary/Models/CollisionConvex/SM_Prop_Copper_Plate_Large_01_Convex.asset
+  uploadId: 976012

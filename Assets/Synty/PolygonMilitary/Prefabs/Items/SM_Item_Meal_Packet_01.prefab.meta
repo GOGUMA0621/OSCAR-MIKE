@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 5271f8509e658d74c917d3bcf3d0826e
+timeCreated: 1592868123
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 100100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 176304
+  packageName: POLYGON - Military Pack - Art by Synty
+  packageVersion: 1.10.4
+  assetPath: Assets/Synty/PolygonMilitary/Prefabs/Items/SM_Item_Meal_Packet_01.prefab
+  uploadId: 976012

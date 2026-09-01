@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 6c2b7c330103eb649b11a780da40dda8
+timeCreated: 1592868112
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 100100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 176304
+  packageName: POLYGON - Military Pack - Art by Synty
+  packageVersion: 1.10.4
+  assetPath: Assets/Synty/PolygonMilitary/Prefabs/Props/Military/SM_Prop_Paper_Pile_02.prefab
+  uploadId: 976012

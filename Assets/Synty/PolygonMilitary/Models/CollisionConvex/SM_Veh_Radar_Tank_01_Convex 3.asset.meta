@@ -1,0 +1,17 @@
+fileFormatVersion: 2
+guid: 81436ee0c2f1bbf4093148e39460de85
+timeCreated: 1596423767
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 43889004922491864
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 176304
+  packageName: POLYGON - Military Pack - Art by Synty
+  packageVersion: 1.10.4
+  assetPath: Assets/Synty/PolygonMilitary/Models/CollisionConvex/SM_Veh_Radar_Tank_01_Convex
+    3.asset
+  uploadId: 976012

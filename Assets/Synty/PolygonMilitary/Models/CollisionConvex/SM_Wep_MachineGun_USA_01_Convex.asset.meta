@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 43906eee8e761254c9c56f5b690db6e0
+timeCreated: 1596422041
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 43410215507678426
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 176304
+  packageName: POLYGON - Military Pack - Art by Synty
+  packageVersion: 1.10.4
+  assetPath: Assets/Synty/PolygonMilitary/Models/CollisionConvex/SM_Wep_MachineGun_USA_01_Convex.asset
+  uploadId: 976012

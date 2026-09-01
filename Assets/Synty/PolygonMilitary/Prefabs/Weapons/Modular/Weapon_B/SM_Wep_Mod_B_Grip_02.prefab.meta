@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 70c766a4c6a94b044b6c639caeeb6ffe
+timeCreated: 1595301630
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 100100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 176304
+  packageName: POLYGON - Military Pack - Art by Synty
+  packageVersion: 1.10.4
+  assetPath: Assets/Synty/PolygonMilitary/Prefabs/Weapons/Modular/Weapon_B/SM_Wep_Mod_B_Grip_02.prefab
+  uploadId: 976012
