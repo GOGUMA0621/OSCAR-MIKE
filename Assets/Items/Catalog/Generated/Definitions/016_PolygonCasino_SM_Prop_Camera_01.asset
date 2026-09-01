@@ -1,0 +1,28 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cc98ec8e33537ec46a4ac911c1e49ecc, type: 3}
+  m_Name: 016_PolygonCasino_SM_Prop_Camera_01
+  m_EditorClassIdentifier: Assembly-CSharp::OskarMike.Items.LootItemDefinition
+  itemId: polygoncasino.sm_prop_camera_01
+  displayName: "\uBCF4\uC548 \uCE74\uBA54\uB77C"
+  sourceAssetName: SM_Prop_Camera_01
+  contentPack: {fileID: 11400000, guid: d2f6c8d30c32eaf4ba76f7198a09bcb8, type: 2}
+  category: 5
+  minValueSteps: 4
+  maxValueSteps: 4
+  basePrice: 75
+  priceVariance: 0.15
+  spawnWeight: 1
+  spawnEnabled: 1
+  allowedZoneIds: []
+  notes: 
+  networkPrefab: {fileID: 5538761551208752779, guid: 77b9a3963dc7fb74592e7abced160690, type: 3}

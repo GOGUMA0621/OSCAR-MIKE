@@ -1,0 +1,28 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cc98ec8e33537ec46a4ac911c1e49ecc, type: 3}
+  m_Name: 006_PolygonCasino_SM_Item_Casino_Chip_Pile_04
+  m_EditorClassIdentifier: Assembly-CSharp::OskarMike.Items.LootItemDefinition
+  itemId: polygoncasino.sm_item_casino_chip_pile_04
+  displayName: "\uCE74\uC9C0\uB178 \uCE69"
+  sourceAssetName: SM_Item_Casino_Chip_Pile_04
+  contentPack: {fileID: 11400000, guid: d2f6c8d30c32eaf4ba76f7198a09bcb8, type: 2}
+  category: 2
+  minValueSteps: 2
+  maxValueSteps: 2
+  basePrice: 25
+  priceVariance: 0.15
+  spawnWeight: 1
+  spawnEnabled: 1
+  allowedZoneIds: []
+  notes: 
+  networkPrefab: {fileID: 6516769661508525211, guid: a0a9d994842d1da4ab099506f503e52a, type: 3}

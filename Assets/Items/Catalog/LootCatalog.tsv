@@ -1,0 +1,88 @@
+sequence	assetName	displayName	contentPack	valueMin	valueMax	category	basePrice	priceVariance	spawnEnabled	allowedZones	notes
+1	SM_Item_Cross_01	금 십자가 목걸이	PolygonCasino	3	3	VALUABLES	150	0.15	true
+2	SM_Item_Smartphone_01	일반 핸드폰	PolygonCasino	1	1	JUNK	25	0.15	true
+3	SM_Item_Cigarette_Pack_01	담배	PolygonCasino	1	1	JUNK	25	0.15	true
+4	SM_Item_Cash_Coin_02	금화	PolygonCasino	3	3	VALUABLES	150	0.15	true
+5	SM_Prop_GoldBar_01	금괴	PolygonCasino	5	5	VALUABLES	600	0.15	true
+6	SM_Item_Casino_Chip_Pile_04	카지노 칩	PolygonCasino	1	1	JUNK	25	0.15	true
+7	SM_Item_Wallet_01	지갑	PolygonCasino	1	2	JUNK	50	0.15	true		원본 밸류 1~2
+8	SM_Item_Card_Deck_01	포커 카드 덱	PolygonCasino	1	1	JUNK	25	0.15	true
+9	SM_Prop_Saki_Bottle_01	사케	PolygonCasino	3	3	CONSUMABLES	150	0.15	true
+10	SM_Prop_Bar_Bottle_01	병맥주	PolygonCasino	1	1	CONSUMABLES	25	0.15	true
+11	SM_Prop_Bar_Bottle_02	양주	PolygonCasino	2	2	CONSUMABLES	75	0.15	true
+12	SM_Prop_Coin_Pile_02	동전 더미	PolygonCasino	1	1	KEY	25	0.15	true		KEY 분류 확인 필요
+13	SM_Prop_Hotel_Key_01	호텔 객실 키	PolygonCasino	1	1	KEY	25	0.15	true
+14	SM_Prop_Key_Ring_01	키 꾸러미	PolygonCasino	1	1	KEY	25	0.15	true
+15	SM_Prop_Toilet_Paper_02	휴지	PolygonCasino	1	1	JUNK	25	0.15	true
+16	SM_Prop_Camera_01	보안 카메라	PolygonCasino	2	2	INTEL	75	0.15	true
+17	SM_Prop_Reception_Bell_01	할리갈리 종	PolygonCasino	1	1	JUNK	25	0.15	true
+18	SM_Prop_Server_Tray_01	은쟁반	PolygonCasino	2	2	JUNK	75	0.15	true
+19	SM_Prop_Vase_01	물담배	PolygonGangWarfare	2	2	JUNK	75	0.15	true
+20	SM_Prop_Alcohol_Bottle_01	위스키	PolygonGangWarfare	2	2	CONSUMABLES	75	0.15	true
+21	SM_Prop_Bottle_02	Hydrochloric Acid (염산)	PolygonGangWarfare	1	1	INDUSTRIAL	25	0.15	true
+22	SM_Prop_Bottle_Small_01	Unknown pill (마약 연상)	PolygonGangWarfare	2	2	DRUGS	75	0.15	true
+23	SM_Prop_Bottle_Small_02	Antibiotics (항생제)	PolygonGangWarfare	1	1	DRUGS	25	0.15	true
+24	SM_Prop_Bottle_01	Protein powder	PolygonGangWarfare	1	1	CONSUMABLES	25	0.15	true
+25	SM_Prop_Chemical_06	배수관 세척제	PolygonGangWarfare	1	1	INDUSTRIAL	25	0.15	true
+26	SM_Prop_Chemical_04	화약	PolygonGangWarfare	2	2	INDUSTRIAL	75	0.15	true
+27	SM_Prop_Chemical_03	소독약	PolygonGangWarfare	1	1	INDUSTRIAL	25	0.15	true
+28	SM_Prop_Chemical_05	Degreaser (기름제거용액)	PolygonGangWarfare	1	1	INDUSTRIAL	25	0.15	true
+29	SM_Prop_Container_02	세제	PolygonGangWarfare	1	1	INDUSTRIAL	25	0.15	true
+30	SM_Prop_Container_03	락스 (Bleach)	PolygonGangWarfare	1	1	INDUSTRIAL	25	0.15	true
+31	SM_Prop_Lab_Beaker_05	삼각비커 (미스터리 화학용액)	PolygonGangWarfare	2	2	DRUGS	75	0.15	true
+32	SM_Prop_GasCan_01	FUEL (연료통)	PolygonGangWarfare	3	3	INDUSTRIAL	150	0.15	true
+33	SM_Prop_Chemical_01	본드	PolygonGangWarfare	1	1	INDUSTRIAL	25	0.15	true
+34	SM_Prop_Fire_Extinguisher_01	소화기	PolygonGangWarfare	1	1	JUNK	25	0.15	true
+35	SM_Prop_Blender_01	믹서기	PolygonGangWarfare	1.5	1.5	ELECTRONICS	50	0.15	true
+36	SM_Prop_Packet_01	마약 연상 포대	PolygonGangWarfare	2	2	DRUGS	75	0.15	true
+37	SM_Prop_EvidenceBag_01	증거품 보관함	PolygonGangWarfare	2	2	INTEL	75	0.15	true
+38	SM_Prop_JewelryPile_01	보석 더미	PolygonGangWarfare	4.5	4.5	VALUABLES	450	0.15	true
+39	SM_Prop_Glasses_02	금테 선글라스	PolygonGangWarfare	2.5	2.5	VALUABLES	113	0.15	true
+40	SM_Prop_Money_Folded_01	돈뭉치1	PolygonGangWarfare	1.5	1.5	VALUABLES	50	0.15	true
+41	SM_Prop_Money_Roll_01	돈뭉치2 (롤)	PolygonGangWarfare	2	2	VALUABLES	75	0.15	true
+42	SM_Prop_Money_Stack_01	돈다발	PolygonGangWarfare	2.5	2.5	VALUABLES	113	0.15	true
+43	SM_Prop_Money_Stack_03	돈다발2	PolygonGangWarfare	3	3	VALUABLES	150	0.15	true		시트 접미사 (1) 제거
+44	SM_Prop_Money_Stack_04	메모지가 붙은 돈다발	PolygonGangWarfare	3	3	VALUABLES	150	0.15	true
+45	SM_Prop_Pills_06	아이오딘 알약통	PolygonGangWarfare	1	1	DRUGS	25	0.15	true
+46	SM_Prop_Pills_07	각성제 알약통	PolygonGangWarfare	2	2	DRUGS	75	0.15	true
+47	SM_Prop_Pills_04	이부프로펜	PolygonGangWarfare	2	2	DRUGS	75	0.15	true
+48	SM_Prop_SprayCan_01	락카 스프레이	PolygonGangWarfare	1	1	JUNK	25	0.15	true
+49	SM_Prop_Scales_01	정밀 저울	PolygonGangWarfare	1.5	1.5	ELECTRONICS	50	0.15	true
+50	SM_Prop_Slowcooker_01	압력솥	PolygonGangWarfare	1	1	JUNK	25	0.15	true
+51	SM_Prop_Pan_01	양철 프라이판	PolygonGangWarfare	1	1	JUNK	25	0.15	true
+52	SM_Prop_CreditCard_01	신용카드	PolygonGangWarfare	1.5	1.5	VALUABLES	50	0.15	true
+53	SM_Prop_ZipBag_White_S_01	마약 (일반) 포대 소	PolygonGangWarfare	1	1	DRUGS	25	0.15	true
+54	SM_Prop_ZipBag_White_L_03	마약 (일반) 포대 중	PolygonGangWarfare	1.5	1.5	DRUGS	50	0.15	true
+55	SM_Prop_ZipBag_White_L_01	마약 (일반) 포대 대	PolygonGangWarfare	2	2	DRUGS	75	0.15	true
+56	SM_Prop_ZipBag_Blue_S_01	마약 (고급) 포대 소	PolygonGangWarfare	3	3	DRUGS	150	0.15	true
+57	SM_Prop_ZipBag_Blue_L_03	마약 (고급) 포대 중	PolygonGangWarfare	3.5	3.5	DRUGS	225	0.15	true
+58	SM_Prop_ZipBag_Blue_L_01	마약 (고급) 포대 대	PolygonGangWarfare	4	4	DRUGS	300	0.15	true
+59	SM_Item_Battery_01	배터리	PolygonMilitary	1	1	INDUSTRIAL	25	0.15	true
+60	SM_Item_Clipboard_01	매출 장부	PolygonMilitary	1	1	JUNK	25	0.15	true
+61	SM_Item_GasMask_01	방독면	PolygonMilitary	1	1	JUNK	25	0.15	true
+62	SM_Item_Laptop_01	군용 암호화 노트북	PolygonMilitary	4	4	MILITARY	300	0.15	true
+63	SM_Item_Tape_01	덕트 테이프	PolygonMilitary	1	1	INDUSTRIAL	25	0.15	true
+64	SM_Prop_Folder_Manila_03	옐로우 라벨 인텔 (일반)	PolygonMilitary	1.5	1.5	INTEL	50	0.15	true
+65	SM_Prop_Folder_Manila_02	그린 라벨 인텔 (보안)	PolygonMilitary	2.5	3	INTEL	131	0.15	true		원본 밸류 2.5~3
+66	SM_Prop_Folder_Manila_01	블루 라벨 인텔 (기밀)	PolygonMilitary	3.5	4	INTEL	263	0.15	true		원본 밸류 3.5~4
+67	SM_Prop_FolderTray_01	인텔 더미	PolygonMilitary	2	3	INTEL	113	0.15	true		원본 밸류 2~3
+68	SM_Prop_MedicalBox_01	서류가방	PolygonMilitary	3	3	INTEL	150	0.15	true
+69	SM_Prop_Pills_01	진통제	PolygonMilitary	1	1	DRUGS	25	0.15	true
+70	SM_Prop_Radio_01	암호화 군용 무전기	PolygonMilitary	4	4	MILITARY	300	0.15	true
+71	SM_Prop_Radio_02	상용 무전기	PolygonMilitary	1.5	1.5	ELECTRONICS	50	0.15	true
+72	SM_Prop_WeaponCase_01	무기 케이스	PolygonMilitary	1	1	MILITARY	25	0.15	true		원본 밸류 -; 임시 1점
+73	SM_Prop_AmmoBox_03	탄통	PolygonMilitary	1	1	MILITARY	25	0.15	true		원본 밸류 -; 임시 1점
+74	SM_Prop_Paper_Pile_02	서류 더미	PolygonMilitary	1	1	JUNK	25	0.15	true
+75	SM_Prop_Paper_Pile_03	서류 더미	PolygonMilitary	1	1	JUNK	25	0.15	true
+76	SM_Prop_C4_01	C4 폭탄	PolygonMilitary	2	2	MILITARY	75	0.15	true
+77	SM_Prop_Mortar_Shell_01	박격포탄	PolygonMilitary	1.5	1.5	MILITARY	50	0.15	true
+78	SM_Prop_Mine_01	대전차지뢰	PolygonMilitary	1.5	1.5	MILITARY	50	0.15	true
+79	SM_Prop_Folder_PVC_01	서류철	PolygonMilitary	1	1	JUNK	25	0.15	true
+80	SM_Prop_Book_01	책(종교적)	PolygonMilitary	1	1	JUNK	25	0.15	true
+81	SM_Prop_Book_02	책(잡지)	PolygonMilitary	1	1	JUNK	25	0.15	true
+82	SM_Prop_Gold_Teapot_01	금주전자	PolygonMilitary	3	3	VALUABLES	150	0.15	true
+83	SM_Prop_Gold_Cup_02	금 잔	PolygonMilitary	2	2	VALUABLES	75	0.15	true
+84	SM_Prop_Money_Folded_01	위조지폐 뭉치	PolygonMilitary	1	1	VALUABLES	25	0.15	true		원본 밸류 0; 임시 1점; 시트 접미사 (1) 제거
+85	SM_Prop_Money_Roll_01	위조지폐 뭉치 (롤)	PolygonMilitary	1	1	VALUABLES	25	0.15	true		원본 밸류 0; 임시 1점; 시트 접미사 (1) 제거
+86	SM_Prop_Money_Strapped_02	메모가 있는 위조지폐 다발	PolygonMilitary	1	1	VALUABLES	25	0.15	true		원본 밸류 0; 임시 1점
+87	SM_Prop_Cable_01	케이블	PolygonMilitary	1	1	INDUSTRIAL	25	0.15	true

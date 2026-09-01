@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0757a4b5c0bdb2643bba24deea1ff907, type: 3}
+  m_Name: PrototypeLootTable
+  m_EditorClassIdentifier: Assembly-CSharp::OskarMike.Items.LootTable
+  items:
+  - {fileID: 11400000, guid: f5939edcf578d354ab6ffe08c93eba29, type: 2}
+  - {fileID: 11400000, guid: 5b18fded355ee2b4badf4eef501278eb, type: 2}
+  - {fileID: 11400000, guid: c1c4de78b8069a145a71edf8babe06de, type: 2}
+  - {fileID: 11400000, guid: e24a2a09757b91446a2ca221a92c1d4b, type: 2}

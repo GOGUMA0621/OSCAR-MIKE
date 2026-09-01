@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 00d87161b1fa71844afee4d1488e6306, type: 3}
+  m_Name: DefaultLootZone
+  m_EditorClassIdentifier: Assembly-CSharp::OskarMike.Items.LootZoneProfile
+  zoneId: default
+  budgetWeight: 1
+  industrialWeight: 1
+  electronicsWeight: 1
+  junkWeight: 1
+  valuablesWeight: 1
+  militaryWeight: 1
+  intelWeight: 1
+  consumablesWeight: 1
+  keyWeight: 1
+  drugsWeight: 1
+  overrideValueWeights: 0
+  valueWeightOverride: {fileID: 0}
