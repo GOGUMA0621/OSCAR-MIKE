@@ -1,0 +1,29 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cc98ec8e33537ec46a4ac911c1e49ecc, type: 3}
+  m_Name: 086_PolygonMilitary_SM_Prop_Money_Strapped_02
+  m_EditorClassIdentifier: Assembly-CSharp::OskarMike.Items.LootItemDefinition
+  itemId: polygonmilitary.sm_prop_money_strapped_02
+  displayName: "\uBA54\uBAA8\uAC00 \uC788\uB294 \uC704\uC870\uC9C0\uD3D0 \uB2E4\uBC1C"
+  sourceAssetName: SM_Prop_Money_Strapped_02
+  contentPack: {fileID: 11400000, guid: c2ffe107ae5c4b84e904fc1072d5c86c, type: 2}
+  usageCategory: 0
+  assetCategory: 3
+  minValueSteps: 2
+  maxValueSteps: 2
+  basePrice: 25
+  priceVariance: 0.15
+  spawnWeight: 1
+  spawnEnabled: 0
+  allowedZoneIds: []
+  notes: "\uC6D0\uBCF8 \uBC38\uB958 0; \uC784\uC2DC 1\uC810"
+  networkPrefab: {fileID: 7876841841494264248, guid: 9b97571eb1214ca4291f9fb1a2c378e6, type: 3}

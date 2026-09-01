@@ -1,9 +1,25 @@
 namespace OskarMike.Items
 {
-    public enum LootRarity : byte
+    public enum LootUsageCategory : byte
     {
-        Common,
-        Uncommon,
-        Rare
+        Unassigned,
+        Junk,
+        Industrial,
+        Military,
+        Supplies,
+        Special
+    }
+
+    public enum LootAssetCategory : byte
+    {
+        Industrial,
+        Electronics,
+        Junk,
+        Valuables,
+        Military,
+        Intel,
+        Consumables,
+        Key,
+        Drugs
     }
 }

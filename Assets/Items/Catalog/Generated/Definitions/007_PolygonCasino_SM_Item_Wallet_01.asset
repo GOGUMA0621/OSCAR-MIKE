@@ -1,0 +1,29 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cc98ec8e33537ec46a4ac911c1e49ecc, type: 3}
+  m_Name: 007_PolygonCasino_SM_Item_Wallet_01
+  m_EditorClassIdentifier: Assembly-CSharp::OskarMike.Items.LootItemDefinition
+  itemId: polygoncasino.sm_item_wallet_01
+  displayName: "\uC9C0\uAC11"
+  sourceAssetName: SM_Item_Wallet_01
+  contentPack: {fileID: 11400000, guid: d2f6c8d30c32eaf4ba76f7198a09bcb8, type: 2}
+  usageCategory: 0
+  assetCategory: 2
+  minValueSteps: 2
+  maxValueSteps: 4
+  basePrice: 50
+  priceVariance: 0.15
+  spawnWeight: 1
+  spawnEnabled: 0
+  allowedZoneIds: []
+  notes: "\uC6D0\uBCF8 \uBC38\uB958 1~2"
+  networkPrefab: {fileID: 1787731920431735916, guid: 8d7d081e88592ce4393a0d6d171afc04, type: 3}

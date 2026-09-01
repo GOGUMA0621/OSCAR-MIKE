@@ -9,16 +9,21 @@ namespace OskarMike.Items
     {
         private readonly NetworkVariable<int> value = new NetworkVariable<int>(
             0, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Server);
-        private readonly NetworkVariable<byte> rarity = new NetworkVariable<byte>(
+        private readonly NetworkVariable<byte> valueSteps = new NetworkVariable<byte>(
+            0, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Server);
+        private readonly NetworkVariable<byte> usageCategory = new NetworkVariable<byte>(
             0, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Server);
         private readonly NetworkVariable<FixedString64Bytes> itemId = new NetworkVariable<FixedString64Bytes>(
             default, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Server);
 
         public int Value => value.Value;
-        public LootRarity Rarity => (LootRarity)rarity.Value;
+        public float ItemValue => valueSteps.Value * 0.5f;
+        public byte ValueSteps => valueSteps.Value;
+        public LootUsageCategory UsageCategory => (LootUsageCategory)usageCategory.Value;
         public string ItemId => itemId.Value.ToString();
 
-        public void InitializeServer(string definitionId, LootRarity itemRarity, int itemValue)
+        public void InitializeServer(string definitionId, byte itemValueSteps,
+            LootUsageCategory itemUsageCategory, int itemPrice)
         {
             if (NetworkManager.Singleton == null || !NetworkManager.Singleton.IsServer)
             {
@@ -26,8 +31,9 @@ namespace OskarMike.Items
                 return;
             }
 
-            rarity.Value = (byte)itemRarity;
-            value.Value = Mathf.Max(0, itemValue);
+            valueSteps.Value = (byte)Mathf.Clamp(itemValueSteps, 2, 10);
+            usageCategory.Value = (byte)itemUsageCategory;
+            value.Value = Mathf.Max(0, itemPrice);
             itemId.Value = string.IsNullOrWhiteSpace(definitionId) ? "loot_item" : definitionId;
         }
     }

@@ -1,0 +1,29 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cc98ec8e33537ec46a4ac911c1e49ecc, type: 3}
+  m_Name: 076_PolygonMilitary_SM_Prop_C4_01
+  m_EditorClassIdentifier: Assembly-CSharp::OskarMike.Items.LootItemDefinition
+  itemId: polygonmilitary.sm_prop_c4_01
+  displayName: "C4 \uD3ED\uD0C4"
+  sourceAssetName: SM_Prop_C4_01
+  contentPack: {fileID: 11400000, guid: c2ffe107ae5c4b84e904fc1072d5c86c, type: 2}
+  usageCategory: 0
+  assetCategory: 4
+  minValueSteps: 4
+  maxValueSteps: 4
+  basePrice: 75
+  priceVariance: 0.15
+  spawnWeight: 1
+  spawnEnabled: 0
+  allowedZoneIds: []
+  notes: 
+  networkPrefab: {fileID: 3838937238998645123, guid: 1aa0c4ecf3312d045b92542dc13975a5, type: 3}

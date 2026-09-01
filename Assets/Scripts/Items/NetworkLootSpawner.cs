@@ -19,10 +19,7 @@ namespace OskarMike.Items
         [SerializeField] private ProceduralMapGenerator mapGenerator;
         [SerializeField] private LootTable lootTable;
         [SerializeField] private LootZoneProfile fallbackZone;
-
-        [Header("Round Economy")]
-        [Min(0)] [SerializeField] private int totalValueBudget = 1000;
-        [Range(0f, 0.5f)] [SerializeField] private float budgetTolerance = 0.1f;
+        [SerializeField] private LootEconomyProfile economyProfile;
 
         [Header("Prototype Fallback")]
         [Tooltip("방 프리팹에 LootSpawnPoint가 없을 때 테스트용 위치를 계산합니다.")]
@@ -61,9 +58,9 @@ namespace OskarMike.Items
         public void TrySpawnAll()
         {
             if (spawned || !CanServerSpawn()) return;
-            if (mapGenerator == null || lootTable == null)
+            if (mapGenerator == null || lootTable == null || economyProfile == null)
             {
-                Debug.LogWarning("[NetworkLootSpawner] Map generator or loot table is not assigned.");
+                Debug.LogWarning("[NetworkLootSpawner] Map generator, loot table, or economy profile is not assigned.");
                 return;
             }
 
@@ -78,8 +75,9 @@ namespace OskarMike.Items
             spawned = true;
             int totalValue = 0;
             int spawnedCount = 0;
-            int lowerTarget = Mathf.RoundToInt(totalValueBudget * (1f - budgetTolerance));
-            int upperTarget = Mathf.RoundToInt(totalValueBudget * (1f + budgetTolerance));
+            int targetBudget = economyProfile.TotalPriceBudget;
+            int lowerTarget = Mathf.RoundToInt(targetBudget * (1f - economyProfile.BudgetTolerance));
+            int upperTarget = Mathf.RoundToInt(targetBudget * (1f + economyProfile.BudgetTolerance));
 
             while (candidates.Count > 0 && totalValue < lowerTarget)
             {
@@ -88,8 +86,8 @@ namespace OskarMike.Items
                 candidates.RemoveAt(candidateIndex);
 
                 int remaining = Mathf.Max(0, upperTarget - totalValue);
-                if (!lootTable.TryRoll(random, candidate.zone, remaining, out LootItemDefinition definition,
-                        out int value))
+                if (!lootTable.TryRoll(random, candidate.zone, economyProfile, remaining,
+                        out LootItemDefinition definition, out byte valueSteps, out int value))
                     continue;
 
                 NetworkObject instance = Instantiate(definition.NetworkPrefab, candidate.position, candidate.rotation);
@@ -101,7 +99,7 @@ namespace OskarMike.Items
                     continue;
                 }
 
-                lootItem.InitializeServer(definition.ItemId, definition.Rarity, value);
+                lootItem.InitializeServer(definition.ItemId, valueSteps, definition.UsageCategory, value);
                 instance.Spawn(true);
                 totalValue += value;
                 spawnedCount++;
@@ -110,7 +108,7 @@ namespace OskarMike.Items
             if (debugLogging || totalValue < lowerTarget)
             {
                 Debug.Log($"[NetworkLootSpawner] Spawned {spawnedCount} items, value={totalValue}, " +
-                          $"target={totalValueBudget} (allowed {lowerTarget}-{upperTarget}).");
+                          $"target={targetBudget} (allowed {lowerTarget}-{upperTarget}).");
             }
         }
 
@@ -191,7 +189,6 @@ namespace OskarMike.Items
 
         private void OnValidate()
         {
-            totalValueBudget = Mathf.Max(0, totalValueBudget);
             fallbackPointsPerRoom = Mathf.Max(0, fallbackPointsPerRoom);
             fallbackWallInset = Mathf.Max(0f, fallbackWallInset);
             floorOffset = Mathf.Max(0f, floorOffset);

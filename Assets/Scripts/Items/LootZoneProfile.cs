@@ -7,30 +7,47 @@ namespace OskarMike.Items
     {
         [SerializeField] private string zoneId = "default";
         [Min(1)] [SerializeField] private int budgetWeight = 1;
-        [Min(0)] [SerializeField] private int commonWeight = 70;
-        [Min(0)] [SerializeField] private int uncommonWeight = 25;
-        [Min(0)] [SerializeField] private int rareWeight = 5;
+        [Min(0)] [SerializeField] private int junkWeight = 1;
+        [Min(0)] [SerializeField] private int industrialWeight = 1;
+        [Min(0)] [SerializeField] private int militaryWeight = 1;
+        [Min(0)] [SerializeField] private int suppliesWeight = 1;
+        [Min(0)] [SerializeField] private int specialWeight = 1;
+        [SerializeField] private bool overrideValueWeights;
+        [SerializeField] private LootEconomyProfile valueWeightOverride;
 
         public string ZoneId => zoneId;
         public int BudgetWeight => budgetWeight;
 
-        public int GetRarityWeight(LootRarity rarity)
+        public int GetUsageWeight(LootUsageCategory usage)
         {
-            return rarity switch
+            return usage switch
             {
-                LootRarity.Uncommon => uncommonWeight,
-                LootRarity.Rare => rareWeight,
-                _ => commonWeight
+                LootUsageCategory.Junk => junkWeight,
+                LootUsageCategory.Industrial => industrialWeight,
+                LootUsageCategory.Military => militaryWeight,
+                LootUsageCategory.Supplies => suppliesWeight,
+                LootUsageCategory.Special => specialWeight,
+                _ => 0
             };
+        }
+
+        public int GetValueWeight(byte valueSteps, LootEconomyProfile fallback)
+        {
+            LootEconomyProfile profile = overrideValueWeights && valueWeightOverride != null
+                ? valueWeightOverride
+                : fallback;
+            return profile != null ? profile.GetValueWeight(valueSteps) : 0;
         }
 
         private void OnValidate()
         {
             zoneId = string.IsNullOrWhiteSpace(zoneId) ? name : zoneId.Trim();
             budgetWeight = Mathf.Max(1, budgetWeight);
-            commonWeight = Mathf.Max(0, commonWeight);
-            uncommonWeight = Mathf.Max(0, uncommonWeight);
-            rareWeight = Mathf.Max(0, rareWeight);
+            junkWeight = Mathf.Max(0, junkWeight);
+            industrialWeight = Mathf.Max(0, industrialWeight);
+            militaryWeight = Mathf.Max(0, militaryWeight);
+            suppliesWeight = Mathf.Max(0, suppliesWeight);
+            specialWeight = Mathf.Max(0, specialWeight);
         }
     }
 }

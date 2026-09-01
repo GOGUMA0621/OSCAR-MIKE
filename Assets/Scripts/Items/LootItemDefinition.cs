@@ -1,6 +1,7 @@
+using System;
+using System.Collections.Generic;
 using Unity.Netcode;
 using UnityEngine;
-using System.Collections.Generic;
 
 namespace OskarMike.Items
 {
@@ -9,50 +10,58 @@ namespace OskarMike.Items
     {
         [SerializeField] private string itemId = "loot_item";
         [SerializeField] private string displayName = "아이템";
-        [SerializeField] private LootRarity rarity = LootRarity.Common;
-        [Min(0)] [SerializeField] private int baseValue = 20;
-        [Range(0f, 1f)] [SerializeField] private float valueVariance = 0.15f;
+        [SerializeField] private string sourceAssetName;
+        [SerializeField] private LootContentPack contentPack;
+        [SerializeField] private LootUsageCategory usageCategory = LootUsageCategory.Unassigned;
+        [SerializeField] private LootAssetCategory assetCategory = LootAssetCategory.Junk;
+        [Tooltip("실제 밸류의 2배입니다. 1점=2, 5점=10")]
+        [Range(2, 10)] [SerializeField] private byte minValueSteps = 2;
+        [Range(2, 10)] [SerializeField] private byte maxValueSteps = 2;
+        [Min(0)] [SerializeField] private int basePrice = 25;
+        [Range(0f, 1f)] [SerializeField] private float priceVariance = 0.15f;
         [Min(1)] [SerializeField] private int spawnWeight = 1;
-        [Tooltip("비어 있으면 모든 지역에서 생성 가능합니다.")]
+        [SerializeField] private bool spawnEnabled;
         [SerializeField] private List<string> allowedZoneIds = new List<string>();
+        [TextArea] [SerializeField] private string notes;
         [SerializeField] private NetworkObject networkPrefab;
 
         public string ItemId => itemId;
         public string DisplayName => displayName;
-        public LootRarity Rarity => rarity;
-        public int BaseValue => baseValue;
-        public float ValueVariance => valueVariance;
+        public string SourceAssetName => sourceAssetName;
+        public LootContentPack ContentPack => contentPack;
+        public LootUsageCategory UsageCategory => usageCategory;
+        public LootAssetCategory AssetCategory => assetCategory;
+        public byte MinValueSteps => minValueSteps;
+        public byte MaxValueSteps => maxValueSteps;
+        public float MinValue => minValueSteps * 0.5f;
+        public float MaxValue => maxValueSteps * 0.5f;
+        public int BasePrice => basePrice;
+        public float PriceVariance => priceVariance;
         public int SpawnWeight => spawnWeight;
+        public bool SpawnEnabled => spawnEnabled;
+        public string Notes => notes;
         public NetworkObject NetworkPrefab => networkPrefab;
+
+        public bool ContainsValue(byte valueSteps) => valueSteps >= minValueSteps && valueSteps <= maxValueSteps;
 
         public bool IsAllowedInZone(string zoneId)
         {
-            if (allowedZoneIds == null || allowedZoneIds.Count == 0)
-                return true;
-
+            if (allowedZoneIds == null || allowedZoneIds.Count == 0) return true;
             for (int i = 0; i < allowedZoneIds.Count; i++)
             {
-                if (string.Equals(allowedZoneIds[i], zoneId, System.StringComparison.OrdinalIgnoreCase))
-                    return true;
+                if (string.Equals(allowedZoneIds[i], zoneId, StringComparison.OrdinalIgnoreCase)) return true;
             }
-
             return false;
-        }
-
-        public int RollValue(System.Random random, int maximumValue)
-        {
-            float variance = Mathf.Clamp01(valueVariance);
-            int min = Mathf.Max(0, Mathf.RoundToInt(baseValue * (1f - variance)));
-            int max = Mathf.Max(min, Mathf.RoundToInt(baseValue * (1f + variance)));
-            max = Mathf.Min(max, Mathf.Max(min, maximumValue));
-            return random.Next(min, max + 1);
         }
 
         private void OnValidate()
         {
-            itemId = string.IsNullOrWhiteSpace(itemId) ? name : itemId.Trim();
+            itemId = string.IsNullOrWhiteSpace(itemId) ? name : itemId.Trim().ToLowerInvariant();
             displayName = string.IsNullOrWhiteSpace(displayName) ? name : displayName.Trim();
-            baseValue = Mathf.Max(0, baseValue);
+            sourceAssetName = sourceAssetName?.Trim() ?? string.Empty;
+            minValueSteps = (byte)Mathf.Clamp(minValueSteps, 2, 10);
+            maxValueSteps = (byte)Mathf.Clamp(maxValueSteps, minValueSteps, 10);
+            basePrice = Mathf.Max(0, basePrice);
             spawnWeight = Mathf.Max(1, spawnWeight);
         }
     }

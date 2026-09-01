@@ -1,0 +1,30 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cc98ec8e33537ec46a4ac911c1e49ecc, type: 3}
+  m_Name: 085_PolygonMilitary_SM_Prop_Money_Roll_01
+  m_EditorClassIdentifier: Assembly-CSharp::OskarMike.Items.LootItemDefinition
+  itemId: polygonmilitary.sm_prop_money_roll_01
+  displayName: "\uC704\uC870\uC9C0\uD3D0 \uBB49\uCE58 (\uB864)"
+  sourceAssetName: SM_Prop_Money_Roll_01
+  contentPack: {fileID: 11400000, guid: c2ffe107ae5c4b84e904fc1072d5c86c, type: 2}
+  usageCategory: 0
+  assetCategory: 3
+  minValueSteps: 2
+  maxValueSteps: 2
+  basePrice: 25
+  priceVariance: 0.15
+  spawnWeight: 1
+  spawnEnabled: 0
+  allowedZoneIds: []
+  notes: "\uC6D0\uBCF8 \uBC38\uB958 0; \uC784\uC2DC 1\uC810; \uC2DC\uD2B8 \uC811\uBBF8\uC0AC
+    (1) \uC81C\uAC70"
+  networkPrefab: {fileID: 1129904027998473758, guid: d67076d6d215e2d4fb0a807d30478722, type: 3}

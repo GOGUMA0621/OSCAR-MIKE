@@ -1,5 +1,9 @@
 #if UNITY_EDITOR
+using System;
 using System.Collections.Generic;
+using System.Globalization;
+using System.IO;
+using System.Linq;
 using OskarMike.MapGeneration;
 using Unity.Netcode;
 using UnityEditor;
@@ -8,173 +12,376 @@ using UnityEngine;
 
 namespace OskarMike.Items.Editor
 {
-    public static class LootPrototypeSetup
+    public static class LootCatalogImporter
     {
-        private const string Root = "Assets/Items/Prototype";
+        private const string CatalogPath = "Assets/Items/Catalog/LootCatalog.tsv";
+        private const string GeneratedRoot = "Assets/Items/Catalog/Generated";
+        private const string DefinitionRoot = GeneratedRoot + "/Definitions";
+        private const string PrefabRoot = GeneratedRoot + "/Prefabs";
+        private const string ProfileRoot = GeneratedRoot + "/Profiles";
+        private const string PackRoot = GeneratedRoot + "/ContentPacks";
+        private const string LootTablePath = ProfileRoot + "/CatalogLootTable.asset";
+        private const string EconomyPath = ProfileRoot + "/DefaultLootEconomy.asset";
+        private const string ZonePath = ProfileRoot + "/DefaultLootZone.asset";
+        private const string NetworkPrefabListPath = "Assets/DefaultNetworkPrefabs.asset";
 
-        [MenuItem("Tools/OSCAR-MIKE/Items/Create Prototype Loot Setup")]
-        public static void Create()
+        private sealed class Row
+        {
+            public int Sequence;
+            public string AssetName;
+            public string DisplayName;
+            public string PackName;
+            public byte MinValueSteps;
+            public byte MaxValueSteps;
+            public LootAssetCategory AssetCategory;
+            public LootUsageCategory UsageCategory;
+            public int BasePrice;
+            public float PriceVariance;
+            public bool RequestedSpawnEnabled;
+            public string[] AllowedZones;
+            public string Notes;
+        }
+
+        [MenuItem("Tools/OSCAR-MIKE/Items/Import 87-Item Loot Catalog")]
+        public static void ImportCatalog()
         {
             EnsureFolders();
-            NetworkObject commonPrefab = CreatePrefab("Loot_Common", PrimitiveType.Cube, new Color(0.55f, 0.58f, 0.62f));
-            NetworkObject uncommonPrefab = CreatePrefab("Loot_Uncommon", PrimitiveType.Cylinder, new Color(0.2f, 0.75f, 0.35f));
-            NetworkObject rarePrefab = CreatePrefab("Loot_Rare", PrimitiveType.Sphere, new Color(0.2f, 0.5f, 1f));
-
-            LootItemDefinition common = CreateItem("scrap_common", "일반 폐품", LootRarity.Common, 35, 8, commonPrefab, null);
-            LootItemDefinition uncommon = CreateItem("scrap_uncommon", "고급 폐품", LootRarity.Uncommon, 90, 4, uncommonPrefab, null);
-            LootItemDefinition rare = CreateItem("scrap_rare", "희귀 폐품", LootRarity.Rare, 220, 2, rarePrefab, null);
-            LootItemDefinition special = CreateItem("restricted_sample", "지역 특수 샘플", LootRarity.Rare, 350, 1, rarePrefab,
-                new[] { "restricted" });
-
-            LootZoneProfile defaultZone = CreateZone("DefaultZone", "default", 70, 25, 5);
-            CreateZone("RestrictedZone", "restricted", 45, 35, 20);
-            LootTable table = CreateTable(new[] { common, uncommon, rare, special });
-
-            RegisterNetworkPrefab(commonPrefab);
-            RegisterNetworkPrefab(uncommonPrefab);
-            RegisterNetworkPrefab(rarePrefab);
-            AssignDefaultZoneToRooms(defaultZone);
-            ConfigureOpenScene(table, defaultZone);
-
-            AssetDatabase.SaveAssets();
-            AssetDatabase.Refresh();
-            Debug.Log("[LootPrototypeSetup] 프로토타입 폐품 프리팹, 데이터, 지역 프로필 및 현재 씬 설정을 생성했습니다.");
-        }
-
-        private static void EnsureFolders()
-        {
-            if (!AssetDatabase.IsValidFolder("Assets/Items")) AssetDatabase.CreateFolder("Assets", "Items");
-            if (!AssetDatabase.IsValidFolder(Root)) AssetDatabase.CreateFolder("Assets/Items", "Prototype");
-            if (!AssetDatabase.IsValidFolder(Root + "/Prefabs")) AssetDatabase.CreateFolder(Root, "Prefabs");
-            if (!AssetDatabase.IsValidFolder(Root + "/Materials")) AssetDatabase.CreateFolder(Root, "Materials");
-            if (!AssetDatabase.IsValidFolder(Root + "/Data")) AssetDatabase.CreateFolder(Root, "Data");
-        }
-
-        private static NetworkObject CreatePrefab(string name, PrimitiveType primitive, Color color)
-        {
-            string materialPath = $"{Root}/Materials/{name}.mat";
-            Material material = AssetDatabase.LoadAssetAtPath<Material>(materialPath);
-            if (material == null)
+            List<string> warnings = new List<string>();
+            List<string> errors = new List<string>();
+            List<Row> rows = ReadRows(errors);
+            ValidateRows(rows, warnings, errors);
+            if (errors.Count > 0)
             {
-                Shader shader = Shader.Find("Universal Render Pipeline/Lit") ?? Shader.Find("Standard");
-                material = new Material(shader) { color = color };
-                AssetDatabase.CreateAsset(material, materialPath);
+                LogReport(rows.Count, 0, 0, warnings, errors);
+                return;
             }
 
-            string prefabPath = $"{Root}/Prefabs/{name}.prefab";
-            GameObject existing = AssetDatabase.LoadAssetAtPath<GameObject>(prefabPath);
+            Dictionary<string, LootContentPack> packs = CreateContentPacks();
+            var definitions = new List<LootItemDefinition>(rows.Count);
+            var networkPrefabs = new List<NetworkObject>(rows.Count);
+            int connectedPrefabs = 0;
+            int unassignedUsage = 0;
+
+            AssetDatabase.StartAssetEditing();
+            try
+            {
+                foreach (Row row in rows)
+                {
+                    if (!packs.TryGetValue(row.PackName, out LootContentPack pack))
+                    {
+                        errors.Add($"#{row.Sequence} 알 수 없는 콘텐츠 팩: {row.PackName}");
+                        continue;
+                    }
+
+                    List<GameObject> sourceMatches = FindExactPrefabs(pack.AssetRoot, row.AssetName);
+                    if (sourceMatches.Count != 1)
+                    {
+                        errors.Add($"#{row.Sequence} {row.PackName}/{row.AssetName}: 프리팹 {sourceMatches.Count}개 발견");
+                    }
+
+                    NetworkObject wrapper = sourceMatches.Count == 1
+                        ? CreateOrGetNetworkWrapper(row, sourceMatches[0])
+                        : null;
+                    if (wrapper != null)
+                    {
+                        networkPrefabs.Add(wrapper);
+                        connectedPrefabs++;
+                    }
+
+                    if (row.UsageCategory == LootUsageCategory.Unassigned) unassignedUsage++;
+                    LootItemDefinition definition = CreateOrUpdateDefinition(row, pack, wrapper);
+                    definitions.Add(definition);
+                }
+
+                LootEconomyProfile economy = CreateOrGetProfile<LootEconomyProfile>(EconomyPath);
+                LootZoneProfile zone = CreateOrGetProfile<LootZoneProfile>(ZonePath);
+                LootTable table = CreateOrUpdateLootTable(definitions);
+                AssignDefaultZoneToRooms(zone);
+                ConfigureOpenScene(table, zone, economy);
+            }
+            finally
+            {
+                AssetDatabase.StopAssetEditing();
+            }
+
+            RegisterNetworkPrefabs(networkPrefabs);
+            AssetDatabase.SaveAssets();
+            AssetDatabase.Refresh();
+
+            if (unassignedUsage > 0)
+                warnings.Add($"용도 미지정 {unassignedUsage}개: 정의와 프리팹은 생성했지만 스폰은 비활성화됨");
+            warnings.Add("#12 SM_Prop_Coin_Pile_02의 KEY 분류는 원본 시트 확인 필요");
+            LogReport(rows.Count, connectedPrefabs, definitions.Count, warnings, errors);
+        }
+
+        [MenuItem("Tools/OSCAR-MIKE/Items/Validate Loot Catalog")]
+        public static void ValidateCatalog()
+        {
+            var warnings = new List<string>();
+            var errors = new List<string>();
+            List<Row> rows = ReadRows(errors);
+            ValidateRows(rows, warnings, errors);
+            int found = 0;
+            Dictionary<string, string> roots = GetPackRoots();
+            foreach (Row row in rows)
+            {
+                if (!roots.TryGetValue(row.PackName, out string root)) continue;
+                int count = FindExactPrefabs(root, row.AssetName).Count;
+                if (count == 1) found++;
+                else errors.Add($"#{row.Sequence} {row.PackName}/{row.AssetName}: 프리팹 {count}개 발견");
+            }
+            LogReport(rows.Count, found, 0, warnings, errors);
+        }
+
+        private static List<Row> ReadRows(List<string> errors)
+        {
+            var rows = new List<Row>();
+            if (!File.Exists(CatalogPath))
+            {
+                errors.Add($"카탈로그 파일 없음: {CatalogPath}");
+                return rows;
+            }
+
+            string[] lines = File.ReadAllLines(CatalogPath);
+            for (int lineIndex = 1; lineIndex < lines.Length; lineIndex++)
+            {
+                if (string.IsNullOrWhiteSpace(lines[lineIndex])) continue;
+                string[] c = lines[lineIndex].Split('\t');
+                if (c.Length < 13)
+                {
+                    errors.Add($"{lineIndex + 1}행: 열 개수 {c.Length}, 필요 13");
+                    continue;
+                }
+
+                try
+                {
+                    var row = new Row
+                    {
+                        Sequence = int.Parse(c[0], CultureInfo.InvariantCulture),
+                        AssetName = CanonicalizeAssetName(c[1]),
+                        DisplayName = c[2].Trim(),
+                        PackName = c[3].Trim(),
+                        MinValueSteps = ParseValueSteps(c[4]),
+                        MaxValueSteps = ParseValueSteps(c[5]),
+                        AssetCategory = ParseEnum<LootAssetCategory>(c[6]),
+                        UsageCategory = string.IsNullOrWhiteSpace(c[7])
+                            ? LootUsageCategory.Unassigned
+                            : ParseEnum<LootUsageCategory>(c[7]),
+                        BasePrice = int.Parse(c[8], CultureInfo.InvariantCulture),
+                        PriceVariance = float.Parse(c[9], CultureInfo.InvariantCulture),
+                        RequestedSpawnEnabled = bool.Parse(c[10]),
+                        AllowedZones = c[11].Split(new[] { '|' }, StringSplitOptions.RemoveEmptyEntries)
+                            .Select(value => value.Trim()).ToArray(),
+                        Notes = c[12].Trim()
+                    };
+                    if (row.MinValueSteps > row.MaxValueSteps)
+                        throw new FormatException("최소 밸류가 최대 밸류보다 큼");
+                    rows.Add(row);
+                }
+                catch (Exception exception)
+                {
+                    errors.Add($"{lineIndex + 1}행 파싱 실패: {exception.Message}");
+                }
+            }
+            return rows;
+        }
+
+        private static void ValidateRows(List<Row> rows, List<string> warnings, List<string> errors)
+        {
+            if (rows.Count != 87) errors.Add($"카탈로그 행 수 {rows.Count}, 필요 87");
+            var sequenceSet = new HashSet<int>();
+            var idSet = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
+            foreach (Row row in rows)
+            {
+                if (!sequenceSet.Add(row.Sequence)) errors.Add($"중복 순번: {row.Sequence}");
+                string id = BuildItemId(row.PackName, row.AssetName);
+                if (!idSet.Add(id)) errors.Add($"중복 아이템 ID: {id}");
+                if (row.MinValueSteps < 2 || row.MaxValueSteps > 10) errors.Add($"#{row.Sequence} 밸류 범위 오류");
+                if (row.UsageCategory == LootUsageCategory.Unassigned)
+                    warnings.Add($"#{row.Sequence} {row.AssetName}: 용도 미지정");
+            }
+        }
+
+        private static Dictionary<string, LootContentPack> CreateContentPacks()
+        {
+            var result = new Dictionary<string, LootContentPack>(StringComparer.OrdinalIgnoreCase);
+            foreach (KeyValuePair<string, string> pair in GetPackRoots())
+            {
+                string path = $"{PackRoot}/{pair.Key}.asset";
+                LootContentPack pack = AssetDatabase.LoadAssetAtPath<LootContentPack>(path);
+                if (pack == null)
+                {
+                    pack = ScriptableObject.CreateInstance<LootContentPack>();
+                    AssetDatabase.CreateAsset(pack, path);
+                }
+                var serialized = new SerializedObject(pack);
+                serialized.FindProperty("packId").stringValue = pair.Key.ToLowerInvariant();
+                serialized.FindProperty("assetRoot").stringValue = pair.Value;
+                serialized.ApplyModifiedPropertiesWithoutUndo();
+                result[pair.Key] = pack;
+            }
+            return result;
+        }
+
+        private static Dictionary<string, string> GetPackRoots()
+        {
+            return new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase)
+            {
+                ["PolygonCasino"] = "Assets/Synty/PolygonCasino",
+                ["PolygonGangWarfare"] = "Assets/Synty/PolygonGangWarfare",
+                ["PolygonMilitary"] = "Assets/Synty/PolygonMilitary"
+            };
+        }
+
+        private static List<GameObject> FindExactPrefabs(string root, string assetName)
+        {
+            return AssetDatabase.FindAssets($"{assetName} t:Prefab", new[] { root })
+                .Select(AssetDatabase.GUIDToAssetPath)
+                .Where(path => string.Equals(Path.GetFileNameWithoutExtension(path), assetName,
+                    StringComparison.OrdinalIgnoreCase))
+                .Select(AssetDatabase.LoadAssetAtPath<GameObject>)
+                .Where(prefab => prefab != null)
+                .ToList();
+        }
+
+        private static NetworkObject CreateOrGetNetworkWrapper(Row row, GameObject sourcePrefab)
+        {
+            string wrapperName = $"{row.PackName}_{row.AssetName}_NetworkLoot";
+            string path = $"{PrefabRoot}/{wrapperName}.prefab";
+            GameObject existing = AssetDatabase.LoadAssetAtPath<GameObject>(path);
             if (existing != null) return existing.GetComponent<NetworkObject>();
 
-            GameObject instance = GameObject.CreatePrimitive(primitive);
-            instance.name = name;
-            instance.transform.localScale = primitive == PrimitiveType.Cylinder
-                ? new Vector3(0.35f, 0.25f, 0.35f)
-                : Vector3.one * 0.5f;
-            instance.GetComponent<Renderer>().sharedMaterial = material;
-            instance.AddComponent<NetworkObject>();
-            instance.AddComponent<NetworkLootItem>();
-            GameObject prefab = PrefabUtility.SaveAsPrefabAsset(instance, prefabPath);
-            Object.DestroyImmediate(instance);
+            var root = new GameObject(wrapperName);
+            root.AddComponent<NetworkObject>();
+            root.AddComponent<NetworkLootItem>();
+            GameObject visual = (GameObject)PrefabUtility.InstantiatePrefab(sourcePrefab);
+            visual.name = "Visual";
+            visual.transform.SetParent(root.transform, false);
+
+            Bounds bounds = CalculateLocalBounds(root);
+            BoxCollider collider = root.AddComponent<BoxCollider>();
+            collider.center = bounds.center;
+            collider.size = new Vector3(
+                Mathf.Max(0.05f, bounds.size.x),
+                Mathf.Max(0.05f, bounds.size.y),
+                Mathf.Max(0.05f, bounds.size.z));
+
+            GameObject prefab = PrefabUtility.SaveAsPrefabAsset(root, path);
+            UnityEngine.Object.DestroyImmediate(root);
             return prefab.GetComponent<NetworkObject>();
         }
 
-        private static LootItemDefinition CreateItem(string id, string displayName, LootRarity rarity,
-            int value, int weight, NetworkObject prefab, string[] zones)
+        private static Bounds CalculateLocalBounds(GameObject root)
         {
-            string path = $"{Root}/Data/{id}.asset";
-            LootItemDefinition item = AssetDatabase.LoadAssetAtPath<LootItemDefinition>(path);
-            if (item == null)
+            Renderer[] renderers = root.GetComponentsInChildren<Renderer>(true);
+            if (renderers.Length == 0) return new Bounds(Vector3.zero, Vector3.one * 0.25f);
+            Bounds worldBounds = renderers[0].bounds;
+            for (int i = 1; i < renderers.Length; i++) worldBounds.Encapsulate(renderers[i].bounds);
+            return new Bounds(root.transform.InverseTransformPoint(worldBounds.center), worldBounds.size);
+        }
+
+        private static LootItemDefinition CreateOrUpdateDefinition(Row row, LootContentPack pack, NetworkObject wrapper)
+        {
+            string id = BuildItemId(row.PackName, row.AssetName);
+            string path = $"{DefinitionRoot}/{row.Sequence:000}_{row.PackName}_{row.AssetName}.asset";
+            LootItemDefinition definition = AssetDatabase.LoadAssetAtPath<LootItemDefinition>(path);
+            if (definition == null)
             {
-                item = ScriptableObject.CreateInstance<LootItemDefinition>();
-                AssetDatabase.CreateAsset(item, path);
+                definition = ScriptableObject.CreateInstance<LootItemDefinition>();
+                AssetDatabase.CreateAsset(definition, path);
             }
 
-            var serialized = new SerializedObject(item);
+            var serialized = new SerializedObject(definition);
             serialized.FindProperty("itemId").stringValue = id;
-            serialized.FindProperty("displayName").stringValue = displayName;
-            serialized.FindProperty("rarity").enumValueIndex = (int)rarity;
-            serialized.FindProperty("baseValue").intValue = value;
-            serialized.FindProperty("valueVariance").floatValue = 0.15f;
-            serialized.FindProperty("spawnWeight").intValue = weight;
-            serialized.FindProperty("networkPrefab").objectReferenceValue = prefab;
-            SerializedProperty allowed = serialized.FindProperty("allowedZoneIds");
-            allowed.arraySize = zones?.Length ?? 0;
-            for (int i = 0; i < allowed.arraySize; i++) allowed.GetArrayElementAtIndex(i).stringValue = zones[i];
+            serialized.FindProperty("displayName").stringValue = row.DisplayName;
+            serialized.FindProperty("sourceAssetName").stringValue = row.AssetName;
+            serialized.FindProperty("contentPack").objectReferenceValue = pack;
+            serialized.FindProperty("usageCategory").enumValueIndex = (int)row.UsageCategory;
+            serialized.FindProperty("assetCategory").enumValueIndex = (int)row.AssetCategory;
+            serialized.FindProperty("minValueSteps").intValue = row.MinValueSteps;
+            serialized.FindProperty("maxValueSteps").intValue = row.MaxValueSteps;
+            serialized.FindProperty("basePrice").intValue = row.BasePrice;
+            serialized.FindProperty("priceVariance").floatValue = row.PriceVariance;
+            serialized.FindProperty("spawnWeight").intValue = 1;
+            serialized.FindProperty("spawnEnabled").boolValue = row.RequestedSpawnEnabled
+                && row.UsageCategory != LootUsageCategory.Unassigned
+                && wrapper != null;
+            serialized.FindProperty("notes").stringValue = row.Notes;
+            serialized.FindProperty("networkPrefab").objectReferenceValue = wrapper;
+            SerializedProperty zones = serialized.FindProperty("allowedZoneIds");
+            zones.arraySize = row.AllowedZones.Length;
+            for (int i = 0; i < zones.arraySize; i++) zones.GetArrayElementAtIndex(i).stringValue = row.AllowedZones[i];
             serialized.ApplyModifiedPropertiesWithoutUndo();
-            return item;
+            return definition;
         }
 
-        private static LootZoneProfile CreateZone(string name, string id, int common, int uncommon, int rare)
+        private static LootTable CreateOrUpdateLootTable(IReadOnlyList<LootItemDefinition> definitions)
         {
-            string path = $"{Root}/Data/{name}.asset";
-            LootZoneProfile zone = AssetDatabase.LoadAssetAtPath<LootZoneProfile>(path);
-            if (zone == null)
-            {
-                zone = ScriptableObject.CreateInstance<LootZoneProfile>();
-                AssetDatabase.CreateAsset(zone, path);
-            }
-            var serialized = new SerializedObject(zone);
-            serialized.FindProperty("zoneId").stringValue = id;
-            serialized.FindProperty("budgetWeight").intValue = 1;
-            serialized.FindProperty("commonWeight").intValue = common;
-            serialized.FindProperty("uncommonWeight").intValue = uncommon;
-            serialized.FindProperty("rareWeight").intValue = rare;
-            serialized.ApplyModifiedPropertiesWithoutUndo();
-            return zone;
-        }
-
-        private static LootTable CreateTable(IReadOnlyList<LootItemDefinition> items)
-        {
-            string path = $"{Root}/Data/PrototypeLootTable.asset";
-            LootTable table = AssetDatabase.LoadAssetAtPath<LootTable>(path);
+            LootTable table = AssetDatabase.LoadAssetAtPath<LootTable>(LootTablePath);
             if (table == null)
             {
                 table = ScriptableObject.CreateInstance<LootTable>();
-                AssetDatabase.CreateAsset(table, path);
+                AssetDatabase.CreateAsset(table, LootTablePath);
             }
             var serialized = new SerializedObject(table);
-            SerializedProperty list = serialized.FindProperty("items");
-            list.arraySize = items.Count;
-            for (int i = 0; i < items.Count; i++) list.GetArrayElementAtIndex(i).objectReferenceValue = items[i];
+            SerializedProperty items = serialized.FindProperty("items");
+            items.arraySize = definitions.Count;
+            for (int i = 0; i < definitions.Count; i++) items.GetArrayElementAtIndex(i).objectReferenceValue = definitions[i];
             serialized.ApplyModifiedPropertiesWithoutUndo();
             return table;
         }
 
-        private static void RegisterNetworkPrefab(NetworkObject prefab)
+        private static T CreateOrGetProfile<T>(string path) where T : ScriptableObject
         {
-            const string path = "Assets/DefaultNetworkPrefabs.asset";
-            NetworkPrefabsList listAsset = AssetDatabase.LoadAssetAtPath<NetworkPrefabsList>(path);
+            T profile = AssetDatabase.LoadAssetAtPath<T>(path);
+            if (profile != null) return profile;
+            profile = ScriptableObject.CreateInstance<T>();
+            AssetDatabase.CreateAsset(profile, path);
+            return profile;
+        }
+
+        private static void RegisterNetworkPrefabs(IReadOnlyList<NetworkObject> prefabs)
+        {
+            NetworkPrefabsList listAsset = AssetDatabase.LoadAssetAtPath<NetworkPrefabsList>(NetworkPrefabListPath);
             if (listAsset == null) return;
             var serialized = new SerializedObject(listAsset);
             SerializedProperty list = serialized.FindProperty("List");
+            var registered = new HashSet<GameObject>();
             for (int i = 0; i < list.arraySize; i++)
             {
-                if (list.GetArrayElementAtIndex(i).FindPropertyRelative("Prefab").objectReferenceValue == prefab.gameObject)
-                    return;
+                GameObject existing = list.GetArrayElementAtIndex(i).FindPropertyRelative("Prefab").objectReferenceValue as GameObject;
+                if (existing != null) registered.Add(existing);
             }
-            int index = list.arraySize;
-            list.InsertArrayElementAtIndex(index);
-            SerializedProperty entry = list.GetArrayElementAtIndex(index);
-            entry.FindPropertyRelative("Override").intValue = 0;
-            entry.FindPropertyRelative("Prefab").objectReferenceValue = prefab.gameObject;
+            for (int prefabIndex = 0; prefabIndex < prefabs.Count; prefabIndex++)
+            {
+                NetworkObject prefab = prefabs[prefabIndex];
+                if (prefab == null || !registered.Add(prefab.gameObject)) continue;
+                int index = list.arraySize;
+                list.InsertArrayElementAtIndex(index);
+                SerializedProperty entry = list.GetArrayElementAtIndex(index);
+                entry.FindPropertyRelative("Override").intValue = 0;
+                entry.FindPropertyRelative("Prefab").objectReferenceValue = prefab.gameObject;
+            }
             serialized.ApplyModifiedPropertiesWithoutUndo();
         }
 
         private static void AssignDefaultZoneToRooms(LootZoneProfile zone)
         {
-            string[] guids = AssetDatabase.FindAssets("t:RoomConfig");
-            foreach (string guid in guids)
+            foreach (string guid in AssetDatabase.FindAssets("t:RoomConfig"))
             {
                 RoomConfig room = AssetDatabase.LoadAssetAtPath<RoomConfig>(AssetDatabase.GUIDToAssetPath(guid));
-                if (room == null || room.lootZone != null) continue;
+                if (room == null) continue;
+                string existingPath = room.lootZone != null ? AssetDatabase.GetAssetPath(room.lootZone) : string.Empty;
+                if (room.lootZone != null && !existingPath.StartsWith("Assets/Items/Prototype/", StringComparison.OrdinalIgnoreCase))
+                    continue;
                 room.lootZone = zone;
                 EditorUtility.SetDirty(room);
             }
         }
 
-        private static void ConfigureOpenScene(LootTable table, LootZoneProfile zone)
+        private static void ConfigureOpenScene(LootTable table, LootZoneProfile zone, LootEconomyProfile economy)
         {
-            ProceduralMapGenerator generator = Object.FindFirstObjectByType<ProceduralMapGenerator>();
+            ProceduralMapGenerator generator = UnityEngine.Object.FindFirstObjectByType<ProceduralMapGenerator>();
             if (generator == null) return;
             NetworkLootSpawner spawner = generator.GetComponent<NetworkLootSpawner>();
             if (spawner == null) spawner = Undo.AddComponent<NetworkLootSpawner>(generator.gameObject);
@@ -182,8 +389,69 @@ namespace OskarMike.Items.Editor
             serialized.FindProperty("mapGenerator").objectReferenceValue = generator;
             serialized.FindProperty("lootTable").objectReferenceValue = table;
             serialized.FindProperty("fallbackZone").objectReferenceValue = zone;
+            serialized.FindProperty("economyProfile").objectReferenceValue = economy;
             serialized.ApplyModifiedProperties();
             EditorSceneManager.MarkSceneDirty(generator.gameObject.scene);
+        }
+
+        private static byte ParseValueSteps(string value)
+        {
+            float parsed = float.Parse(value.Trim(), CultureInfo.InvariantCulture);
+            int steps = Mathf.RoundToInt(parsed * 2f);
+            if (steps < 2 || steps > 10 || Mathf.Abs(parsed * 2f - steps) > 0.001f)
+                throw new FormatException($"0.5 단위가 아닌 밸류: {value}");
+            return (byte)steps;
+        }
+
+        private static T ParseEnum<T>(string value) where T : struct
+        {
+            string normalized = value.Trim();
+            int parenthesis = normalized.IndexOf('(');
+            if (parenthesis >= 0) normalized = normalized.Substring(0, parenthesis).Trim();
+            if (!Enum.TryParse(normalized, true, out T result)) throw new FormatException($"알 수 없는 {typeof(T).Name}: {value}");
+            return result;
+        }
+
+        private static string CanonicalizeAssetName(string value)
+        {
+            string result = value.Trim();
+            if (result.EndsWith(" (1)", StringComparison.Ordinal)) result = result.Substring(0, result.Length - 4);
+            return result;
+        }
+
+        private static string BuildItemId(string packName, string assetName)
+        {
+            return $"{packName}.{assetName}".ToLowerInvariant();
+        }
+
+        private static void EnsureFolders()
+        {
+            EnsureFolder("Assets/Items");
+            EnsureFolder("Assets/Items/Catalog");
+            EnsureFolder(GeneratedRoot);
+            EnsureFolder(DefinitionRoot);
+            EnsureFolder(PrefabRoot);
+            EnsureFolder(ProfileRoot);
+            EnsureFolder(PackRoot);
+        }
+
+        private static void EnsureFolder(string path)
+        {
+            if (AssetDatabase.IsValidFolder(path)) return;
+            string parent = Path.GetDirectoryName(path)?.Replace('\\', '/');
+            string name = Path.GetFileName(path);
+            if (!string.IsNullOrEmpty(parent)) EnsureFolder(parent);
+            AssetDatabase.CreateFolder(parent, name);
+        }
+
+        private static void LogReport(int rows, int connected, int definitions,
+            IReadOnlyList<string> warnings, IReadOnlyList<string> errors)
+        {
+            string summary = $"[LootCatalog] rows={rows}, connectedPrefabs={connected}, definitions={definitions}, " +
+                             $"warnings={warnings.Count}, errors={errors.Count}";
+            if (errors.Count == 0) Debug.Log(summary); else Debug.LogError(summary);
+            foreach (string warning in warnings) Debug.LogWarning($"[LootCatalog] {warning}");
+            foreach (string error in errors) Debug.LogError($"[LootCatalog] {error}");
         }
     }
 }

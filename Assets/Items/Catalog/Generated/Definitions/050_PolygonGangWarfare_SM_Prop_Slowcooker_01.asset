@@ -1,0 +1,29 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cc98ec8e33537ec46a4ac911c1e49ecc, type: 3}
+  m_Name: 050_PolygonGangWarfare_SM_Prop_Slowcooker_01
+  m_EditorClassIdentifier: Assembly-CSharp::OskarMike.Items.LootItemDefinition
+  itemId: polygongangwarfare.sm_prop_slowcooker_01
+  displayName: "\uC555\uB825\uC1A5"
+  sourceAssetName: SM_Prop_Slowcooker_01
+  contentPack: {fileID: 11400000, guid: f942391ce56a69145876f68bfc75467e, type: 2}
+  usageCategory: 0
+  assetCategory: 2
+  minValueSteps: 2
+  maxValueSteps: 2
+  basePrice: 25
+  priceVariance: 0.15
+  spawnWeight: 1
+  spawnEnabled: 0
+  allowedZoneIds: []
+  notes: 
+  networkPrefab: {fileID: 8671856709306820752, guid: af371cd75b9649045aca409fbe6f688e, type: 3}
