@@ -16,14 +16,13 @@ MonoBehaviour:
   displayName: "\uAE08 \uC2ED\uC790\uAC00 \uBAA9\uAC78\uC774"
   sourceAssetName: SM_Item_Cross_01
   contentPack: {fileID: 11400000, guid: d2f6c8d30c32eaf4ba76f7198a09bcb8, type: 2}
-  usageCategory: 0
-  assetCategory: 3
+  category: 3
   minValueSteps: 6
   maxValueSteps: 6
   basePrice: 150
   priceVariance: 0.15
   spawnWeight: 1
-  spawnEnabled: 0
+  spawnEnabled: 1
   allowedZoneIds: []
   notes: 
   networkPrefab: {fileID: 6217095641602594473, guid: ecd2082bb63fcad40be1a88ceafcba0e, type: 3}

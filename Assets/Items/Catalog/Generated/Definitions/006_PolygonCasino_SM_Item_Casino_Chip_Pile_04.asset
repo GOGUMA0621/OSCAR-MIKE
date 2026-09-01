@@ -16,14 +16,13 @@ MonoBehaviour:
   displayName: "\uCE74\uC9C0\uB178 \uCE69"
   sourceAssetName: SM_Item_Casino_Chip_Pile_04
   contentPack: {fileID: 11400000, guid: d2f6c8d30c32eaf4ba76f7198a09bcb8, type: 2}
-  usageCategory: 0
-  assetCategory: 2
+  category: 2
   minValueSteps: 2
   maxValueSteps: 2
   basePrice: 25
   priceVariance: 0.15
   spawnWeight: 1
-  spawnEnabled: 0
+  spawnEnabled: 1
   allowedZoneIds: []
   notes: 
   networkPrefab: {fileID: 6516769661508525211, guid: a0a9d994842d1da4ab099506f503e52a, type: 3}

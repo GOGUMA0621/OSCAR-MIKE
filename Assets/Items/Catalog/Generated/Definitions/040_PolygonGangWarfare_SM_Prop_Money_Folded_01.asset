@@ -16,14 +16,13 @@ MonoBehaviour:
   displayName: "\uB3C8\uBB49\uCE581"
   sourceAssetName: SM_Prop_Money_Folded_01
   contentPack: {fileID: 11400000, guid: f942391ce56a69145876f68bfc75467e, type: 2}
-  usageCategory: 0
-  assetCategory: 3
+  category: 3
   minValueSteps: 3
   maxValueSteps: 3
   basePrice: 50
   priceVariance: 0.15
   spawnWeight: 1
-  spawnEnabled: 0
+  spawnEnabled: 1
   allowedZoneIds: []
   notes: 
   networkPrefab: {fileID: 6736900018684231425, guid: 2e7944e072da44c42ac76131f2c56bd0, type: 3}

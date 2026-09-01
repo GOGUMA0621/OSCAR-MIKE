@@ -16,14 +16,13 @@ MonoBehaviour:
   displayName: "\uB77D\uCE74 \uC2A4\uD504\uB808\uC774"
   sourceAssetName: SM_Prop_SprayCan_01
   contentPack: {fileID: 11400000, guid: f942391ce56a69145876f68bfc75467e, type: 2}
-  usageCategory: 0
-  assetCategory: 2
+  category: 2
   minValueSteps: 2
   maxValueSteps: 2
   basePrice: 25
   priceVariance: 0.15
   spawnWeight: 1
-  spawnEnabled: 0
+  spawnEnabled: 1
   allowedZoneIds: []
   notes: 
   networkPrefab: {fileID: 3408397125445050672, guid: af3b248367a774f4bbd783e7602ba0ef, type: 3}

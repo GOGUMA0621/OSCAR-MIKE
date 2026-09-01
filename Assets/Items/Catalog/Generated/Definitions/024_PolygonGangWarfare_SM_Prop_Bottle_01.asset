@@ -16,14 +16,13 @@ MonoBehaviour:
   displayName: Protein powder
   sourceAssetName: SM_Prop_Bottle_01
   contentPack: {fileID: 11400000, guid: f942391ce56a69145876f68bfc75467e, type: 2}
-  usageCategory: 0
-  assetCategory: 6
+  category: 6
   minValueSteps: 2
   maxValueSteps: 2
   basePrice: 25
   priceVariance: 0.15
   spawnWeight: 1
-  spawnEnabled: 0
+  spawnEnabled: 1
   allowedZoneIds: []
   notes: 
   networkPrefab: {fileID: 3696629548813846149, guid: dec645603ecc0cc489b9890e94bdf3a1, type: 3}

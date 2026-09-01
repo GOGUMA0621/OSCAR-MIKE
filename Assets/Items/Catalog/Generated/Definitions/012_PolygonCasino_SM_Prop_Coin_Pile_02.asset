@@ -16,14 +16,13 @@ MonoBehaviour:
   displayName: "\uB3D9\uC804 \uB354\uBBF8"
   sourceAssetName: SM_Prop_Coin_Pile_02
   contentPack: {fileID: 11400000, guid: d2f6c8d30c32eaf4ba76f7198a09bcb8, type: 2}
-  usageCategory: 0
-  assetCategory: 7
+  category: 3
   minValueSteps: 2
   maxValueSteps: 2
   basePrice: 25
   priceVariance: 0.15
   spawnWeight: 1
-  spawnEnabled: 0
+  spawnEnabled: 1
   allowedZoneIds: []
   notes: "KEY \uBD84\uB958 \uD655\uC778 \uD544\uC694"
   networkPrefab: {fileID: 4010001216160709064, guid: c111202a87859bc4e80c30d76c42f329, type: 3}

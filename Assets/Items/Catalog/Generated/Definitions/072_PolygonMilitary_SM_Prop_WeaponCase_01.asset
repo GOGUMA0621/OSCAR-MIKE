@@ -16,14 +16,13 @@ MonoBehaviour:
   displayName: "\uBB34\uAE30 \uCF00\uC774\uC2A4"
   sourceAssetName: SM_Prop_WeaponCase_01
   contentPack: {fileID: 11400000, guid: c2ffe107ae5c4b84e904fc1072d5c86c, type: 2}
-  usageCategory: 0
-  assetCategory: 4
+  category: 4
   minValueSteps: 2
   maxValueSteps: 2
   basePrice: 25
   priceVariance: 0.15
   spawnWeight: 1
-  spawnEnabled: 0
+  spawnEnabled: 1
   allowedZoneIds: []
   notes: "\uC6D0\uBCF8 \uBC38\uB958 -; \uC784\uC2DC 1\uC810"
   networkPrefab: {fileID: 2788706628233169210, guid: b26d9db178c1de94cbb3fed2702a6f35, type: 3}

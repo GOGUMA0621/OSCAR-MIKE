@@ -16,14 +16,13 @@ MonoBehaviour:
   displayName: "\uB300\uC804\uCC28\uC9C0\uB8B0"
   sourceAssetName: SM_Prop_Mine_01
   contentPack: {fileID: 11400000, guid: c2ffe107ae5c4b84e904fc1072d5c86c, type: 2}
-  usageCategory: 0
-  assetCategory: 4
+  category: 4
   minValueSteps: 3
   maxValueSteps: 3
   basePrice: 50
   priceVariance: 0.15
   spawnWeight: 1
-  spawnEnabled: 0
+  spawnEnabled: 1
   allowedZoneIds: []
   notes: 
   networkPrefab: {fileID: 606900609485215072, guid: 6391ba091b0227b4cb467a7bb6079afe, type: 3}

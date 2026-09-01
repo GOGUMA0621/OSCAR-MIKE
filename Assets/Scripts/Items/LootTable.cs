@@ -22,10 +22,10 @@ namespace OskarMike.Items
 
             for (int attempt = 0; attempt < MaxRollAttempts; attempt++)
             {
-                LootUsageCategory usage = RollUsage(random, zone);
+                LootCategory category = RollCategory(random, zone);
                 byte targetValue = RollValueSteps(random, zone, economy);
-                if (usage == LootUsageCategory.Unassigned || targetValue == 0) return false;
-                if (!TryPickItem(random, zone, usage, targetValue, maximumPrice, out item)) continue;
+                if (targetValue == 0) return false;
+                if (!TryPickItem(random, zone, category, targetValue, maximumPrice, out item)) continue;
 
                 valueSteps = targetValue;
                 price = LootPriceCalculator.RollPrice(item, random, maximumPrice);
@@ -35,19 +35,19 @@ namespace OskarMike.Items
             return false;
         }
 
-        private static LootUsageCategory RollUsage(System.Random random, LootZoneProfile zone)
+        private static LootCategory RollCategory(System.Random random, LootZoneProfile zone)
         {
             int total = 0;
-            for (byte i = 1; i <= 5; i++) total += zone.GetUsageWeight((LootUsageCategory)i);
-            if (total <= 0) return LootUsageCategory.Unassigned;
+            for (byte i = 0; i < 9; i++) total += zone.GetCategoryWeight((LootCategory)i);
+            if (total <= 0) return LootCategory.Junk;
             int roll = random.Next(total);
-            for (byte i = 1; i <= 5; i++)
+            for (byte i = 0; i < 9; i++)
             {
-                int weight = zone.GetUsageWeight((LootUsageCategory)i);
-                if (roll < weight) return (LootUsageCategory)i;
+                int weight = zone.GetCategoryWeight((LootCategory)i);
+                if (roll < weight) return (LootCategory)i;
                 roll -= weight;
             }
-            return LootUsageCategory.Unassigned;
+            return LootCategory.Junk;
         }
 
         private static byte RollValueSteps(System.Random random, LootZoneProfile zone, LootEconomyProfile economy)
@@ -65,7 +65,7 @@ namespace OskarMike.Items
             return 0;
         }
 
-        private bool TryPickItem(System.Random random, LootZoneProfile zone, LootUsageCategory usage,
+        private bool TryPickItem(System.Random random, LootZoneProfile zone, LootCategory category,
             byte valueSteps, int maximumPrice, out LootItemDefinition result)
         {
             result = null;
@@ -73,7 +73,7 @@ namespace OskarMike.Items
             for (int i = 0; i < items.Count; i++)
             {
                 LootItemDefinition candidate = items[i];
-                if (IsEligible(candidate, zone, usage, valueSteps, maximumPrice)) totalWeight += candidate.SpawnWeight;
+                if (IsEligible(candidate, zone, category, valueSteps, maximumPrice)) totalWeight += candidate.SpawnWeight;
             }
             if (totalWeight <= 0) return false;
 
@@ -81,7 +81,7 @@ namespace OskarMike.Items
             for (int i = 0; i < items.Count; i++)
             {
                 LootItemDefinition candidate = items[i];
-                if (!IsEligible(candidate, zone, usage, valueSteps, maximumPrice)) continue;
+                if (!IsEligible(candidate, zone, category, valueSteps, maximumPrice)) continue;
                 if (roll < candidate.SpawnWeight)
                 {
                     result = candidate;
@@ -93,12 +93,12 @@ namespace OskarMike.Items
         }
 
         private static bool IsEligible(LootItemDefinition item, LootZoneProfile zone,
-            LootUsageCategory usage, byte valueSteps, int maximumPrice)
+            LootCategory category, byte valueSteps, int maximumPrice)
         {
             return item != null
                 && item.SpawnEnabled
                 && item.NetworkPrefab != null
-                && item.UsageCategory == usage
+                && item.Category == category
                 && item.ContainsValue(valueSteps)
                 && item.IsAllowedInZone(zone.ZoneId)
                 && LootPriceCalculator.GetMinimumPrice(item) <= maximumPrice;

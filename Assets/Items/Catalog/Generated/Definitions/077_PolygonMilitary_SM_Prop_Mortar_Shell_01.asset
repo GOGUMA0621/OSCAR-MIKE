@@ -16,14 +16,13 @@ MonoBehaviour:
   displayName: "\uBC15\uACA9\uD3EC\uD0C4"
   sourceAssetName: SM_Prop_Mortar_Shell_01
   contentPack: {fileID: 11400000, guid: c2ffe107ae5c4b84e904fc1072d5c86c, type: 2}
-  usageCategory: 0
-  assetCategory: 4
+  category: 4
   minValueSteps: 3
   maxValueSteps: 3
   basePrice: 50
   priceVariance: 0.15
   spawnWeight: 1
-  spawnEnabled: 0
+  spawnEnabled: 1
   allowedZoneIds: []
   notes: 
   networkPrefab: {fileID: 4383995901942126560, guid: 4cdbbf39d91b5d549ae3cba53e112fc7, type: 3}

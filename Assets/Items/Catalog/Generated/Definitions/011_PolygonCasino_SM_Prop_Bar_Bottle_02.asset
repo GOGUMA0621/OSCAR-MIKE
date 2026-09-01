@@ -16,14 +16,13 @@ MonoBehaviour:
   displayName: "\uC591\uC8FC"
   sourceAssetName: SM_Prop_Bar_Bottle_02
   contentPack: {fileID: 11400000, guid: d2f6c8d30c32eaf4ba76f7198a09bcb8, type: 2}
-  usageCategory: 0
-  assetCategory: 6
+  category: 6
   minValueSteps: 4
   maxValueSteps: 4
   basePrice: 75
   priceVariance: 0.15
   spawnWeight: 1
-  spawnEnabled: 0
+  spawnEnabled: 1
   allowedZoneIds: []
   notes: 
   networkPrefab: {fileID: 2968790459421648884, guid: 3c9a9d2538ec3fa45a8fd153d428d807, type: 3}

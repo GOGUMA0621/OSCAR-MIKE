@@ -16,14 +16,13 @@ MonoBehaviour:
   displayName: "\uB9E4\uCD9C \uC7A5\uBD80"
   sourceAssetName: SM_Item_Clipboard_01
   contentPack: {fileID: 11400000, guid: c2ffe107ae5c4b84e904fc1072d5c86c, type: 2}
-  usageCategory: 0
-  assetCategory: 2
+  category: 2
   minValueSteps: 2
   maxValueSteps: 2
   basePrice: 25
   priceVariance: 0.15
   spawnWeight: 1
-  spawnEnabled: 0
+  spawnEnabled: 1
   allowedZoneIds: []
   notes: 
   networkPrefab: {fileID: 5441980385507048184, guid: 1101cf0752f193d4ab38f7831565ab3d, type: 3}

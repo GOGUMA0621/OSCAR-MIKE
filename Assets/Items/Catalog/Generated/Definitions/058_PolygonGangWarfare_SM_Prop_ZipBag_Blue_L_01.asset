@@ -16,14 +16,13 @@ MonoBehaviour:
   displayName: "\uB9C8\uC57D (\uACE0\uAE09) \uD3EC\uB300 \uB300"
   sourceAssetName: SM_Prop_ZipBag_Blue_L_01
   contentPack: {fileID: 11400000, guid: f942391ce56a69145876f68bfc75467e, type: 2}
-  usageCategory: 0
-  assetCategory: 8
+  category: 8
   minValueSteps: 8
   maxValueSteps: 8
   basePrice: 300
   priceVariance: 0.15
   spawnWeight: 1
-  spawnEnabled: 0
+  spawnEnabled: 1
   allowedZoneIds: []
   notes: 
   networkPrefab: {fileID: 2044850841586589476, guid: 71db2e7fdf6bacf4ca7f38b86ae481ba, type: 3}

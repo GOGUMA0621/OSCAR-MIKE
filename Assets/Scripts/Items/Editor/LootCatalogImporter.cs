@@ -14,7 +14,7 @@ namespace OskarMike.Items.Editor
 {
     public static class LootCatalogImporter
     {
-        private const string CatalogPath = "Assets/Items/Catalog/LootCatalog.tsv";
+        private const string CatalogPath = "Tools/LootCatalog/LootCatalog.tsv";
         private const string GeneratedRoot = "Assets/Items/Catalog/Generated";
         private const string DefinitionRoot = GeneratedRoot + "/Definitions";
         private const string PrefabRoot = GeneratedRoot + "/Prefabs";
@@ -33,8 +33,7 @@ namespace OskarMike.Items.Editor
             public string PackName;
             public byte MinValueSteps;
             public byte MaxValueSteps;
-            public LootAssetCategory AssetCategory;
-            public LootUsageCategory UsageCategory;
+            public LootCategory Category;
             public int BasePrice;
             public float PriceVariance;
             public bool RequestedSpawnEnabled;
@@ -42,7 +41,7 @@ namespace OskarMike.Items.Editor
             public string Notes;
         }
 
-        [MenuItem("Tools/OSCAR-MIKE/Items/Import 87-Item Loot Catalog")]
+        [MenuItem("Tools/OSCAR-MIKE/Items/Import Items from Loot Catalog")]
         public static void ImportCatalog()
         {
             EnsureFolders();
@@ -60,7 +59,6 @@ namespace OskarMike.Items.Editor
             var definitions = new List<LootItemDefinition>(rows.Count);
             var networkPrefabs = new List<NetworkObject>(rows.Count);
             int connectedPrefabs = 0;
-            int unassignedUsage = 0;
 
             AssetDatabase.StartAssetEditing();
             try
@@ -88,13 +86,13 @@ namespace OskarMike.Items.Editor
                         connectedPrefabs++;
                     }
 
-                    if (row.UsageCategory == LootUsageCategory.Unassigned) unassignedUsage++;
                     LootItemDefinition definition = CreateOrUpdateDefinition(row, pack, wrapper);
                     definitions.Add(definition);
                 }
 
                 LootEconomyProfile economy = CreateOrGetProfile<LootEconomyProfile>(EconomyPath);
                 LootZoneProfile zone = CreateOrGetProfile<LootZoneProfile>(ZonePath);
+                ConfigureDefaultZone(zone);
                 LootTable table = CreateOrUpdateLootTable(definitions);
                 AssignDefaultZoneToRooms(zone);
                 ConfigureOpenScene(table, zone, economy);
@@ -108,9 +106,6 @@ namespace OskarMike.Items.Editor
             AssetDatabase.SaveAssets();
             AssetDatabase.Refresh();
 
-            if (unassignedUsage > 0)
-                warnings.Add($"용도 미지정 {unassignedUsage}개: 정의와 프리팹은 생성했지만 스폰은 비활성화됨");
-            warnings.Add("#12 SM_Prop_Coin_Pile_02의 KEY 분류는 원본 시트 확인 필요");
             LogReport(rows.Count, connectedPrefabs, definitions.Count, warnings, errors);
         }
 
@@ -147,11 +142,12 @@ namespace OskarMike.Items.Editor
             {
                 if (string.IsNullOrWhiteSpace(lines[lineIndex])) continue;
                 string[] c = lines[lineIndex].Split('\t');
-                if (c.Length < 13)
+                if (c.Length < 10)
                 {
-                    errors.Add($"{lineIndex + 1}행: 열 개수 {c.Length}, 필요 13");
+                    errors.Add($"{lineIndex + 1}행: 필수 열 개수 {c.Length}, 필요 10");
                     continue;
                 }
+                if (c.Length < 12) Array.Resize(ref c, 12);
 
                 try
                 {
@@ -163,16 +159,13 @@ namespace OskarMike.Items.Editor
                         PackName = c[3].Trim(),
                         MinValueSteps = ParseValueSteps(c[4]),
                         MaxValueSteps = ParseValueSteps(c[5]),
-                        AssetCategory = ParseEnum<LootAssetCategory>(c[6]),
-                        UsageCategory = string.IsNullOrWhiteSpace(c[7])
-                            ? LootUsageCategory.Unassigned
-                            : ParseEnum<LootUsageCategory>(c[7]),
-                        BasePrice = int.Parse(c[8], CultureInfo.InvariantCulture),
-                        PriceVariance = float.Parse(c[9], CultureInfo.InvariantCulture),
-                        RequestedSpawnEnabled = bool.Parse(c[10]),
-                        AllowedZones = c[11].Split(new[] { '|' }, StringSplitOptions.RemoveEmptyEntries)
+                        Category = ParseEnum<LootCategory>(c[6]),
+                        BasePrice = int.Parse(c[7], CultureInfo.InvariantCulture),
+                        PriceVariance = float.Parse(c[8], CultureInfo.InvariantCulture),
+                        RequestedSpawnEnabled = bool.Parse(c[9]),
+                        AllowedZones = (c[10] ?? string.Empty).Split(new[] { '|' }, StringSplitOptions.RemoveEmptyEntries)
                             .Select(value => value.Trim()).ToArray(),
-                        Notes = c[12].Trim()
+                        Notes = (c[11] ?? string.Empty).Trim()
                     };
                     if (row.MinValueSteps > row.MaxValueSteps)
                         throw new FormatException("최소 밸류가 최대 밸류보다 큼");
@@ -197,8 +190,15 @@ namespace OskarMike.Items.Editor
                 string id = BuildItemId(row.PackName, row.AssetName);
                 if (!idSet.Add(id)) errors.Add($"중복 아이템 ID: {id}");
                 if (row.MinValueSteps < 2 || row.MaxValueSteps > 10) errors.Add($"#{row.Sequence} 밸류 범위 오류");
-                if (row.UsageCategory == LootUsageCategory.Unassigned)
-                    warnings.Add($"#{row.Sequence} {row.AssetName}: 용도 미지정");
+
+                const string warningKeyword = "주의:";
+                int warningIndex = row.Notes.IndexOf(warningKeyword, StringComparison.OrdinalIgnoreCase);
+                if (warningIndex >= 0)
+                {
+                    string message = row.Notes.Substring(warningIndex + warningKeyword.Length).Trim();
+                    if (string.IsNullOrEmpty(message)) message = "확인이 필요한 항목입니다.";
+                    warnings.Add($"#{row.Sequence} {row.AssetName}: {message}");
+                }
             }
         }
 
@@ -296,16 +296,13 @@ namespace OskarMike.Items.Editor
             serialized.FindProperty("displayName").stringValue = row.DisplayName;
             serialized.FindProperty("sourceAssetName").stringValue = row.AssetName;
             serialized.FindProperty("contentPack").objectReferenceValue = pack;
-            serialized.FindProperty("usageCategory").enumValueIndex = (int)row.UsageCategory;
-            serialized.FindProperty("assetCategory").enumValueIndex = (int)row.AssetCategory;
+            serialized.FindProperty("category").enumValueIndex = (int)row.Category;
             serialized.FindProperty("minValueSteps").intValue = row.MinValueSteps;
             serialized.FindProperty("maxValueSteps").intValue = row.MaxValueSteps;
             serialized.FindProperty("basePrice").intValue = row.BasePrice;
             serialized.FindProperty("priceVariance").floatValue = row.PriceVariance;
             serialized.FindProperty("spawnWeight").intValue = 1;
-            serialized.FindProperty("spawnEnabled").boolValue = row.RequestedSpawnEnabled
-                && row.UsageCategory != LootUsageCategory.Unassigned
-                && wrapper != null;
+            serialized.FindProperty("spawnEnabled").boolValue = row.RequestedSpawnEnabled && wrapper != null;
             serialized.FindProperty("notes").stringValue = row.Notes;
             serialized.FindProperty("networkPrefab").objectReferenceValue = wrapper;
             SerializedProperty zones = serialized.FindProperty("allowedZoneIds");
@@ -338,6 +335,22 @@ namespace OskarMike.Items.Editor
             profile = ScriptableObject.CreateInstance<T>();
             AssetDatabase.CreateAsset(profile, path);
             return profile;
+        }
+
+        private static void ConfigureDefaultZone(LootZoneProfile zone)
+        {
+            var serialized = new SerializedObject(zone);
+            serialized.FindProperty("zoneId").stringValue = "default";
+            serialized.FindProperty("budgetWeight").intValue = 1;
+            string[] categoryWeights =
+            {
+                "industrialWeight", "electronicsWeight", "junkWeight", "valuablesWeight", "militaryWeight",
+                "intelWeight", "consumablesWeight", "keyWeight", "drugsWeight"
+            };
+            foreach (string propertyName in categoryWeights)
+                serialized.FindProperty(propertyName).intValue = 1;
+            serialized.ApplyModifiedPropertiesWithoutUndo();
+            EditorUtility.SetDirty(zone);
         }
 
         private static void RegisterNetworkPrefabs(IReadOnlyList<NetworkObject> prefabs)

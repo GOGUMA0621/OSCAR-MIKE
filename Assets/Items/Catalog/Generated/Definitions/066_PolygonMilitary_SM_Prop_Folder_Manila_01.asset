@@ -16,14 +16,13 @@ MonoBehaviour:
   displayName: "\uBE14\uB8E8 \uB77C\uBCA8 \uC778\uD154 (\uAE30\uBC00)"
   sourceAssetName: SM_Prop_Folder_Manila_01
   contentPack: {fileID: 11400000, guid: c2ffe107ae5c4b84e904fc1072d5c86c, type: 2}
-  usageCategory: 0
-  assetCategory: 5
+  category: 5
   minValueSteps: 7
   maxValueSteps: 8
   basePrice: 263
   priceVariance: 0.15
   spawnWeight: 1
-  spawnEnabled: 0
+  spawnEnabled: 1
   allowedZoneIds: []
   notes: "\uC6D0\uBCF8 \uBC38\uB958 3.5~4"
   networkPrefab: {fileID: 8457217737892921809, guid: f8599f0f73fb8e846ac6251f8017abab, type: 3}

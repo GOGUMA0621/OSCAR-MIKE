@@ -16,14 +16,13 @@ MonoBehaviour:
   displayName: "\uB355\uD2B8 \uD14C\uC774\uD504"
   sourceAssetName: SM_Item_Tape_01
   contentPack: {fileID: 11400000, guid: c2ffe107ae5c4b84e904fc1072d5c86c, type: 2}
-  usageCategory: 0
-  assetCategory: 0
+  category: 0
   minValueSteps: 2
   maxValueSteps: 2
   basePrice: 25
   priceVariance: 0.15
   spawnWeight: 1
-  spawnEnabled: 0
+  spawnEnabled: 1
   allowedZoneIds: []
   notes: 
   networkPrefab: {fileID: 1448917193769030276, guid: 30194d21cf57a1c4cb617a06f1f0774a, type: 3}

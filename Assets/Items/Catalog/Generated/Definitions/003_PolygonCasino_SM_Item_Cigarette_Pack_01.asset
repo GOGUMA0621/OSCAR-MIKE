@@ -16,14 +16,13 @@ MonoBehaviour:
   displayName: "\uB2F4\uBC30"
   sourceAssetName: SM_Item_Cigarette_Pack_01
   contentPack: {fileID: 11400000, guid: d2f6c8d30c32eaf4ba76f7198a09bcb8, type: 2}
-  usageCategory: 0
-  assetCategory: 2
+  category: 2
   minValueSteps: 2
   maxValueSteps: 2
   basePrice: 25
   priceVariance: 0.15
   spawnWeight: 1
-  spawnEnabled: 0
+  spawnEnabled: 1
   allowedZoneIds: []
   notes: 
   networkPrefab: {fileID: 2758976121070428813, guid: b4d7b1bcbcae07c4a950df2bcd0600e1, type: 3}

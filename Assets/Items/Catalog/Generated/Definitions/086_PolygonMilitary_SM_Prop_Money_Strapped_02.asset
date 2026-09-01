@@ -16,14 +16,13 @@ MonoBehaviour:
   displayName: "\uBA54\uBAA8\uAC00 \uC788\uB294 \uC704\uC870\uC9C0\uD3D0 \uB2E4\uBC1C"
   sourceAssetName: SM_Prop_Money_Strapped_02
   contentPack: {fileID: 11400000, guid: c2ffe107ae5c4b84e904fc1072d5c86c, type: 2}
-  usageCategory: 0
-  assetCategory: 3
+  category: 3
   minValueSteps: 2
   maxValueSteps: 2
   basePrice: 25
   priceVariance: 0.15
   spawnWeight: 1
-  spawnEnabled: 0
+  spawnEnabled: 1
   allowedZoneIds: []
   notes: "\uC6D0\uBCF8 \uBC38\uB958 0; \uC784\uC2DC 1\uC810"
   networkPrefab: {fileID: 7876841841494264248, guid: 9b97571eb1214ca4291f9fb1a2c378e6, type: 3}

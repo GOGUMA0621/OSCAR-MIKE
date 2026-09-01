@@ -16,14 +16,13 @@ MonoBehaviour:
   displayName: "\uCC45(\uC7A1\uC9C0)"
   sourceAssetName: SM_Prop_Book_02
   contentPack: {fileID: 11400000, guid: c2ffe107ae5c4b84e904fc1072d5c86c, type: 2}
-  usageCategory: 0
-  assetCategory: 2
+  category: 2
   minValueSteps: 2
   maxValueSteps: 2
   basePrice: 25
   priceVariance: 0.15
   spawnWeight: 1
-  spawnEnabled: 0
+  spawnEnabled: 1
   allowedZoneIds: []
   notes: 
   networkPrefab: {fileID: 2972806788902404113, guid: c537fab41b721354ba69cf4034d44923, type: 3}

@@ -16,14 +16,13 @@ MonoBehaviour:
   displayName: "Hydrochloric Acid (\uC5FC\uC0B0)"
   sourceAssetName: SM_Prop_Bottle_02
   contentPack: {fileID: 11400000, guid: f942391ce56a69145876f68bfc75467e, type: 2}
-  usageCategory: 0
-  assetCategory: 0
+  category: 0
   minValueSteps: 2
   maxValueSteps: 2
   basePrice: 25
   priceVariance: 0.15
   spawnWeight: 1
-  spawnEnabled: 0
+  spawnEnabled: 1
   allowedZoneIds: []
   notes: 
   networkPrefab: {fileID: 2195907816431500555, guid: 2916519e47a8b6e4cb952ec2eab3d8b4, type: 3}

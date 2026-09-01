@@ -16,14 +16,13 @@ MonoBehaviour:
   displayName: "\uAE08 \uC794"
   sourceAssetName: SM_Prop_Gold_Cup_02
   contentPack: {fileID: 11400000, guid: c2ffe107ae5c4b84e904fc1072d5c86c, type: 2}
-  usageCategory: 0
-  assetCategory: 3
+  category: 3
   minValueSteps: 4
   maxValueSteps: 4
   basePrice: 75
   priceVariance: 0.15
   spawnWeight: 1
-  spawnEnabled: 0
+  spawnEnabled: 1
   allowedZoneIds: []
   notes: 
   networkPrefab: {fileID: 2696589008487460883, guid: bbe96ebc7371f8141aaf8ec7dd97ca88, type: 3}

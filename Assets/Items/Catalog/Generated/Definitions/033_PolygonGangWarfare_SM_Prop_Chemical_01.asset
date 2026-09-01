@@ -16,14 +16,13 @@ MonoBehaviour:
   displayName: "\uBCF8\uB4DC"
   sourceAssetName: SM_Prop_Chemical_01
   contentPack: {fileID: 11400000, guid: f942391ce56a69145876f68bfc75467e, type: 2}
-  usageCategory: 0
-  assetCategory: 0
+  category: 0
   minValueSteps: 2
   maxValueSteps: 2
   basePrice: 25
   priceVariance: 0.15
   spawnWeight: 1
-  spawnEnabled: 0
+  spawnEnabled: 1
   allowedZoneIds: []
   notes: 
   networkPrefab: {fileID: 887136415912635975, guid: bd3708bce0733cf49a462a9a7e516aa5, type: 3}

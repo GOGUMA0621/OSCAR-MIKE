@@ -14,10 +14,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::OskarMike.Items.LootZoneProfile
   zoneId: default
   budgetWeight: 1
-  junkWeight: 1
   industrialWeight: 1
+  electronicsWeight: 1
+  junkWeight: 1
+  valuablesWeight: 1
   militaryWeight: 1
-  suppliesWeight: 1
-  specialWeight: 1
+  intelWeight: 1
+  consumablesWeight: 1
+  keyWeight: 1
+  drugsWeight: 1
   overrideValueWeights: 0
   valueWeightOverride: {fileID: 0}

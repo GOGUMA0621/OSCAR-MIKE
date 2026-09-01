@@ -16,14 +16,13 @@ MonoBehaviour:
   displayName: "\uBCF4\uC11D \uB354\uBBF8"
   sourceAssetName: SM_Prop_JewelryPile_01
   contentPack: {fileID: 11400000, guid: f942391ce56a69145876f68bfc75467e, type: 2}
-  usageCategory: 0
-  assetCategory: 3
+  category: 3
   minValueSteps: 9
   maxValueSteps: 9
   basePrice: 450
   priceVariance: 0.15
   spawnWeight: 1
-  spawnEnabled: 0
+  spawnEnabled: 1
   allowedZoneIds: []
   notes: 
   networkPrefab: {fileID: 371966337012010892, guid: 47753ce5de4a4914b8fd6c818c3efd02, type: 3}

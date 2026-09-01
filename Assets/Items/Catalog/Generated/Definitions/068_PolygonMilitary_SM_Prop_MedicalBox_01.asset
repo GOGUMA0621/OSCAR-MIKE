@@ -16,14 +16,13 @@ MonoBehaviour:
   displayName: "\uC11C\uB958\uAC00\uBC29"
   sourceAssetName: SM_Prop_MedicalBox_01
   contentPack: {fileID: 11400000, guid: c2ffe107ae5c4b84e904fc1072d5c86c, type: 2}
-  usageCategory: 0
-  assetCategory: 5
+  category: 5
   minValueSteps: 6
   maxValueSteps: 6
   basePrice: 150
   priceVariance: 0.15
   spawnWeight: 1
-  spawnEnabled: 0
+  spawnEnabled: 1
   allowedZoneIds: []
   notes: 
   networkPrefab: {fileID: 5734342493502611569, guid: 609d1427901341c4f8b2bacd18a68d3b, type: 3}

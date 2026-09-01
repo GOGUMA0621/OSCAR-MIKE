@@ -16,14 +16,13 @@ MonoBehaviour:
   displayName: "\uC554\uD638\uD654 \uAD70\uC6A9 \uBB34\uC804\uAE30"
   sourceAssetName: SM_Prop_Radio_01
   contentPack: {fileID: 11400000, guid: c2ffe107ae5c4b84e904fc1072d5c86c, type: 2}
-  usageCategory: 0
-  assetCategory: 4
+  category: 4
   minValueSteps: 8
   maxValueSteps: 8
   basePrice: 300
   priceVariance: 0.15
   spawnWeight: 1
-  spawnEnabled: 0
+  spawnEnabled: 1
   allowedZoneIds: []
   notes: 
   networkPrefab: {fileID: 7077101330113837960, guid: c8e29ddfd7158d24c80359571d908309, type: 3}

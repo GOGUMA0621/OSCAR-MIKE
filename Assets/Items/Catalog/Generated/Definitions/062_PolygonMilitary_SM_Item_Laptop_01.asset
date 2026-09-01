@@ -16,14 +16,13 @@ MonoBehaviour:
   displayName: "\uAD70\uC6A9 \uC554\uD638\uD654 \uB178\uD2B8\uBD81"
   sourceAssetName: SM_Item_Laptop_01
   contentPack: {fileID: 11400000, guid: c2ffe107ae5c4b84e904fc1072d5c86c, type: 2}
-  usageCategory: 0
-  assetCategory: 4
+  category: 4
   minValueSteps: 8
   maxValueSteps: 8
   basePrice: 300
   priceVariance: 0.15
   spawnWeight: 1
-  spawnEnabled: 0
+  spawnEnabled: 1
   allowedZoneIds: []
   notes: 
   networkPrefab: {fileID: 6120493653389717776, guid: a058ef9ba163251458a356c68e204b7a, type: 3}

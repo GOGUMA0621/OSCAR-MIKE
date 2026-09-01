@@ -16,14 +16,13 @@ MonoBehaviour:
   displayName: "\uD0C4\uD1B5"
   sourceAssetName: SM_Prop_AmmoBox_03
   contentPack: {fileID: 11400000, guid: c2ffe107ae5c4b84e904fc1072d5c86c, type: 2}
-  usageCategory: 0
-  assetCategory: 4
+  category: 4
   minValueSteps: 2
   maxValueSteps: 2
   basePrice: 25
   priceVariance: 0.15
   spawnWeight: 1
-  spawnEnabled: 0
+  spawnEnabled: 1
   allowedZoneIds: []
   notes: "\uC6D0\uBCF8 \uBC38\uB958 -; \uC784\uC2DC 1\uC810"
   networkPrefab: {fileID: 3543463349764008317, guid: 6445f01d09ac3c04485cb49c43fb505c, type: 3}

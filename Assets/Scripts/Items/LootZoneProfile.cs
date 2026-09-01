@@ -7,26 +7,34 @@ namespace OskarMike.Items
     {
         [SerializeField] private string zoneId = "default";
         [Min(1)] [SerializeField] private int budgetWeight = 1;
-        [Min(0)] [SerializeField] private int junkWeight = 1;
         [Min(0)] [SerializeField] private int industrialWeight = 1;
+        [Min(0)] [SerializeField] private int electronicsWeight = 1;
+        [Min(0)] [SerializeField] private int junkWeight = 1;
+        [Min(0)] [SerializeField] private int valuablesWeight = 1;
         [Min(0)] [SerializeField] private int militaryWeight = 1;
-        [Min(0)] [SerializeField] private int suppliesWeight = 1;
-        [Min(0)] [SerializeField] private int specialWeight = 1;
+        [Min(0)] [SerializeField] private int intelWeight = 1;
+        [Min(0)] [SerializeField] private int consumablesWeight = 1;
+        [Min(0)] [SerializeField] private int keyWeight = 1;
+        [Min(0)] [SerializeField] private int drugsWeight = 1;
         [SerializeField] private bool overrideValueWeights;
         [SerializeField] private LootEconomyProfile valueWeightOverride;
 
         public string ZoneId => zoneId;
         public int BudgetWeight => budgetWeight;
 
-        public int GetUsageWeight(LootUsageCategory usage)
+        public int GetCategoryWeight(LootCategory category)
         {
-            return usage switch
+            return category switch
             {
-                LootUsageCategory.Junk => junkWeight,
-                LootUsageCategory.Industrial => industrialWeight,
-                LootUsageCategory.Military => militaryWeight,
-                LootUsageCategory.Supplies => suppliesWeight,
-                LootUsageCategory.Special => specialWeight,
+                LootCategory.Industrial => industrialWeight,
+                LootCategory.Electronics => electronicsWeight,
+                LootCategory.Junk => junkWeight,
+                LootCategory.Valuables => valuablesWeight,
+                LootCategory.Military => militaryWeight,
+                LootCategory.Intel => intelWeight,
+                LootCategory.Consumables => consumablesWeight,
+                LootCategory.Key => keyWeight,
+                LootCategory.Drugs => drugsWeight,
                 _ => 0
             };
         }
@@ -43,11 +51,15 @@ namespace OskarMike.Items
         {
             zoneId = string.IsNullOrWhiteSpace(zoneId) ? name : zoneId.Trim();
             budgetWeight = Mathf.Max(1, budgetWeight);
-            junkWeight = Mathf.Max(0, junkWeight);
             industrialWeight = Mathf.Max(0, industrialWeight);
+            electronicsWeight = Mathf.Max(0, electronicsWeight);
+            junkWeight = Mathf.Max(0, junkWeight);
+            valuablesWeight = Mathf.Max(0, valuablesWeight);
             militaryWeight = Mathf.Max(0, militaryWeight);
-            suppliesWeight = Mathf.Max(0, suppliesWeight);
-            specialWeight = Mathf.Max(0, specialWeight);
+            intelWeight = Mathf.Max(0, intelWeight);
+            consumablesWeight = Mathf.Max(0, consumablesWeight);
+            keyWeight = Mathf.Max(0, keyWeight);
+            drugsWeight = Mathf.Max(0, drugsWeight);
         }
     }
 }

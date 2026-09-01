@@ -16,14 +16,13 @@ MonoBehaviour:
   displayName: "\uC544\uC774\uC624\uB518 \uC54C\uC57D\uD1B5"
   sourceAssetName: SM_Prop_Pills_06
   contentPack: {fileID: 11400000, guid: f942391ce56a69145876f68bfc75467e, type: 2}
-  usageCategory: 0
-  assetCategory: 8
+  category: 8
   minValueSteps: 2
   maxValueSteps: 2
   basePrice: 25
   priceVariance: 0.15
   spawnWeight: 1
-  spawnEnabled: 0
+  spawnEnabled: 1
   allowedZoneIds: []
   notes: 
   networkPrefab: {fileID: 1395509587242921909, guid: a719efcc69e4eef4dbd94983d957d213, type: 3}

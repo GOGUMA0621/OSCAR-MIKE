@@ -16,14 +16,13 @@ MonoBehaviour:
   displayName: "\uBCF4\uC548 \uCE74\uBA54\uB77C"
   sourceAssetName: SM_Prop_Camera_01
   contentPack: {fileID: 11400000, guid: d2f6c8d30c32eaf4ba76f7198a09bcb8, type: 2}
-  usageCategory: 0
-  assetCategory: 5
+  category: 5
   minValueSteps: 4
   maxValueSteps: 4
   basePrice: 75
   priceVariance: 0.15
   spawnWeight: 1
-  spawnEnabled: 0
+  spawnEnabled: 1
   allowedZoneIds: []
   notes: 
   networkPrefab: {fileID: 5538761551208752779, guid: 77b9a3963dc7fb74592e7abced160690, type: 3}

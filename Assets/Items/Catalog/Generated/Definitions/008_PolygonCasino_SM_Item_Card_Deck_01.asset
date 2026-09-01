@@ -16,14 +16,13 @@ MonoBehaviour:
   displayName: "\uD3EC\uCEE4 \uCE74\uB4DC \uB371"
   sourceAssetName: SM_Item_Card_Deck_01
   contentPack: {fileID: 11400000, guid: d2f6c8d30c32eaf4ba76f7198a09bcb8, type: 2}
-  usageCategory: 0
-  assetCategory: 2
+  category: 2
   minValueSteps: 2
   maxValueSteps: 2
   basePrice: 25
   priceVariance: 0.15
   spawnWeight: 1
-  spawnEnabled: 0
+  spawnEnabled: 1
   allowedZoneIds: []
   notes: 
   networkPrefab: {fileID: 459336170353412261, guid: b155256da5630494d9159968f212abeb, type: 3}

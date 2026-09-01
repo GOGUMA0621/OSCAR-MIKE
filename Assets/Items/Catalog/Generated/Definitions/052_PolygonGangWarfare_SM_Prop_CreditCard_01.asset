@@ -16,14 +16,13 @@ MonoBehaviour:
   displayName: "\uC2E0\uC6A9\uCE74\uB4DC"
   sourceAssetName: SM_Prop_CreditCard_01
   contentPack: {fileID: 11400000, guid: f942391ce56a69145876f68bfc75467e, type: 2}
-  usageCategory: 0
-  assetCategory: 3
+  category: 3
   minValueSteps: 3
   maxValueSteps: 3
   basePrice: 50
   priceVariance: 0.15
   spawnWeight: 1
-  spawnEnabled: 0
+  spawnEnabled: 1
   allowedZoneIds: []
   notes: 
   networkPrefab: {fileID: 6667518896733694478, guid: 7a9cbc4fd7bdbd74a974c73b6fa94784, type: 3}

@@ -12,8 +12,7 @@ namespace OskarMike.Items
         [SerializeField] private string displayName = "아이템";
         [SerializeField] private string sourceAssetName;
         [SerializeField] private LootContentPack contentPack;
-        [SerializeField] private LootUsageCategory usageCategory = LootUsageCategory.Unassigned;
-        [SerializeField] private LootAssetCategory assetCategory = LootAssetCategory.Junk;
+        [SerializeField] private LootCategory category = LootCategory.Junk;
         [Tooltip("실제 밸류의 2배입니다. 1점=2, 5점=10")]
         [Range(2, 10)] [SerializeField] private byte minValueSteps = 2;
         [Range(2, 10)] [SerializeField] private byte maxValueSteps = 2;
@@ -29,8 +28,7 @@ namespace OskarMike.Items
         public string DisplayName => displayName;
         public string SourceAssetName => sourceAssetName;
         public LootContentPack ContentPack => contentPack;
-        public LootUsageCategory UsageCategory => usageCategory;
-        public LootAssetCategory AssetCategory => assetCategory;
+        public LootCategory Category => category;
         public byte MinValueSteps => minValueSteps;
         public byte MaxValueSteps => maxValueSteps;
         public float MinValue => minValueSteps * 0.5f;

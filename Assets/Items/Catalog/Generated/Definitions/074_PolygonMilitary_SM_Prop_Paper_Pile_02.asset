@@ -16,14 +16,13 @@ MonoBehaviour:
   displayName: "\uC11C\uB958 \uB354\uBBF8"
   sourceAssetName: SM_Prop_Paper_Pile_02
   contentPack: {fileID: 11400000, guid: c2ffe107ae5c4b84e904fc1072d5c86c, type: 2}
-  usageCategory: 0
-  assetCategory: 2
+  category: 2
   minValueSteps: 2
   maxValueSteps: 2
   basePrice: 25
   priceVariance: 0.15
   spawnWeight: 1
-  spawnEnabled: 0
+  spawnEnabled: 1
   allowedZoneIds: []
   notes: 
   networkPrefab: {fileID: 8567794270881303724, guid: 8d8cda0870c1c08439efefadad754f99, type: 3}

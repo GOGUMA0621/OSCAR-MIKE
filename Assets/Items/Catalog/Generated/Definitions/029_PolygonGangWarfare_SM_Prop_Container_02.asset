@@ -16,14 +16,13 @@ MonoBehaviour:
   displayName: "\uC138\uC81C"
   sourceAssetName: SM_Prop_Container_02
   contentPack: {fileID: 11400000, guid: f942391ce56a69145876f68bfc75467e, type: 2}
-  usageCategory: 0
-  assetCategory: 0
+  category: 0
   minValueSteps: 2
   maxValueSteps: 2
   basePrice: 25
   priceVariance: 0.15
   spawnWeight: 1
-  spawnEnabled: 0
+  spawnEnabled: 1
   allowedZoneIds: []
   notes: 
   networkPrefab: {fileID: 6611797498183814221, guid: 67ac7494961d34348973a6bf6c74180d, type: 3}

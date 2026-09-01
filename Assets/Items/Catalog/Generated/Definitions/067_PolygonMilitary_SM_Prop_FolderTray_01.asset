@@ -16,14 +16,13 @@ MonoBehaviour:
   displayName: "\uC778\uD154 \uB354\uBBF8"
   sourceAssetName: SM_Prop_FolderTray_01
   contentPack: {fileID: 11400000, guid: c2ffe107ae5c4b84e904fc1072d5c86c, type: 2}
-  usageCategory: 0
-  assetCategory: 5
+  category: 5
   minValueSteps: 4
   maxValueSteps: 6
   basePrice: 113
   priceVariance: 0.15
   spawnWeight: 1
-  spawnEnabled: 0
+  spawnEnabled: 1
   allowedZoneIds: []
   notes: "\uC6D0\uBCF8 \uBC38\uB958 2~3"
   networkPrefab: {fileID: 2901300315860044601, guid: 3bb1fa3eff869c44fa408a3b14de636d, type: 3}

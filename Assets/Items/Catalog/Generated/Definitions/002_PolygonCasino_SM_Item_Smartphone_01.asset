@@ -16,14 +16,13 @@ MonoBehaviour:
   displayName: "\uC77C\uBC18 \uD578\uB4DC\uD3F0"
   sourceAssetName: SM_Item_Smartphone_01
   contentPack: {fileID: 11400000, guid: d2f6c8d30c32eaf4ba76f7198a09bcb8, type: 2}
-  usageCategory: 0
-  assetCategory: 2
+  category: 2
   minValueSteps: 2
   maxValueSteps: 2
   basePrice: 25
   priceVariance: 0.15
   spawnWeight: 1
-  spawnEnabled: 0
+  spawnEnabled: 1
   allowedZoneIds: []
   notes: 
   networkPrefab: {fileID: 1871461483594495462, guid: 9efd335ff786fa94d8c42f46d9f8aeea, type: 3}

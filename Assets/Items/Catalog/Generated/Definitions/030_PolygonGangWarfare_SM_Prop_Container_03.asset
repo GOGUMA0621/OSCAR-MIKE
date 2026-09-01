@@ -16,14 +16,13 @@ MonoBehaviour:
   displayName: "\uB77D\uC2A4 (Bleach)"
   sourceAssetName: SM_Prop_Container_03
   contentPack: {fileID: 11400000, guid: f942391ce56a69145876f68bfc75467e, type: 2}
-  usageCategory: 0
-  assetCategory: 0
+  category: 0
   minValueSteps: 2
   maxValueSteps: 2
   basePrice: 25
   priceVariance: 0.15
   spawnWeight: 1
-  spawnEnabled: 0
+  spawnEnabled: 1
   allowedZoneIds: []
   notes: 
   networkPrefab: {fileID: 7402393697785959341, guid: 8de23f9a1b53c464198324fd27515f39, type: 3}

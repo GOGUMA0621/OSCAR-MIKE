@@ -16,14 +16,13 @@ MonoBehaviour:
   displayName: "C4 \uD3ED\uD0C4"
   sourceAssetName: SM_Prop_C4_01
   contentPack: {fileID: 11400000, guid: c2ffe107ae5c4b84e904fc1072d5c86c, type: 2}
-  usageCategory: 0
-  assetCategory: 4
+  category: 4
   minValueSteps: 4
   maxValueSteps: 4
   basePrice: 75
   priceVariance: 0.15
   spawnWeight: 1
-  spawnEnabled: 0
+  spawnEnabled: 1
   allowedZoneIds: []
   notes: 
   networkPrefab: {fileID: 3838937238998645123, guid: 1aa0c4ecf3312d045b92542dc13975a5, type: 3}

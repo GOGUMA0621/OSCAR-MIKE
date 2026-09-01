@@ -16,14 +16,13 @@ MonoBehaviour:
   displayName: "\uAE08\uD654"
   sourceAssetName: SM_Item_Cash_Coin_02
   contentPack: {fileID: 11400000, guid: d2f6c8d30c32eaf4ba76f7198a09bcb8, type: 2}
-  usageCategory: 0
-  assetCategory: 3
+  category: 3
   minValueSteps: 6
   maxValueSteps: 6
   basePrice: 150
   priceVariance: 0.15
   spawnWeight: 1
-  spawnEnabled: 0
+  spawnEnabled: 1
   allowedZoneIds: []
   notes: 
   networkPrefab: {fileID: 7280344849873223497, guid: 4f4ac5399d06e6c4281388155681595d, type: 3}

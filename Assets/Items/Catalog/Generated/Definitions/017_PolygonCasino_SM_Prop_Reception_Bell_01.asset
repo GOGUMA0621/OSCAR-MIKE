@@ -16,14 +16,13 @@ MonoBehaviour:
   displayName: "\uD560\uB9AC\uAC08\uB9AC \uC885"
   sourceAssetName: SM_Prop_Reception_Bell_01
   contentPack: {fileID: 11400000, guid: d2f6c8d30c32eaf4ba76f7198a09bcb8, type: 2}
-  usageCategory: 0
-  assetCategory: 2
+  category: 2
   minValueSteps: 2
   maxValueSteps: 2
   basePrice: 25
   priceVariance: 0.15
   spawnWeight: 1
-  spawnEnabled: 0
+  spawnEnabled: 1
   allowedZoneIds: []
   notes: 
   networkPrefab: {fileID: 4058822941300172093, guid: d93c8e252db74d04cadebb5cc871ef5f, type: 3}

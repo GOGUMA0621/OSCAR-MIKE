@@ -16,14 +16,13 @@ MonoBehaviour:
   displayName: "\uC9C0\uAC11"
   sourceAssetName: SM_Item_Wallet_01
   contentPack: {fileID: 11400000, guid: d2f6c8d30c32eaf4ba76f7198a09bcb8, type: 2}
-  usageCategory: 0
-  assetCategory: 2
+  category: 2
   minValueSteps: 2
   maxValueSteps: 4
   basePrice: 50
   priceVariance: 0.15
   spawnWeight: 1
-  spawnEnabled: 0
+  spawnEnabled: 1
   allowedZoneIds: []
   notes: "\uC6D0\uBCF8 \uBC38\uB958 1~2"
   networkPrefab: {fileID: 1787731920431735916, guid: 8d7d081e88592ce4393a0d6d171afc04, type: 3}

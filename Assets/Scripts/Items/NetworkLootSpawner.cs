@@ -99,7 +99,7 @@ namespace OskarMike.Items
                     continue;
                 }
 
-                lootItem.InitializeServer(definition.ItemId, valueSteps, definition.UsageCategory, value);
+                lootItem.InitializeServer(definition.ItemId, valueSteps, definition.Category, value);
                 instance.Spawn(true);
                 totalValue += value;
                 spawnedCount++;

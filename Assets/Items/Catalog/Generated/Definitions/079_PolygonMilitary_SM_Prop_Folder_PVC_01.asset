@@ -16,14 +16,13 @@ MonoBehaviour:
   displayName: "\uC11C\uB958\uCCA0"
   sourceAssetName: SM_Prop_Folder_PVC_01
   contentPack: {fileID: 11400000, guid: c2ffe107ae5c4b84e904fc1072d5c86c, type: 2}
-  usageCategory: 0
-  assetCategory: 2
+  category: 2
   minValueSteps: 2
   maxValueSteps: 2
   basePrice: 25
   priceVariance: 0.15
   spawnWeight: 1
-  spawnEnabled: 0
+  spawnEnabled: 1
   allowedZoneIds: []
   notes: 
   networkPrefab: {fileID: 8851153261199995454, guid: 28c1df88d0187f64cadc117db0ea6ff1, type: 3}

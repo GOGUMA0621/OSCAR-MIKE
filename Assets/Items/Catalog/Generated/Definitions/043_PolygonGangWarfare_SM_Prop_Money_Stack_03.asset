@@ -16,14 +16,13 @@ MonoBehaviour:
   displayName: "\uB3C8\uB2E4\uBC1C2"
   sourceAssetName: SM_Prop_Money_Stack_03
   contentPack: {fileID: 11400000, guid: f942391ce56a69145876f68bfc75467e, type: 2}
-  usageCategory: 0
-  assetCategory: 3
+  category: 3
   minValueSteps: 6
   maxValueSteps: 6
   basePrice: 150
   priceVariance: 0.15
   spawnWeight: 1
-  spawnEnabled: 0
+  spawnEnabled: 1
   allowedZoneIds: []
   notes: "\uC2DC\uD2B8 \uC811\uBBF8\uC0AC (1) \uC81C\uAC70"
   networkPrefab: {fileID: 2208307722557677584, guid: 7aa7a2436b4d4bd4b8c68f15a675c656, type: 3}

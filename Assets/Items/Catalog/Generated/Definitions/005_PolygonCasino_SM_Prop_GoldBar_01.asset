@@ -16,14 +16,13 @@ MonoBehaviour:
   displayName: "\uAE08\uAD34"
   sourceAssetName: SM_Prop_GoldBar_01
   contentPack: {fileID: 11400000, guid: d2f6c8d30c32eaf4ba76f7198a09bcb8, type: 2}
-  usageCategory: 0
-  assetCategory: 3
+  category: 3
   minValueSteps: 10
   maxValueSteps: 10
   basePrice: 600
   priceVariance: 0.15
   spawnWeight: 1
-  spawnEnabled: 0
+  spawnEnabled: 1
   allowedZoneIds: []
   notes: 
   networkPrefab: {fileID: 2578720261962131265, guid: 5a8254c02e5bc1947a569b0543afdb26, type: 3}

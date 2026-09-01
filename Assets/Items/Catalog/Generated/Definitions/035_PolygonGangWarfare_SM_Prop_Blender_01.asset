@@ -16,14 +16,13 @@ MonoBehaviour:
   displayName: "\uBBF9\uC11C\uAE30"
   sourceAssetName: SM_Prop_Blender_01
   contentPack: {fileID: 11400000, guid: f942391ce56a69145876f68bfc75467e, type: 2}
-  usageCategory: 0
-  assetCategory: 1
+  category: 1
   minValueSteps: 3
   maxValueSteps: 3
   basePrice: 50
   priceVariance: 0.15
   spawnWeight: 1
-  spawnEnabled: 0
+  spawnEnabled: 1
   allowedZoneIds: []
   notes: 
   networkPrefab: {fileID: 5839013211399758700, guid: fed1468d94559c54294ad2c57e19a009, type: 3}

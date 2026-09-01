@@ -16,14 +16,13 @@ MonoBehaviour:
   displayName: "\uC555\uB825\uC1A5"
   sourceAssetName: SM_Prop_Slowcooker_01
   contentPack: {fileID: 11400000, guid: f942391ce56a69145876f68bfc75467e, type: 2}
-  usageCategory: 0
-  assetCategory: 2
+  category: 2
   minValueSteps: 2
   maxValueSteps: 2
   basePrice: 25
   priceVariance: 0.15
   spawnWeight: 1
-  spawnEnabled: 0
+  spawnEnabled: 1
   allowedZoneIds: []
   notes: 
   networkPrefab: {fileID: 8671856709306820752, guid: af371cd75b9649045aca409fbe6f688e, type: 3}

@@ -16,14 +16,13 @@ MonoBehaviour:
   displayName: "\uC704\uC870\uC9C0\uD3D0 \uBB49\uCE58 (\uB864)"
   sourceAssetName: SM_Prop_Money_Roll_01
   contentPack: {fileID: 11400000, guid: c2ffe107ae5c4b84e904fc1072d5c86c, type: 2}
-  usageCategory: 0
-  assetCategory: 3
+  category: 3
   minValueSteps: 2
   maxValueSteps: 2
   basePrice: 25
   priceVariance: 0.15
   spawnWeight: 1
-  spawnEnabled: 0
+  spawnEnabled: 1
   allowedZoneIds: []
   notes: "\uC6D0\uBCF8 \uBC38\uB958 0; \uC784\uC2DC 1\uC810; \uC2DC\uD2B8 \uC811\uBBF8\uC0AC
     (1) \uC81C\uAC70"

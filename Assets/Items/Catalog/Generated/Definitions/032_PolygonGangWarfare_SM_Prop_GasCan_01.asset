@@ -16,14 +16,13 @@ MonoBehaviour:
   displayName: "FUEL (\uC5F0\uB8CC\uD1B5)"
   sourceAssetName: SM_Prop_GasCan_01
   contentPack: {fileID: 11400000, guid: f942391ce56a69145876f68bfc75467e, type: 2}
-  usageCategory: 0
-  assetCategory: 0
+  category: 0
   minValueSteps: 6
   maxValueSteps: 6
   basePrice: 150
   priceVariance: 0.15
   spawnWeight: 1
-  spawnEnabled: 0
+  spawnEnabled: 1
   allowedZoneIds: []
   notes: 
   networkPrefab: {fileID: 8685429480814007709, guid: bcc8b0fed99a59546a526bcdec7523ef, type: 3}

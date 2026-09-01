@@ -16,14 +16,13 @@ MonoBehaviour:
   displayName: "\uC815\uBC00 \uC800\uC6B8"
   sourceAssetName: SM_Prop_Scales_01
   contentPack: {fileID: 11400000, guid: f942391ce56a69145876f68bfc75467e, type: 2}
-  usageCategory: 0
-  assetCategory: 1
+  category: 1
   minValueSteps: 3
   maxValueSteps: 3
   basePrice: 50
   priceVariance: 0.15
   spawnWeight: 1
-  spawnEnabled: 0
+  spawnEnabled: 1
   allowedZoneIds: []
   notes: 
   networkPrefab: {fileID: 8100955576377054934, guid: 1c9a92a29303618449c5684a4118a4f4, type: 3}

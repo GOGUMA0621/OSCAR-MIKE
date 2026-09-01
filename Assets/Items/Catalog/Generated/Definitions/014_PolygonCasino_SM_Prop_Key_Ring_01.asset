@@ -16,14 +16,13 @@ MonoBehaviour:
   displayName: "\uD0A4 \uAFB8\uB7EC\uBBF8"
   sourceAssetName: SM_Prop_Key_Ring_01
   contentPack: {fileID: 11400000, guid: d2f6c8d30c32eaf4ba76f7198a09bcb8, type: 2}
-  usageCategory: 0
-  assetCategory: 7
+  category: 7
   minValueSteps: 2
   maxValueSteps: 2
   basePrice: 25
   priceVariance: 0.15
   spawnWeight: 1
-  spawnEnabled: 0
+  spawnEnabled: 1
   allowedZoneIds: []
   notes: 
   networkPrefab: {fileID: 8679785026019345646, guid: c2d083357961dcd4080c38c8b470ff9d, type: 3}

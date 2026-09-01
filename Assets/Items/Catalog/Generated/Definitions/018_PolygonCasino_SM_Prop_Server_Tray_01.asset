@@ -16,14 +16,13 @@ MonoBehaviour:
   displayName: "\uC740\uC7C1\uBC18"
   sourceAssetName: SM_Prop_Server_Tray_01
   contentPack: {fileID: 11400000, guid: d2f6c8d30c32eaf4ba76f7198a09bcb8, type: 2}
-  usageCategory: 0
-  assetCategory: 2
+  category: 2
   minValueSteps: 4
   maxValueSteps: 4
   basePrice: 75
   priceVariance: 0.15
   spawnWeight: 1
-  spawnEnabled: 0
+  spawnEnabled: 1
   allowedZoneIds: []
   notes: 
   networkPrefab: {fileID: 916118653532065918, guid: a173977bfe02ada4dadc990c78c72247, type: 3}
