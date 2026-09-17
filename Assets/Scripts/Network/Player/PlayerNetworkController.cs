@@ -33,10 +33,11 @@ namespace OskarMike.Network.Player
 
         // ── 이동 설정 ──────────────────────────────────────
         [Header("Move Speed")]
-        [SerializeField] private float speedWalkStand  = 4.5f;
-        [SerializeField] private float speedSprintStand = 8.0f;
-        [SerializeField] private float speedWalkCrouch = 2.5f;
-        [SerializeField] private float speedWalkProne  = 1.2f;
+        [SerializeField] private float speedWalkStand = 1.2f;
+        [SerializeField] private float speedTacticalWalkStand = 2.4f;
+        [SerializeField] private float speedFullSprintStand = 4.5f;
+        [SerializeField] private float speedWalkCrouch = 0.65f;
+        [SerializeField] private float speedWalkProne  = 0.3f;
 
         [Header("Jump & Gravity")]
         [SerializeField] private float jumpHeight = 1.2f;
@@ -76,6 +77,9 @@ namespace OskarMike.Network.Player
         // ── 마우스 룩 ──────────────────────────────────────
         [Header("Mouse Look")]
         [SerializeField] private float mouseSensitivity = 100f;
+        [SerializeField] private float cameraPostureTransitionSpeed = 8f;
+        [SerializeField, Range(0f, 1f)] private float cameraCrouchHeightRatio = 0.48f;
+        [SerializeField, Range(0f, 1f)] private float cameraProneHeightRatio = 0.06f;
         [SerializeField] private Transform cameraHolder;
 
         // ── 조준 흔들림 ────────────────────────────────────
@@ -88,6 +92,7 @@ namespace OskarMike.Network.Player
         [SerializeField] private string moveActionName   = "Move";
         [SerializeField] private string lookActionName   = "Look";
         [SerializeField] private string jumpActionName   = "Jump";
+        [SerializeField] private string walkActionName   = "Walk";
         [SerializeField] private string sprintActionName = "Sprint";
         [SerializeField] private string crouchActionName = "Crouch";
         [SerializeField] private string proneActionName  = "Prone";
@@ -130,22 +135,38 @@ namespace OskarMike.Network.Player
         // ── 오너 클라이언트 전용 ───────────────────────────
         private float localVerticalRotation = 0f;
         private float swayTimer             = 0f;
+        private Vector3 cameraStandLocalPos;
         private Vector3 cameraBaseLocalPos;
+        private bool gameplayInputEnabled = false;
+        public bool GameplayInputEnabled => gameplayInputEnabled;
 
 #if ENABLE_INPUT_SYSTEM
         private PlayerInput  playerInput;
         private InputAction  moveAction;
         private InputAction  lookAction;
         private InputAction  jumpAction;
+        private InputAction  walkAction;
         private InputAction  sprintAction;
         private InputAction  crouchAction;
         private InputAction  proneAction;
+        private InputAction leanLeftAction;
+        private InputAction leanRightAction;
 #endif
 
         // ── 공개 프로퍼티 ──────────────────────────────────
         public bool          IsReady  => isReady.Value;
         public PlayerPosture Posture  => netPosture.Value;
         public PlayerActionState ActionState => netActionState.Value;
+        private readonly NetworkVariable<PlayerMoveState> netMoveState = new NetworkVariable<PlayerMoveState>(
+            PlayerMoveState.Idle, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Server);
+        private readonly NetworkVariable<float> netLean = new NetworkVariable<float>(
+            0f, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Server);
+        public PlayerMoveState MoveState => netMoveState.Value;
+        public float Lean => netLean.Value;
+        [Header("Lean")]
+        [SerializeField] private float leanDistance = 0.22f;
+        [SerializeField] private float leanAngle = 12f;
+        private float cameraLean;
 
         // ══════════════════════════════════════════════════
         // Unity 생명주기
@@ -156,6 +177,7 @@ namespace OskarMike.Network.Player
             characterController = GetComponent<CharacterController>();
             stamina             = GetComponent<PlayerStamina>();
             localCamera         = GetComponentInChildren<Camera>(true);
+            InitializeCharacterControllerHeight();
 #if ENABLE_INPUT_SYSTEM
             playerInput = GetComponent<PlayerInput>();
 #endif
@@ -174,9 +196,11 @@ namespace OskarMike.Network.Player
             if (IsOwner)
             {
                 if (cameraHolder != null)
-                    cameraBaseLocalPos = cameraHolder.localPosition;
+                    cameraStandLocalPos = cameraHolder.localPosition;
                 else if (localCamera != null)
-                    cameraBaseLocalPos = localCamera.transform.localPosition;
+                    cameraStandLocalPos = localCamera.transform.localPosition;
+
+                cameraBaseLocalPos = cameraStandLocalPos;
 
                 NetworkManager.SceneManager.OnSceneEvent += HandleSceneEvent;
                 RefreshGameplayState();
@@ -209,7 +233,9 @@ namespace OskarMike.Network.Player
         private void Update()
         {
             if (!IsOwner) return;
+            if (!gameplayInputEnabled) return;
 
+            UpdateCameraPosturePosition();
             HandleLocalCameraPitch();
             HandleAimSway();
             SendInputToServer();
@@ -225,11 +251,14 @@ namespace OskarMike.Network.Player
             Vector2 lookInput  = ReadLookInput();
             float   yawDelta   = lookInput.x * mouseSensitivity * Time.deltaTime;
             bool    jumpPressed   = ReadButtonOnce(ref jumpAction);
+            // The existing Alt action selects tactical walk; unmodified movement is slow walk.
+            bool    isWalking     = !ReadButtonHeld(walkAction);
             bool    isSprinting   = ReadButtonHeld(sprintAction);
             bool    crouchPressed = ReadButtonOnce(ref crouchAction);
             bool    pronePressed  = ReadButtonOnce(ref proneAction);
 
-            MoveServerRpc(moveInput, yawDelta, jumpPressed, isSprinting, crouchPressed, pronePressed);
+            MoveServerRpc(moveInput, yawDelta, jumpPressed, isWalking, isSprinting, crouchPressed, pronePressed,
+                (ReadButtonHeld(leanRightAction) ? 1f : 0f) - (ReadButtonHeld(leanLeftAction) ? 1f : 0f));
         }
 
         // ══════════════════════════════════════════════════
@@ -241,9 +270,11 @@ namespace OskarMike.Network.Player
             Vector2 moveInput,
             float   yawDelta,
             bool    jumpPressed,
+            bool    isWalking,
             bool    isSprinting,
             bool    crouchPressed,
-            bool    pronePressed)
+            bool    pronePressed,
+            float   leanInput)
         {
             float dt = Mathf.Max(Time.deltaTime, 0.0001f);
             moveInput = Vector2.ClampMagnitude(moveInput, 1f);
@@ -252,8 +283,9 @@ namespace OskarMike.Network.Player
                 transform.Rotate(Vector3.up * yawDelta);
 
             TickActionLockout(dt);
+            netLean.Value = 0f;
 
-            bool canSprintBeforePosture = CanSprint(moveInput, isSprinting, characterController.isGrounded);
+            bool canSprintBeforePosture = CanFullSprint(moveInput, isSprinting, characterController.isGrounded);
             UpdateRecentSprintTimer(canSprintBeforePosture, dt);
 
             if (IsTimedActionActive())
@@ -263,6 +295,7 @@ namespace OskarMike.Network.Player
                 TickTimedAction(dt);
                 UpdateCharacterControllerHeight(dt);
                 SyncAirActionState();
+                netMoveState.Value = serverMoveState;
                 return;
             }
 
@@ -275,27 +308,35 @@ namespace OskarMike.Network.Player
                 TickTimedAction(dt);
                 UpdateCharacterControllerHeight(dt);
                 SyncAirActionState();
+                netMoveState.Value = serverMoveState;
                 return;
             }
 
             UpdatePosture(crouchPressed, pronePressed);
-            UpdateMoveState(moveInput, CanSprint(moveInput, isSprinting, characterController.isGrounded));
+            UpdateMoveState(moveInput, isWalking, CanFullSprint(moveInput, isSprinting, characterController.isGrounded));
             TickStamina(dt);
             TryJump(jumpPressed);
             ApplyGravity(dt);
             MoveNormally(moveInput, dt);
             UpdateCharacterControllerHeight(dt);
             SyncAirActionState();
+            netMoveState.Value = serverMoveState;
+            bool canLean = serverPosture != PlayerPosture.Prone && characterController.isGrounded
+                && serverMoveState != PlayerMoveState.FullSprint && serverActionState == PlayerActionState.None;
+            netLean.Value = canLean && !float.IsNaN(leanInput) && !float.IsInfinity(leanInput)
+                ? Mathf.Clamp(leanInput, -1f, 1f) : 0f;
         }
 
-        private void UpdateMoveState(Vector2 moveInput, bool canSprint)
+        private void UpdateMoveState(Vector2 moveInput, bool isWalking, bool canFullSprint)
         {
             if (moveInput.sqrMagnitude < 0.01f)
                 serverMoveState = PlayerMoveState.Idle;
-            else if (canSprint)
-                serverMoveState = PlayerMoveState.Sprint;
-            else
+            else if (canFullSprint)
+                serverMoveState = PlayerMoveState.FullSprint;
+            else if (isWalking)
                 serverMoveState = PlayerMoveState.Walk;
+            else
+                serverMoveState = PlayerMoveState.TacticalWalk;
         }
 
         private void MoveNormally(Vector2 moveInput, float dt)
@@ -318,6 +359,15 @@ namespace OskarMike.Network.Player
                     characterController.height, targetH, postureTransitionSpeed * dt);
                 characterController.center = Vector3.up * (characterController.height * 0.5f);
             }
+        }
+
+        private void InitializeCharacterControllerHeight()
+        {
+            if (characterController == null) return;
+
+            serverPosture = PlayerPosture.Stand;
+            characterController.height = heightStand;
+            characterController.center = Vector3.up * (heightStand * 0.5f);
         }
 
         private void TryJump(bool jumpPressed)
@@ -435,7 +485,7 @@ namespace OskarMike.Network.Player
             return true;
         }
 
-        private bool CanSprint(Vector2 moveInput, bool sprintHeld, bool isGrounded)
+        private bool CanFullSprint(Vector2 moveInput, bool sprintHeld, bool isGrounded)
         {
             return sprintHeld
                    && isGrounded
@@ -445,7 +495,7 @@ namespace OskarMike.Network.Player
                    && moveInput.y > 0.1f
                    && moveInput.sqrMagnitude >= 0.01f
                    && stamina != null
-                   && stamina.CanSprint;
+                   && stamina.CanFullSprint;
         }
 
         private bool CanJump(bool jumpPressed)
@@ -512,11 +562,11 @@ namespace OskarMike.Network.Player
             switch (serverActionState)
             {
                 case PlayerActionState.Sliding:
-                    MoveGroundBurstAction(dt, t, speedSprintStand * slideStartSpeedMultiplier, speedWalkCrouch);
+                    MoveGroundBurstAction(dt, t, speedFullSprintStand * slideStartSpeedMultiplier, speedWalkCrouch);
                     if (t >= 1f) EndTimedAction(PlayerPosture.Crouch);
                     break;
                 case PlayerActionState.Diving:
-                    MoveGroundBurstAction(dt, t, speedSprintStand * diveStartSpeedMultiplier, speedWalkProne);
+                    MoveGroundBurstAction(dt, t, speedFullSprintStand * diveStartSpeedMultiplier, speedWalkProne);
                     if (t >= 1f) EndTimedAction(PlayerPosture.Prone);
                     break;
                 case PlayerActionState.Vaulting:
@@ -668,7 +718,43 @@ namespace OskarMike.Network.Player
 
             Transform camT = cameraHolder != null ? cameraHolder : localCamera?.transform;
             if (camT != null)
-                camT.localRotation = Quaternion.Euler(localVerticalRotation, 0f, 0f);
+                camT.localRotation = Quaternion.Euler(localVerticalRotation, 0f, -cameraLean * leanAngle);
+        }
+
+        private void UpdateCameraPosturePosition()
+        {
+            Transform camT = cameraHolder != null ? cameraHolder : localCamera?.transform;
+            if (camT == null) return;
+
+            Vector3 targetBaseLocalPos = GetCameraBaseLocalPosition(Posture);
+            cameraLean = Mathf.MoveTowards(cameraLean, Lean, 5f * Time.deltaTime);
+            Vector3 offset = transform.right * (cameraLean * leanDistance);
+            float distance = offset.magnitude;
+            if (distance > 0.001f)
+            {
+                foreach (var hit in Physics.SphereCastAll(transform.TransformPoint(targetBaseLocalPos),
+                             0.04f, offset.normalized, distance, ~0, QueryTriggerInteraction.Ignore))
+                    if (!hit.transform.IsChildOf(transform))
+                        distance = Mathf.Min(distance, Mathf.Max(0f, hit.distance - 0.01f));
+                targetBaseLocalPos.x += Mathf.Sign(cameraLean) * distance;
+            }
+            cameraBaseLocalPos = Vector3.MoveTowards(
+                cameraBaseLocalPos,
+                targetBaseLocalPos,
+                cameraPostureTransitionSpeed * Time.deltaTime);
+        }
+
+        private Vector3 GetCameraBaseLocalPosition(PlayerPosture posture)
+        {
+            Vector3 position = cameraStandLocalPos;
+            float heightRatio = posture switch
+            {
+                PlayerPosture.Crouch => cameraCrouchHeightRatio,
+                PlayerPosture.Prone  => cameraProneHeightRatio,
+                _                    => 1f
+            };
+            position.y = cameraStandLocalPos.y * Mathf.Clamp01(heightRatio);
+            return position;
         }
 
         /// <summary>
@@ -703,7 +789,12 @@ namespace OskarMike.Network.Player
             {
                 PlayerPosture.Crouch => speedWalkCrouch,
                 PlayerPosture.Prone  => speedWalkProne,
-                _ => serverMoveState == PlayerMoveState.Sprint ? speedSprintStand : speedWalkStand
+                _ => serverMoveState switch
+                {
+                    PlayerMoveState.FullSprint => speedFullSprintStand,
+                    PlayerMoveState.Walk       => speedWalkStand,
+                    _                          => speedTacticalWalkStand
+                }
             };
         }
 
@@ -742,6 +833,7 @@ namespace OskarMike.Network.Player
 
         public void EnableGameplayInput()
         {
+            gameplayInputEnabled = true;
 #if ENABLE_INPUT_SYSTEM
             if (playerInput != null) playerInput.enabled = true;
             BindInputActions();
@@ -752,6 +844,7 @@ namespace OskarMike.Network.Player
 
         public void DisableGameplayInput()
         {
+            gameplayInputEnabled = false;
 #if ENABLE_INPUT_SYSTEM
             if (playerInput != null) playerInput.enabled = false;
             ClearInputActions();
@@ -857,9 +950,12 @@ namespace OskarMike.Network.Player
             moveAction   = Bind(moveActionName);
             lookAction   = Bind(lookActionName);
             jumpAction   = Bind(jumpActionName);
+            walkAction   = Bind(walkActionName);
             sprintAction = Bind(sprintActionName);
             crouchAction = Bind(crouchActionName);
             proneAction  = Bind(proneActionName);
+            leanLeftAction = Bind("LeanLeft");
+            leanRightAction = Bind("LeanRight");
         }
 
         private InputAction Bind(string actionName)
@@ -871,7 +967,7 @@ namespace OskarMike.Network.Player
 
         private void ClearInputActions()
         {
-            moveAction = lookAction = jumpAction = sprintAction = crouchAction = proneAction = null;
+            moveAction = lookAction = jumpAction = walkAction = sprintAction = crouchAction = proneAction = leanLeftAction = leanRightAction = null;
         }
 #endif
     }

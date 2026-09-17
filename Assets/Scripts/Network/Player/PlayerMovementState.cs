@@ -16,9 +16,10 @@ namespace OskarMike.Network.Player
     /// </summary>
     public enum PlayerMoveState : byte
     {
-        Idle    = 0,
-        Walk    = 1,
-        Sprint  = 2
+        Idle         = 0,
+        Walk         = 1,
+        TacticalWalk = 2,
+        FullSprint   = 3
     }
 
     /// <summary>

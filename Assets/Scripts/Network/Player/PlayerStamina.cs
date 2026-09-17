@@ -8,7 +8,7 @@ namespace OskarMike.Network.Player
     /// 서버에서만 값을 갱신하고 NetworkVariable로 클라이언트에 전파한다.
     ///
     /// 소모 조건:
-    ///   - 달리기 (Sprint)    : drainSprint / 초
+    ///   - 전력 질주 (Full Sprint) : drainFullSprint / 초
     ///   - 점프               : costJump (1회)
     ///   - 볼트/파쿠르        : costParkour (1회, 일시적)
     ///   - 슬라이딩           : costSlide (1회)
@@ -27,7 +27,7 @@ namespace OskarMike.Network.Player
         [Header("Stamina")]
         [SerializeField] private float maxStamina          = 100f;
         [SerializeField] private float recoverRate         = 10f;   // /초
-        [SerializeField] private float drainSprint         = 15f;   // /초
+        [SerializeField] private float drainFullSprint     = 30f;   // /초
         [SerializeField] private float drainOverweightWalk = 5f;    // /초 (과적 이동)
         [SerializeField] private float costJump            = 10f;   // 1회
         [SerializeField] private float costParkour         = 12f;   // 1회
@@ -37,6 +37,7 @@ namespace OskarMike.Network.Player
 
         [Header("Sway Thresholds")]
         [SerializeField] private float lowStaminaThreshold = 0.20f; // 20%
+        [SerializeField] private float fullSprintResumeThreshold = 0.35f; // 35%
         [SerializeField] private float postSprintSwayTime  = 2f;    // 질주 후 흔들림 지속 초
 
         // ── NetworkVariable ────────────────────────────────
@@ -46,16 +47,17 @@ namespace OskarMike.Network.Player
             NetworkVariableWritePermission.Server);
 
         // ── 서버 전용 상태 ──────────────────────────────────
-        private float postSprintTimer = 0f;   // 질주 종료 후 경과 시간
+        private float postSprintTimer = float.PositiveInfinity;   // 질주 종료 후 경과 시간
         private float recoveryDelayTimer = 0f;
         private bool  wasSprintingLastFrame = false;
+        private bool  fullSprintLockedByExhaustion = false;
 
         // ── 공개 읽기 전용 ──────────────────────────────────
         public float Stamina      => stamina.Value;
         public float MaxStamina   => maxStamina;
         public float Ratio        => stamina.Value / maxStamina;
         public bool  IsExhausted  => Ratio <= lowStaminaThreshold;
-        public bool  CanSprint    => !IsExhausted;
+        public bool  CanFullSprint => !fullSprintLockedByExhaustion && !IsExhausted;
         public bool  CanJump      => CanSpend(costJump);
         public bool  CanVault     => CanSpend(costParkour);
         public bool  CanSlide     => CanSpend(costSlide);
@@ -74,7 +76,8 @@ namespace OskarMike.Network.Player
         {
             if (!IsServer) return;
 
-            bool isSprinting = moveState == PlayerMoveState.Sprint;
+            bool isSprinting = moveState == PlayerMoveState.FullSprint;
+            bool isMoving = moveState != PlayerMoveState.Idle;
 
             // 질주 종료 감지 → 타이머 리셋
             if (wasSprintingLastFrame && !isSprinting)
@@ -97,9 +100,9 @@ namespace OskarMike.Network.Player
 
             if (isSprinting)
             {
-                delta -= drainSprint * dt;
+                delta -= drainFullSprint * dt;
             }
-            else if (isOverweight && moveState == PlayerMoveState.Walk)
+            else if (isOverweight && isMoving)
             {
                 delta -= drainOverweightWalk * dt;
             }
@@ -109,6 +112,7 @@ namespace OskarMike.Network.Player
             }
 
             stamina.Value = Mathf.Clamp(stamina.Value + delta, 0f, maxStamina);
+            UpdateFullSprintLock();
         }
 
         /// <summary>점프 스태미나 소모 (서버 호출).</summary>
@@ -143,11 +147,20 @@ namespace OskarMike.Network.Player
         {
             if (!CanSpend(amount)) return false;
             stamina.Value = Mathf.Max(0f, stamina.Value - amount);
+            UpdateFullSprintLock();
             StartRecoveryDelay();
             return true;
         }
 
         private bool CanSpend(float amount) => stamina.Value >= amount;
+
+        private void UpdateFullSprintLock()
+        {
+            if (Ratio <= lowStaminaThreshold)
+                fullSprintLockedByExhaustion = true;
+            else if (Ratio >= fullSprintResumeThreshold)
+                fullSprintLockedByExhaustion = false;
+        }
 
         private void StartRecoveryDelay()
         {
