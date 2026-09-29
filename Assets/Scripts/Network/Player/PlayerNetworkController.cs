@@ -78,8 +78,10 @@ namespace OskarMike.Network.Player
         [Header("Mouse Look")]
         [SerializeField] private float mouseSensitivity = 100f;
         [SerializeField] private float cameraPostureTransitionSpeed = 8f;
-        [SerializeField, Range(0f, 1f)] private float cameraCrouchHeightRatio = 0.48f;
-        [SerializeField, Range(0f, 1f)] private float cameraProneHeightRatio = 0.06f;
+        // The dummy's measured head heights are 1.519/1.051/0.274 m. Camera targets
+        // account for the -0.08 m visual grounding offset used with the controller skin.
+        [SerializeField, Range(0f, 1f)] private float cameraCrouchHeightRatio = 0.674f;
+        [SerializeField, Range(0f, 1f)] private float cameraProneHeightRatio = 0.135f;
         [SerializeField] private Transform cameraHolder;
 
         // ── 조준 흔들림 ────────────────────────────────────

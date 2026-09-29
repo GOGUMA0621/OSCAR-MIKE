@@ -69,7 +69,7 @@ namespace OskarMike.Network.Player
 
             if (next != currentState)
             {
-                animator.CrossFadeInFixedTime(next, 0.12f, 0);
+                animator.CrossFadeInFixedTime(next, 0.15f, 0);
                 currentState = next;
             }
 

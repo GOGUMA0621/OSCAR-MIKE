@@ -146,7 +146,12 @@ namespace OskarMike.EditorTools
                 if (existing != null) UnityEngine.Object.DestroyImmediate(existing.gameObject);
                 var visual = (GameObject)PrefabUtility.InstantiatePrefab(dummy, player.transform);
                 visual.name = "CharacterVisual";
-                visual.transform.localPosition = Vector3.zero;
+                // CharacterController keeps its root approximately one skin width above
+                // contacted ground. Offset only the presentation model so its feet remain
+                // visually grounded without changing authoritative movement or collision.
+                var characterController = player.GetComponent<CharacterController>();
+                float visualGroundingOffset = characterController != null ? -characterController.skinWidth : 0f;
+                visual.transform.localPosition = Vector3.up * visualGroundingOffset;
                 visual.transform.localRotation = Quaternion.identity;
                 var animator = visual.GetComponent<Animator>();
                 if (animator == null) animator = visual.AddComponent<Animator>();

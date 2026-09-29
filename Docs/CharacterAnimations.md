@@ -36,6 +36,10 @@ Animations do not determine speed, collision, stamina, or action duration. Foot 
 
 The owner body uses a LocalPlayerVisual layer excluded only by the owner camera, avoiding first-person head/body clipping. Observe the model using Unity Scene view during Play Mode or a second connected player. This is not a first-person arms/weapon rig.
 
+The CharacterController can keep the authoritative player root approximately one skin width (0.08 m) above contacted ground. CharacterVisual is therefore offset down by that skin width so the feet remain visually grounded without moving the networked root. The animation setup tool reapplies this offset when rebuilding the dummy.
+
+The stance camera heights are matched to the grounded dummy's measured head positions. Relative to the controller root, the standing camera is 1.44 m; crouch targets about 0.97 m (67.4%); prone targets about 0.19 m (13.5%). With the runtime root resting near 0.08 m, their world heights remain approximately 1.52 m, 1.05 m, and 0.27 m. The camera transitions smoothly between these fixed stance heights instead of following animation head bob.
+
 ## Verification checklist
 
 - Restart MovementTest Play Mode; regeneration of the scene is unnecessary.

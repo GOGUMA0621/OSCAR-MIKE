@@ -1,0 +1,10 @@
+# Keep Unity text assets stable across Windows/editor tooling.
+*.asmdef text eol=lf
+*.asset text eol=lf
+*.cs text eol=lf
+*.inputactions text eol=lf
+*.json text eol=lf
+*.meta text eol=lf
+*.prefab text eol=lf
+*.slnx text eol=lf
+*.unity text eol=lf
