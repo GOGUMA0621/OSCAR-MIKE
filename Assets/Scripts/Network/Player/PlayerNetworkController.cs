@@ -30,6 +30,8 @@ namespace OskarMike.Network.Player
     public class PlayerNetworkController : NetworkBehaviour
     {
         public static event Action<ulong, bool> ReadyStateChangedGlobal;
+        // Emitted only for input-driven server movement, never platform transport.
+        public event Action<PlayerMoveState, PlayerPosture, Vector3, bool> ServerMovementCompleted;
 
         // ── 이동 설정 ──────────────────────────────────────
         [Header("Move Speed")]
@@ -276,7 +278,10 @@ namespace OskarMike.Network.Player
             horizontal *= speed;
 
             Vector3 motion = horizontal + Vector3.up * verticalVelocity;
+            Vector3 movementStart = transform.position;
             characterController.Move(motion * dt);
+            ServerMovementCompleted?.Invoke(serverMoveState, serverPosture,
+                transform.position - movementStart, characterController.isGrounded);
 
             // 11) CC 높이 부드럽게 전환
             float targetH = PostureToHeight(serverPosture);
