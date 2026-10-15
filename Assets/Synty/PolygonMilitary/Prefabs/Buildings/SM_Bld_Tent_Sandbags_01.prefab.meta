@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: a6177be75e0734247b4f446d0fe1db3a
+timeCreated: 1592868118
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 100100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 176304
+  packageName: POLYGON - Military Pack - Art by Synty
+  packageVersion: 1.10.4
+  assetPath: Assets/Synty/PolygonMilitary/Prefabs/Buildings/SM_Bld_Tent_Sandbags_01.prefab
+  uploadId: 976012

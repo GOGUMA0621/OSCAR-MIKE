@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 168b4d16db40f1a44ac54d4a2fa9c095
+timeCreated: 1595369826
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 100100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 176304
+  packageName: POLYGON - Military Pack - Art by Synty
+  packageVersion: 1.10.4
+  assetPath: Assets/Synty/PolygonMilitary/Prefabs/Characters/Attachments/SM_Chr_Attach_Helmet_05.prefab
+  uploadId: 976012

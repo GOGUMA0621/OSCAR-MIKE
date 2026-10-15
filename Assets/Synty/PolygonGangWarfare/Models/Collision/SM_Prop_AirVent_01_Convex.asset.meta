@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: c40e496556b7ff746a6d70efe687ef77
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 43749505665739304
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 150589
+  packageName: POLYGON - Gang Warfare Pack - Art by Synty
+  packageVersion: 1.7.2
+  assetPath: Assets/Synty/PolygonGangWarfare/Models/Collision/SM_Prop_AirVent_01_Convex.asset
+  uploadId: 975930

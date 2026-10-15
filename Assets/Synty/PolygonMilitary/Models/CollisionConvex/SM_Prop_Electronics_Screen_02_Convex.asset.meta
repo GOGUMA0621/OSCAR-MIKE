@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: a6de80a51d7b22843a58d5129b1098c9
+timeCreated: 1596420441
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 43204528677886934
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 176304
+  packageName: POLYGON - Military Pack - Art by Synty
+  packageVersion: 1.10.4
+  assetPath: Assets/Synty/PolygonMilitary/Models/CollisionConvex/SM_Prop_Electronics_Screen_02_Convex.asset
+  uploadId: 976012

@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 8a0d4038f37da8043a8df48c3ba19afe
+timeCreated: 1592955478
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 100100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 176304
+  packageName: POLYGON - Military Pack - Art by Synty
+  packageVersion: 1.10.4
+  assetPath: Assets/Synty/PolygonMilitary/Prefabs/Props/SM_Prop_Bathroom_Pipes_01.prefab
+  uploadId: 976012

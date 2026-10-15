@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 76d78141ae40024449a21b4cbc6b56db
+timeCreated: 1596424722
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 43182052861529164
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 176304
+  packageName: POLYGON - Military Pack - Art by Synty
+  packageVersion: 1.10.4
+  assetPath: Assets/Synty/PolygonMilitary/Models/CollisionConvex/SM_Bld_Door_Garage_01_Convex.asset
+  uploadId: 976012

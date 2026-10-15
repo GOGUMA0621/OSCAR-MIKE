@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 81d811fb9b021de4faf07acaefdd931e
+timeCreated: 1595480481
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 100100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 176304
+  packageName: POLYGON - Military Pack - Art by Synty
+  packageVersion: 1.10.4
+  assetPath: Assets/Synty/PolygonMilitary/Prefabs/FX/FX_Smoke_Huge_01.prefab
+  uploadId: 976012

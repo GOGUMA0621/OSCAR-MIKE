@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 3754b747d84ef864ca31ab93782e4dca
+timeCreated: 1596422750
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 43414082704661874
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 176304
+  packageName: POLYGON - Military Pack - Art by Synty
+  packageVersion: 1.10.4
+  assetPath: Assets/Synty/PolygonMilitary/Models/CollisionConvex/SM_Veh_Tank_Russian_01_Destroyed_Convex.asset
+  uploadId: 976012

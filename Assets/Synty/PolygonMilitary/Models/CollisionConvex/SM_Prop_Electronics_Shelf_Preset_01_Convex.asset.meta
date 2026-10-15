@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 0bac4c5e9d663f54c92ca7f383289da7
+timeCreated: 1596420512
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 43223875432499980
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 176304
+  packageName: POLYGON - Military Pack - Art by Synty
+  packageVersion: 1.10.4
+  assetPath: Assets/Synty/PolygonMilitary/Models/CollisionConvex/SM_Prop_Electronics_Shelf_Preset_01_Convex.asset
+  uploadId: 976012

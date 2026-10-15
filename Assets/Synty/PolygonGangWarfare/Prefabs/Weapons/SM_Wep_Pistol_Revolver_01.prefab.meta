@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 484dc341396335f458d85c68df5cb481
+timeCreated: 1562642845
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 100100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 150589
+  packageName: POLYGON - Gang Warfare Pack - Art by Synty
+  packageVersion: 1.7.2
+  assetPath: Assets/Synty/PolygonGangWarfare/Prefabs/Weapons/SM_Wep_Pistol_Revolver_01.prefab
+  uploadId: 975930

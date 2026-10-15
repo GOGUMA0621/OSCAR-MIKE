@@ -1,0 +1,17 @@
+fileFormatVersion: 2
+guid: 8c41f78367dacac42b3f20e61f4a9ab4
+timeCreated: 1596423451
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 43014219514775794
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 176304
+  packageName: POLYGON - Military Pack - Art by Synty
+  packageVersion: 1.10.4
+  assetPath: Assets/Synty/PolygonMilitary/Models/CollisionConvex/SM_Veh_Helicopter_Attack_01_Convex
+    1.asset
+  uploadId: 976012

@@ -1,0 +1,28 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cc98ec8e33537ec46a4ac911c1e49ecc, type: 3}
+  m_Name: 044_PolygonGangWarfare_SM_Prop_Money_Stack_04
+  m_EditorClassIdentifier: Assembly-CSharp::OskarMike.Items.LootItemDefinition
+  itemId: polygongangwarfare.sm_prop_money_stack_04
+  displayName: "\uBA54\uBAA8\uC9C0\uAC00 \uBD99\uC740 \uB3C8\uB2E4\uBC1C"
+  sourceAssetName: SM_Prop_Money_Stack_04
+  contentPack: {fileID: 11400000, guid: f942391ce56a69145876f68bfc75467e, type: 2}
+  category: 3
+  minValueSteps: 6
+  maxValueSteps: 6
+  basePrice: 150
+  priceVariance: 0.15
+  spawnWeight: 1
+  spawnEnabled: 1
+  allowedZoneIds: []
+  notes: 
+  networkPrefab: {fileID: 5197344170154679479, guid: 70faee1fc4d5ceb44aa58d5e661e90c9, type: 3}

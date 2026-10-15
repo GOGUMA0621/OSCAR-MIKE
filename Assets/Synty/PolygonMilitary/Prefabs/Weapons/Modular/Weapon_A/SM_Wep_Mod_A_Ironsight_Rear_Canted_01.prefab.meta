@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 387c7e262d856114685e7792015f4899
+timeCreated: 1595301637
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 100100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 176304
+  packageName: POLYGON - Military Pack - Art by Synty
+  packageVersion: 1.10.4
+  assetPath: Assets/Synty/PolygonMilitary/Prefabs/Weapons/Modular/Weapon_A/SM_Wep_Mod_A_Ironsight_Rear_Canted_01.prefab
+  uploadId: 976012

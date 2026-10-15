@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 6a953a193f8b25f4ca71f5339df2e969
+timeCreated: 1595369821
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 100100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 176304
+  packageName: POLYGON - Military Pack - Art by Synty
+  packageVersion: 1.10.4
+  assetPath: Assets/Synty/PolygonMilitary/Prefabs/Characters/Attachments/Patches/SM_Chr_Attach_Nameplate_07.prefab
+  uploadId: 976012

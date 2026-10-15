@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: e20c74a239aa0774b9271e45759638ff
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 43677924307542234
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 150589
+  packageName: POLYGON - Gang Warfare Pack - Art by Synty
+  packageVersion: 1.7.2
+  assetPath: Assets/Synty/PolygonGangWarfare/Models/Collision/SM_Bld_Floor_Asphalt_02_Convex.asset
+  uploadId: 975930

@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: cfbf90e4ccbb7e44dbb267323c17eeff
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 43025340894699140
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 150589
+  packageName: POLYGON - Gang Warfare Pack - Art by Synty
+  packageVersion: 1.7.2
+  assetPath: Assets/Synty/PolygonGangWarfare/Models/Collision/SM_Bld_Walkway_Rail_01_Convex.asset
+  uploadId: 975930

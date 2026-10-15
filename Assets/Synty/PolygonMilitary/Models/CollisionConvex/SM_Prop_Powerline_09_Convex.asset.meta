@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 88b090485af5dcc4fba7e3f6c4599c2f
+timeCreated: 1596420434
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 43058523990878942
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 176304
+  packageName: POLYGON - Military Pack - Art by Synty
+  packageVersion: 1.10.4
+  assetPath: Assets/Synty/PolygonMilitary/Models/CollisionConvex/SM_Prop_Powerline_09_Convex.asset
+  uploadId: 976012

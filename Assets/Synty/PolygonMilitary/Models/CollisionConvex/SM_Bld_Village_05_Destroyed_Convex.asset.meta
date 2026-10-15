@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 5c8517546ca276d469c945633b436a66
+timeCreated: 1596424718
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 43867569157881774
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 176304
+  packageName: POLYGON - Military Pack - Art by Synty
+  packageVersion: 1.10.4
+  assetPath: Assets/Synty/PolygonMilitary/Models/CollisionConvex/SM_Bld_Village_05_Destroyed_Convex.asset
+  uploadId: 976012

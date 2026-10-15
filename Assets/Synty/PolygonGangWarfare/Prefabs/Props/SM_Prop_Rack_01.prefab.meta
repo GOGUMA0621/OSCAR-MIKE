@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 88c770822aa38894b810cd3da027d29d
+timeCreated: 1562815546
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 100100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 150589
+  packageName: POLYGON - Gang Warfare Pack - Art by Synty
+  packageVersion: 1.7.2
+  assetPath: Assets/Synty/PolygonGangWarfare/Prefabs/Props/SM_Prop_Rack_01.prefab
+  uploadId: 975930

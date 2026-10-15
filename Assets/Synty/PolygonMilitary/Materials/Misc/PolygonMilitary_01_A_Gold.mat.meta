@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: b2c3a31deaefda1498acfc5155aa8dbb
+timeCreated: 1590445039
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 2100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 176304
+  packageName: POLYGON - Military Pack - Art by Synty
+  packageVersion: 1.10.4
+  assetPath: Assets/Synty/PolygonMilitary/Materials/Misc/PolygonMilitary_01_A_Gold.mat
+  uploadId: 976012

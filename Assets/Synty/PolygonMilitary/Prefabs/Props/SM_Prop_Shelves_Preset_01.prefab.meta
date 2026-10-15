@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 2d04cc98aa3b10d4bbd5559466d94b60
+timeCreated: 1592890139
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 100100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 176304
+  packageName: POLYGON - Military Pack - Art by Synty
+  packageVersion: 1.10.4
+  assetPath: Assets/Synty/PolygonMilitary/Prefabs/Props/SM_Prop_Shelves_Preset_01.prefab
+  uploadId: 976012

@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 5cf5c9118ffa06743803bef3241d9959
+timeCreated: 1593474115
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 100100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 176304
+  packageName: POLYGON - Military Pack - Art by Synty
+  packageVersion: 1.10.4
+  assetPath: Assets/Synty/PolygonMilitary/Prefabs/Buildings/SM_Bld_Archway_03.prefab
+  uploadId: 976012

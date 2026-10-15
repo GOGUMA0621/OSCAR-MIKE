@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: e1dadd9161e26f64599997ca63af3572
+timeCreated: 1590460272
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 100100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 176304
+  packageName: POLYGON - Military Pack - Art by Synty
+  packageVersion: 1.10.4
+  assetPath: Assets/Synty/PolygonMilitary/Prefabs/Generic/SM_Generic_Cloud_03.prefab
+  uploadId: 976012

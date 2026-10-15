@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 1a8a1af8a2b73ae4787feda0f3c5c364
+timeCreated: 1593134916
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 100100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 176304
+  packageName: POLYGON - Military Pack - Art by Synty
+  packageVersion: 1.10.4
+  assetPath: Assets/Synty/PolygonMilitary/Prefabs/Buildings/SM_Bld_Clock_Tower_Clock_01.prefab
+  uploadId: 976012

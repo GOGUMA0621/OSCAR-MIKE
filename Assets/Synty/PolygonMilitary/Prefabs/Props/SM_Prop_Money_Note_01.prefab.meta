@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 74a0cf2b04986c5469884aef7460ec4b
+timeCreated: 1595569018
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 100100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 176304
+  packageName: POLYGON - Military Pack - Art by Synty
+  packageVersion: 1.10.4
+  assetPath: Assets/Synty/PolygonMilitary/Prefabs/Props/SM_Prop_Money_Note_01.prefab
+  uploadId: 976012

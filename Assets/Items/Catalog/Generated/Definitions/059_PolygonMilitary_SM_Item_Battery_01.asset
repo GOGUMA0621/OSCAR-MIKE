@@ -1,0 +1,28 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cc98ec8e33537ec46a4ac911c1e49ecc, type: 3}
+  m_Name: 059_PolygonMilitary_SM_Item_Battery_01
+  m_EditorClassIdentifier: Assembly-CSharp::OskarMike.Items.LootItemDefinition
+  itemId: polygonmilitary.sm_item_battery_01
+  displayName: "\uBC30\uD130\uB9AC"
+  sourceAssetName: SM_Item_Battery_01
+  contentPack: {fileID: 11400000, guid: c2ffe107ae5c4b84e904fc1072d5c86c, type: 2}
+  category: 0
+  minValueSteps: 2
+  maxValueSteps: 2
+  basePrice: 25
+  priceVariance: 0.15
+  spawnWeight: 1
+  spawnEnabled: 1
+  allowedZoneIds: []
+  notes: 
+  networkPrefab: {fileID: 7306400304359040739, guid: 4665b2284c278c24897ca33e3f45da5d, type: 3}

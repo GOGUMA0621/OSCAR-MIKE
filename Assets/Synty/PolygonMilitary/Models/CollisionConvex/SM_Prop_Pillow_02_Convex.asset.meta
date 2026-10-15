@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: b5de0ee2b70e5d3419c2f114a752d3fd
+timeCreated: 1596420440
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 43561050403636128
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 176304
+  packageName: POLYGON - Military Pack - Art by Synty
+  packageVersion: 1.10.4
+  assetPath: Assets/Synty/PolygonMilitary/Models/CollisionConvex/SM_Prop_Pillow_02_Convex.asset
+  uploadId: 976012

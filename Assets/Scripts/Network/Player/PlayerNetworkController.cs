@@ -30,6 +30,8 @@ namespace OskarMike.Network.Player
     public class PlayerNetworkController : NetworkBehaviour
     {
         public static event Action<ulong, bool> ReadyStateChangedGlobal;
+        // Emitted only for input-driven server movement, never platform transport.
+        public event Action<PlayerMoveState, PlayerPosture, Vector3, bool> ServerMovementCompleted;
 
         // ── 이동 설정 ──────────────────────────────────────
         [Header("Move Speed")]
@@ -169,6 +171,17 @@ namespace OskarMike.Network.Player
         [SerializeField] private float leanDistance = 0.22f;
         [SerializeField] private float leanAngle = 12f;
         private float cameraLean;
+
+        /// <summary>
+        /// 서버 권한 이동 발판이 플레이어를 자식화하지 않고 함께 운반할 때 사용한다.
+        /// </summary>
+        public void ApplyServerPlatformMotion(Vector3 platformDelta)
+        {
+            if (!IsServer || characterController == null || !characterController.enabled)
+                return;
+
+            characterController.Move(platformDelta);
+        }
 
         // ══════════════════════════════════════════════════
         // Unity 생명주기
@@ -347,9 +360,13 @@ namespace OskarMike.Network.Player
             float acceleration = GetHorizontalAcceleration(targetHorizontal);
             horizontalVelocity = Vector3.MoveTowards(horizontalVelocity, targetHorizontal, acceleration * dt);
 
+            Vector3 movementStart = transform.position;
             CollisionFlags flags = characterController.Move((horizontalVelocity + Vector3.up * verticalVelocity) * dt);
             if ((flags & CollisionFlags.Below) != 0 && verticalVelocity < 0f)
                 verticalVelocity = -2f;
+
+            ServerMovementCompleted?.Invoke(serverMoveState, serverPosture,
+                transform.position - movementStart, characterController.isGrounded);
         }
 
         private void UpdateCharacterControllerHeight(float dt)

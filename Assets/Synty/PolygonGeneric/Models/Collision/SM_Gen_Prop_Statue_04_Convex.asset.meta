@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 6903800ce71f20a4db2396ccca1b7594
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 11400000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 176304
+  packageName: POLYGON - Military Pack - Art by Synty
+  packageVersion: 1.10.4
+  assetPath: Assets/Synty/PolygonGeneric/Models/Collision/SM_Gen_Prop_Statue_04_Convex.asset
+  uploadId: 976012

@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: d791069cf0964d4cb4261a0d675b379e
+timeCreated: 1556850168
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 2100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 150589
+  packageName: POLYGON - Gang Warfare Pack - Art by Synty
+  packageVersion: 1.7.2
+  assetPath: Assets/Synty/PolygonGangWarfare/Materials/FX/FX_Default_01.mat
+  uploadId: 975930

@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 6f2d8f75056eab94e8209780bf426aa9
+timeCreated: 1595301606
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 100100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 176304
+  packageName: POLYGON - Military Pack - Art by Synty
+  packageVersion: 1.10.4
+  assetPath: Assets/Synty/PolygonMilitary/Prefabs/Weapons/Modular_Presets/SM_Wep_Preset_B_Rifle_02.prefab
+  uploadId: 976012

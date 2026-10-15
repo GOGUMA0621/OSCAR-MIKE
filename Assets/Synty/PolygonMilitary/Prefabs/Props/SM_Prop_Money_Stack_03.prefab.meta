@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: f6a8f14a81c441745817f57b3dc5aa88
+timeCreated: 1595569019
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 100100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 176304
+  packageName: POLYGON - Military Pack - Art by Synty
+  packageVersion: 1.10.4
+  assetPath: Assets/Synty/PolygonMilitary/Prefabs/Props/SM_Prop_Money_Stack_03.prefab
+  uploadId: 976012

@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 3b39da5ac7b3c064a9b7b15f5798f545
+timeCreated: 1596420669
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 43700705122307070
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 176304
+  packageName: POLYGON - Military Pack - Art by Synty
+  packageVersion: 1.10.4
+  assetPath: Assets/Synty/PolygonMilitary/Models/CollisionConvex/SM_Prop_WaterTank_02_Convex.asset
+  uploadId: 976012

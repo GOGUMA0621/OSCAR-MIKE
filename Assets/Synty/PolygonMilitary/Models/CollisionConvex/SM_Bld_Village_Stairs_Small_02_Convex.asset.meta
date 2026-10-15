@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 516163a273fff8d44bc92a3c145ac8ea
+timeCreated: 1596424724
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 43162752682092536
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 176304
+  packageName: POLYGON - Military Pack - Art by Synty
+  packageVersion: 1.10.4
+  assetPath: Assets/Synty/PolygonMilitary/Models/CollisionConvex/SM_Bld_Village_Stairs_Small_02_Convex.asset
+  uploadId: 976012

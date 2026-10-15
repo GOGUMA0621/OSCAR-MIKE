@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 343ec077bde9d834bbd112f38f03de8b
+timeCreated: 1596420497
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 43177952465558674
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 176304
+  packageName: POLYGON - Military Pack - Art by Synty
+  packageVersion: 1.10.4
+  assetPath: Assets/Synty/PolygonMilitary/Models/CollisionConvex/SM_Prop_TeaPot_03_Convex.asset
+  uploadId: 976012

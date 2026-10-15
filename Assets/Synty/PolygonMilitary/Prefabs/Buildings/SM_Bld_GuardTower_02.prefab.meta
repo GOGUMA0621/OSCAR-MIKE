@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: e80bc785a6eb0ae42b4812ad0cf387c5
+timeCreated: 1591334126
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 100100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 176304
+  packageName: POLYGON - Military Pack - Art by Synty
+  packageVersion: 1.10.4
+  assetPath: Assets/Synty/PolygonMilitary/Prefabs/Buildings/SM_Bld_GuardTower_02.prefab
+  uploadId: 976012

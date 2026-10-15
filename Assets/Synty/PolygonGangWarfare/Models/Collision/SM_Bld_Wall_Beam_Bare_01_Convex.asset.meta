@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: bdacb5843337453449d77a15e29195d9
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 43321769848233950
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 150589
+  packageName: POLYGON - Gang Warfare Pack - Art by Synty
+  packageVersion: 1.7.2
+  assetPath: Assets/Synty/PolygonGangWarfare/Models/Collision/SM_Bld_Wall_Beam_Bare_01_Convex.asset
+  uploadId: 975930

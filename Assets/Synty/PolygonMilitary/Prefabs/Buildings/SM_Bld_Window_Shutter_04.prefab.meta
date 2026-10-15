@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: a89f5848276c7b145a58f1cfdfeae24a
+timeCreated: 1591066277
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 100100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 176304
+  packageName: POLYGON - Military Pack - Art by Synty
+  packageVersion: 1.10.4
+  assetPath: Assets/Synty/PolygonMilitary/Prefabs/Buildings/SM_Bld_Window_Shutter_04.prefab
+  uploadId: 976012

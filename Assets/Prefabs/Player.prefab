@@ -148,6 +148,7 @@ GameObject:
   - component: {fileID: 7025091736550813081}
   - component: {fileID: 8156523762465580135}
   - component: {fileID: 2431989035870410902}
+  - component: {fileID: 1234894767015807867}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -586,3 +587,20 @@ Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: d9cd8eb4a074cd84ab2686c58bcf21d9, type: 3}
   m_PrefabInstance: {fileID: 8579181348195808473}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1234894767015807867
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8097309021167318534}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8324d464008c18c4c8eedbae1f37f96a, type: 3}
+  m_Name:
+  m_EditorClassIdentifier: Assembly-CSharp::OskarMike.AI.PlayerFootstepEmitter
+  ShowTopMostFoldoutHeaderGroup: 1
+  walk: {fileID: 11400000, guid: 10a799f4548488945b1d197e216614fb, type: 2}
+  sprint: {fileID: 11400000, guid: 0ac308ecb69a8d54bb3c5d5c3e0b1170, type: 2}
+  crouch: {fileID: 11400000, guid: 74b2e6807a8425f4989c307da615502f, type: 2}
+  prone: {fileID: 11400000, guid: b684eb1824bec9f4db3eab18532bbdf2, type: 2}

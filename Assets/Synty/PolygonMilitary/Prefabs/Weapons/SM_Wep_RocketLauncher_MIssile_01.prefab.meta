@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: eed9b1e31a976bb46b7b75a53363eb86
+timeCreated: 1595301612
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 100100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 176304
+  packageName: POLYGON - Military Pack - Art by Synty
+  packageVersion: 1.10.4
+  assetPath: Assets/Synty/PolygonMilitary/Prefabs/Weapons/SM_Wep_RocketLauncher_MIssile_01.prefab
+  uploadId: 976012

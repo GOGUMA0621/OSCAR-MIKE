@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: eb84f8273f221414e9ed6bee8a50a064
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 43454498969012520
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 150589
+  packageName: POLYGON - Gang Warfare Pack - Art by Synty
+  packageVersion: 1.7.2
+  assetPath: Assets/Synty/PolygonGangWarfare/Models/Collision/SM_Prop_Sign_Danger_01_Convex.asset
+  uploadId: 975930

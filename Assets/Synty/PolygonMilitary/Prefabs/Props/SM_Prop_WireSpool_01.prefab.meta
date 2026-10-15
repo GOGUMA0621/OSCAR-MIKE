@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 47b99d23d7ea9a24e9c852a86e3a5a13
+timeCreated: 1592868144
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 100100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 176304
+  packageName: POLYGON - Military Pack - Art by Synty
+  packageVersion: 1.10.4
+  assetPath: Assets/Synty/PolygonMilitary/Prefabs/Props/SM_Prop_WireSpool_01.prefab
+  uploadId: 976012

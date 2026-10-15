@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: ab8178582e45f3b4195daaabcecec50d
+timeCreated: 1595819686
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 100100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 176304
+  packageName: POLYGON - Military Pack - Art by Synty
+  packageVersion: 1.10.4
+  assetPath: Assets/Synty/PolygonMilitary/Prefabs/Environment/SM_Env_Crater_01.prefab
+  uploadId: 976012

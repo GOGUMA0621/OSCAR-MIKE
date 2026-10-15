@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 32a78b2b7ae8b8447a09915034545d28
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 43438632508883272
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 150589
+  packageName: POLYGON - Gang Warfare Pack - Art by Synty
+  packageVersion: 1.7.2
+  assetPath: Assets/Synty/PolygonGangWarfare/Models/Collision/SM_Bld_Fence_Wire_01_Convex.asset
+  uploadId: 975930

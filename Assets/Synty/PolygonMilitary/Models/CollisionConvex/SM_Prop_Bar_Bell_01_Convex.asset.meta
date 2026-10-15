@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 4dd315a5459fb054f95d03e74e73c9a4
+timeCreated: 1596421417
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 43285433251699192
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 176304
+  packageName: POLYGON - Military Pack - Art by Synty
+  packageVersion: 1.10.4
+  assetPath: Assets/Synty/PolygonMilitary/Models/CollisionConvex/SM_Prop_Bar_Bell_01_Convex.asset
+  uploadId: 976012

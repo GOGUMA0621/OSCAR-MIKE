@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: c7a34ff5865ba6c4eb07523195e01975
+timeCreated: 1596424726
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 43601654011729010
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 176304
+  packageName: POLYGON - Military Pack - Art by Synty
+  packageVersion: 1.10.4
+  assetPath: Assets/Synty/PolygonMilitary/Models/CollisionConvex/SM_Bld_Window_Shutter_01_Convex.asset
+  uploadId: 976012

@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 82bf002e6f0093b4486817df2ad566d1
+timeCreated: 1595388397
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 100100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 176304
+  packageName: POLYGON - Military Pack - Art by Synty
+  packageVersion: 1.10.4
+  assetPath: Assets/Synty/PolygonMilitary/Prefabs/Characters/Alt_Soldiers/SM_Chr_Soldier_Male_01_Alt_02.prefab
+  uploadId: 976012

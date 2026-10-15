@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 6afdcd85623dca749adb22af574e6153
+timeCreated: 1596421983
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 43803258085940590
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 176304
+  packageName: POLYGON - Military Pack - Art by Synty
+  packageVersion: 1.10.4
+  assetPath: Assets/Synty/PolygonMilitary/Models/CollisionConvex/SM_Prop_Pipeline_Pipe_Large_Connector_02_Convex.asset
+  uploadId: 976012

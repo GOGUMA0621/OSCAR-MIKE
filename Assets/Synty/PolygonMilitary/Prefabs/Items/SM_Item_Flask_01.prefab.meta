@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: a660123e83c055b47bd3c9e30da61055
+timeCreated: 1592868121
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 100100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 176304
+  packageName: POLYGON - Military Pack - Art by Synty
+  packageVersion: 1.10.4
+  assetPath: Assets/Synty/PolygonMilitary/Prefabs/Items/SM_Item_Flask_01.prefab
+  uploadId: 976012

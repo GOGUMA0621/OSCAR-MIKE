@@ -1,0 +1,17 @@
+fileFormatVersion: 2
+guid: 7dbf7b9a71731734fafad3f663bb6747
+timeCreated: 1596425063
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 43303940324866744
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 176304
+  packageName: POLYGON - Military Pack - Art by Synty
+  packageVersion: 1.10.4
+  assetPath: Assets/Synty/PolygonMilitary/Models/CollisionConvex/SM_Bld_Clock_Tower_01_Convex
+    1.asset
+  uploadId: 976012

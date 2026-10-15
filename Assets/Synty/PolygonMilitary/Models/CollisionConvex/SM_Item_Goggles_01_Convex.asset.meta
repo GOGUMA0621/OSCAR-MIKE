@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: fe0ebdc753a97ec4c995c316dcbd17d3
+timeCreated: 1596421883
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 43639248994538296
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 176304
+  packageName: POLYGON - Military Pack - Art by Synty
+  packageVersion: 1.10.4
+  assetPath: Assets/Synty/PolygonMilitary/Models/CollisionConvex/SM_Item_Goggles_01_Convex.asset
+  uploadId: 976012

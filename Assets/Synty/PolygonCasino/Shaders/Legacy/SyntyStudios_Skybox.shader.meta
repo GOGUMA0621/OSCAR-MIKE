@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 30169be6c624456990ba1a51baf3be9b
+timeCreated: 1644548983
+licenseType: Store
+ShaderImporter:
+  defaultTextures: []
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 252731
+  packageName: POLYGON - Casino Pack - Art by Synty
+  packageVersion: 1.9.2
+  assetPath: Assets/Synty/PolygonCasino/Shaders/Legacy/SyntyStudios_Skybox.shader
+  uploadId: 974002

@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 933b67bc4d1fed944830fa4fcfc639c0
+timeCreated: 1596420502
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 43233596208837678
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 176304
+  packageName: POLYGON - Military Pack - Art by Synty
+  packageVersion: 1.10.4
+  assetPath: Assets/Synty/PolygonMilitary/Models/CollisionConvex/SM_Prop_Basket_05_Convex.asset
+  uploadId: 976012

@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 549776934ad1192438525c328f3fade4
+timeCreated: 1596420594
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 43135503543330740
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 176304
+  packageName: POLYGON - Military Pack - Art by Synty
+  packageVersion: 1.10.4
+  assetPath: Assets/Synty/PolygonMilitary/Models/CollisionConvex/SM_Prop_Washingline_03_Convex.asset
+  uploadId: 976012

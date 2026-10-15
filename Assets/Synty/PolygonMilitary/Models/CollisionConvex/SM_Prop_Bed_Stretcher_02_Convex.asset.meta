@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 2d6c2e5d6f2be554d98a25adf4117784
+timeCreated: 1596421430
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 43608620174739558
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 176304
+  packageName: POLYGON - Military Pack - Art by Synty
+  packageVersion: 1.10.4
+  assetPath: Assets/Synty/PolygonMilitary/Models/CollisionConvex/SM_Prop_Bed_Stretcher_02_Convex.asset
+  uploadId: 976012

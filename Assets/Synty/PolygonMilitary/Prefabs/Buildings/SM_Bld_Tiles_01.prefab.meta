@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 1f3b5d7d77429334387843ecdd9a16ff
+timeCreated: 1593474146
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 100100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 176304
+  packageName: POLYGON - Military Pack - Art by Synty
+  packageVersion: 1.10.4
+  assetPath: Assets/Synty/PolygonMilitary/Prefabs/Buildings/SM_Bld_Tiles_01.prefab
+  uploadId: 976012

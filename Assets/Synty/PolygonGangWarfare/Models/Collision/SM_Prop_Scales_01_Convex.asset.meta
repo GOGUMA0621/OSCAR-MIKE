@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: bfe769cf1ca91c542bbe53c164f1aef1
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 43939769930840402
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 150589
+  packageName: POLYGON - Gang Warfare Pack - Art by Synty
+  packageVersion: 1.7.2
+  assetPath: Assets/Synty/PolygonGangWarfare/Models/Collision/SM_Prop_Scales_01_Convex.asset
+  uploadId: 975930

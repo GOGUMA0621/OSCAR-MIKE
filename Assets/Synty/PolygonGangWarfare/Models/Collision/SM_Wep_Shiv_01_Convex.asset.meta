@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: d4c311f7fb017034aa7b279fbebbdc19
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 43139931618485762
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 150589
+  packageName: POLYGON - Gang Warfare Pack - Art by Synty
+  packageVersion: 1.7.2
+  assetPath: Assets/Synty/PolygonGangWarfare/Models/Collision/SM_Wep_Shiv_01_Convex.asset
+  uploadId: 975930

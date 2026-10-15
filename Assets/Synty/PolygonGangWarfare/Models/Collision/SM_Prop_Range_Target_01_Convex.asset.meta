@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 5c62cb61450482e4c9d5e2d4e34aab3b
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 43195485513594962
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 150589
+  packageName: POLYGON - Gang Warfare Pack - Art by Synty
+  packageVersion: 1.7.2
+  assetPath: Assets/Synty/PolygonGangWarfare/Models/Collision/SM_Prop_Range_Target_01_Convex.asset
+  uploadId: 975930

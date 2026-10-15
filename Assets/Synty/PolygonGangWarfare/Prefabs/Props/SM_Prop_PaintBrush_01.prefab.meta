@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 3375c4f75594b1e4aadff0dc693a2b64
+timeCreated: 1562647344
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 100100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 150589
+  packageName: POLYGON - Gang Warfare Pack - Art by Synty
+  packageVersion: 1.7.2
+  assetPath: Assets/Synty/PolygonGangWarfare/Prefabs/Props/SM_Prop_PaintBrush_01.prefab
+  uploadId: 975930

@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: b7c1751ab4b1377489b571e897eaf983
+timeCreated: 1596420609
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 43894019159138334
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 176304
+  packageName: POLYGON - Military Pack - Art by Synty
+  packageVersion: 1.10.4
+  assetPath: Assets/Synty/PolygonMilitary/Models/CollisionConvex/SM_Prop_Shoes_04_Convex.asset
+  uploadId: 976012

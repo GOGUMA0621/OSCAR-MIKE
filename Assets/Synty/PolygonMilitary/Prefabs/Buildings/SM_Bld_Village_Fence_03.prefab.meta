@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 18e562e55142c6b4bbe2d0f0ba4c6864
+timeCreated: 1590552606
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 100100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 176304
+  packageName: POLYGON - Military Pack - Art by Synty
+  packageVersion: 1.10.4
+  assetPath: Assets/Synty/PolygonMilitary/Prefabs/Buildings/SM_Bld_Village_Fence_03.prefab
+  uploadId: 976012

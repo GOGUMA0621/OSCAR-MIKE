@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 0494515a0a8f94a4083d79843c4d0b15
+timeCreated: 1596420479
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 43910473795955146
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 176304
+  packageName: POLYGON - Military Pack - Art by Synty
+  packageVersion: 1.10.4
+  assetPath: Assets/Synty/PolygonMilitary/Models/CollisionConvex/SM_Prop_Taxi_Sign_01_Convex.asset
+  uploadId: 976012

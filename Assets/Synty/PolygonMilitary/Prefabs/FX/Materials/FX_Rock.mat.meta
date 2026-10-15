@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 69966edecb89b6241be125d4a2e68721
+timeCreated: 1576616879
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 2100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 176304
+  packageName: POLYGON - Military Pack - Art by Synty
+  packageVersion: 1.10.4
+  assetPath: Assets/Synty/PolygonMilitary/Prefabs/FX/Materials/FX_Rock.mat
+  uploadId: 976012

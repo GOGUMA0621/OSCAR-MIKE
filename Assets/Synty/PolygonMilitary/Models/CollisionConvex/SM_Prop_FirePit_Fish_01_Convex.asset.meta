@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: a281650f59e695645b116baf16721407
+timeCreated: 1596420621
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 43327766373384076
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 176304
+  packageName: POLYGON - Military Pack - Art by Synty
+  packageVersion: 1.10.4
+  assetPath: Assets/Synty/PolygonMilitary/Models/CollisionConvex/SM_Prop_FirePit_Fish_01_Convex.asset
+  uploadId: 976012

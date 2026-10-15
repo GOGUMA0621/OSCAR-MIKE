@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 00cc486f9933b094181310aa68729455
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 43905497401524556
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 150589
+  packageName: POLYGON - Gang Warfare Pack - Art by Synty
+  packageVersion: 1.7.2
+  assetPath: Assets/Synty/PolygonGangWarfare/Models/Collision/SM_Prop_Sword_Display_01_Convex.asset
+  uploadId: 975930

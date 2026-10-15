@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: d5533b8f80b68764883bb938f503c384
+timeCreated: 1596420605
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 43008308325496904
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 176304
+  packageName: POLYGON - Military Pack - Art by Synty
+  packageVersion: 1.10.4
+  assetPath: Assets/Synty/PolygonMilitary/Models/CollisionConvex/SM_Prop_Wire_Lights_03_Convex.asset
+  uploadId: 976012

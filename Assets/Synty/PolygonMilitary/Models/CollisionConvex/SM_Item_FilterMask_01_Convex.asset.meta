@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: d63b9a14c069d5d43aa70afb254b54d2
+timeCreated: 1596421871
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 43336644491518598
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 176304
+  packageName: POLYGON - Military Pack - Art by Synty
+  packageVersion: 1.10.4
+  assetPath: Assets/Synty/PolygonMilitary/Models/CollisionConvex/SM_Item_FilterMask_01_Convex.asset
+  uploadId: 976012

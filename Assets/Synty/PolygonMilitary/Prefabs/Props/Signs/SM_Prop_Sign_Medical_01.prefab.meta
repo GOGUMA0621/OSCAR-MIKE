@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: b6cefa6c274f55f44b4e7b5f5d819b97
+timeCreated: 1592868144
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 100100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 176304
+  packageName: POLYGON - Military Pack - Art by Synty
+  packageVersion: 1.10.4
+  assetPath: Assets/Synty/PolygonMilitary/Prefabs/Props/Signs/SM_Prop_Sign_Medical_01.prefab
+  uploadId: 976012

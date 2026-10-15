@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 4b22fdff6d590d64eb658fa31fc37f6b
+timeCreated: 1596421190
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 43294707476660022
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 176304
+  packageName: POLYGON - Military Pack - Art by Synty
+  packageVersion: 1.10.4
+  assetPath: Assets/Synty/PolygonMilitary/Models/CollisionConvex/SM_Prop_Vehicle_Debris_02_Convex.asset
+  uploadId: 976012

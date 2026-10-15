@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 05651ff35ceb7884da0afb992747e1ef
+timeCreated: 1590552599
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 100100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 176304
+  packageName: POLYGON - Military Pack - Art by Synty
+  packageVersion: 1.10.4
+  assetPath: Assets/Synty/PolygonMilitary/Prefabs/Buildings/SM_Bld_Village_Stairs_Large_01.prefab
+  uploadId: 976012

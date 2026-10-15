@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: da0766b126329c145a4d721911665260
+timeCreated: 1596420667
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 43773243843926476
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 176304
+  packageName: POLYGON - Military Pack - Art by Synty
+  packageVersion: 1.10.4
+  assetPath: Assets/Synty/PolygonMilitary/Models/CollisionConvex/SM_Prop_Chair_02_Convex.asset
+  uploadId: 976012

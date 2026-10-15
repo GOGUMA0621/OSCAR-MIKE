@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 57df9d1a6c9aa1747b0b44dfdfe7b24c
+timeCreated: 1595369804
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 100100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 176304
+  packageName: POLYGON - Military Pack - Art by Synty
+  packageVersion: 1.10.4
+  assetPath: Assets/Synty/PolygonMilitary/Prefabs/Characters/Attachments/Patches/SM_Chr_Attach_Patch_Rank_09.prefab
+  uploadId: 976012

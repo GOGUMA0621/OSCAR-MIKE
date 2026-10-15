@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: aecd957dcbe22bc4eab4e8dd6e3d8ea1
+timeCreated: 1596422751
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 43109149670819616
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 176304
+  packageName: POLYGON - Military Pack - Art by Synty
+  packageVersion: 1.10.4
+  assetPath: Assets/Synty/PolygonMilitary/Models/CollisionConvex/SM_Veh_Helicopter_Transport_01_Destroyed_Back_Convex.asset
+  uploadId: 976012

@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 17faa96b11b19294e89e20de1ddd1169
+timeCreated: 1595815238
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 100100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 176304
+  packageName: POLYGON - Military Pack - Art by Synty
+  packageVersion: 1.10.4
+  assetPath: Assets/Synty/PolygonMilitary/Prefabs/Props/Military/SM_Prop_Crate_Cube_01.prefab
+  uploadId: 976012

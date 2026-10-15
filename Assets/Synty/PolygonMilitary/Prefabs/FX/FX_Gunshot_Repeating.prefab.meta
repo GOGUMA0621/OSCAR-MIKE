@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: a5ef242807d7c2649942d9d654c8c463
+timeCreated: 1595480818
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 100100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 176304
+  packageName: POLYGON - Military Pack - Art by Synty
+  packageVersion: 1.10.4
+  assetPath: Assets/Synty/PolygonMilitary/Prefabs/FX/FX_Gunshot_Repeating.prefab
+  uploadId: 976012

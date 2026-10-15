@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 484b0a688aef99a419680af626c2cf66
+timeCreated: 1562644611
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 100100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 150589
+  packageName: POLYGON - Gang Warfare Pack - Art by Synty
+  packageVersion: 1.7.2
+  assetPath: Assets/Synty/PolygonGangWarfare/Prefabs/Buildings/SM_Bld_Interior_Wall_CornerFlat_01.prefab
+  uploadId: 975930

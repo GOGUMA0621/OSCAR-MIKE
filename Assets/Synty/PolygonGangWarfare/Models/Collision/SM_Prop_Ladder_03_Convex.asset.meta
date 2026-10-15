@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 4a60c1e82b0b25e4cbb7880ab3083965
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 43118622657852510
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 150589
+  packageName: POLYGON - Gang Warfare Pack - Art by Synty
+  packageVersion: 1.7.2
+  assetPath: Assets/Synty/PolygonGangWarfare/Models/Collision/SM_Prop_Ladder_03_Convex.asset
+  uploadId: 975930

@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 5bc2c56bc49e7a54ca45cd7ab031b7fc
+timeCreated: 1562644595
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 100100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 150589
+  packageName: POLYGON - Gang Warfare Pack - Art by Synty
+  packageVersion: 1.7.2
+  assetPath: Assets/Synty/PolygonGangWarfare/Prefabs/Buildings/SM_Bld_Wall_Metal_Window_01.prefab
+  uploadId: 975930

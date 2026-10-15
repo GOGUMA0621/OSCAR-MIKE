@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 1fcda8e2890fa544da51db45d7b1b423
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 43527570511631318
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 150589
+  packageName: POLYGON - Gang Warfare Pack - Art by Synty
+  packageVersion: 1.7.2
+  assetPath: Assets/Synty/PolygonGangWarfare/Models/Collision/SM_Prop_Warehouse_Wall_Socket_01_Convex.asset
+  uploadId: 975930

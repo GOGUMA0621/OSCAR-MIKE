@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 7ff5375b49bf4cb187341f4c16a8f3da
+timeCreated: 1644537005
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 100100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 252731
+  packageName: POLYGON - Casino Pack - Art by Synty
+  packageVersion: 1.9.2
+  assetPath: Assets/Synty/PolygonCasino/Prefabs/Environment/Skydome_01.prefab
+  uploadId: 974002

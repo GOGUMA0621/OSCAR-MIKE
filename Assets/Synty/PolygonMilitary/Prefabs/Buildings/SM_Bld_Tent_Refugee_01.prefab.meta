@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: c991609d89a41774295640164ca0fdd9
+timeCreated: 1592890144
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 100100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 176304
+  packageName: POLYGON - Military Pack - Art by Synty
+  packageVersion: 1.10.4
+  assetPath: Assets/Synty/PolygonMilitary/Prefabs/Buildings/SM_Bld_Tent_Refugee_01.prefab
+  uploadId: 976012

@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 36c8f1ff4dba2fc4ab36c50aaf004bdd
+timeCreated: 1562642853
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 100100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 150589
+  packageName: POLYGON - Gang Warfare Pack - Art by Synty
+  packageVersion: 1.7.2
+  assetPath: Assets/Synty/PolygonGangWarfare/Prefabs/Props/SM_Prop_Lab_Tank_03.prefab
+  uploadId: 975930

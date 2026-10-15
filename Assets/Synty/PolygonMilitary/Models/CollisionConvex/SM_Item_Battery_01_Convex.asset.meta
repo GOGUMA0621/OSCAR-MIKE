@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 5481431d922437b449db6e8faa31a33d
+timeCreated: 1596421860
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 43285146601917718
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 176304
+  packageName: POLYGON - Military Pack - Art by Synty
+  packageVersion: 1.10.4
+  assetPath: Assets/Synty/PolygonMilitary/Models/CollisionConvex/SM_Item_Battery_01_Convex.asset
+  uploadId: 976012

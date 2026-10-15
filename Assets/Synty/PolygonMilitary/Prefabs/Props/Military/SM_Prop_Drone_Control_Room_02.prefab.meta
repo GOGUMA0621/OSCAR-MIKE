@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: fd4bd8e49dcf2e9488bcedae536af188
+timeCreated: 1592967413
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 100100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 176304
+  packageName: POLYGON - Military Pack - Art by Synty
+  packageVersion: 1.10.4
+  assetPath: Assets/Synty/PolygonMilitary/Prefabs/Props/Military/SM_Prop_Drone_Control_Room_02.prefab
+  uploadId: 976012

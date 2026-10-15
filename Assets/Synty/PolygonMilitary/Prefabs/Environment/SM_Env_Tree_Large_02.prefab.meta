@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 17bd2dda20ace184cb724428f1c67e9a
+timeCreated: 1590552612
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 100100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 176304
+  packageName: POLYGON - Military Pack - Art by Synty
+  packageVersion: 1.10.4
+  assetPath: Assets/Synty/PolygonMilitary/Prefabs/Environment/SM_Env_Tree_Large_02.prefab
+  uploadId: 976012

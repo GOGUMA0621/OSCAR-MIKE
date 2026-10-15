@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 9895e0be64a73044fadf7464ddbd67ac
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 43009382947804044
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 150589
+  packageName: POLYGON - Gang Warfare Pack - Art by Synty
+  packageVersion: 1.7.2
+  assetPath: Assets/Synty/PolygonGangWarfare/Models/Collision/SM_Bld_Wall_Metal_Door_Slide_01_Convex.asset
+  uploadId: 975930

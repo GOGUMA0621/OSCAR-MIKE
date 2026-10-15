@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 0f299a5ab0a11ab4e8f6e395e764da36
+timeCreated: 1595369812
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 100100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 176304
+  packageName: POLYGON - Military Pack - Art by Synty
+  packageVersion: 1.10.4
+  assetPath: Assets/Synty/PolygonMilitary/Prefabs/Characters/Attachments/SM_Chr_Attach_Pouch_Mag_Single_01.prefab
+  uploadId: 976012

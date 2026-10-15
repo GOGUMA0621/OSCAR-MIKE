@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 83328105fc646b14bb1d9f7dd4e3ebe5
+timeCreated: 1592868131
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 100100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 176304
+  packageName: POLYGON - Military Pack - Art by Synty
+  packageVersion: 1.10.4
+  assetPath: Assets/Synty/PolygonMilitary/Prefabs/Props/Military/SM_Prop_Bed_Stretcher_01.prefab
+  uploadId: 976012

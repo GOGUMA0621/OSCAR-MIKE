@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 988fa9bf998607c4d92f434399f1a6c5
+timeCreated: 1562644604
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 100100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 150589
+  packageName: POLYGON - Gang Warfare Pack - Art by Synty
+  packageVersion: 1.7.2
+  assetPath: Assets/Synty/PolygonGangWarfare/Prefabs/Props/SM_Prop_CardboardBox_Stack_01.prefab
+  uploadId: 975930

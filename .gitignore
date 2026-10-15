@@ -66,6 +66,9 @@ sysinfo.txt
 # Mono auto generated files
 mono_crash.*
 
+# Visual Studio generated solution files
+*.slnx
+
 # Builds
 *.apk
 *.aab

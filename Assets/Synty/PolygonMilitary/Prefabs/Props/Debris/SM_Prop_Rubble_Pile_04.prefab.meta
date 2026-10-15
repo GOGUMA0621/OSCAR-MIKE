@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 1114244fc4973954bbe035da6f8338b5
+timeCreated: 1594963622
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 100100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 176304
+  packageName: POLYGON - Military Pack - Art by Synty
+  packageVersion: 1.10.4
+  assetPath: Assets/Synty/PolygonMilitary/Prefabs/Props/Debris/SM_Prop_Rubble_Pile_04.prefab
+  uploadId: 976012

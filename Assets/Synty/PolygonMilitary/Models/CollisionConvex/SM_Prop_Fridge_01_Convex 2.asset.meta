@@ -1,0 +1,17 @@
+fileFormatVersion: 2
+guid: 343cecd1d9708a440896f92f4b07b7b1
+timeCreated: 1596420792
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 43550411245586028
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 176304
+  packageName: POLYGON - Military Pack - Art by Synty
+  packageVersion: 1.10.4
+  assetPath: Assets/Synty/PolygonMilitary/Models/CollisionConvex/SM_Prop_Fridge_01_Convex
+    2.asset
+  uploadId: 976012

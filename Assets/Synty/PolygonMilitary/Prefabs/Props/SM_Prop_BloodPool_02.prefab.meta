@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: ab351ef99e5f8504cb3f2ea69dff1d57
+timeCreated: 1595893697
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 100100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 176304
+  packageName: POLYGON - Military Pack - Art by Synty
+  packageVersion: 1.10.4
+  assetPath: Assets/Synty/PolygonMilitary/Prefabs/Props/SM_Prop_BloodPool_02.prefab
+  uploadId: 976012

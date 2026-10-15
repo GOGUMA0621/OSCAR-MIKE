@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 56eefc81a83f5294b90b50532217b4bb
+timeCreated: 1596423398
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 43603588202012576
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 176304
+  packageName: POLYGON - Military Pack - Art by Synty
+  packageVersion: 1.10.4
+  assetPath: Assets/Synty/PolygonMilitary/Models/CollisionConvex/SM_Veh_Truck_01_Tray_Convex.asset
+  uploadId: 976012

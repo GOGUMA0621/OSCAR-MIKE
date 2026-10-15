@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 38e9d125d35f3b0488047f291bf48e15
+timeCreated: 1591238588
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 100100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 176304
+  packageName: POLYGON - Military Pack - Art by Synty
+  packageVersion: 1.10.4
+  assetPath: Assets/Synty/PolygonMilitary/Prefabs/Props/Pipeline/SM_Prop_Pipeline_Pipe_Small_Straight_01.prefab
+  uploadId: 976012

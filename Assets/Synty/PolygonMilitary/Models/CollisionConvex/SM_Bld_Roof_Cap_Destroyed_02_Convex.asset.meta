@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: b0bd1a2c735ec1f4794c2d9ff107c9fb
+timeCreated: 1596424736
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 43587924992165926
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 176304
+  packageName: POLYGON - Military Pack - Art by Synty
+  packageVersion: 1.10.4
+  assetPath: Assets/Synty/PolygonMilitary/Models/CollisionConvex/SM_Bld_Roof_Cap_Destroyed_02_Convex.asset
+  uploadId: 976012

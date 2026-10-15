@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 0d6e319ed3c33da4d9152e6d9d080d44
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 43294572306168602
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 150589
+  packageName: POLYGON - Gang Warfare Pack - Art by Synty
+  packageVersion: 1.7.2
+  assetPath: Assets/Synty/PolygonGangWarfare/Models/Collision/SM_Bld_Roof_Connector_End_01_Convex.asset
+  uploadId: 975930

@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: a66d0ed25ea5a6645b6fd4996ea594b1
+timeCreated: 1590460273
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 100100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 176304
+  packageName: POLYGON - Military Pack - Art by Synty
+  packageVersion: 1.10.4
+  assetPath: Assets/Synty/PolygonMilitary/Prefabs/Generic/SM_Generic_Small_Rocks_02.prefab
+  uploadId: 976012

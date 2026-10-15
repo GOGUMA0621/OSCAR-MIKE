@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 57bb9a1b30423e94c9386e970b8c5730
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 43631816416598204
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 150589
+  packageName: POLYGON - Gang Warfare Pack - Art by Synty
+  packageVersion: 1.7.2
+  assetPath: Assets/Synty/PolygonGangWarfare/Models/Collision/SM_Prop_Wood_Panel_01_Convex.asset
+  uploadId: 975930

@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 1805d40f7598f7346809fd63c5c1b1fe
+timeCreated: 1593042129
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 100100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 176304
+  packageName: POLYGON - Military Pack - Art by Synty
+  packageVersion: 1.10.4
+  assetPath: Assets/Synty/PolygonMilitary/Prefabs/Vehicles/Veh_Attachments/SM_Veh_Heli_Attach_Minigun.prefab
+  uploadId: 976012

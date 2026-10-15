@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 2c3b313acc03568438c50979f5190f6c
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 43705322934270862
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 150589
+  packageName: POLYGON - Gang Warfare Pack - Art by Synty
+  packageVersion: 1.7.2
+  assetPath: Assets/Synty/PolygonGangWarfare/Models/Collision/SM_Bld_Roof_Flat_Open_01_Convex.asset
+  uploadId: 975930

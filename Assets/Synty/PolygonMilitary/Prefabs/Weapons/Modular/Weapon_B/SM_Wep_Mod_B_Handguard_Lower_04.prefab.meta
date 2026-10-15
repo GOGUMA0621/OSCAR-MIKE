@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 0bf89792f9223104a8d5e3496f6d5b9d
+timeCreated: 1595301628
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 100100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 176304
+  packageName: POLYGON - Military Pack - Art by Synty
+  packageVersion: 1.10.4
+  assetPath: Assets/Synty/PolygonMilitary/Prefabs/Weapons/Modular/Weapon_B/SM_Wep_Mod_B_Handguard_Lower_04.prefab
+  uploadId: 976012

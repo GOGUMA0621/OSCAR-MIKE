@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: e57caa58d7f5b6c4b986a5c307bdefd5
+timeCreated: 1590552609
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 100100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 176304
+  packageName: POLYGON - Military Pack - Art by Synty
+  packageVersion: 1.10.4
+  assetPath: Assets/Synty/PolygonMilitary/Prefabs/Environment/SM_Env_Rock_Flat_01.prefab
+  uploadId: 976012

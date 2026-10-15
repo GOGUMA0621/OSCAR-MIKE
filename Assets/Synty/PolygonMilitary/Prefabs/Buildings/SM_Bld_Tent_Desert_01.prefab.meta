@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: df707e8e0e9303046af06d1d3b927883
+timeCreated: 1592890144
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 100100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 176304
+  packageName: POLYGON - Military Pack - Art by Synty
+  packageVersion: 1.10.4
+  assetPath: Assets/Synty/PolygonMilitary/Prefabs/Buildings/SM_Bld_Tent_Desert_01.prefab
+  uploadId: 976012

@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: dd24c983c3deb564e8e23071721b2db6
+timeCreated: 1593139896
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 100100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 176304
+  packageName: POLYGON - Military Pack - Art by Synty
+  packageVersion: 1.10.4
+  assetPath: Assets/Synty/PolygonMilitary/Prefabs/Environment/SM_Env_SandEdge_05.prefab
+  uploadId: 976012

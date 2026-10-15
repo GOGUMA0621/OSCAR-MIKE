@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: bf7a3acdac2ec07438ec8cfda140c44f
+timeCreated: 1596424745
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 43658387976459190
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 176304
+  packageName: POLYGON - Military Pack - Art by Synty
+  packageVersion: 1.10.4
+  assetPath: Assets/Synty/PolygonMilitary/Models/CollisionConvex/SM_Bld_Roof_Cap_02_Convex.asset
+  uploadId: 976012

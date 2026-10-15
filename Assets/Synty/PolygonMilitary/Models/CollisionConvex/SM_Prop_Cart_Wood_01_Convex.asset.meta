@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 6e2c9f0969baf674abeb901d8b65d805
+timeCreated: 1596420458
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 43078404856550704
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 176304
+  packageName: POLYGON - Military Pack - Art by Synty
+  packageVersion: 1.10.4
+  assetPath: Assets/Synty/PolygonMilitary/Models/CollisionConvex/SM_Prop_Cart_Wood_01_Convex.asset
+  uploadId: 976012

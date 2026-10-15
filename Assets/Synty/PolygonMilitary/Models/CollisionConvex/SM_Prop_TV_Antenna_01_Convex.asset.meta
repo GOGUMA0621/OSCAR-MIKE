@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 4fa0c57ea068bcd488240fb1125095b2
+timeCreated: 1596420724
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 43520352453350870
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 176304
+  packageName: POLYGON - Military Pack - Art by Synty
+  packageVersion: 1.10.4
+  assetPath: Assets/Synty/PolygonMilitary/Models/CollisionConvex/SM_Prop_TV_Antenna_01_Convex.asset
+  uploadId: 976012

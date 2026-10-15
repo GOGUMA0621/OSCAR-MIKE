@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 4eb4d037a0f57f64987e735d1ae47ae4
+timeCreated: 1591064133
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 100100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 176304
+  packageName: POLYGON - Military Pack - Art by Synty
+  packageVersion: 1.10.4
+  assetPath: Assets/Synty/PolygonMilitary/Prefabs/Environment/SM_Env_Bush_Large_03.prefab
+  uploadId: 976012

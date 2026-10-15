@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 33df2bc7e0379314d85757e59fda8067
+timeCreated: 1596420553
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 43497450642385650
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 176304
+  packageName: POLYGON - Military Pack - Art by Synty
+  packageVersion: 1.10.4
+  assetPath: Assets/Synty/PolygonMilitary/Models/CollisionConvex/SM_Prop_Wire_Pole_01_Convex.asset
+  uploadId: 976012

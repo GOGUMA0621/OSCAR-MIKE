@@ -1,0 +1,17 @@
+fileFormatVersion: 2
+guid: c8f4d65a69bd64347a9511a1a0c339e7
+timeCreated: 1596422101
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 43097759918614006
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 176304
+  packageName: POLYGON - Military Pack - Art by Synty
+  packageVersion: 1.10.4
+  assetPath: Assets/Synty/PolygonMilitary/Models/CollisionConvex/SM_Prop_Pipline_OilPump_01_Convex
+    1.asset
+  uploadId: 976012

@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 7ccb3dc1c87ad6d489df3cfc267422fe
+timeCreated: 1596421188
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 43345417989419072
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 176304
+  packageName: POLYGON - Military Pack - Art by Synty
+  packageVersion: 1.10.4
+  assetPath: Assets/Synty/PolygonMilitary/Models/CollisionConvex/SM_Prop_Ammo_Bullet_Cases_02_Convex.asset
+  uploadId: 976012

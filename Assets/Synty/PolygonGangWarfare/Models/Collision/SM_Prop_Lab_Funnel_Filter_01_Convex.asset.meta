@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: d134ead1b3ec7b8449ef24d5b534b90b
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 43770620263267622
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 150589
+  packageName: POLYGON - Gang Warfare Pack - Art by Synty
+  packageVersion: 1.7.2
+  assetPath: Assets/Synty/PolygonGangWarfare/Models/Collision/SM_Prop_Lab_Funnel_Filter_01_Convex.asset
+  uploadId: 975930

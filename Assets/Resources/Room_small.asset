@@ -15,3 +15,4 @@ MonoBehaviour:
   prefab: {fileID: 0}
   size: {x: 1, y: 1}
   weight: 3
+  lootZone: {fileID: 11400000, guid: fce63d88682172846bccec9eb4873622, type: 2}

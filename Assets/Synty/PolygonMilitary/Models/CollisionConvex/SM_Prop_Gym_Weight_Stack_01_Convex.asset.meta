@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 783dff53e2221d645bb9a902a6af024b
+timeCreated: 1596421474
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 43498382621612780
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 176304
+  packageName: POLYGON - Military Pack - Art by Synty
+  packageVersion: 1.10.4
+  assetPath: Assets/Synty/PolygonMilitary/Models/CollisionConvex/SM_Prop_Gym_Weight_Stack_01_Convex.asset
+  uploadId: 976012

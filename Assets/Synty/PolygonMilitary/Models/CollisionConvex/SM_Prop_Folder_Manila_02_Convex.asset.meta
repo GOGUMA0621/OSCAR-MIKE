@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 6ee3721fb8dbcdd469b55c64ac07cd9c
+timeCreated: 1596421463
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 43415974894762672
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 176304
+  packageName: POLYGON - Military Pack - Art by Synty
+  packageVersion: 1.10.4
+  assetPath: Assets/Synty/PolygonMilitary/Models/CollisionConvex/SM_Prop_Folder_Manila_02_Convex.asset
+  uploadId: 976012

@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: b4d03276b0a281849b746a4dee949c24
+timeCreated: 1595388177
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 100100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 176304
+  packageName: POLYGON - Military Pack - Art by Synty
+  packageVersion: 1.10.4
+  assetPath: Assets/Synty/PolygonMilitary/Prefabs/Weapons/SM_Wep_Grenade_01.prefab
+  uploadId: 976012

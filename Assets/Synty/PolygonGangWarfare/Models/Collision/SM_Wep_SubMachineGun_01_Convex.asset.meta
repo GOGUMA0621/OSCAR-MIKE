@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: cb4d7a54f6fb3924982e06dc88444078
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 43312039707743840
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 150589
+  packageName: POLYGON - Gang Warfare Pack - Art by Synty
+  packageVersion: 1.7.2
+  assetPath: Assets/Synty/PolygonGangWarfare/Models/Collision/SM_Wep_SubMachineGun_01_Convex.asset
+  uploadId: 975930

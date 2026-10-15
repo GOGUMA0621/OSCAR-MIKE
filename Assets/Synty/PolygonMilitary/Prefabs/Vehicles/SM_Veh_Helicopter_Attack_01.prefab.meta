@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: b108d85799ddb2148973fd94b0d538d6
+timeCreated: 1593042141
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 100100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 176304
+  packageName: POLYGON - Military Pack - Art by Synty
+  packageVersion: 1.10.4
+  assetPath: Assets/Synty/PolygonMilitary/Prefabs/Vehicles/SM_Veh_Helicopter_Attack_01.prefab
+  uploadId: 976012

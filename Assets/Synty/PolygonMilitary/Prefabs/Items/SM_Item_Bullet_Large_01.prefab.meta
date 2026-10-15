@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: a9d6c60db7632044eaf27b4534f13c29
+timeCreated: 1595369816
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 100100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 176304
+  packageName: POLYGON - Military Pack - Art by Synty
+  packageVersion: 1.10.4
+  assetPath: Assets/Synty/PolygonMilitary/Prefabs/Items/SM_Item_Bullet_Large_01.prefab
+  uploadId: 976012

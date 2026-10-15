@@ -1,0 +1,17 @@
+fileFormatVersion: 2
+guid: b0e437f05053b8e4ba03bc6ffac1f721
+timeCreated: 1596421671
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 43304316116395468
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 176304
+  packageName: POLYGON - Military Pack - Art by Synty
+  packageVersion: 1.10.4
+  assetPath: Assets/Synty/PolygonMilitary/Models/CollisionConvex/SM_Prop_Fuel_Bladder_02_Convex
+    3.asset
+  uploadId: 976012

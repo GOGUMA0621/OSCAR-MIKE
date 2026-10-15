@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: afe89ec4ad5d95742acab36d9e917893
+timeCreated: 1590615687
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 100100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 176304
+  packageName: POLYGON - Military Pack - Art by Synty
+  packageVersion: 1.10.4
+  assetPath: Assets/Synty/PolygonMilitary/Prefabs/Environment/SM_Env_Ground_Hill_Flat_03.prefab
+  uploadId: 976012

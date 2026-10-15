@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 39d4eaa8557b278489171252e6cdd9e4
+timeCreated: 1563147316
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 100100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 150589
+  packageName: POLYGON - Gang Warfare Pack - Art by Synty
+  packageVersion: 1.7.2
+  assetPath: Assets/Synty/PolygonGangWarfare/Prefabs/FX/FX_BugLights_01.prefab
+  uploadId: 975930

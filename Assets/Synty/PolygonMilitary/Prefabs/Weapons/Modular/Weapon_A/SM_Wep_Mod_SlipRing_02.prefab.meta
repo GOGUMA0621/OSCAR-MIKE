@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: d65da36fe0722534c9dd34f4f09255aa
+timeCreated: 1595301606
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 100100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 176304
+  packageName: POLYGON - Military Pack - Art by Synty
+  packageVersion: 1.10.4
+  assetPath: Assets/Synty/PolygonMilitary/Prefabs/Weapons/Modular/Weapon_A/SM_Wep_Mod_SlipRing_02.prefab
+  uploadId: 976012

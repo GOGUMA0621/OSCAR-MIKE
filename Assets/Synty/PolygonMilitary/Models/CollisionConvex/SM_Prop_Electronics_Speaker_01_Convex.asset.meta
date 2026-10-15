@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: a64c6152c6906b44c83a89f98d753f96
+timeCreated: 1596420553
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 43110623631429602
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 176304
+  packageName: POLYGON - Military Pack - Art by Synty
+  packageVersion: 1.10.4
+  assetPath: Assets/Synty/PolygonMilitary/Models/CollisionConvex/SM_Prop_Electronics_Speaker_01_Convex.asset
+  uploadId: 976012

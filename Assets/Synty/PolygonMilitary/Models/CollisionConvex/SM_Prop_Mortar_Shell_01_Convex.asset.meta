@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 64710395deb86cc4b933609c51b44df5
+timeCreated: 1596421460
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 43569440974751052
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 176304
+  packageName: POLYGON - Military Pack - Art by Synty
+  packageVersion: 1.10.4
+  assetPath: Assets/Synty/PolygonMilitary/Models/CollisionConvex/SM_Prop_Mortar_Shell_01_Convex.asset
+  uploadId: 976012

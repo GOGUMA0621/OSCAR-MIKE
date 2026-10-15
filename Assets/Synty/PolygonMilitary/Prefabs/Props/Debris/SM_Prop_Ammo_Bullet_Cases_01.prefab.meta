@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 394f72b8edf68db46953ff9142a30f52
+timeCreated: 1595887922
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 100100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 176304
+  packageName: POLYGON - Military Pack - Art by Synty
+  packageVersion: 1.10.4
+  assetPath: Assets/Synty/PolygonMilitary/Prefabs/Props/Debris/SM_Prop_Ammo_Bullet_Cases_01.prefab
+  uploadId: 976012

@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: d36094ae0bfa7004f8fef063d70af4fe
+timeCreated: 1596423403
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 43816948309672288
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 176304
+  packageName: POLYGON - Military Pack - Art by Synty
+  packageVersion: 1.10.4
+  assetPath: Assets/Synty/PolygonMilitary/Models/CollisionConvex/SM_Veh_Tank_German_01_Convex.asset
+  uploadId: 976012

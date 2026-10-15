@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: ec59bb4edb21b3a49ba78ad5b6ed7cce
+timeCreated: 1591157423
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 100100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 176304
+  packageName: POLYGON - Military Pack - Art by Synty
+  packageVersion: 1.10.4
+  assetPath: Assets/Synty/PolygonMilitary/Prefabs/Environment/SM_Env_DirtRoad_Exit_01.prefab
+  uploadId: 976012

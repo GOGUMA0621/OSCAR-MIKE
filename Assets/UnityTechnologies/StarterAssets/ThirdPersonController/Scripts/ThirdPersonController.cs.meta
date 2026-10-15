@@ -11,8 +11,9 @@ MonoImporter:
   assetBundleVariant: 
 AssetOrigin:
   serializedVersion: 1
-  productId: 4696
-  packageName: Robot Kyle | URP
-  packageVersion: 4.0
+  productId: 196526
+  packageName: Starter Assets - ThirdPerson | Updates in new CharacterController
+    package
+  packageVersion: 1.1.7
   assetPath: Assets/UnityTechnologies/StarterAssets/ThirdPersonController/Scripts/ThirdPersonController.cs
-  uploadId: 847474
+  uploadId: 879174

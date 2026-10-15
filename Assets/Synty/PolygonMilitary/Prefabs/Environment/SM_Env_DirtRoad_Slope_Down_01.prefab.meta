@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: b15a5c034274b2e4a9fa1de2aebce264
+timeCreated: 1590552601
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 100100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 176304
+  packageName: POLYGON - Military Pack - Art by Synty
+  packageVersion: 1.10.4
+  assetPath: Assets/Synty/PolygonMilitary/Prefabs/Environment/SM_Env_DirtRoad_Slope_Down_01.prefab
+  uploadId: 976012

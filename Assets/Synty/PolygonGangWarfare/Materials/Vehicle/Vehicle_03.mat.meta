@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 6b7c7c892819c2645853bd7be049af09
+timeCreated: 1562641611
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 2100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 150589
+  packageName: POLYGON - Gang Warfare Pack - Art by Synty
+  packageVersion: 1.7.2
+  assetPath: Assets/Synty/PolygonGangWarfare/Materials/Vehicle/Vehicle_03.mat
+  uploadId: 975930

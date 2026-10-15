@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 9e74e2e1a869e7f4a980498603bc7622
+timeCreated: 1596420554
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 43217911092646618
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 176304
+  packageName: POLYGON - Military Pack - Art by Synty
+  packageVersion: 1.10.4
+  assetPath: Assets/Synty/PolygonMilitary/Models/CollisionConvex/SM_Prop_Rubbish_Bottle_03_Convex.asset
+  uploadId: 976012

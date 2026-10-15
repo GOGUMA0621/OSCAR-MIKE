@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: eca0efa523376394e9f0cd8bba8e13e4
+timeCreated: 1596420488
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 43959806846025882
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 176304
+  packageName: POLYGON - Military Pack - Art by Synty
+  packageVersion: 1.10.4
+  assetPath: Assets/Synty/PolygonMilitary/Models/CollisionConvex/SM_Prop_Money_Stack_02_Convex.asset
+  uploadId: 976012

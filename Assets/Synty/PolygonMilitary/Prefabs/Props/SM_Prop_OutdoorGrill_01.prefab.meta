@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 75feff5775222404592e644b2ed7b89f
+timeCreated: 1592890144
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 100100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 176304
+  packageName: POLYGON - Military Pack - Art by Synty
+  packageVersion: 1.10.4
+  assetPath: Assets/Synty/PolygonMilitary/Prefabs/Props/SM_Prop_OutdoorGrill_01.prefab
+  uploadId: 976012

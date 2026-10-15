@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 6a6b35cc4500f264d86e660d0f975977
+timeCreated: 1595301606
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 100100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 176304
+  packageName: POLYGON - Military Pack - Art by Synty
+  packageVersion: 1.10.4
+  assetPath: Assets/Synty/PolygonMilitary/Prefabs/Weapons/SM_Wep_Pistol_Small_01.prefab
+  uploadId: 976012

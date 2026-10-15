@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: a51d5acc6f25c784bbc20c3a6b795356
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 43329689000998566
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 150589
+  packageName: POLYGON - Gang Warfare Pack - Art by Synty
+  packageVersion: 1.7.2
+  assetPath: Assets/Synty/PolygonGangWarfare/Models/Collision/SM_Prop_Chemical_01_Convex.asset
+  uploadId: 975930

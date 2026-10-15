@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 6227b193541ae1f4093386a2ab6bccff
+timeCreated: 1596420516
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 43731509909602150
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 176304
+  packageName: POLYGON - Military Pack - Art by Synty
+  packageVersion: 1.10.4
+  assetPath: Assets/Synty/PolygonMilitary/Models/CollisionConvex/SM_Prop_GasCan_01_Convex.asset
+  uploadId: 976012

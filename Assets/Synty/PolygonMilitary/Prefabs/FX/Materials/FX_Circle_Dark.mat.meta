@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: e483fea7ffa80b54bae01bf333b06568
+timeCreated: 1576555502
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 176304
+  packageName: POLYGON - Military Pack - Art by Synty
+  packageVersion: 1.10.4
+  assetPath: Assets/Synty/PolygonMilitary/Prefabs/FX/Materials/FX_Circle_Dark.mat
+  uploadId: 976012

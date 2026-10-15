@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 1540a189e776c4a4bb58a9ac51870d7b
+timeCreated: 1595369835
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 100100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 176304
+  packageName: POLYGON - Military Pack - Art by Synty
+  packageVersion: 1.10.4
+  assetPath: Assets/Synty/PolygonMilitary/Prefabs/Characters/Attachments/SM_Chr_Attach_Glasses_02.prefab
+  uploadId: 976012

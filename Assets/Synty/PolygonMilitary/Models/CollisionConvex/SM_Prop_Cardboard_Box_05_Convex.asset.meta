@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: e7e09988113f9f54c87ac8f29542e043
+timeCreated: 1596420672
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 43930550798292620
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 176304
+  packageName: POLYGON - Military Pack - Art by Synty
+  packageVersion: 1.10.4
+  assetPath: Assets/Synty/PolygonMilitary/Models/CollisionConvex/SM_Prop_Cardboard_Box_05_Convex.asset
+  uploadId: 976012

@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 98ca236ec40bd5e4cab600ccf16267f8
+timeCreated: 1596420428
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 43784287458277498
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 176304
+  packageName: POLYGON - Military Pack - Art by Synty
+  packageVersion: 1.10.4
+  assetPath: Assets/Synty/PolygonMilitary/Models/CollisionConvex/SM_Prop_Runway_Barrier_02_Convex.asset
+  uploadId: 976012

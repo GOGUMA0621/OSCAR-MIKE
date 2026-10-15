@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 9d058df543136874b8fb60f082093493
+timeCreated: 1590552604
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 100100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 176304
+  packageName: POLYGON - Military Pack - Art by Synty
+  packageVersion: 1.10.4
+  assetPath: Assets/Synty/PolygonMilitary/Prefabs/Environment/SM_Env_Mountain_06.prefab
+  uploadId: 976012

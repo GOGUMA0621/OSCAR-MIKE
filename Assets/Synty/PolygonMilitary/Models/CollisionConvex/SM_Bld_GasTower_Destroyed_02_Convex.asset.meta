@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 2299b18a20793254f9e67ea3ca5cee82
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 43020780517280318
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 176304
+  packageName: POLYGON - Military Pack - Art by Synty
+  packageVersion: 1.10.4
+  assetPath: Assets/Synty/PolygonMilitary/Models/CollisionConvex/SM_Bld_GasTower_Destroyed_02_Convex.asset
+  uploadId: 976012

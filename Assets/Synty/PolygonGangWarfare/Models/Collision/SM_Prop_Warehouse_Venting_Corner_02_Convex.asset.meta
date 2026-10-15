@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 1988aff0f288abe479825f84f0816e7e
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 43270453075904070
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 150589
+  packageName: POLYGON - Gang Warfare Pack - Art by Synty
+  packageVersion: 1.7.2
+  assetPath: Assets/Synty/PolygonGangWarfare/Models/Collision/SM_Prop_Warehouse_Venting_Corner_02_Convex.asset
+  uploadId: 975930

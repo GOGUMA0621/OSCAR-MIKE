@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 2a922c3348474ca4396cfa41b514111a
+timeCreated: 1596420596
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 43215088300576284
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 176304
+  packageName: POLYGON - Military Pack - Art by Synty
+  packageVersion: 1.10.4
+  assetPath: Assets/Synty/PolygonMilitary/Models/CollisionConvex/SM_Prop_Ladder_02_Convex.asset
+  uploadId: 976012

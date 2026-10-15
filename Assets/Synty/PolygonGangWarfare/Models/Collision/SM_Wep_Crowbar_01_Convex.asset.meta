@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: de2d4fb7b1e8ea94ba6d1fa7a51a6e76
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 43230436396158558
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 150589
+  packageName: POLYGON - Gang Warfare Pack - Art by Synty
+  packageVersion: 1.7.2
+  assetPath: Assets/Synty/PolygonGangWarfare/Models/Collision/SM_Wep_Crowbar_01_Convex.asset
+  uploadId: 975930

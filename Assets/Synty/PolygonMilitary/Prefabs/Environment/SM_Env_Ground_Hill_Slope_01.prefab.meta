@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 107b8fa21f3850349aa940d0dc121a70
+timeCreated: 1593033196
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 100100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 176304
+  packageName: POLYGON - Military Pack - Art by Synty
+  packageVersion: 1.10.4
+  assetPath: Assets/Synty/PolygonMilitary/Prefabs/Environment/SM_Env_Ground_Hill_Slope_01.prefab
+  uploadId: 976012

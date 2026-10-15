@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 142f63586bffcea4eb680407795b2654
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 43791841423541680
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 150589
+  packageName: POLYGON - Gang Warfare Pack - Art by Synty
+  packageVersion: 1.7.2
+  assetPath: Assets/Synty/PolygonGangWarfare/Models/Collision/SM_Prop_Vase_01_Convex.asset
+  uploadId: 975930

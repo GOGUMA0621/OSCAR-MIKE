@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 71a06a16850010e4fa906c6868928631
+timeCreated: 1596420385
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 43283098748493896
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 176304
+  packageName: POLYGON - Military Pack - Art by Synty
+  packageVersion: 1.10.4
+  assetPath: Assets/Synty/PolygonMilitary/Models/CollisionConvex/SM_Prop_Rug_33_Convex.asset
+  uploadId: 976012

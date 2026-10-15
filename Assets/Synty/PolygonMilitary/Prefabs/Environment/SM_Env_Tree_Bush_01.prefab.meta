@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: c57d98b87f751864380eac238f6c6d4b
+timeCreated: 1590552611
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 100100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 176304
+  packageName: POLYGON - Military Pack - Art by Synty
+  packageVersion: 1.10.4
+  assetPath: Assets/Synty/PolygonMilitary/Prefabs/Environment/SM_Env_Tree_Bush_01.prefab
+  uploadId: 976012

@@ -1,0 +1,17 @@
+fileFormatVersion: 2
+guid: fbf6ead250ee6844c8bfc2b7420b3ede
+timeCreated: 1596422093
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 43369011583728022
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 176304
+  packageName: POLYGON - Military Pack - Art by Synty
+  packageVersion: 1.10.4
+  assetPath: Assets/Synty/PolygonMilitary/Models/CollisionConvex/SM_Bld_GasTower_Pipe_03_Convex
+    1.asset
+  uploadId: 976012

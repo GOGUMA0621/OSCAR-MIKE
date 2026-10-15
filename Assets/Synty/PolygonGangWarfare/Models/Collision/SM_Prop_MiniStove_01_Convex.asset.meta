@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: ffbc820277fb52942b2fb3050d53aca6
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 43567713192446248
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 150589
+  packageName: POLYGON - Gang Warfare Pack - Art by Synty
+  packageVersion: 1.7.2
+  assetPath: Assets/Synty/PolygonGangWarfare/Models/Collision/SM_Prop_MiniStove_01_Convex.asset
+  uploadId: 975930

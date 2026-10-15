@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: ea2d847cf21b98d409998079a0b9f5d2
+timeCreated: 1594350577
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 100100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 176304
+  packageName: POLYGON - Military Pack - Art by Synty
+  packageVersion: 1.10.4
+  assetPath: Assets/Synty/PolygonMilitary/Prefabs/Vehicles/Destroyed/SM_Veh_Helicopter_Transport_01_Destroyed_Back.prefab
+  uploadId: 976012

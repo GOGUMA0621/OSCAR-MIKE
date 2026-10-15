@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 617fe60be354c1f46ac165ec7e2cb405
+timeCreated: 1592949695
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 100100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 176304
+  packageName: POLYGON - Military Pack - Art by Synty
+  packageVersion: 1.10.4
+  assetPath: Assets/Synty/PolygonMilitary/Prefabs/Buildings/SM_Bld_Shack_03.prefab
+  uploadId: 976012

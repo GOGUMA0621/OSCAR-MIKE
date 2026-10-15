@@ -1,0 +1,28 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cc98ec8e33537ec46a4ac911c1e49ecc, type: 3}
+  m_Name: 066_PolygonMilitary_SM_Prop_Folder_Manila_01
+  m_EditorClassIdentifier: Assembly-CSharp::OskarMike.Items.LootItemDefinition
+  itemId: polygonmilitary.sm_prop_folder_manila_01
+  displayName: "\uBE14\uB8E8 \uB77C\uBCA8 \uC778\uD154 (\uAE30\uBC00)"
+  sourceAssetName: SM_Prop_Folder_Manila_01
+  contentPack: {fileID: 11400000, guid: c2ffe107ae5c4b84e904fc1072d5c86c, type: 2}
+  category: 5
+  minValueSteps: 7
+  maxValueSteps: 8
+  basePrice: 263
+  priceVariance: 0.15
+  spawnWeight: 1
+  spawnEnabled: 1
+  allowedZoneIds: []
+  notes: "\uC6D0\uBCF8 \uBC38\uB958 3.5~4"
+  networkPrefab: {fileID: 8457217737892921809, guid: f8599f0f73fb8e846ac6251f8017abab, type: 3}

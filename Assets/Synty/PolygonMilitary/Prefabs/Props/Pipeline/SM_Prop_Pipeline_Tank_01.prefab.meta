@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: bdfc906eb711f86438e99a4075dba718
+timeCreated: 1591238586
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 100100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 176304
+  packageName: POLYGON - Military Pack - Art by Synty
+  packageVersion: 1.10.4
+  assetPath: Assets/Synty/PolygonMilitary/Prefabs/Props/Pipeline/SM_Prop_Pipeline_Tank_01.prefab
+  uploadId: 976012

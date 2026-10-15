@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 3e2e4b96fea8ae24d80f1bf047092735
+timeCreated: 1596420727
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 43239699896557962
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 176304
+  packageName: POLYGON - Military Pack - Art by Synty
+  packageVersion: 1.10.4
+  assetPath: Assets/Synty/PolygonMilitary/Models/CollisionConvex/SM_Prop_BarrelPile_02_Convex.asset
+  uploadId: 976012

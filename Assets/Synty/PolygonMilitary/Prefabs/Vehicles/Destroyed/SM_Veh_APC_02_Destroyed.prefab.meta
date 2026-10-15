@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 01380bd35e9913c488d91c9daf041ab2
+timeCreated: 1594251422
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 100100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 176304
+  packageName: POLYGON - Military Pack - Art by Synty
+  packageVersion: 1.10.4
+  assetPath: Assets/Synty/PolygonMilitary/Prefabs/Vehicles/Destroyed/SM_Veh_APC_02_Destroyed.prefab
+  uploadId: 976012

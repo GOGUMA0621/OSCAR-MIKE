@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 044235158d618194e86a4da16aee3283
+timeCreated: 1596420474
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 43114362533379978
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 176304
+  packageName: POLYGON - Military Pack - Art by Synty
+  packageVersion: 1.10.4
+  assetPath: Assets/Synty/PolygonMilitary/Models/CollisionConvex/SM_Prop_WireSpool_01_Convex.asset
+  uploadId: 976012

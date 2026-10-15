@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 2d7716a2c1a1af144a46dc833090ec40
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 43189425443667604
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 150589
+  packageName: POLYGON - Gang Warfare Pack - Art by Synty
+  packageVersion: 1.7.2
+  assetPath: Assets/Synty/PolygonGangWarfare/Models/Collision/SM_Prop_SmokePipe_01_Convex.asset
+  uploadId: 975930

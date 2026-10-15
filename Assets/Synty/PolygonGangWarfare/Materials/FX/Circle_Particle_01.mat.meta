@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: a06c4d34f9394560b0014a2b598b08e2
+timeCreated: 1556850168
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 2100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 150589
+  packageName: POLYGON - Gang Warfare Pack - Art by Synty
+  packageVersion: 1.7.2
+  assetPath: Assets/Synty/PolygonGangWarfare/Materials/FX/Circle_Particle_01.mat
+  uploadId: 975930

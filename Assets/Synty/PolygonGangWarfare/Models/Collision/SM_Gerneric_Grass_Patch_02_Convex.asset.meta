@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 50b5d50337667e742ab3fb83a6e79872
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 43648831313566434
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 150589
+  packageName: POLYGON - Gang Warfare Pack - Art by Synty
+  packageVersion: 1.7.2
+  assetPath: Assets/Synty/PolygonGangWarfare/Models/Collision/SM_Gerneric_Grass_Patch_02_Convex.asset
+  uploadId: 975930

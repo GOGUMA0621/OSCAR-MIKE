@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 95a45fe9ad07c8b4bb876a5895a562c0
+timeCreated: 1590552613
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 100100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 176304
+  packageName: POLYGON - Military Pack - Art by Synty
+  packageVersion: 1.10.4
+  assetPath: Assets/Synty/PolygonMilitary/Prefabs/Props/SM_Prop_Ladder_02.prefab
+  uploadId: 976012

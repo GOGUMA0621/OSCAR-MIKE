@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 96e947df06e21f948a8c6ad8fc919f5d
+timeCreated: 1594960711
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 100100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 176304
+  packageName: POLYGON - Military Pack - Art by Synty
+  packageVersion: 1.10.4
+  assetPath: Assets/Synty/PolygonMilitary/Prefabs/Characters/SM_Chr_Contractor_Male_02.prefab
+  uploadId: 976012

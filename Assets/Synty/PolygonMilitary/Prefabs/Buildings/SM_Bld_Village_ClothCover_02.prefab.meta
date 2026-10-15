@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 3df81c3da86250c468ee901608387514
+timeCreated: 1590552609
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 100100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 176304
+  packageName: POLYGON - Military Pack - Art by Synty
+  packageVersion: 1.10.4
+  assetPath: Assets/Synty/PolygonMilitary/Prefabs/Buildings/SM_Bld_Village_ClothCover_02.prefab
+  uploadId: 976012

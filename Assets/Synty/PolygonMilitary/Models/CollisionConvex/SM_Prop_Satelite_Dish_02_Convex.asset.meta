@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 033f3e966a3534546afa0eeb2c4b2b85
+timeCreated: 1596420473
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 43595583134656378
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 176304
+  packageName: POLYGON - Military Pack - Art by Synty
+  packageVersion: 1.10.4
+  assetPath: Assets/Synty/PolygonMilitary/Models/CollisionConvex/SM_Prop_Satelite_Dish_02_Convex.asset
+  uploadId: 976012

@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 2bc4b9d3a8dba6b498397498e7d73e3f
+timeCreated: 1592868108
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 100100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 176304
+  packageName: POLYGON - Military Pack - Art by Synty
+  packageVersion: 1.10.4
+  assetPath: Assets/Synty/PolygonMilitary/Prefabs/Props/Military/SM_Prop_MedicalBox_01.prefab
+  uploadId: 976012

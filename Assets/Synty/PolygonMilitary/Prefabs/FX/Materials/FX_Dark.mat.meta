@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: db5f0d67df793824fb0c40433a95a8d8
+timeCreated: 1556850168
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 2100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 176304
+  packageName: POLYGON - Military Pack - Art by Synty
+  packageVersion: 1.10.4
+  assetPath: Assets/Synty/PolygonMilitary/Prefabs/FX/Materials/FX_Dark.mat
+  uploadId: 976012

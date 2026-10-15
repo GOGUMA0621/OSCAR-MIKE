@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 6a0906f3dc3581548a7b635dbf5b0dad
+timeCreated: 1592868137
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 100100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 176304
+  packageName: POLYGON - Military Pack - Art by Synty
+  packageVersion: 1.10.4
+  assetPath: Assets/Synty/PolygonMilitary/Prefabs/Props/SM_Prop_Chair_Plastic_01.prefab
+  uploadId: 976012

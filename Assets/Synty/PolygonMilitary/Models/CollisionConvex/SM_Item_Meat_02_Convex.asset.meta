@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: fe47a19b6ea2d3a46a323a21b453e678
+timeCreated: 1596421856
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 43826921195459086
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 176304
+  packageName: POLYGON - Military Pack - Art by Synty
+  packageVersion: 1.10.4
+  assetPath: Assets/Synty/PolygonMilitary/Models/CollisionConvex/SM_Item_Meat_02_Convex.asset
+  uploadId: 976012

@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: f36c8acccd3442b4987e4f8f6da8e5a7
+timeCreated: 1596420540
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 43166987586584620
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 176304
+  packageName: POLYGON - Military Pack - Art by Synty
+  packageVersion: 1.10.4
+  assetPath: Assets/Synty/PolygonMilitary/Models/CollisionConvex/SM_Prop_DownPipe_Corner_01_Convex.asset
+  uploadId: 976012

@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 1a68e89aa001eea4188d9828f44e22d0
+timeCreated: 1596420332
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 43770941596497266
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 176304
+  packageName: POLYGON - Military Pack - Art by Synty
+  packageVersion: 1.10.4
+  assetPath: Assets/Synty/PolygonMilitary/Models/CollisionConvex/SM_Prop_Sign_Poster_04_Convex.asset
+  uploadId: 976012

@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 588d440b470e63e4d85276170df8f7d8
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 8900197715197277731
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 252731
+  packageName: POLYGON - Casino Pack - Art by Synty
+  packageVersion: 1.9.2
+  assetPath: Assets/Synty/PolygonCasino/Models/Collision/Convex/SM_Env_Sidewalk_Slope_01_Convex.asset
+  uploadId: 974002

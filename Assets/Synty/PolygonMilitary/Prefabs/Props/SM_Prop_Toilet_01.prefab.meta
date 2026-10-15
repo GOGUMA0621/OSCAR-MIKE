@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 0811bbb510f62c642a0f5ef87c1a9e18
+timeCreated: 1592955478
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 100100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 176304
+  packageName: POLYGON - Military Pack - Art by Synty
+  packageVersion: 1.10.4
+  assetPath: Assets/Synty/PolygonMilitary/Prefabs/Props/SM_Prop_Toilet_01.prefab
+  uploadId: 976012

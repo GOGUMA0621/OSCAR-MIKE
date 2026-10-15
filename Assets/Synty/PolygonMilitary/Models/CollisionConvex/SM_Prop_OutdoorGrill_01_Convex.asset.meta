@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 5a48ddea914cd6d4682db00c85fddc6c
+timeCreated: 1596420551
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 43032463216909616
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 176304
+  packageName: POLYGON - Military Pack - Art by Synty
+  packageVersion: 1.10.4
+  assetPath: Assets/Synty/PolygonMilitary/Models/CollisionConvex/SM_Prop_OutdoorGrill_01_Convex.asset
+  uploadId: 976012

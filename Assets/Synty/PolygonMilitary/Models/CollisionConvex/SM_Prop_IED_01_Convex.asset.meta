@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 75eaca21587885a4dbd0fc72035812a7
+timeCreated: 1596421480
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 43284906650543894
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 176304
+  packageName: POLYGON - Military Pack - Art by Synty
+  packageVersion: 1.10.4
+  assetPath: Assets/Synty/PolygonMilitary/Models/CollisionConvex/SM_Prop_IED_01_Convex.asset
+  uploadId: 976012

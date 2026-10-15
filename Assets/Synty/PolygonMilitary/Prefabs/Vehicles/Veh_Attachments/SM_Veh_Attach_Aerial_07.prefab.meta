@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 16fd5631b4cd5104b905a1fd1a690799
+timeCreated: 1595285726
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 100100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 176304
+  packageName: POLYGON - Military Pack - Art by Synty
+  packageVersion: 1.10.4
+  assetPath: Assets/Synty/PolygonMilitary/Prefabs/Vehicles/Veh_Attachments/SM_Veh_Attach_Aerial_07.prefab
+  uploadId: 976012

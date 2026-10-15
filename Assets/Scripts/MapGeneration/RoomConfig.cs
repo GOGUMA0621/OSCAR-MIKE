@@ -1,4 +1,5 @@
 using UnityEngine;
+using OskarMike.Items;
 
 namespace OskarMike.MapGeneration
 {
@@ -8,5 +9,7 @@ namespace OskarMike.MapGeneration
         public GameObject prefab;
         public Vector2Int size = Vector2Int.one;
         [Min(1)] public int weight = 1;
+        [Tooltip("이 방에 적용할 폐품 지역 프로필입니다.")]
+        public LootZoneProfile lootZone;
     }
 }

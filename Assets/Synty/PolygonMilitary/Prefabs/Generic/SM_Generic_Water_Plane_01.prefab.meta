@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 9c8b227244f5e484f8cd9b7be62d536e
+timeCreated: 1590460274
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 100100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 176304
+  packageName: POLYGON - Military Pack - Art by Synty
+  packageVersion: 1.10.4
+  assetPath: Assets/Synty/PolygonMilitary/Prefabs/Generic/SM_Generic_Water_Plane_01.prefab
+  uploadId: 976012

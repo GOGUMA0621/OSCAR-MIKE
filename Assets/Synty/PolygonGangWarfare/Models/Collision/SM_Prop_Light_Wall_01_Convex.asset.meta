@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 67c13e64d26f04046888d3bb9e37d1f9
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 43625641716815870
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 150589
+  packageName: POLYGON - Gang Warfare Pack - Art by Synty
+  packageVersion: 1.7.2
+  assetPath: Assets/Synty/PolygonGangWarfare/Models/Collision/SM_Prop_Light_Wall_01_Convex.asset
+  uploadId: 975930

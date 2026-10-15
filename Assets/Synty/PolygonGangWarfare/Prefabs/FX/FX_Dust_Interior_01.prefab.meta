@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: af937520f1427db4fafdbb6049ae0d88
+timeCreated: 1562904709
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 100100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 150589
+  packageName: POLYGON - Gang Warfare Pack - Art by Synty
+  packageVersion: 1.7.2
+  assetPath: Assets/Synty/PolygonGangWarfare/Prefabs/FX/FX_Dust_Interior_01.prefab
+  uploadId: 975930

@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 9c021bdf7428d9247a78e73590a99c88
+timeCreated: 1563145650
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 100100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 150589
+  packageName: POLYGON - Gang Warfare Pack - Art by Synty
+  packageVersion: 1.7.2
+  assetPath: Assets/Synty/PolygonGangWarfare/Prefabs/FX/FX_Smoke_Large_01.prefab
+  uploadId: 975930

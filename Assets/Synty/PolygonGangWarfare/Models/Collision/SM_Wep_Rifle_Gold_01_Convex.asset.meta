@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: fa095b061922684429a563f7b00735ed
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 43853821893658052
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 150589
+  packageName: POLYGON - Gang Warfare Pack - Art by Synty
+  packageVersion: 1.7.2
+  assetPath: Assets/Synty/PolygonGangWarfare/Models/Collision/SM_Wep_Rifle_Gold_01_Convex.asset
+  uploadId: 975930

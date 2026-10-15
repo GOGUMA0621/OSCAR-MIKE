@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: aad2f6bc0f048984a82865b1a044d65c
+timeCreated: 1594963620
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 100100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 176304
+  packageName: POLYGON - Military Pack - Art by Synty
+  packageVersion: 1.10.4
+  assetPath: Assets/Synty/PolygonMilitary/Prefabs/Props/Debris/SM_Prop_Block_03.prefab
+  uploadId: 976012

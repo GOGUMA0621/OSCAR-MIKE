@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 8aaccdbf0a69d3a4ebb4c28d57ebf604
+timeCreated: 1596420515
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 43166051478114978
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 176304
+  packageName: POLYGON - Military Pack - Art by Synty
+  packageVersion: 1.10.4
+  assetPath: Assets/Synty/PolygonMilitary/Models/CollisionConvex/SM_Prop_Bedside_Table_01_Convex.asset
+  uploadId: 976012

@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 6dad102878a5b244686dabdc63722dda
+timeCreated: 1596421477
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 43280676082875154
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 176304
+  packageName: POLYGON - Military Pack - Art by Synty
+  packageVersion: 1.10.4
+  assetPath: Assets/Synty/PolygonMilitary/Models/CollisionConvex/SM_Prop_Drone_Control_Station_01_Convex.asset
+  uploadId: 976012

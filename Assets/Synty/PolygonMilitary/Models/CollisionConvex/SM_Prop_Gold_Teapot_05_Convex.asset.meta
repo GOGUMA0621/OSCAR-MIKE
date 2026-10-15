@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 4b3dea2a4385d9743ab5250ef0017c30
+timeCreated: 1596420733
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 43080038298217346
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 176304
+  packageName: POLYGON - Military Pack - Art by Synty
+  packageVersion: 1.10.4
+  assetPath: Assets/Synty/PolygonMilitary/Models/CollisionConvex/SM_Prop_Gold_Teapot_05_Convex.asset
+  uploadId: 976012

@@ -1,0 +1,28 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cc98ec8e33537ec46a4ac911c1e49ecc, type: 3}
+  m_Name: 023_PolygonGangWarfare_SM_Prop_Bottle_Small_02
+  m_EditorClassIdentifier: Assembly-CSharp::OskarMike.Items.LootItemDefinition
+  itemId: polygongangwarfare.sm_prop_bottle_small_02
+  displayName: "Antibiotics (\uD56D\uC0DD\uC81C)"
+  sourceAssetName: SM_Prop_Bottle_Small_02
+  contentPack: {fileID: 11400000, guid: f942391ce56a69145876f68bfc75467e, type: 2}
+  category: 8
+  minValueSteps: 2
+  maxValueSteps: 2
+  basePrice: 25
+  priceVariance: 0.15
+  spawnWeight: 1
+  spawnEnabled: 1
+  allowedZoneIds: []
+  notes: 
+  networkPrefab: {fileID: 891816246242455849, guid: c703f9500e9de0042b6f48848bf18c35, type: 3}

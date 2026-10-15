@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: b0e7a33f876b0be409a1668f22487d38
+timeCreated: 1596421493
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 43145393821677632
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 176304
+  packageName: POLYGON - Military Pack - Art by Synty
+  packageVersion: 1.10.4
+  assetPath: Assets/Synty/PolygonMilitary/Models/CollisionConvex/SM_Prop_Radio_Control_Box_01_Convex.asset
+  uploadId: 976012

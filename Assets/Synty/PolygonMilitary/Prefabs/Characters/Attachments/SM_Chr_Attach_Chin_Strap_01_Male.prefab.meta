@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: a7e11410ab5760e4292367169030a551
+timeCreated: 1595369837
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 100100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 176304
+  packageName: POLYGON - Military Pack - Art by Synty
+  packageVersion: 1.10.4
+  assetPath: Assets/Synty/PolygonMilitary/Prefabs/Characters/Attachments/SM_Chr_Attach_Chin_Strap_01_Male.prefab
+  uploadId: 976012

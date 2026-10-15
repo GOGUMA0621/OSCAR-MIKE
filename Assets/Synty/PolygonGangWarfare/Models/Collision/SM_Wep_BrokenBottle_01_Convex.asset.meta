@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 9f0c0663bf4e4484880838f139ea652a
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 43380264414271962
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 150589
+  packageName: POLYGON - Gang Warfare Pack - Art by Synty
+  packageVersion: 1.7.2
+  assetPath: Assets/Synty/PolygonGangWarfare/Models/Collision/SM_Wep_BrokenBottle_01_Convex.asset
+  uploadId: 975930

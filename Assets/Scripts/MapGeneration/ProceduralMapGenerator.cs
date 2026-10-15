@@ -5,6 +5,8 @@ namespace OskarMike.MapGeneration
 {
     public class ProceduralMapGenerator : MonoBehaviour
     {
+        public event System.Action MapGenerated;
+
         public enum RoomPlacementShape
         {
             DiagonalOnly,
@@ -60,6 +62,7 @@ namespace OskarMike.MapGeneration
         [System.Serializable]
         public struct PlacedRoomData
         {
+            public int roomIndex;
             public RoomConfig config;
             public Vector3 worldPos;
             // Center grid coordinate of the room. Convert with GridToWorldCenter().
@@ -71,6 +74,8 @@ namespace OskarMike.MapGeneration
         [System.Serializable]
         public struct CorridorData
         {
+            public int roomAIndex;
+            public int roomBIndex;
             public Vector3 start;       // room A door
             public Vector3 extendStart; // minStraight out from room A
             public Vector3 corner;      // L-turn point
@@ -78,6 +83,23 @@ namespace OskarMike.MapGeneration
             public Vector3 end;         // room B door
             public float width;
             public GameObject instance;
+        }
+
+        private struct CorridorSegmentRect
+        {
+            public float minX;
+            public float maxX;
+            public float minZ;
+            public float maxZ;
+            public bool isHorizontal;
+        }
+
+        private struct WallBlockerRect
+        {
+            public float minX;
+            public float maxX;
+            public float minZ;
+            public float maxZ;
         }
 
         private struct GenerationStats
@@ -99,6 +121,19 @@ namespace OskarMike.MapGeneration
         public List<PlacedRoomData> placedRooms = new List<PlacedRoomData>();
         public List<CorridorData> corridors = new List<CorridorData>();
 
+        public IReadOnlyList<PlacedRoomData> PlacedRooms => placedRooms;
+        public IReadOnlyList<CorridorData> Corridors => corridors;
+        public int EffectiveSeed { get; private set; }
+
+        public Bounds GetRoomBounds(int roomIndex)
+        {
+            if (roomIndex < 0 || roomIndex >= placedRooms.Count)
+                return default;
+
+            PlacedRoomData room = placedRooms[roomIndex];
+            return new Bounds(room.worldPos, GetRoomWorldSize(room.size));
+        }
+
         private System.Random rng;
 
         [ContextMenu("Generate Map")]
@@ -114,12 +149,13 @@ namespace OskarMike.MapGeneration
                 effectiveSeed = seed != 0 ? seed : System.Environment.TickCount
             };
             rng = new System.Random(stats.effectiveSeed);
+            EffectiveSeed = stats.effectiveSeed;
 
             var root = new GameObject("GeneratedMap").transform;
 
             // 1) Place first room at origin
             var firstConfig = roomPool.PickRandom(rng);
-            var firstRoom = PlaceRoom(firstConfig, Vector2Int.zero, root);
+            var firstRoom = PlaceRoom(firstConfig, Vector2Int.zero, root, 0);
             placedRooms.Add(firstRoom);
 
             // 2) Place remaining rooms
@@ -141,6 +177,7 @@ namespace OskarMike.MapGeneration
             BuildCorridorFloor(root);
 
             LogGenerationSummary(stats);
+            MapGenerated?.Invoke();
         }
 
         private void OnValidate()
@@ -274,7 +311,7 @@ namespace OskarMike.MapGeneration
             corridors.Clear();
         }
 
-        private PlacedRoomData PlaceRoom(RoomConfig config, Vector2Int gridPos, Transform parent)
+        private PlacedRoomData PlaceRoom(RoomConfig config, Vector2Int gridPos, Transform parent, int roomIndex)
         {
             Vector3 worldPos = GridToWorldCenter(gridPos);
             GameObject instance;
@@ -295,6 +332,7 @@ namespace OskarMike.MapGeneration
 
             return new PlacedRoomData
             {
+                roomIndex = roomIndex,
                 config = config,
                 worldPos = worldPos,
                 gridPos = gridPos,
@@ -417,9 +455,10 @@ namespace OskarMike.MapGeneration
                     continue;
                 }
 
-                result = PlaceRoom(config, gridPos, parent);
+                int newRoomIndex = placedRooms.Count;
+                result = PlaceRoom(config, gridPos, parent, newRoomIndex);
 
-                var corridor = BuildCorridor(dA, extA, corner, extB, dB, parent);
+                var corridor = BuildCorridor(dA, extA, corner, extB, dB, anchorIdx, newRoomIndex, parent);
                 corridors.Add(corridor);
 
                 if (debugLogging)
@@ -555,10 +594,13 @@ namespace OskarMike.MapGeneration
                 return center + new Vector3(0f, 0f, Mathf.Sign(local.z) * hd);
         }
 
-        private CorridorData BuildCorridor(Vector3 start, Vector3 extendStart, Vector3 corner, Vector3 extendEnd, Vector3 end, Transform parent)
+        private CorridorData BuildCorridor(Vector3 start, Vector3 extendStart, Vector3 corner, Vector3 extendEnd, Vector3 end,
+            int roomAIndex, int roomBIndex, Transform parent)
         {
             return new CorridorData
             {
+                roomAIndex = roomAIndex,
+                roomBIndex = roomBIndex,
                 start = start,
                 extendStart = extendStart,
                 corner = corner,
@@ -585,6 +627,8 @@ namespace OskarMike.MapGeneration
             var wallUvs = new List<Vector2>();
             var wallNormals = new List<Vector3>();
             var wallCache = new VertexCache(wallVerts, wallUvs, wallNormals);
+            var wallRects = new List<CorridorSegmentRect>();
+            var wallBlockers = new List<WallBlockerRect>();
             float bot = corridorFloorY;
             float halfW = corridorWidth * 0.5f;
 
@@ -599,12 +643,15 @@ namespace OskarMike.MapGeneration
                 // 벽: 짧은 miter edge 방식 (계단식 꺾임 방지)
                 if (generateCorridorWalls)
                 {
-                    Vector3[] rawPoints = { corr.start, corr.extendStart, corr.corner, corr.extendEnd, corr.end };
-                    List<Vector3> points = SimplifyCorridorPoints(rawPoints);
-                    BuildCorridorEdges(points, halfW, out var left, out var right);
-                    AddCorridorWalls(wallCache, wallTris, left, right, bot, corridorWallHeight);
+                    AddCorridorWallRects(corr, halfW, wallRects);
+                    AddCorridorDoorWallBlockers(corr, halfW, wallBlockers);
                 }
 
+            }
+
+            if (generateCorridorWalls)
+            {
+                AddCorridorWallsFromCorridors(wallCache, wallTris, corridors, wallRects, wallBlockers, halfW, bot, corridorWallHeight);
             }
 
             if (debugLogging) Debug.Log($"[Floor] Total: {verts.Count} verts, {tris.Count / 3} tris");
@@ -636,6 +683,7 @@ namespace OskarMike.MapGeneration
             var go = new GameObject("CorridorFloor");
             go.transform.SetParent(parent);
             go.AddComponent<MeshFilter>().sharedMesh = mesh;
+            go.AddComponent<MeshCollider>().sharedMesh = mesh;
 
             var renderer = go.AddComponent<MeshRenderer>();
             if (corridorMaterial != null)
@@ -664,6 +712,7 @@ namespace OskarMike.MapGeneration
             var go = new GameObject("CorridorWalls");
             go.transform.SetParent(parent);
             go.AddComponent<MeshFilter>().sharedMesh = mesh;
+            go.AddComponent<MeshCollider>().sharedMesh = mesh;
 
             var renderer = go.AddComponent<MeshRenderer>();
             if (corridorWallMaterial != null)
@@ -710,6 +759,15 @@ namespace OskarMike.MapGeneration
                 _uvs.Add(uv);
                 _normals.Add(n);
                 _map[key] = idx;
+                return idx;
+            }
+
+            public int AddUnique(Vector3 v, Vector2 uv, Vector3 n)
+            {
+                int idx = _verts.Count;
+                _verts.Add(v);
+                _uvs.Add(uv);
+                _normals.Add(n);
                 return idx;
             }
 
@@ -786,9 +844,7 @@ namespace OskarMike.MapGeneration
         private static void BuildCorridorFloorQuads(VertexCache cache, List<int> tris,
             CorridorData corr, float halfW, float bot)
         {
-            Vector3[] points = { corr.start, corr.extendStart, corr.corner, corr.extendEnd, corr.end };
-            List<Vector3> simplified = SimplifyCorridorPoints(points);
-            BuildCorridorEdges(simplified, halfW, out var left, out var right);
+            BuildCorridorOutline(corr, halfW, out var left, out var right);
 
             if (left.Count < 2 || right.Count != left.Count)
                 return;
@@ -801,6 +857,21 @@ namespace OskarMike.MapGeneration
 
                 AddFloorQuadCorners(cache, tris, left[i], right[i], right[i + 1], left[i + 1], bot);
             }
+        }
+
+        public static void BuildCorridorOutline(CorridorData corridor, float halfWidth,
+            out List<Vector3> left, out List<Vector3> right)
+        {
+            Vector3[] rawPoints =
+            {
+                corridor.start,
+                corridor.extendStart,
+                corridor.corner,
+                corridor.extendEnd,
+                corridor.end
+            };
+            List<Vector3> simplified = SimplifyCorridorPoints(rawPoints);
+            BuildCorridorEdges(simplified, halfWidth, out left, out right);
         }
 
         // 벽 전용 edge 생성. 꺾임점은 miter로 이어서 계단식 벽을 방지하되,
@@ -843,24 +914,206 @@ namespace OskarMike.MapGeneration
             }
         }
 
-        private static void AddCorridorWalls(VertexCache cache, List<int> tris,
-            List<Vector3> left, List<Vector3> right, float floorY, float wallHeight)
+        private static void AddCorridorWallRects(CorridorData corr, float halfW, List<CorridorSegmentRect> rects)
         {
-            if (left.Count < 2 || right.Count != left.Count)
+            Vector3[] rawPoints = { corr.start, corr.extendStart, corr.corner, corr.extendEnd, corr.end };
+            List<Vector3> points = SimplifyCorridorPoints(rawPoints);
+
+            for (int i = 0; i < points.Count - 1; i++)
+            {
+                Vector3 from = points[i];
+                Vector3 to = points[i + 1];
+                if (Vector3.Distance(from, to) <= 0.01f)
+                    continue;
+
+                bool horizontal = Mathf.Abs(to.x - from.x) >= Mathf.Abs(to.z - from.z);
+                if (horizontal)
+                {
+                    rects.Add(new CorridorSegmentRect
+                    {
+                        minX = Mathf.Min(from.x, to.x),
+                        maxX = Mathf.Max(from.x, to.x),
+                        minZ = from.z - halfW,
+                        maxZ = from.z + halfW,
+                        isHorizontal = true
+                    });
+                }
+                else
+                {
+                    rects.Add(new CorridorSegmentRect
+                    {
+                        minX = from.x - halfW,
+                        maxX = from.x + halfW,
+                        minZ = Mathf.Min(from.z, to.z),
+                        maxZ = Mathf.Max(from.z, to.z),
+                        isHorizontal = false
+                    });
+                }
+            }
+        }
+
+        private static void AddCorridorDoorWallBlockers(CorridorData corr, float halfW, List<WallBlockerRect> blockers)
+        {
+            AddDoorWallBlocker(corr.start, corr.extendStart, halfW, blockers);
+            AddDoorWallBlocker(corr.end, corr.extendEnd, halfW, blockers);
+        }
+
+        private static void AddDoorWallBlocker(Vector3 door, Vector3 corridorPoint, float halfW, List<WallBlockerRect> blockers)
+        {
+            Vector3 dir = GetSegmentDirection(door, corridorPoint);
+            Vector3 side = Vector3.Cross(Vector3.up, dir);
+            Vector3 center = door;
+            Vector3 forwardExtent = new Vector3(Mathf.Abs(dir.x), 0f, Mathf.Abs(dir.z)) * 0.05f;
+            Vector3 sideExtent = new Vector3(Mathf.Abs(side.x), 0f, Mathf.Abs(side.z)) * halfW;
+            Vector3 extent = forwardExtent + sideExtent;
+
+            blockers.Add(new WallBlockerRect
+            {
+                minX = center.x - extent.x,
+                maxX = center.x + extent.x,
+                minZ = center.z - extent.z,
+                maxZ = center.z + extent.z
+            });
+        }
+
+        private static void AddCorridorWallsFromCorridors(VertexCache cache, List<int> tris,
+            List<CorridorData> corridorData, List<CorridorSegmentRect> rects, List<WallBlockerRect> blockers,
+            float halfW, float floorY, float wallHeight)
+        {
+            for (int ci = 0; ci < corridorData.Count; ci++)
+            {
+                CorridorData corr = corridorData[ci];
+                Vector3[] rawPoints = { corr.start, corr.extendStart, corr.corner, corr.extendEnd, corr.end };
+                List<Vector3> points = SimplifyCorridorPoints(rawPoints);
+                BuildCorridorEdges(points, halfW, out var left, out var right);
+
+                AddWallEdgeChain(cache, tris, left, rects, blockers, floorY, wallHeight);
+                AddWallEdgeChain(cache, tris, right, rects, blockers, floorY, wallHeight);
+            }
+        }
+
+        private static void AddWallEdgeChain(VertexCache cache, List<int> tris,
+            List<Vector3> points, List<CorridorSegmentRect> rects, List<WallBlockerRect> blockers,
+            float floorY, float wallHeight)
+        {
+            for (int i = 0; i < points.Count - 1; i++)
+                AddWallEdgeWithCuts(cache, tris, points[i], points[i + 1], rects, blockers, floorY, wallHeight);
+        }
+
+        private static void AddWallEdgeWithCuts(VertexCache cache, List<int> tris,
+            Vector3 a, Vector3 b, List<CorridorSegmentRect> rects, List<WallBlockerRect> blockers,
+            float floorY, float wallHeight)
+        {
+            const float tolerance = 0.001f;
+            if (Vector3.Distance(a, b) <= 0.01f)
                 return;
 
-            for (int i = 0; i < left.Count - 1; i++)
+            bool runsAlongX = Mathf.Abs(b.x - a.x) >= Mathf.Abs(b.z - a.z);
+            float fixedCoord = runsAlongX ? a.z : a.x;
+            float start = runsAlongX ? a.x : a.z;
+            float end = runsAlongX ? b.x : b.z;
+            if (end < start)
             {
-                AddWallPlane(cache, tris,
-                    new Vector3(left[i + 1].x, left[i + 1].y, left[i + 1].z),
-                    new Vector3(left[i].x, left[i].y, left[i].z),
-                    floorY, wallHeight);
+                float tmp = start;
+                start = end;
+                end = tmp;
+            }
 
-                AddWallPlane(cache, tris,
-                    new Vector3(right[i].x, right[i].y, right[i].z),
-                    new Vector3(right[i + 1].x, right[i + 1].y, right[i + 1].z),
+            var blocked = new List<Vector2>();
+            for (int i = 0; i < rects.Count; i++)
+            {
+                CorridorSegmentRect rect = rects[i];
+                if (runsAlongX)
+                {
+                    if (fixedCoord <= rect.minZ + tolerance || fixedCoord >= rect.maxZ - tolerance)
+                        continue;
+
+                    float overlapStart = Mathf.Max(start, rect.minX);
+                    float overlapEnd = Mathf.Min(end, rect.maxX);
+                    if (overlapEnd - overlapStart > tolerance)
+                        blocked.Add(new Vector2(overlapStart, overlapEnd));
+                }
+                else
+                {
+                    if (fixedCoord <= rect.minX + tolerance || fixedCoord >= rect.maxX - tolerance)
+                        continue;
+
+                    float overlapStart = Mathf.Max(start, rect.minZ);
+                    float overlapEnd = Mathf.Min(end, rect.maxZ);
+                    if (overlapEnd - overlapStart > tolerance)
+                        blocked.Add(new Vector2(overlapStart, overlapEnd));
+                }
+            }
+
+            AddUnblockedWallEdgeSpans(cache, tris, blockers, blocked, runsAlongX, fixedCoord, start, end, floorY, wallHeight);
+        }
+
+        private static void AddUnblockedWallEdgeSpans(VertexCache cache, List<int> tris,
+            List<WallBlockerRect> blockers, List<Vector2> blocked, bool runsAlongX,
+            float fixedCoord, float start, float end, float floorY, float wallHeight)
+        {
+            const float minSpan = 0.01f;
+            blocked.Sort((a, b) => a.x.CompareTo(b.x));
+
+            float cursor = start;
+            for (int i = 0; i < blocked.Count; i++)
+            {
+                float blockStart = Mathf.Clamp(blocked[i].x, start, end);
+                float blockEnd = Mathf.Clamp(blocked[i].y, start, end);
+                if (blockEnd <= cursor)
+                    continue;
+
+                if (blockStart - cursor > minSpan)
+                    AddWallSpan(cache, tris, blockers, runsAlongX, fixedCoord, cursor, blockStart, floorY, wallHeight);
+
+                cursor = Mathf.Max(cursor, blockEnd);
+            }
+
+            if (end - cursor > minSpan)
+                AddWallSpan(cache, tris, blockers, runsAlongX, fixedCoord, cursor, end, floorY, wallHeight);
+        }
+
+        private static void AddWallSpan(VertexCache cache, List<int> tris,
+            List<WallBlockerRect> blockers, bool runsAlongX, float fixedCoord,
+            float start, float end, float floorY, float wallHeight)
+        {
+            if (runsAlongX)
+            {
+                AddWallPlaneUnlessBlocked(cache, tris, blockers,
+                    new Vector3(start, floorY, fixedCoord),
+                    new Vector3(end, floorY, fixedCoord),
                     floorY, wallHeight);
             }
+            else
+            {
+                AddWallPlaneUnlessBlocked(cache, tris, blockers,
+                    new Vector3(fixedCoord, floorY, start),
+                    new Vector3(fixedCoord, floorY, end),
+                    floorY, wallHeight);
+            }
+        }
+
+        private static bool PointInsideAnyBlockerRect(float x, float z, List<WallBlockerRect> blockers, float tolerance)
+        {
+            for (int i = 0; i < blockers.Count; i++)
+            {
+                WallBlockerRect blocker = blockers[i];
+                if (x > blocker.minX + tolerance && x < blocker.maxX - tolerance
+                    && z > blocker.minZ + tolerance && z < blocker.maxZ - tolerance)
+                    return true;
+            }
+
+            return false;
+        }
+
+        private static void AddWallPlaneUnlessBlocked(VertexCache cache, List<int> tris,
+            List<WallBlockerRect> blockers, Vector3 a, Vector3 b, float floorY, float wallHeight)
+        {
+            Vector3 midpoint = (a + b) * 0.5f;
+            if (PointInsideAnyBlockerRect(midpoint.x, midpoint.z, blockers, 0.001f))
+                return;
+
+            AddWallPlane(cache, tris, a, b, floorY, wallHeight);
         }
 
         private static void AddWallPlane(VertexCache cache, List<int> tris,
@@ -873,8 +1126,8 @@ namespace OskarMike.MapGeneration
             Vector3 bottomB = WithY(b, floorY);
             Vector3 topB = WithY(b, floorY + wallHeight);
             Vector3 topA = WithY(a, floorY + wallHeight);
-            AddQuad(cache, tris, bottomA, bottomB, topB, topA);
-            AddQuad(cache, tris, bottomB, bottomA, topA, topB);
+            AddWallQuad(cache, tris, bottomA, bottomB, topB, topA);
+            AddWallQuad(cache, tris, bottomB, bottomA, topA, topB);
         }
 
         private static Vector3 WithY(Vector3 value, float y)
@@ -896,6 +1149,24 @@ namespace OskarMike.MapGeneration
             int i1 = cache.Add(b, new Vector2(width, 0f), normal);
             int i2 = cache.Add(c, new Vector2(width, height), normal);
             int i3 = cache.Add(d, new Vector2(0f, height), normal);
+
+            tris.Add(i0); tris.Add(i2); tris.Add(i1);
+            tris.Add(i0); tris.Add(i3); tris.Add(i2);
+        }
+
+        private static void AddWallQuad(VertexCache cache, List<int> tris,
+            Vector3 a, Vector3 b, Vector3 c, Vector3 d)
+        {
+            Vector3 normal = Vector3.Cross(b - a, c - a).normalized;
+            if (normal.sqrMagnitude <= 0.0001f)
+                normal = Vector3.up;
+
+            float width = Vector3.Distance(a, b);
+            float height = Vector3.Distance(b, c);
+            int i0 = cache.AddUnique(a, new Vector2(0f, 0f), normal);
+            int i1 = cache.AddUnique(b, new Vector2(width, 0f), normal);
+            int i2 = cache.AddUnique(c, new Vector2(width, height), normal);
+            int i3 = cache.AddUnique(d, new Vector2(0f, height), normal);
 
             tris.Add(i0); tris.Add(i2); tris.Add(i1);
             tris.Add(i0); tris.Add(i3); tris.Add(i2);

@@ -1,0 +1,17 @@
+fileFormatVersion: 2
+guid: 8e0fc606ca2688d47b3fb7e80f67210a
+timeCreated: 1596421271
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 43426375986544872
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 176304
+  packageName: POLYGON - Military Pack - Art by Synty
+  packageVersion: 1.10.4
+  assetPath: Assets/Synty/PolygonMilitary/Models/CollisionConvex/SM_Prop_Fence_Damaged_04_Convex
+    1.asset
+  uploadId: 976012

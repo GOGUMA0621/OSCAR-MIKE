@@ -20,6 +20,9 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/MovementTest.unity
     guid: f8bd6d5a1e51c98498a3ca76fcdb3c2c
+  - enabled: 1
+    path: Assets/Scenes/EnemyAITest.unity
+    guid: 380a067542da3514ba3553a73a97b5bd
   m_configObjects:
     com.unity.dt.app-ui: {fileID: 11400000, guid: 1b1c20d82303e4b5781c3ef50ac1449f, type: 2}
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 052faaac586de48259a63d0c4782560b, type: 3}

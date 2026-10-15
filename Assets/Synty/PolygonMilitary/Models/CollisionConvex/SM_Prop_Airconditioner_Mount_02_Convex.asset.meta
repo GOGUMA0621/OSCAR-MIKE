@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 93e9c6c3d70c24f4f8f6ec6461afa563
+timeCreated: 1596420713
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 43066432962243508
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 176304
+  packageName: POLYGON - Military Pack - Art by Synty
+  packageVersion: 1.10.4
+  assetPath: Assets/Synty/PolygonMilitary/Models/CollisionConvex/SM_Prop_Airconditioner_Mount_02_Convex.asset
+  uploadId: 976012

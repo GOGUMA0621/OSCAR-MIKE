@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 457a576e8a68c754f9167395ef5f8957
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 11400000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 176304
+  packageName: POLYGON - Military Pack - Art by Synty
+  packageVersion: 1.10.4
+  assetPath: Assets/Synty/PolygonGeneric/Models/Collision/SM_Gen_Prop_Chain_Anchor_01_Convex.asset
+  uploadId: 976012

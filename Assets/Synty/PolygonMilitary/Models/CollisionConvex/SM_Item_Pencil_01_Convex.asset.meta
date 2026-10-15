@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: f469097c09b114a41b659c0134107a98
+timeCreated: 1596421875
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 43920657508938428
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 176304
+  packageName: POLYGON - Military Pack - Art by Synty
+  packageVersion: 1.10.4
+  assetPath: Assets/Synty/PolygonMilitary/Models/CollisionConvex/SM_Item_Pencil_01_Convex.asset
+  uploadId: 976012

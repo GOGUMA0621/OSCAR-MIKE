@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: d57a4f3362ec5664a831ea7c50ba6966
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: -7506381065115306580
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 252731
+  packageName: POLYGON - Casino Pack - Art by Synty
+  packageVersion: 1.9.2
+  assetPath: Assets/Synty/PolygonCasino/Models/Collision/Convex/SM_Item_Matches_Tray_01_Convex.asset
+  uploadId: 974002

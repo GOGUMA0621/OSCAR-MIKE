@@ -1,0 +1,17 @@
+fileFormatVersion: 2
+guid: 5887e53e05bf1c04a91364fc2586daf6
+timeCreated: 1596422620
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 43098892655625316
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 176304
+  packageName: POLYGON - Military Pack - Art by Synty
+  packageVersion: 1.10.4
+  assetPath: Assets/Synty/PolygonMilitary/Models/CollisionConvex/SM_Env_Tree_Small_02_Convex
+    1.asset
+  uploadId: 976012
