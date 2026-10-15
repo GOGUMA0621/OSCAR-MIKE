@@ -28,7 +28,7 @@ namespace OskarMike.AI
             delta.y = 0;
             if (delta.sqrMagnitude < 0.000001f || Time.timeAsDouble < nextStep) return;
             AINoiseDefinition definition = posture == PlayerPosture.Prone ? prone :
-                posture == PlayerPosture.Crouch ? crouch : state == PlayerMoveState.Sprint ? sprint : walk;
+                posture == PlayerPosture.Crouch ? crouch : state == PlayerMoveState.FullSprint ? sprint : walk;
             if (definition == null) return;
             nextStep = Time.timeAsDouble + Mathf.Max(0.05f, definition.interval);
             Vector3 footPosition = transform.position;
