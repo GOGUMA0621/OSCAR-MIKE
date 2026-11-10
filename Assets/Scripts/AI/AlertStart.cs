@@ -140,6 +140,7 @@ namespace OskarMike.AI
         protected override Status OnUpdate()
         {
             if (!Enemy.ServerActive || !Enemy.HasVisual) return Status.Failure;
+            if (Enemy.TryGetComponent<EnemyCombatController>(out var combat)) { combat.Tick(); return Status.Running; }
             if (!Enemy.Navigate(Enemy.LastKnownPosition, Mathf.Max(0, Speed.Value))) return Status.Failure;
             return Status.Running;
         }
@@ -149,7 +150,12 @@ namespace OskarMike.AI
     [NodeDescription(name: "정지 후 조준", category: "OSKAR MIKE/전투", id: "061a5bba47714daeb606d9df11c50313")]
     public partial class EnemyAim : EnemyGraphAction
     {
-        protected override Status Begin() { Enemy.StopMoving(); Enemy.Face(Enemy.LastKnownPosition); return Status.Success; }
+        protected override Status Begin()
+        {
+            if (Enemy.TryGetComponent<EnemyCombatController>(out var combat)) combat.Tick();
+            else { Enemy.StopMoving(); Enemy.Face(Enemy.LastKnownPosition); }
+            return Status.Success;
+        }
     }
     [Serializable, GeneratePropertyBag]
     [NodeDescription(name: "한 발 사격", category: "OSKAR MIKE/전투", id: "061a5bba47714daeb606d9df11c50314")]

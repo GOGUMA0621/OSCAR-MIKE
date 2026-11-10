@@ -8,3 +8,4 @@
 *.prefab text eol=lf
 *.slnx text eol=lf
 *.unity text eol=lf
+Assets/Models/X1_EP.fbx filter=lfs diff=lfs merge=lfs -text

@@ -66,6 +66,8 @@ namespace OskarMike.AI
         private double nextSense, alertStartedAt, nextFire, nextPathRetry;
         private int navigationFrame = -1;
         private NavMeshPath path;
+        private EnemyCombatController combat;
+        private bool recoveryPausedGraph;
 
         public T Read<T>(string name, T fallback = default)
         {
@@ -82,13 +84,30 @@ namespace OskarMike.AI
             float value = Read(name, fallback);
             return float.IsNaN(value) || float.IsInfinity(value) ? fallback : Mathf.Max(0, value);
         }
-        private void Update() { if (ServerActive && graph.enabled) Sense(); }
+        private void Update()
+        {
+            if (!ServerActive || graph.Graph == null || (combat == null && !graph.enabled)) return;
+            Sense();
+            if (combat == null) return;
+            combat.Tick();
+            bool pauseForCover = combat.Recovering || combat.HoldingCover || combat.LeavingCover || combat.AwaitingRecoveryCover || (combat.HasAttackSlot && !HasVisual);
+            if (pauseForCover && !recoveryPausedGraph)
+            {
+                if (state.Value == EnemyState.Alert) CompleteAlert();
+                graph.End(); graph.enabled = false; recoveryPausedGraph = true;
+            }
+            else if (!pauseForCover && recoveryPausedGraph)
+            {
+                recoveryPausedGraph = false; graph.enabled = true; graph.Restart();
+            }
+        }
 
         private void Awake()
         {
             path = new NavMeshPath();
             mover = GetComponent<NavMeshAgent>();
             graph = GetComponent<BehaviorGraphAgent>();
+            combat = GetComponent<EnemyCombatController>();
             audioSource = GetComponent<AudioSource>();
             graph.enabled = false;
             mover.enabled = false;
@@ -136,6 +155,7 @@ namespace OskarMike.AI
         private void OnDisable() => StopSimulation();
         private void OnEnable()
         {
+            if (TryGetComponent<EnemyHealth>(out var health) && health.Dead) { enabled = false; return; }
             if (!ServerActive || mover == null || graph == null || graph.Graph == null) return;
             mover.enabled = true;
             if (!mover.isOnNavMesh) { mover.enabled = false; return; }
@@ -146,6 +166,8 @@ namespace OskarMike.AI
         }
         private void StopSimulation()
         {
+            recoveryPausedGraph = false;
+            if (combat != null) combat.Cancel();
             ServerNoiseBus.Emitted -= Hear;
             alertInProgress = false;
             signalled = true;
@@ -194,6 +216,7 @@ namespace OskarMike.AI
         private Vector3 Eye => transform.position + Vector3.up * Number("EyeHeight", 1.6f);
         public bool CanSee(NetworkObject target)
         {
+            if (target != null && target.TryGetComponent<OskarMike.Network.Player.PlayerHealth>(out var targetHealth) && targetHealth.Dead) return false;
             if (target == null || !target.IsSpawned || !target.gameObject.activeInHierarchy) return false;
             var cc = target.GetComponent<CharacterController>();
             Vector3 aim = cc != null ? cc.bounds.center : target.transform.position + Vector3.up;
@@ -208,8 +231,9 @@ namespace OskarMike.AI
         {
             if (!ServerActive || Time.timeAsDouble < nextSense) return;
             nextSense = Time.timeAsDouble + senseInterval;
-            NetworkObject visible = CanSee(Target) ? Target : null;
-            if (visible == null)
+            NetworkObject preferred = combat != null ? combat.SelectTarget(Target) : Target;
+            NetworkObject visible = CanSee(preferred) ? preferred : null;
+            if (visible == null && (combat == null || !combat.LockActive))
             {
                 float closest = float.PositiveInfinity;
                 foreach (var client in NetworkManager.ConnectedClientsList)
@@ -287,6 +311,7 @@ namespace OskarMike.AI
         }
         public bool TryFire()
         {
+            if (combat != null && !combat.CanFire) return false;
             if (!ServerActive || alertInProgress || Time.timeAsDouble < nextFire ||
                 Time.timeAsDouble < FireAllowedAt || !CanSee(Target) ||
                 Vector3.Distance(transform.position, Target.transform.position) > firingRange) return false;

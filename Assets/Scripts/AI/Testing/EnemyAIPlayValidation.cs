@@ -26,6 +26,8 @@ namespace OskarMike.AI.Testing
         private EnemyAgent enemy;
         private NetworkObject player;
         private Vector3 initialPosition;
+        private Vector3 heldSlot;
+        private uint shotsOutsideRange;
         private double alertAt;
         private int requests;
         private EnemyAgent otherEnemy;
@@ -94,17 +96,38 @@ namespace OskarMike.AI.Testing
                     case 4:
                         Check(requests == 1 && TotalLiving() == 2, "80 percent warning spawns exactly one wave");
                         Check(enemy.ShotSequence == 0, "No firing before warning completes");
-                        Wait(5, .6); break;
+                        // Combat now reserves/moves to a slot and deliberately aims before firing.
+                        Wait(5, 5); break;
                     case 5:
-                        Check(enemy.State == EnemyState.Shoot && enemy.ShotSequence > 0, "Visible target fires after warning");
+                        Check(enemy.State == EnemyState.Shoot && enemy.ShotSequence > 0,
+                            $"Visible target fires after warning (state={enemy.State}, shots={enemy.ShotSequence}, visual={enemy.HasVisual}, position={enemy.transform.position}, combat={enemy.GetComponent<EnemyCombatController>()?.DiagnosticState})");
                         Check(Object.FindObjectsByType<EnemyAgent>(FindObjectsSortMode.None).Where(e => e.IsSpawned && e != enemy)
                             .All(e => !e.canRequestReinforcements), "Reinforcements cannot call reinforcements");
                         int before = TotalLiving();
                         Check(ReinforcementZone.Request(enemy, player.transform.position) == 0 && TotalLiving() == before,
                             "Cooldown blocks repeated request to sole nearby zone");
-                        MovePlayer(new Vector3(20, 0, -20)); Wait(6, .3); break;
+                        initialPosition = enemy.transform.position;
+                        heldSlot = enemy.GetComponent<EnemyCombatController>().ReservedPosition;
+                        MovePlayer(new Vector3(-14, 0, 5)); Wait(22, 1.5); break;
+                    case 22:
+                        Check(enemy.HasVisual && enemy.GetComponent<EnemyCombatController>().HasAttackSlot &&
+                            Vector3.Distance(enemy.transform.position, initialPosition) < .1f &&
+                            Vector3.Distance(enemy.GetComponent<EnemyCombatController>().ReservedPosition, heldSlot) < .01f,
+                            "Visible target moving over 1.5m retains attack position and slot");
+                        MovePlayer(enemy.transform.position + Vector3.forward * 11);
+                        shotsOutsideRange = enemy.ShotSequence;
+                        Wait(23, 1.5); break;
+                    case 23:
+                        Check(enemy.HasVisual && enemy.ShotSequence == shotsOutsideRange &&
+                            enemy.GetComponent<EnemyCombatController>().HasAttackSlot &&
+                            Vector3.Distance(enemy.transform.position, initialPosition) < .1f,
+                            "Visible target outside firing range stops shots but retains position");
+                        MovePlayer(new Vector3(20, 0, -20)); Wait(6, 1.2); break;
                     case 6:
                         Check(enemy.State == EnemyState.Investigate, "Lost sight investigates last seen position");
+                        Check(!enemy.GetComponent<EnemyCombatController>().HasAttackSlot &&
+                            Vector3.Distance(enemy.transform.position, initialPosition) > .1f,
+                            "Lost visual releases attack slot and starts investigation movement");
                         MovePlayer(enemy.transform.position + enemy.transform.forward * 3); Wait(7, .3); break;
                     case 7:
                         Check(enemy.AlertSequence == 1 && requests == 1, "Same encounter reacquires without second warning");

@@ -162,6 +162,8 @@ namespace OskarMike.AI.Editor
             var audio = go.AddComponent<AudioSource>(); audio.spatialBlend = 1; audio.playOnAwake = false;
             go.AddComponent<BehaviorGraphAgent>().Graph = graph;
             go.AddComponent<EnemyAgent>();
+            go.AddComponent<EnemyHealth>();
+            go.AddComponent<EnemyCombatController>();
             var visual = GameObject.CreatePrimitive(PrimitiveType.Capsule);
             visual.name = "임시 적 모델"; visual.transform.SetParent(go.transform); visual.transform.localPosition = Vector3.up;
             Object.DestroyImmediate(visual.GetComponent<Collider>());

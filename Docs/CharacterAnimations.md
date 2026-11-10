@@ -1,3 +1,50 @@
+# Animator 중심 로코모션 — 2026-10-23
+
+PlayerAnimationPresenter는 제거했다. Animator가 상태 선택과 전환을 담당한다.
+PlayerAnimatorParameters는 서버에서 측정한 수평 속도와 동기화된 자세/행동/기울이기를 파라미터로 전달한다.
+추가 RPC 없이 속도만 서버 쓰기 NetworkVariable로 동기화한다.
+LocalPlayerVisibility는 로컬 카메라에서 자기 몸을 숨기는 역할만 담당한다.
+
+## Unity에서 편집하기
+
+Assets/Animations/Player/PlayerLocomotion.controller를 열고 Base Layer의 각 로코모션을 더블클릭한다.
+
+| 파라미터 | 타입 | 값 |
+|---|---|---|
+| Speed | Float | 서버 입력 이동 결과의 수평 속도(m/s) |
+| Posture | Int | 0 서기 / 1 웅크리기 / 2 엎드리기 |
+| Action | Int | 0 일반 / 1 점프 / 2 낙하 / 3 넘기 / 4 다이브 / 5 슬라이드 |
+| Lean | Float | -1 왼쪽 / 0 중립 / 1 오른쪽 |
+| LeanPoseTime | Float | 1 고정: 기울이기 클립 끝 포즈 |
+
+- StandingLocomotion: Idle 0, Walk 1.2, TacticalRun 2.4, Sprint 4.5. 클립 배율은 1 / 1 / 0.85 / 1.2.
+- CrouchLocomotion: CrouchIdle 0, CrouchWalk 0.65.
+- ProneLocomotion: ProneIdle 0, Crawl 0.3.
+- 세 트리 모두 1D / Speed를 사용한다. Threshold는 실제 이동 속도를 변경하지 않는다.
+- 서기에서 앉기, 서기/앉기에서 엎드리기는 진입 클립을 끝까지 재생한다.
+- 자세 진입 완료 전환은 Exit Time 1, 일반 전환은 Exit Time 없음. Fixed Duration은 0.15초.
+- 다른 자세 입력이나 특수 동작으로 전환할 수 있다. 전환 블렌드 자체는 0.15초 동안 완료한다.
+- 특수 동작은 Any State의 Action 조건으로 진입하고, 완료 시 현재 Posture의 로코모션으로 직접 돌아간다.
+- Lean은 기존 Additive 마스크를 유지한다. 좌우 상태 선택은 Animator 조건, 가중치는 완화된 Lean의 절댓값이다.
+- UpperBody는 무기용 빈 레이어다. Root와 발 IK는 마스크에서 제외했다. 모션 추가 시 Lean과 겹치는 부위의 덮어쓰기 및 레이어 순서를 조율한다.
+- Root Motion은 끈다. 이동 권한은 서버 CharacterController가 유지한다.
+
+## 구성 도구와 검증
+
+Oskar Mike > Animation > Configure Animator Locomotion은 표준 트리와 전환을 다시 적용한다.
+수동 수정한 트리/전환을 유지하려면 구성 메뉴를 다시 실행하지 않는다.
+클립을 재생성하거나 이동하지 않고, 사용자가 정리한 Anim 하위 클립을 찾아 연결한다.
+기존 PlayerAnimationSetup.Build 진입점도 이 구성 도구를 호출한다.
+
+Oskar Mike > Animation > Validate Animator Locomotion은 임시 미리보기 씬에서 23개 검사를 수행한다.
+제품 Player와 AI TestPlayer 모두 새 연결 컴포넌트를 사용한다.
+실제 4인 원격 모션/지연과 발 접지/미끄러짐의 시각적 품질은 별도 검증 대상이다.
+슬라이드/다이브/넘기 및 좌우/후진 전용 클립 부족은 그대로다. 이번 변경은 새 모션 제작이 아니다.
+
+---
+
+아래는 초기 캐릭터 도입 기록이다. 상태 선택 코드와 생성 도구 설명은 위 최신 구성으로 대체된다.
+
 # Character animation integration
 
 ## Controls and ownership

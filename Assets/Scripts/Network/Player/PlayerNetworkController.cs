@@ -134,6 +134,7 @@ namespace OskarMike.Network.Player
         // ── 컴포넌트 참조 ──────────────────────────────────
         private CharacterController characterController;
         private PlayerStamina        stamina;
+        private PlayerHealth         health;
         private Camera               localCamera;
 
         // ── 오너 클라이언트 전용 ───────────────────────────
@@ -191,6 +192,7 @@ namespace OskarMike.Network.Player
         {
             characterController = GetComponent<CharacterController>();
             stamina             = GetComponent<PlayerStamina>();
+            health              = GetComponent<PlayerHealth>();
             localCamera         = GetComponentInChildren<Camera>(true);
             InitializeCharacterControllerHeight();
 #if ENABLE_INPUT_SYSTEM
@@ -291,6 +293,11 @@ namespace OskarMike.Network.Player
             bool    pronePressed,
             float   leanInput)
         {
+            if (health != null && health.Dead)
+            {
+                StopForDeath();
+                return;
+            }
             float dt = Mathf.Max(Time.deltaTime, 0.0001f);
             moveInput = Vector2.ClampMagnitude(moveInput, 1f);
 
@@ -340,6 +347,18 @@ namespace OskarMike.Network.Player
                 && serverMoveState != PlayerMoveState.FullSprint && serverActionState == PlayerActionState.None;
             netLean.Value = canLean && !float.IsNaN(leanInput) && !float.IsInfinity(leanInput)
                 ? Mathf.Clamp(leanInput, -1f, 1f) : 0f;
+        }
+
+        public void StopForDeath()
+        {
+            if (!IsServer) return;
+            horizontalVelocity = Vector3.zero;
+            verticalVelocity = 0f;
+            actionTimer = actionDuration = actionLockoutTimer = recentSprintTimer = 0f;
+            serverMoveState = PlayerMoveState.Idle;
+            netMoveState.Value = PlayerMoveState.Idle;
+            netLean.Value = 0f;
+            SetActionState(PlayerActionState.None);
         }
 
         private void UpdateMoveState(Vector2 moveInput, bool isWalking, bool canFullSprint)
@@ -852,6 +871,7 @@ namespace OskarMike.Network.Player
 
         public void EnableGameplayInput()
         {
+            if (health != null && health.Dead) return;
             gameplayInputEnabled = true;
 #if ENABLE_INPUT_SYSTEM
             if (playerInput != null) playerInput.enabled = true;
