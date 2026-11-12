@@ -136,6 +136,7 @@ namespace OskarMike.Network.Player
         private PlayerStamina        stamina;
         private PlayerHealth         health;
         private Camera               localCamera;
+        private IPlayerMovementModifier movementModifier; // 더플백 운반 등 (선택)
 
         // ── 오너 클라이언트 전용 ───────────────────────────
         private float localVerticalRotation = 0f;
@@ -194,6 +195,7 @@ namespace OskarMike.Network.Player
             stamina             = GetComponent<PlayerStamina>();
             health              = GetComponent<PlayerHealth>();
             localCamera         = GetComponentInChildren<Camera>(true);
+            movementModifier    = GetComponent<IPlayerMovementModifier>();
             InitializeCharacterControllerHeight();
 #if ENABLE_INPUT_SYSTEM
             playerInput = GetComponent<PlayerInput>();
@@ -533,7 +535,8 @@ namespace OskarMike.Network.Player
                    && moveInput.y > 0.1f
                    && moveInput.sqrMagnitude >= 0.01f
                    && stamina != null
-                   && stamina.CanFullSprint;
+                   && stamina.CanFullSprint
+                   && (movementModifier == null || movementModifier.AllowFullSprint);
         }
 
         private bool CanJump(bool jumpPressed)
@@ -822,6 +825,12 @@ namespace OskarMike.Network.Player
         // ══════════════════════════════════════════════════
 
         private float GetSpeed()
+        {
+            float multiplier = movementModifier != null ? Mathf.Max(0f, movementModifier.SpeedMultiplier) : 1f;
+            return GetBaseSpeed() * multiplier;
+        }
+
+        private float GetBaseSpeed()
         {
             return serverPosture switch
             {

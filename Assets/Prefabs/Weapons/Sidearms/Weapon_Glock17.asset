@@ -1,0 +1,35 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 08144ddec7b3c2741bca3344387d3c37, type: 3}
+  m_Name: Weapon_Glock17
+  m_EditorClassIdentifier: Assembly-CSharp::OskarMike.Weapons.WeaponDefinition
+  weaponId: glock17
+  displayName: "\uAE00\uB85D 17"
+  slot: 1
+  damage: 15
+  fireInterval: 0.18
+  automatic: 0
+  range: 120
+  spreadDegrees: 0.6
+  magazineSize: 17
+  startingReserve: 51
+  reloadTime: 1.6
+  drawTime: 0.35
+  viewModelPrefab: {fileID: 3196047605060955953, guid: 3b83f5e12692efa498def7d6ac897ba5, type: 3}
+  viewOffset: {x: 0.13, y: -0.11, z: 0.4}
+  viewEuler: {x: 0, y: 0, z: 0}
+  viewMuzzle: {x: 0, y: 0.005, z: 0.108}
+  viewKick: 0.05
+  worldModelPrefab: {fileID: 3196047605060955953, guid: 3b83f5e12692efa498def7d6ac897ba5, type: 3}
+  worldOffset: {x: 0, y: 0, z: 0}
+  worldEuler: {x: 358.5, y: 0, z: 134.4}
+  worldMuzzle: {x: 0, y: 0.005, z: 0.108}

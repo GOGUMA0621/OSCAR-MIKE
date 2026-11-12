@@ -1,0 +1,35 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 08144ddec7b3c2741bca3344387d3c37, type: 3}
+  m_Name: Weapon_M4A1
+  m_EditorClassIdentifier: Assembly-CSharp::OskarMike.Weapons.WeaponDefinition
+  weaponId: m4a1
+  displayName: M4A1
+  slot: 0
+  damage: 20
+  fireInterval: 0.1
+  automatic: 1
+  range: 300
+  spreadDegrees: 0.4
+  magazineSize: 30
+  startingReserve: 90
+  reloadTime: 2.3
+  drawTime: 0.6
+  viewModelPrefab: {fileID: 4805077088663528612, guid: d4ae2b24c03ad6e4c8562ba1e7cb3893, type: 3}
+  viewOffset: {x: 0.16, y: -0.17, z: 0.3}
+  viewEuler: {x: 0, y: 0, z: 0}
+  viewMuzzle: {x: 0, y: 0.052, z: 0.602}
+  viewKick: 0.04
+  worldModelPrefab: {fileID: 4805077088663528612, guid: d4ae2b24c03ad6e4c8562ba1e7cb3893, type: 3}
+  worldOffset: {x: 0, y: 0, z: 0}
+  worldEuler: {x: 358.5, y: 0, z: 134.4}
+  worldMuzzle: {x: 0, y: 0.052, z: 0.602}
