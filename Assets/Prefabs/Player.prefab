@@ -672,9 +672,11 @@ MonoBehaviour:
   drawDrop: 0.25
   kickRecoverSpeed: 0.8
   kickPitchDegrees: 4
+  muzzleFlashPrefab: {fileID: 3797838010009497503, guid: 51ba6347d027b934492286c634ac885d, type: 3}
+  muzzleFlashScale: {x: 0.8, y: 1.2}
   muzzleColor: {r: 1, g: 0.78, b: 0.45, a: 1}
-  muzzleIntensity: 3
-  muzzleRange: 6
+  muzzleIntensity: 1.5
+  muzzleRange: 2
   muzzleDuration: 0.05
 --- !u!114 &369235882809025359
 MonoBehaviour:

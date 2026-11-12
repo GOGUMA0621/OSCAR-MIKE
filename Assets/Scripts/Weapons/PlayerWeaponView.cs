@@ -25,9 +25,13 @@ namespace OskarMike.Weapons
         [SerializeField] private float drawDrop = 0.25f;
         [SerializeField] private float kickRecoverSpeed = 0.8f;
         [SerializeField] private float kickPitchDegrees = 4f;
+        [Tooltip("총구에 잠깐 표시할 플래시 메시 (카메라를 향한 가산 쿼드 등)")]
+        [SerializeField] private GameObject muzzleFlashPrefab;
+        [SerializeField] private Vector2 muzzleFlashScale = new Vector2(0.8f, 1.2f);
         [SerializeField] private Color muzzleColor = new Color(1f, 0.78f, 0.45f);
-        [SerializeField] private float muzzleIntensity = 3f;
-        [SerializeField] private float muzzleRange = 6f;
+        [SerializeField] private float muzzleIntensity = 1.5f;
+        [Tooltip("너무 크면 바닥(발밑)까지 비춰서 발에서 번쩍이는 것처럼 보인다")]
+        [SerializeField] private float muzzleRange = 2f;
         [SerializeField] private float muzzleDuration = 0.05f;
 
         private PlayerWeaponLoadout loadout;
@@ -35,7 +39,10 @@ namespace OskarMike.Weapons
         private PlayerHealth health;
         private readonly GameObject[] viewModels = new GameObject[2];
         private readonly GameObject[] worldModels = new GameObject[2];
+        private Transform muzzleRoot;
         private Light muzzleLight;
+        private GameObject muzzleFlash;
+        private Transform worldScaleRoot;
         private float muzzleUntil;
         private float kick;
         private int localLayer;
@@ -113,7 +120,7 @@ namespace OskarMike.Weapons
                     * Quaternion.Euler(-kickPitchDegrees * kickRatio - reloadDip * 120f, 0f, 0f);
             }
 
-            if (muzzleLight != null && muzzleLight.enabled && Time.time >= muzzleUntil) muzzleLight.enabled = false;
+            if (muzzleRoot != null && muzzleRoot.gameObject.activeSelf && Time.time >= muzzleUntil) muzzleRoot.gameObject.SetActive(false);
         }
 
         private void OnShotFired(bool localPrediction)
@@ -132,19 +139,33 @@ namespace OskarMike.Weapons
 
         private void Flash(Transform parent, Vector3 localPosition)
         {
-            if (muzzleLight == null)
+            if (muzzleRoot == null)
             {
-                var go = new GameObject("머즐 플래시");
-                muzzleLight = go.AddComponent<Light>();
+                muzzleRoot = new GameObject("머즐 플래시").transform;
+                muzzleLight = muzzleRoot.gameObject.AddComponent<Light>();
                 muzzleLight.type = LightType.Point;
                 muzzleLight.shadows = LightShadows.None;
+                if (muzzleFlashPrefab != null)
+                {
+                    muzzleFlash = Instantiate(muzzleFlashPrefab, muzzleRoot, false);
+                    Strip(muzzleFlash, ShadowCastingMode.Off);
+                }
+            }
+            muzzleRoot.SetParent(parent, false);
+            muzzleRoot.localPosition = localPosition;
+            muzzleRoot.localRotation = Quaternion.identity;
+            muzzleRoot.localScale = Vector3.one;
+            muzzleRoot.gameObject.layer = parent.gameObject.layer;
+            if (muzzleFlash != null)
+            {
+                SetLayer(muzzleFlash, parent.gameObject.layer);
+                muzzleFlash.transform.localRotation = Quaternion.Euler(0f, 0f, Random.Range(0f, 360f));
+                muzzleFlash.transform.localScale = Vector3.one * Random.Range(muzzleFlashScale.x, muzzleFlashScale.y);
             }
             muzzleLight.color = muzzleColor;
             muzzleLight.intensity = muzzleIntensity;
             muzzleLight.range = muzzleRange;
-            muzzleLight.transform.SetParent(parent, false);
-            muzzleLight.transform.localPosition = localPosition;
-            muzzleLight.enabled = true;
+            muzzleRoot.gameObject.SetActive(true);
             muzzleUntil = Time.time + muzzleDuration;
         }
 
@@ -162,7 +183,7 @@ namespace OskarMike.Weapons
         private GameObject CreateWorldModel(WeaponDefinition def)
         {
             if (def.WorldModelPrefab == null) return null;
-            Transform parent = worldAnchor != null ? worldAnchor : transform;
+            Transform parent = worldAnchor != null ? WorldScaleRoot() : transform;
             var go = Instantiate(def.WorldModelPrefab, parent, false);
             go.name = def.DisplayName + " (3인칭)";
             go.transform.localPosition = worldAnchor != null ? def.WorldOffset : fallbackWorldOffset;
@@ -171,6 +192,22 @@ namespace OskarMike.Weapons
             if (loadout.IsOwner && localLayer >= 0) SetLayer(go, localLayer);
             return go;
         }
+
+        /// <summary>
+        /// 리그 본에 큰 스케일(예: FBX 0.01 단위 → 손 본 lossyScale 100)이 걸려 있어도
+        /// 무기가 실제 미터 크기로 보이도록 스케일을 상쇄하는 중간 노드.
+        /// </summary>
+        private Transform WorldScaleRoot()
+        {
+            if (worldScaleRoot != null) return worldScaleRoot;
+            worldScaleRoot = new GameObject("무기 손 기준").transform;
+            worldScaleRoot.SetParent(worldAnchor, false);
+            Vector3 s = worldAnchor.lossyScale;
+            worldScaleRoot.localScale = new Vector3(SafeInverse(s.x), SafeInverse(s.y), SafeInverse(s.z));
+            return worldScaleRoot;
+        }
+
+        private static float SafeInverse(float v) => Mathf.Abs(v) > 0.0001f ? 1f / v : 1f;
 
         private void ApplyOwnerLayer()
         {
@@ -197,7 +234,7 @@ namespace OskarMike.Weapons
                 if (viewModels[i] != null) viewModels[i].SetActive(false);
                 if (worldModels[i] != null) worldModels[i].SetActive(false);
             }
-            if (muzzleLight != null) muzzleLight.enabled = false;
+            if (muzzleRoot != null) muzzleRoot.gameObject.SetActive(false);
         }
     }
 }
