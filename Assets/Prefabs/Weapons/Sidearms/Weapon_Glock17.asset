@@ -30,6 +30,6 @@ MonoBehaviour:
   viewMuzzle: {x: 0, y: 0.005, z: 0.108}
   viewKick: 0.05
   worldModelPrefab: {fileID: 3196047605060955953, guid: 3b83f5e12692efa498def7d6ac897ba5, type: 3}
-  worldOffset: {x: 0, y: 0, z: 0}
-  worldEuler: {x: 358.5, y: 0, z: 134.4}
+  worldOffset: {x: 0, y: 0.02, z: 0.06}
+  worldEuler: {x: 0, y: 0, z: 0}
   worldMuzzle: {x: 0, y: 0.005, z: 0.108}

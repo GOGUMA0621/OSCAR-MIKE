@@ -47,9 +47,11 @@ namespace OskarMike.Weapons
         [Tooltip("발사 시 뒤로 밀리는 거리")]
         [Min(0f)] [SerializeField] private float viewKick = 0.05f;
 
-        [Header("3인칭 모델 (오른손 하위)")]
+        [Header("3인칭 모델 (위치는 오른손, 방향은 몸 정면 기준)")]
         [SerializeField] private GameObject worldModelPrefab;
-        [SerializeField] private Vector3 worldOffset = new Vector3(0.05f, 0.03f, 0.02f);
+        [Tooltip("손 위치에서의 오프셋 (몸 기준 좌표, m)")]
+        [SerializeField] private Vector3 worldOffset = Vector3.zero;
+        [Tooltip("몸 정면 기준 회전. (0,0,0) = 총구가 캐릭터 정면")]
         [SerializeField] private Vector3 worldEuler = Vector3.zero;
         [SerializeField] private Vector3 worldMuzzle = new Vector3(0f, 0.05f, 0.5f);
 

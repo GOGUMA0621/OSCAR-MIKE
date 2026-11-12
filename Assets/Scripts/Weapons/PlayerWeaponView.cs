@@ -102,7 +102,11 @@ namespace OskarMike.Weapons
                 if (viewModels[i] != null) viewModels[i].SetActive(isActive && showView);
 
                 if (isActive && worldModels[i] == null) worldModels[i] = CreateWorldModel(def);
-                if (worldModels[i] != null) worldModels[i].SetActive(isActive);
+                if (worldModels[i] != null)
+                {
+                    worldModels[i].SetActive(isActive);
+                    if (isActive) AlignWorldModel(worldModels[i].transform, def);
+                }
             }
 
             kick = Mathf.MoveTowards(kick, 0f, kickRecoverSpeed * Time.deltaTime);
@@ -121,6 +125,17 @@ namespace OskarMike.Weapons
             }
 
             if (muzzleRoot != null && muzzleRoot.gameObject.activeSelf && Time.time >= muzzleUntil) muzzleRoot.gameObject.SetActive(false);
+        }
+
+        /// <summary>
+        /// 3인칭 총: 위치는 손(애니메이션)을 따라가고, 방향은 손 회전과 무관하게 몸 정면 기준으로 맞춘다.
+        /// (Animator 갱신 이후인 LateUpdate 에서 호출)
+        /// </summary>
+        private void AlignWorldModel(Transform model, WeaponDefinition def)
+        {
+            if (worldAnchor == null) return;
+            Quaternion body = transform.rotation;
+            model.SetPositionAndRotation(worldAnchor.position + body * def.WorldOffset, body * def.WorldRotation);
         }
 
         private void OnShotFired(bool localPrediction)
