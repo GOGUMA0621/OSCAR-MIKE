@@ -59,6 +59,10 @@ namespace OskarMike.Weapons
         [Range(1, 32)] [SerializeField] private int impactPoolSize = 8;
         [Range(0, 128)] [SerializeField] private int bulletHolePoolSize = 32;
         [Min(1f)] [SerializeField] private float bulletHoleLifetime = 20f;
+        [Tooltip("탄흔 텍스처 아틀라스 칸 수 (가로 x 세로). 생성 시 한 칸을 무작위로 고른다.")]
+        [SerializeField] private Vector2Int bulletHoleAtlas = new Vector2Int(2, 2);
+        [Tooltip("생성 시 무작위 크기 배율 (최소, 최대)")]
+        [SerializeField] private Vector2 bulletHoleScale = new Vector2(0.75f, 1.3f);
 
         private PlayerWeaponLoadout loadout;
         private PlayerNetworkController controller;
@@ -79,6 +83,8 @@ namespace OskarMike.Weapons
         private WeaponImpactPool fleshImpacts;
         private WeaponImpactPool bulletHoles;
         private bool destroying;
+        private MaterialPropertyBlock holeBlock;
+        private static readonly int BaseMapST = Shader.PropertyToID("_BaseMap_ST");
 
         private void Awake()
         {
@@ -231,7 +237,27 @@ namespace OskarMike.Weapons
                 bulletHoles ??= new WeaponImpactPool(bulletHolePrefab, bulletHolePoolSize, bulletHoleLifetime);
                 // 쿼드 앞면(-Z)이 법선을 향하도록 + 무작위 회전
                 Quaternion face = Quaternion.LookRotation(-normal) * Quaternion.Euler(0f, 0f, Random.Range(0f, 360f));
-                bulletHoles.Spawn(impact.Point + normal * 0.004f, face);
+                // 겹친 탄흔끼리 깜빡이지 않도록 표면에서 띄우는 거리도 조금씩 다르게
+                var hole = bulletHoles.Spawn(impact.Point + normal * Random.Range(0.003f, 0.006f), face);
+                if (hole != null) VaryBulletHole(hole);
+            }
+        }
+
+        /// <summary>탄흔마다 아틀라스 칸(모양)과 크기를 무작위로 바꾼다.</summary>
+        private void VaryBulletHole(GameObject hole)
+        {
+            hole.transform.localScale = Vector3.one * Random.Range(bulletHoleScale.x, bulletHoleScale.y);
+
+            int cols = Mathf.Max(1, bulletHoleAtlas.x), rows = Mathf.Max(1, bulletHoleAtlas.y);
+            if (cols * rows <= 1) return;
+            int cell = Random.Range(0, cols * rows);
+            var st = new Vector4(1f / cols, 1f / rows, (cell % cols) / (float)cols, (cell / cols) / (float)rows);
+            holeBlock ??= new MaterialPropertyBlock();
+            foreach (var r in hole.GetComponentsInChildren<Renderer>())
+            {
+                r.GetPropertyBlock(holeBlock);
+                holeBlock.SetVector(BaseMapST, st);
+                r.SetPropertyBlock(holeBlock);
             }
         }
 

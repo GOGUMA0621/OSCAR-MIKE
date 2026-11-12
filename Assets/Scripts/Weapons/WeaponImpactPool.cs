@@ -28,9 +28,10 @@ namespace OskarMike.Weapons
 
         public bool IsValid => prefab != null;
 
-        public void Spawn(Vector3 position, Quaternion rotation)
+        /// <returns>재생된 인스턴스 (호출자가 크기·머티리얼 변형 등을 추가로 적용할 수 있다)</returns>
+        public GameObject Spawn(Vector3 position, Quaternion rotation)
         {
-            if (prefab == null) return;
+            if (prefab == null) return null;
             int index = Acquire();
             var go = items[index];
             go.transform.SetPositionAndRotation(position, rotation);
@@ -42,6 +43,7 @@ namespace OskarMike.Weapons
                 ps.Play(true);
             }
             expiresAt[index] = lifetime > 0f ? Time.time + lifetime : float.PositiveInfinity;
+            return go;
         }
 
         /// <summary>수명이 지난 탄흔 숨기기 (매 프레임 호출).</summary>
