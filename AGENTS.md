@@ -22,14 +22,14 @@ All use `Instance` + `DontDestroyOnLoad` (no DI):
 `RuntimeBootstrap` in each scene auto-creates any missing singleton on Awake.
 
 ## Networking Patterns
-- **ServerRpc (2 total)**: `MoveServerRpc` (owner→server, every Update, bundles all input) + `SetReadyServerRpc`
+- **ServerRpc (7 total)**: `MoveServerRpc` (owner→server, every Update, bundles all input) + `SetReadyServerRpc` + `PlayerLootCarrier.InteractServerRpc` / `ThrowServerRpc` (farming, see Duffel Bag section) + `PlayerWeaponLoadout.SelectSlotServerRpc` / `FireServerRpc` / `ReloadServerRpc` (weapons, see Weapons section)
 - **ClientRpc**: NONE — transform synced via `NetworkTransform`, state via `NetworkVariable`
 - **NetworkVariable write**: always `Server` permission
 - **Player prefab** (`Assets/Prefabs/Player.prefab`) registered in DefaultNetworkPrefabs.asset. Components: `CharacterController`, `NetworkObject`, `NetworkTransform` (Server auth mode), `PlayerInput` (actions: `PlayerActions.inputactions`), `PlayerNetworkController`, `PlayerStamina` (auto via `[RequireComponent]`)
 
 ## Input System
 - Action map name: **`"Keyboard&Mouse"`** (note the ampersand)
-- 7 actions: `Move`, `Look`, `Jump`, `Sprint`, `Crouch`, `Prone`, `Interact` (Interact not wired yet)
+- Actions include `Move`, `Look`, `Jump`, `Sprint`, `Crouch`, `Prone`, `Interact` (F), `Throw` (G), `LeanLeft` (Q), `LeanRight` (E), `PrimaryWeapon` (1), `SecondaryWeapon` (2), `Fire` (LMB), `Reload` (R). `Interact`/`Throw` are bound by `PlayerLootCarrier`; weapon actions by `PlayerWeaponLoadout` — not `PlayerNetworkController`.
 - Owner-client only processes input. Non-owners: `playerInput.enabled = false`.
 - Scene-aware: input enabled only in `GameMap`/`Hideout` scenes. Disabled in Lobby/MainMenu.
 - Look input has `ScaleVector2(x=0.1,y=0.1)` processor (scaled at input level, NOT in code).
@@ -43,9 +43,29 @@ All use `Instance` + `DontDestroyOnLoad` (no DI):
 - Aim sway: local-only procedural camera shake when `stamina.ShouldSway`.
 - Movement is host-authoritative: client sends move/rotate/jump/sprint/crouch/prone in one RPC, server executes `CharacterController.Move()`.
 - Crouch/Prone: toggles (C → crouch toggle, Z → prone toggle). CC height lerped via `postureTransitionSpeed`.
-- Player speed config on prefab: walk 4.5, sprint 8.0, crouch 2.5, prone 1.2. Jump height 1.2, gravity -15.
+- Speeds (serialized): walk 1.2, tactical walk 2.4, full sprint 4.5, crouch 0.65, prone 0.3. `GetSpeed()` multiplies by `IPlayerMovementModifier.SpeedMultiplier` and `CanFullSprint()` checks `AllowFullSprint` (optional component on the player, e.g. `PlayerLootCarrier`).
 - NetworkVariables: `isReady` (bool), `netPosture` (PlayerPosture byte) — both `WritePermission.Server`.
 - **RobotKyle.prefab** is a non-networked visual model (StarterAssets third-person, no `NetworkObject`). Leftover template content.
+
+## Farming — Duffel Bag (`Assets/Scripts/Items/Duffel/`)
+- One team `DuffelBag` per run, spawned by `DuffelBagSpawner` (GameMap, RangeCourse). Prefab `Assets/Prefabs/DuffelBag.prefab`, visual `Assets/Models/DuffelBag/SM_DuffelBag.prefab` (procedural low-poly mesh; regenerate via `Tools/OSCAR-MIKE/Generate Duffel Bag Model`, source `Assets/Scripts/Items/Editor/DuffelBagMeshGenerator.cs`).
+- The bag stores **value only** (`storedValue`), not items. Deposited loot is despawned.
+- `PlayerLootCarrier` (on Player.prefab and AI TestPlayer.prefab): 4 personal slots (`NetworkList<LootSlotEntry>`) + 1 hand. Picked loot is despawned and kept as `LootSlotEntry`. Dropping the hand item re-spawns it from `lootTables`.
+- F: pick up item (slot → hand) / deposit everything into a bag (on the ground, on a teammate's back, or your own) / shoulder an empty-handed bag. G: throw bag (crouched/prone = put down) or drop hand item.
+- Carrying is a fixed debuff (×0.7 speed, no full sprint), regardless of value. `CanUsePrimaryWeapon == false` while carrying (hook for the future weapon system; `RangeTestGun` already honors it).
+- Hits: `DuffelBagHitbox` on layer `Hitbox` (collides with nothing, raycasts only). `DuffelBag.ServerApplyHit(damage)` removes `ceil(value × damage × 0.005)`. The money FX plays on all peers via the `hitSequence` NetworkVariable.
+- The carried bag is NGO-parented to the player (`TrySetParent`). It is released on death and in `OnNetworkPreDespawn`.
+
+## Weapons (`Assets/Scripts/Weapons/`)
+- Throwables are out of scope for now. Two slots: **Primary** (1, M4A1) and **Secondary** (2, Glock 17), both given on spawn.
+- `WeaponDefinition` (ScriptableObject): stats (damage, fire interval, auto/semi, magazine/reserve, reload/draw time, range, spread) + view/world model prefab & offsets. Assets: `Assets/Prefabs/Weapons/Primary/Weapon_M4A1.asset`, `Assets/Prefabs/Weapons/Sidearms/Weapon_Glock17.asset`; model prefabs `M4A1.prefab` / `Glock17.prefab` (grip at origin, muzzle +Z).
+- `PlayerWeaponLoadout` (NetworkBehaviour on Player.prefab and AI TestPlayer.prefab — RangeCourse/EnemyAITest use TestPlayer): owner sends slot/fire/reload RPCs; server validates (alive, draw/reload, fire rate, ammo, no FullSprint/Vault/Dive/Slide, origin within 2.5 m) and does the hitscan. NetworkVariables: `activeSlot`, `primaryAmmo`/`secondaryAmmo` (`WeaponAmmo`), `reloading`, `lastShot` (`ShotEvent` = sequence + `ShotImpact` {point, normal, `ImpactKind`}, remote muzzle/tracer/impact FX), `hitSequence` (owner hit marker; low bit = head). Spread is applied by the owner before sending the direction, so the owner's local tracer and the server hit use the same ray (`FindImpact`).
+- `BulletTracer` (pooled by `PlayerWeaponView`, material `Assets/Prefabs/Weapons/FX/M_BulletTracer.mat`): visual-only streak from the muzzle to the impact point (owner: 1st-person muzzle, immediately; others: 3rd-person muzzle when `lastShot` changes).
+- Impact FX play when the tracer arrives (`WeaponImpactPool`, prefabs in `Assets/Prefabs/Weapons/FX/`): `ImpactKind.Surface` (static world) = sparks + dust + `BulletHole` (max 32, hidden after 20 s; random roll, scale 0.75–1.3 and one of 4 noisy variants from the 2×2 atlas `T_BulletHole.png` via `_BaseMap_ST` — `M_BulletHole` must stay on URP/Unlit, since URP particle shaders ignore tiling); `Target` (dummies, duffel bag, dynamic rigidbodies) = sparks + dust, no hole; `Flesh` (`EnemyHealth`/other `PlayerHealth`) = blood; `None` (max range) = nothing.
+- Hit order: `RangeTargetHitbox` → `DuffelBagHitbox` → `EnemyHealth` (in parent) → `PlayerHealth` (only if `friendlyFire`). Region from optional `WeaponHitbox` marker, default Body. Non-trigger colliders block the shot.
+- Duffel rule: while `PlayerLootCarrier.CanUsePrimaryWeapon == false` the server forces Secondary and refuses Primary.
+- `PlayerWeaponView` (local only): owner 1st-person model under the camera; 3rd-person model on the humanoid right hand (owner copy on `LocalPlayerVisual`). `PlayerWeaponHud`: ammo, slot list, crosshair, hit marker.
+- `RangeTestGun` stays in RangeCourse for dummy labels / F5 reset but does nothing else when the player has `PlayerWeaponLoadout`.
 
 ## Session / Ready State Flow
 ```

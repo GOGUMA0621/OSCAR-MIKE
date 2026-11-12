@@ -152,6 +152,11 @@ GameObject:
   - component: {fileID: 2682303801921673805}
   - component: {fileID: 5651320994325026776}
   - component: {fileID: 1313817545799913743}
+  - component: {fileID: 5018251646405031800}
+  - component: {fileID: 8361616092065328433}
+  - component: {fileID: 7760140278280903218}
+  - component: {fileID: 551751493564903954}
+  - component: {fileID: 369235882809025359}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -589,6 +594,118 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 695d72da7b164731b7d5eb94867c6777, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::OskarMike.Network.Player.LocalPlayerVisibility
+--- !u!114 &5018251646405031800
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8097309021167318534}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dfb4c56fda333ba4cb3323b64afd4c06, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::OskarMike.Items.PlayerLootCarrier
+  ShowTopMostFoldoutHeaderGroup: 1
+  slotCount: 4
+  interactRange: 2.5
+  serverRangeTolerance: 1.5
+  interactActionName: Interact
+  throwActionName: Throw
+  lootTables:
+  - {fileID: 11400000, guid: 8ee4c21cca070e54dbab0bfaacdc5be4, type: 2}
+  - {fileID: 11400000, guid: 81c3598f33e61224c93b9fddbc5d74b5, type: 2}
+--- !u!114 &8361616092065328433
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8097309021167318534}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7d222545360d0b443a229809ee4f4150, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::OskarMike.UI.PlayerLootHud
+  font: {fileID: 11400000, guid: fbff3d51ba2da114f81d30bc57b14e3f, type: 2}
+  lossFlashDuration: 1.2
+--- !u!114 &7760140278280903218
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8097309021167318534}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b7fd13dea9eaa0d45a86fcb39e26c765, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::OskarMike.Weapons.PlayerWeaponLoadout
+  ShowTopMostFoldoutHeaderGroup: 1
+  primary: {fileID: 11400000, guid: ca57d18785adfa14da0574fc35c667a0, type: 2}
+  secondary: {fileID: 11400000, guid: c2c1c132633ca284eb86f0650eb90869, type: 2}
+  primaryActionName: PrimaryWeapon
+  secondaryActionName: SecondaryWeapon
+  fireActionName: Fire
+  reloadActionName: Reload
+  hitMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  friendlyFire: 0
+  maxOriginDistance: 2.5
+  fireIntervalTolerance: 0.25
+--- !u!114 &551751493564903954
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8097309021167318534}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 16c324b066a5e7f45a9d51938826bf27, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::OskarMike.Weapons.PlayerWeaponView
+  viewRoot: {fileID: 0}
+  worldAnchor: {fileID: 0}
+  fallbackWorldOffset: {x: 0.25, y: 1.25, z: 0.35}
+  drawDrop: 0.25
+  kickRecoverSpeed: 0.8
+  kickPitchDegrees: 4
+  muzzleFlashPrefab: {fileID: 3797838010009497503, guid: 51ba6347d027b934492286c634ac885d, type: 3}
+  muzzleFlashScale: {x: 0.8, y: 1.2}
+  muzzleColor: {r: 1, g: 0.78, b: 0.45, a: 1}
+  muzzleIntensity: 1.5
+  muzzleRange: 2
+  muzzleDuration: 0.05
+  tracerMaterial: {fileID: 2100000, guid: 1a7c0c36e0a1ce14d97ef89d9e8d2744, type: 2}
+  tracerSpeed: 220
+  tracerLength: 3
+  tracerWidth: 0.04
+  tracerColor: {r: 1, g: 0.75, b: 0.35, a: 1}
+  tracerMinDistance: 1.5
+  tracerEvery: 1
+  tracerPoolSize: 16
+  impactSurfacePrefab: {fileID: 316881537810272754, guid: e82315ed6f3914f4bbd6eb1cec0e16cf, type: 3}
+  impactFleshPrefab: {fileID: 8515341000153008972, guid: 762d2e0a9df9ccb4f9cf629695958df9, type: 3}
+  bulletHolePrefab: {fileID: 474339881252356500, guid: 5e2d056affd333f4b92498931f8325e9, type: 3}
+  impactPoolSize: 8
+  bulletHolePoolSize: 32
+  bulletHoleLifetime: 20
+--- !u!114 &369235882809025359
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8097309021167318534}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d220ebe9e61a50b4c8dee31f7ef19a06, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::OskarMike.UI.PlayerWeaponHud
+  font: {fileID: 11400000, guid: fbff3d51ba2da114f81d30bc57b14e3f, type: 2}
+  hitMarkerDuration: 0.15
 --- !u!1001 &6638560359484012245
 PrefabInstance:
   m_ObjectHideFlags: 0

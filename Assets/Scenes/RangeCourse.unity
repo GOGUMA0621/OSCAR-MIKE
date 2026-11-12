@@ -4415,7 +4415,7 @@ GameObject:
   - component: {fileID: 109674592}
   - component: {fileID: 109674591}
   m_Layer: 0
-  m_Name: Crawl overhead (8)
+  m_Name: item table
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -7483,7 +7483,7 @@ GameObject:
   - component: {fileID: 170915242}
   - component: {fileID: 170915241}
   m_Layer: 0
-  m_Name: Crawl overhead (7)
+  m_Name: item table
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -8208,6 +8208,52 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 181213822}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &182129079
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 182129081}
+  - component: {fileID: 182129080}
+  m_Layer: 0
+  m_Name: DuffelBagSpawner
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &182129080
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 182129079}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 861328204d73d1847bc52df922ad4bbc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::OskarMike.Items.DuffelBagSpawner
+  duffelBagPrefab: {fileID: 4683333299593195441, guid: 5752d0f4b85d17f4cbf63ad5568b0bdf, type: 3}
+  spawnPoint: {fileID: 0}
+--- !u!4 &182129081
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 182129079}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -2, y: 0.6, z: 3}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &182739457
 GameObject:
   m_ObjectHideFlags: 0
@@ -18383,7 +18429,7 @@ GameObject:
   - component: {fileID: 414992316}
   - component: {fileID: 414992315}
   m_Layer: 0
-  m_Name: Crawl overhead (12)
+  m_Name: item table
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -22594,7 +22640,7 @@ GameObject:
   - component: {fileID: 509912780}
   - component: {fileID: 509912779}
   m_Layer: 0
-  m_Name: Crawl overhead (5)
+  m_Name: item table
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -25630,7 +25676,7 @@ GameObject:
   - component: {fileID: 601223143}
   - component: {fileID: 601223142}
   m_Layer: 0
-  m_Name: Crawl overhead (9)
+  m_Name: item table
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -30352,7 +30398,7 @@ GameObject:
   - component: {fileID: 724093977}
   - component: {fileID: 724093976}
   m_Layer: 0
-  m_Name: Crawl overhead (10)
+  m_Name: item table
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -38434,7 +38480,7 @@ GameObject:
   - component: {fileID: 916301642}
   - component: {fileID: 916301641}
   m_Layer: 0
-  m_Name: Crawl overhead (11)
+  m_Name: item table
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -51461,7 +51507,7 @@ GameObject:
   - component: {fileID: 1240575303}
   - component: {fileID: 1240575302}
   m_Layer: 0
-  m_Name: Crawl overhead (6)
+  m_Name: item table
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -57889,7 +57935,7 @@ GameObject:
   - component: {fileID: 1420776472}
   - component: {fileID: 1420776471}
   m_Layer: 0
-  m_Name: Crawl overhead (4)
+  m_Name: item table
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -66584,7 +66630,7 @@ GameObject:
   - component: {fileID: 1634286153}
   - component: {fileID: 1634286152}
   m_Layer: 0
-  m_Name: Crawl overhead (1)
+  m_Name: item table
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -71149,7 +71195,7 @@ GameObject:
   - component: {fileID: 1737160159}
   - component: {fileID: 1737160158}
   m_Layer: 0
-  m_Name: Crawl overhead (3)
+  m_Name: item table
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -76591,7 +76637,7 @@ GameObject:
   - component: {fileID: 1893001943}
   - component: {fileID: 1893001942}
   m_Layer: 0
-  m_Name: Crawl overhead (2)
+  m_Name: item table
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -87886,3 +87932,4 @@ SceneRoots:
   - {fileID: 1698222227}
   - {fileID: 726737120}
   - {fileID: 158127927}
+  - {fileID: 182129081}
