@@ -29,14 +29,36 @@ namespace OskarMike.Weapons
         public override int GetHashCode() => (Magazine << 16) ^ Reserve;
     }
 
-    /// <summary>원격 피어 사격 연출용: 발사 순번 + 탄이 멈춘 지점 (트레이서 끝점).</summary>
+    /// <summary>탄이 멈춘 대상의 종류 (탄착 효과 선택용).</summary>
+    public enum ImpactKind : byte
+    {
+        None = 0,     // 아무것도 맞지 않음 (사거리 끝)
+        Surface = 1,  // 벽·바닥 등 고정 지형: 불꽃 + 먼지 + 탄흔
+        Target = 2,   // 사격장 더미·더플백·움직이는 물체: 불꽃 + 먼지 (탄흔 없음)
+        Flesh = 3     // 적·플레이어: 피
+    }
+
+    /// <summary>탄착 정보 (위치·법선·종류).</summary>
+    [Serializable]
+    public struct ShotImpact : IEquatable<ShotImpact>
+    {
+        public Vector3 Point;
+        public Vector3 Normal;
+        public ImpactKind Kind;
+
+        public bool Equals(ShotImpact other) => Point == other.Point && Normal == other.Normal && Kind == other.Kind;
+        public override bool Equals(object obj) => obj is ShotImpact other && Equals(other);
+        public override int GetHashCode() => Point.GetHashCode() ^ (int)Kind;
+    }
+
+    /// <summary>원격 피어 사격 연출용: 발사 순번 + 탄착 정보.</summary>
     [Serializable]
     public struct ShotEvent : INetworkSerializeByMemcpy, IEquatable<ShotEvent>
     {
         public int Sequence;
-        public Vector3 End;
+        public ShotImpact Impact;
 
-        public bool Equals(ShotEvent other) => Sequence == other.Sequence && End == other.End;
+        public bool Equals(ShotEvent other) => Sequence == other.Sequence && Impact.Equals(other.Impact);
         public override bool Equals(object obj) => obj is ShotEvent other && Equals(other);
         public override int GetHashCode() => Sequence;
     }
@@ -83,7 +105,7 @@ namespace OskarMike.Weapons
             default, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Server);
         private readonly NetworkVariable<bool> reloading = new NetworkVariable<bool>(
             false, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Server);
-        // 원격 피어 사격 연출용 (발사 1회마다 Sequence +1, End = 탄착 지점).
+        // 원격 피어 사격 연출용 (발사 1회마다 Sequence +1, Impact = 탄착 정보).
         private readonly NetworkVariable<ShotEvent> lastShot = new NetworkVariable<ShotEvent>(
             default, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Server);
         // 오너 히트마커용: (명중 횟수 << 1) | (머리면 1). 값 하나로 순서 문제 없이 부위까지 전달.
@@ -117,9 +139,9 @@ namespace OskarMike.Weapons
 
         // ── 공개 상태 ──────────────────────────────────────
         /// <summary>
-        /// 발사 연출 (local: true = 오너 로컬 즉시 예측, false = 원격 피어 동기화 / end: 탄착 지점).
+        /// 발사 연출 (local: true = 오너 로컬 즉시 예측, false = 원격 피어 동기화 / impact: 탄착 정보).
         /// </summary>
-        public event Action<bool, Vector3> ShotFired;
+        public event Action<bool, ShotImpact> ShotFired;
         /// <summary>오너 전용: 서버가 명중을 확인했을 때 (true = 머리).</summary>
         public event Action<bool> HitConfirmed;
         public event Action<WeaponSlot> ActiveSlotChanged;
@@ -246,9 +268,9 @@ namespace OskarMike.Weapons
             Transform eye = localCamera != null ? localCamera.transform : transform;
             // 퍼짐은 오너가 계산해 보낸다 → 로컬 트레이서와 서버 판정 방향이 일치.
             Vector3 dir = ApplySpread(eye.forward, def.SpreadDegrees);
-            Vector3 end = FindImpact(eye.position, dir, def.Range, out RaycastHit hit) ? hit.point : eye.position + dir * def.Range;
+            ShotImpact impact = Trace(eye.position, dir, def.Range, out _);
             FireServerRpc(eye.position, dir);
-            ShotFired?.Invoke(true, end);
+            ShotFired?.Invoke(true, impact);
 #endif
         }
 
@@ -325,8 +347,8 @@ namespace OskarMike.Weapons
             serverNextFireAt = now + def.FireInterval * (1f - fireIntervalTolerance);
 
             Vector3 dir = direction.normalized;
-            HitFeedback result = ServerTrace(origin, dir, def, out Vector3 end);
-            lastShot.Value = new ShotEvent { Sequence = unchecked(lastShot.Value.Sequence + 1), End = end };
+            HitFeedback result = ServerTrace(origin, dir, def, out ShotImpact impact);
+            lastShot.Value = new ShotEvent { Sequence = unchecked(lastShot.Value.Sequence + 1), Impact = impact };
             if (result != HitFeedback.None)
             {
                 int count = (hitSequence.Value >> 1) + 1;
@@ -383,16 +405,35 @@ namespace OskarMike.Weapons
             return action != PlayerActionState.Vaulting && action != PlayerActionState.Diving && action != PlayerActionState.Sliding;
         }
 
-        private HitFeedback ServerTrace(Vector3 origin, Vector3 direction, WeaponDefinition def, out Vector3 end)
+        private HitFeedback ServerTrace(Vector3 origin, Vector3 direction, WeaponDefinition def, out ShotImpact impact)
         {
-            if (!FindImpact(origin, direction, def.Range, out RaycastHit hit))
-            {
-                end = origin + direction * def.Range;
-                return HitFeedback.None;
-            }
-            end = hit.point;
-            TryApplyHit(hit.collider, def.Damage, out HitFeedback feedback);
+            impact = Trace(origin, direction, def.Range, out Collider col);
+            if (col == null) return HitFeedback.None;
+            TryApplyHit(col, def.Damage, out HitFeedback feedback);
             return feedback;
+        }
+
+        /// <summary>탄착 정보 계산 (서버 판정·오너 로컬 연출 공용).</summary>
+        private ShotImpact Trace(Vector3 origin, Vector3 direction, float range, out Collider col)
+        {
+            if (!FindImpact(origin, direction, range, out RaycastHit hit))
+            {
+                col = null;
+                return new ShotImpact { Point = origin + direction * range, Normal = -direction, Kind = ImpactKind.None };
+            }
+            col = hit.collider;
+            return new ShotImpact { Point = hit.point, Normal = hit.normal, Kind = Classify(col) };
+        }
+
+        private ImpactKind Classify(Collider col)
+        {
+            if (col.GetComponentInParent<EnemyHealth>() != null) return ImpactKind.Flesh;
+            var player = col.GetComponentInParent<PlayerHealth>();
+            if (player != null && player.gameObject != gameObject) return ImpactKind.Flesh;
+            if (IsShootable(col)) return ImpactKind.Target;
+            // 움직이는 물체(동적 리지드바디)에는 탄흔을 남기지 않는다
+            var body = col.attachedRigidbody;
+            return body != null && !body.isKinematic ? ImpactKind.Target : ImpactKind.Surface;
         }
 
         /// <summary>
@@ -496,7 +537,7 @@ namespace OskarMike.Weapons
         private void OnLastShotChanged(ShotEvent previous, ShotEvent current)
         {
             // 오너는 입력 시점에 이미 로컬 연출을 재생했다.
-            if (!IsOwner && current.Sequence != previous.Sequence) ShotFired?.Invoke(false, current.End);
+            if (!IsOwner && current.Sequence != previous.Sequence) ShotFired?.Invoke(false, current.Impact);
         }
 
         private void OnHitSequenceChanged(int previous, int current)

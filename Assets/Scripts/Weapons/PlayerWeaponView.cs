@@ -49,6 +49,17 @@ namespace OskarMike.Weapons
         [Range(1, 5)] [SerializeField] private int tracerEvery = 1;
         [Range(4, 64)] [SerializeField] private int tracerPoolSize = 16;
 
+        [Header("탄착 효과")]
+        [Tooltip("벽·바닥·더미 등: 불꽃 + 먼지 파티클")]
+        [SerializeField] private GameObject impactSurfacePrefab;
+        [Tooltip("적·플레이어: 피 파티클 (비우면 표면 효과 사용)")]
+        [SerializeField] private GameObject impactFleshPrefab;
+        [Tooltip("고정 지형에 남는 탄흔 (쿼드, 앞면이 -Z)")]
+        [SerializeField] private GameObject bulletHolePrefab;
+        [Range(1, 32)] [SerializeField] private int impactPoolSize = 8;
+        [Range(0, 128)] [SerializeField] private int bulletHolePoolSize = 32;
+        [Min(1f)] [SerializeField] private float bulletHoleLifetime = 20f;
+
         private PlayerWeaponLoadout loadout;
         private PlayerNetworkController controller;
         private PlayerHealth health;
@@ -64,6 +75,10 @@ namespace OskarMike.Weapons
         private bool ownerLayerApplied;
         private readonly System.Collections.Generic.List<BulletTracer> tracers = new System.Collections.Generic.List<BulletTracer>();
         private int tracerCounter;
+        private WeaponImpactPool surfaceImpacts;
+        private WeaponImpactPool fleshImpacts;
+        private WeaponImpactPool bulletHoles;
+        private bool destroying;
 
         private void Awake()
         {
@@ -93,6 +108,10 @@ namespace OskarMike.Weapons
 
         private void OnDestroy()
         {
+            destroying = true;
+            surfaceImpacts?.Dispose();
+            fleshImpacts?.Dispose();
+            bulletHoles?.Dispose();
             foreach (var t in tracers) if (t != null) Destroy(t.gameObject);
             tracers.Clear();
             for (int i = 0; i < 2; i++)
@@ -104,6 +123,7 @@ namespace OskarMike.Weapons
 
         private void LateUpdate()
         {
+            bulletHoles?.Tick();
             if (!loadout.IsSpawned || (health != null && health.Dead)) { SetAllInactive(); return; }
 
             bool owner = loadout.IsOwner;
@@ -157,37 +177,74 @@ namespace OskarMike.Weapons
             model.SetPositionAndRotation(worldAnchor.position + body * def.WorldOffset, body * def.WorldRotation);
         }
 
-        private void OnShotFired(bool localPrediction, Vector3 end)
+        private void OnShotFired(bool localPrediction, ShotImpact impact)
         {
             var def = loadout.ActiveDefinition;
             if (def == null) return;
             int active = (int)loadout.ActiveSlot;
             if (localPrediction) kick = def.ViewKick;
 
-            // 오너는 1인칭 총구, 원격은 3인칭 총구에서 플래시 + 궤적
+            // 오너는 1인칭 총구, 원격은 3인칭 총구에서 플래시 + 궤적. 탄착 효과는 궤적이 도착할 때 재생.
             GameObject model = loadout.IsOwner ? viewModels[active] : worldModels[active];
-            if (model == null) return;
-            Vector3 local = loadout.IsOwner ? def.ViewMuzzle : def.WorldMuzzle;
-            Flash(model.transform, local);
-            LaunchTracer(model.transform.TransformPoint(local), end);
+            bool tracerLaunched = false;
+            if (model != null)
+            {
+                Vector3 local = loadout.IsOwner ? def.ViewMuzzle : def.WorldMuzzle;
+                Flash(model.transform, local);
+                tracerLaunched = LaunchTracer(model.transform.TransformPoint(local), impact);
+            }
+            if (!tracerLaunched) PlayImpact(impact);
         }
 
-        private void LaunchTracer(Vector3 from, Vector3 to)
+        /// <returns>궤적을 띄웠으면 true (탄착 효과는 도착 시 재생)</returns>
+        private bool LaunchTracer(Vector3 from, ShotImpact impact)
         {
-            if (tracerMaterial == null) return;
+            if (tracerMaterial == null) return false;
             tracerCounter++;
-            if (tracerEvery > 1 && tracerCounter % tracerEvery != 0) return;
-            if ((to - from).sqrMagnitude < tracerMinDistance * tracerMinDistance) return;
+            if (tracerEvery > 1 && tracerCounter % tracerEvery != 0) return false;
+            if ((impact.Point - from).sqrMagnitude < tracerMinDistance * tracerMinDistance) return false;
 
             BulletTracer tracer = null;
             foreach (var t in tracers) if (t != null && !t.Busy) { tracer = t; break; }
             if (tracer == null)
             {
-                if (tracers.Count >= tracerPoolSize) return; // 풀이 가득 차면 이번 궤적은 생략
+                if (tracers.Count >= tracerPoolSize) return false; // 풀이 가득 차면 이번 궤적은 생략
                 tracer = BulletTracer.Create(tracerMaterial);
                 tracers.Add(tracer);
             }
-            tracer.Launch(from, to, tracerSpeed, tracerLength, tracerWidth, tracerColor);
+            tracer.Launch(from, impact.Point, tracerSpeed, tracerLength, tracerWidth, tracerColor, () => PlayImpact(impact));
+            return true;
+        }
+
+        private void PlayImpact(ShotImpact impact)
+        {
+            if (destroying || this == null || impact.Kind == ImpactKind.None) return;
+            Vector3 normal = impact.Normal.sqrMagnitude > 0.0001f ? impact.Normal.normalized : Vector3.up;
+
+            // 파티클은 +Z 로 분출 → 표면 바깥(법선) 방향
+            Quaternion outward = Quaternion.LookRotation(normal);
+            WeaponImpactPool pool = impact.Kind == ImpactKind.Flesh ? FleshImpacts() : SurfaceImpacts();
+            if (pool != null && pool.IsValid) pool.Spawn(impact.Point + normal * 0.01f, outward);
+
+            if (impact.Kind == ImpactKind.Surface && bulletHolePrefab != null && bulletHolePoolSize > 0)
+            {
+                bulletHoles ??= new WeaponImpactPool(bulletHolePrefab, bulletHolePoolSize, bulletHoleLifetime);
+                // 쿼드 앞면(-Z)이 법선을 향하도록 + 무작위 회전
+                Quaternion face = Quaternion.LookRotation(-normal) * Quaternion.Euler(0f, 0f, Random.Range(0f, 360f));
+                bulletHoles.Spawn(impact.Point + normal * 0.004f, face);
+            }
+        }
+
+        private WeaponImpactPool SurfaceImpacts()
+        {
+            if (impactSurfacePrefab == null) return null;
+            return surfaceImpacts ??= new WeaponImpactPool(impactSurfacePrefab, impactPoolSize);
+        }
+
+        private WeaponImpactPool FleshImpacts()
+        {
+            if (impactFleshPrefab == null) return SurfaceImpacts();
+            return fleshImpacts ??= new WeaponImpactPool(impactFleshPrefab, impactPoolSize);
         }
 
         private void Flash(Transform parent, Vector3 localPosition)

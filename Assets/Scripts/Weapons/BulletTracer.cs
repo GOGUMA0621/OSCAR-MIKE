@@ -18,6 +18,8 @@ namespace OskarMike.Weapons
         private float traveled;
         private float speed;
         private float length;
+        private bool arrived = true;
+        private System.Action onArrive;
 
         public bool Busy => gameObject.activeSelf;
 
@@ -45,12 +47,15 @@ namespace OskarMike.Weapons
         /// <param name="to">탄착 지점</param>
         /// <param name="metersPerSecond">궤적 이동 속도 (실제 탄속보다 느리게 해야 눈에 보인다)</param>
         /// <param name="streakLength">빛줄기 길이 (m)</param>
+        /// <param name="arrive">머리가 탄착점에 닿는 순간 1회 호출 (탄착 효과 재생용)</param>
         public void Launch(Vector3 from, Vector3 to, float metersPerSecond, float streakLength,
-                           float width, Color color)
+                           float width, Color color, System.Action arrive = null)
         {
             Vector3 delta = to - from;
             distance = delta.magnitude;
-            if (distance < 0.01f) { gameObject.SetActive(false); return; }
+            if (distance < 0.01f) { gameObject.SetActive(false); arrive?.Invoke(); return; }
+            arrived = false;
+            onArrive = arrive;
 
             start = from;
             direction = delta / distance;
@@ -72,9 +77,24 @@ namespace OskarMike.Weapons
         private void Update()
         {
             traveled += speed * Time.deltaTime;
+            if (!arrived && traveled >= distance) Arrive();
             // 머리가 탄착점에 닿은 뒤 꼬리까지 들어가면 종료
             if (traveled - length >= distance) { gameObject.SetActive(false); return; }
             Apply();
+        }
+
+        private void Arrive()
+        {
+            arrived = true;
+            var callback = onArrive;
+            onArrive = null;
+            callback?.Invoke();
+        }
+
+        // 비행 중 비활성화돼도 탄착 효과는 놓치지 않는다
+        private void OnDisable()
+        {
+            if (!arrived) Arrive();
         }
 
         private void Apply()

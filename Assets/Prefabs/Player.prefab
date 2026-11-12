@@ -686,6 +686,12 @@ MonoBehaviour:
   tracerMinDistance: 1.5
   tracerEvery: 1
   tracerPoolSize: 16
+  impactSurfacePrefab: {fileID: 316881537810272754, guid: e82315ed6f3914f4bbd6eb1cec0e16cf, type: 3}
+  impactFleshPrefab: {fileID: 8515341000153008972, guid: 762d2e0a9df9ccb4f9cf629695958df9, type: 3}
+  bulletHolePrefab: {fileID: 474339881252356500, guid: 5e2d056affd333f4b92498931f8325e9, type: 3}
+  impactPoolSize: 8
+  bulletHolePoolSize: 32
+  bulletHoleLifetime: 20
 --- !u!114 &369235882809025359
 MonoBehaviour:
   m_ObjectHideFlags: 0
