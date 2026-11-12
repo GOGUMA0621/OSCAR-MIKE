@@ -34,6 +34,21 @@ namespace OskarMike.Weapons
         [SerializeField] private float muzzleRange = 2f;
         [SerializeField] private float muzzleDuration = 0.05f;
 
+        [Header("총알 궤적 (트레이서)")]
+        [Tooltip("가산(Additive) 파티클 머티리얼. 비우면 궤적을 그리지 않는다.")]
+        [SerializeField] private Material tracerMaterial;
+        [Tooltip("궤적 이동 속도 (m/s). 실제 탄속보다 느려야 눈에 보인다.")]
+        [Min(10f)] [SerializeField] private float tracerSpeed = 220f;
+        [Tooltip("빛줄기 길이 (m)")]
+        [Min(0.1f)] [SerializeField] private float tracerLength = 3f;
+        [Min(0.001f)] [SerializeField] private float tracerWidth = 0.04f;
+        [SerializeField] private Color tracerColor = new Color(1f, 0.75f, 0.35f);
+        [Tooltip("이보다 가까운 탄착은 궤적 생략 (m)")]
+        [Min(0f)] [SerializeField] private float tracerMinDistance = 1.5f;
+        [Tooltip("발사 몇 발마다 궤적을 그릴지 (1 = 매 발)")]
+        [Range(1, 5)] [SerializeField] private int tracerEvery = 1;
+        [Range(4, 64)] [SerializeField] private int tracerPoolSize = 16;
+
         private PlayerWeaponLoadout loadout;
         private PlayerNetworkController controller;
         private PlayerHealth health;
@@ -47,6 +62,8 @@ namespace OskarMike.Weapons
         private float kick;
         private int localLayer;
         private bool ownerLayerApplied;
+        private readonly System.Collections.Generic.List<BulletTracer> tracers = new System.Collections.Generic.List<BulletTracer>();
+        private int tracerCounter;
 
         private void Awake()
         {
@@ -76,6 +93,8 @@ namespace OskarMike.Weapons
 
         private void OnDestroy()
         {
+            foreach (var t in tracers) if (t != null) Destroy(t.gameObject);
+            tracers.Clear();
             for (int i = 0; i < 2; i++)
             {
                 if (viewModels[i] != null) Destroy(viewModels[i]);
@@ -138,18 +157,37 @@ namespace OskarMike.Weapons
             model.SetPositionAndRotation(worldAnchor.position + body * def.WorldOffset, body * def.WorldRotation);
         }
 
-        private void OnShotFired(bool localPrediction)
+        private void OnShotFired(bool localPrediction, Vector3 end)
         {
             var def = loadout.ActiveDefinition;
             if (def == null) return;
             int active = (int)loadout.ActiveSlot;
             if (localPrediction) kick = def.ViewKick;
 
-            // 오너는 1인칭 총구, 원격은 3인칭 총구에 플래시
+            // 오너는 1인칭 총구, 원격은 3인칭 총구에서 플래시 + 궤적
             GameObject model = loadout.IsOwner ? viewModels[active] : worldModels[active];
             if (model == null) return;
             Vector3 local = loadout.IsOwner ? def.ViewMuzzle : def.WorldMuzzle;
             Flash(model.transform, local);
+            LaunchTracer(model.transform.TransformPoint(local), end);
+        }
+
+        private void LaunchTracer(Vector3 from, Vector3 to)
+        {
+            if (tracerMaterial == null) return;
+            tracerCounter++;
+            if (tracerEvery > 1 && tracerCounter % tracerEvery != 0) return;
+            if ((to - from).sqrMagnitude < tracerMinDistance * tracerMinDistance) return;
+
+            BulletTracer tracer = null;
+            foreach (var t in tracers) if (t != null && !t.Busy) { tracer = t; break; }
+            if (tracer == null)
+            {
+                if (tracers.Count >= tracerPoolSize) return; // 풀이 가득 차면 이번 궤적은 생략
+                tracer = BulletTracer.Create(tracerMaterial);
+                tracers.Add(tracer);
+            }
+            tracer.Launch(from, to, tracerSpeed, tracerLength, tracerWidth, tracerColor);
         }
 
         private void Flash(Transform parent, Vector3 localPosition)

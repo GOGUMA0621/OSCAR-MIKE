@@ -29,6 +29,18 @@ namespace OskarMike.Weapons
         public override int GetHashCode() => (Magazine << 16) ^ Reserve;
     }
 
+    /// <summary>원격 피어 사격 연출용: 발사 순번 + 탄이 멈춘 지점 (트레이서 끝점).</summary>
+    [Serializable]
+    public struct ShotEvent : INetworkSerializeByMemcpy, IEquatable<ShotEvent>
+    {
+        public int Sequence;
+        public Vector3 End;
+
+        public bool Equals(ShotEvent other) => Sequence == other.Sequence && End == other.End;
+        public override bool Equals(object obj) => obj is ShotEvent other && Equals(other);
+        public override int GetHashCode() => Sequence;
+    }
+
     /// <summary>
     /// 플레이어 무장 (주무장 + 보조무장). 스폰 시 기본 지급.
     ///
@@ -71,9 +83,9 @@ namespace OskarMike.Weapons
             default, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Server);
         private readonly NetworkVariable<bool> reloading = new NetworkVariable<bool>(
             false, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Server);
-        // 원격 피어 사격 연출용 (발사 1회마다 +1).
-        private readonly NetworkVariable<int> shotSequence = new NetworkVariable<int>(
-            0, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Server);
+        // 원격 피어 사격 연출용 (발사 1회마다 Sequence +1, End = 탄착 지점).
+        private readonly NetworkVariable<ShotEvent> lastShot = new NetworkVariable<ShotEvent>(
+            default, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Server);
         // 오너 히트마커용: (명중 횟수 << 1) | (머리면 1). 값 하나로 순서 문제 없이 부위까지 전달.
         private readonly NetworkVariable<int> hitSequence = new NetworkVariable<int>(
             0, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Server);
@@ -104,8 +116,10 @@ namespace OskarMike.Weapons
         private readonly RaycastHit[] hitBuffer = new RaycastHit[32];
 
         // ── 공개 상태 ──────────────────────────────────────
-        /// <summary>발사 연출 (true = 오너 로컬 즉시 예측, false = 원격 피어 동기화).</summary>
-        public event Action<bool> ShotFired;
+        /// <summary>
+        /// 발사 연출 (local: true = 오너 로컬 즉시 예측, false = 원격 피어 동기화 / end: 탄착 지점).
+        /// </summary>
+        public event Action<bool, Vector3> ShotFired;
         /// <summary>오너 전용: 서버가 명중을 확인했을 때 (true = 머리).</summary>
         public event Action<bool> HitConfirmed;
         public event Action<WeaponSlot> ActiveSlotChanged;
@@ -160,7 +174,7 @@ namespace OskarMike.Weapons
 
             activeSlot.OnValueChanged += OnActiveSlotChanged;
             reloading.OnValueChanged += OnReloadingChanged;
-            shotSequence.OnValueChanged += OnShotSequenceChanged;
+            lastShot.OnValueChanged += OnLastShotChanged;
             hitSequence.OnValueChanged += OnHitSequenceChanged;
 
 #if ENABLE_INPUT_SYSTEM
@@ -178,7 +192,7 @@ namespace OskarMike.Weapons
         {
             activeSlot.OnValueChanged -= OnActiveSlotChanged;
             reloading.OnValueChanged -= OnReloadingChanged;
-            shotSequence.OnValueChanged -= OnShotSequenceChanged;
+            lastShot.OnValueChanged -= OnLastShotChanged;
             hitSequence.OnValueChanged -= OnHitSequenceChanged;
 #if ENABLE_INPUT_SYSTEM
             primaryAction = secondaryAction = fireAction = reloadAction = null;
@@ -230,8 +244,11 @@ namespace OskarMike.Weapons
 
             localNextFireAt = Time.timeAsDouble + def.FireInterval;
             Transform eye = localCamera != null ? localCamera.transform : transform;
-            FireServerRpc(eye.position, eye.forward);
-            ShotFired?.Invoke(true);
+            // 퍼짐은 오너가 계산해 보낸다 → 로컬 트레이서와 서버 판정 방향이 일치.
+            Vector3 dir = ApplySpread(eye.forward, def.SpreadDegrees);
+            Vector3 end = FindImpact(eye.position, dir, def.Range, out RaycastHit hit) ? hit.point : eye.position + dir * def.Range;
+            FireServerRpc(eye.position, dir);
+            ShotFired?.Invoke(true, end);
 #endif
         }
 
@@ -306,10 +323,10 @@ namespace OskarMike.Weapons
             ammo.Magazine--;
             ammoVar.Value = ammo;
             serverNextFireAt = now + def.FireInterval * (1f - fireIntervalTolerance);
-            shotSequence.Value = unchecked(shotSequence.Value + 1);
 
-            Vector3 dir = ApplySpread(direction.normalized, def.SpreadDegrees);
-            HitFeedback result = ServerTrace(origin, dir, def);
+            Vector3 dir = direction.normalized;
+            HitFeedback result = ServerTrace(origin, dir, def, out Vector3 end);
+            lastShot.Value = new ShotEvent { Sequence = unchecked(lastShot.Value.Sequence + 1), End = end };
             if (result != HitFeedback.None)
             {
                 int count = (hitSequence.Value >> 1) + 1;
@@ -366,18 +383,43 @@ namespace OskarMike.Weapons
             return action != PlayerActionState.Vaulting && action != PlayerActionState.Diving && action != PlayerActionState.Sliding;
         }
 
-        private HitFeedback ServerTrace(Vector3 origin, Vector3 direction, WeaponDefinition def)
+        private HitFeedback ServerTrace(Vector3 origin, Vector3 direction, WeaponDefinition def, out Vector3 end)
         {
-            int count = Physics.RaycastNonAlloc(origin, direction, hitBuffer, def.Range, hitMask, QueryTriggerInteraction.Collide);
+            if (!FindImpact(origin, direction, def.Range, out RaycastHit hit))
+            {
+                end = origin + direction * def.Range;
+                return HitFeedback.None;
+            }
+            end = hit.point;
+            TryApplyHit(hit.collider, def.Damage, out HitFeedback feedback);
+            return feedback;
+        }
+
+        /// <summary>
+        /// 탄이 멈추는 첫 지점 (서버 판정·로컬 트레이서 공용). 자기 자신은 무시하고,
+        /// 트리거는 피격 대상일 때만, 일반 콜라이더(벽 등)는 항상 탄을 멈춘다.
+        /// </summary>
+        private bool FindImpact(Vector3 origin, Vector3 direction, float range, out RaycastHit result)
+        {
+            int count = Physics.RaycastNonAlloc(origin, direction, hitBuffer, range, hitMask, QueryTriggerInteraction.Collide);
             Array.Sort(hitBuffer, 0, count, Comparer.Instance);
             for (int i = 0; i < count; i++)
             {
                 Collider col = hitBuffer[i].collider;
                 if (col == null || col.transform.IsChildOf(transform)) continue;
-                if (TryApplyHit(col, def.Damage, out HitFeedback feedback)) return feedback;
-                if (!col.isTrigger) return HitFeedback.None; // 벽 등 장애물
+                if (!col.isTrigger || IsShootable(col)) { result = hitBuffer[i]; return true; }
             }
-            return HitFeedback.None;
+            result = default;
+            return false;
+        }
+
+        private bool IsShootable(Collider col)
+        {
+            if (col.TryGetComponent(out RangeTargetHitbox rangeBox) && rangeBox.target != null) return true;
+            if (col.TryGetComponent(out DuffelBagHitbox bagBox) && bagBox.bag != null) return true;
+            if (col.GetComponentInParent<EnemyHealth>() != null) return true;
+            var player = col.GetComponentInParent<PlayerHealth>();
+            return player != null && player.gameObject != gameObject;
         }
 
         /// <summary>대상 처리 여부를 반환 (true = 탄이 여기서 멈춤). 실제 피해가 들어갔으면 feedback 설정.</summary>
@@ -451,10 +493,10 @@ namespace OskarMike.Weapons
             if (current) localReloadStartedAt = Time.timeAsDouble;
         }
 
-        private void OnShotSequenceChanged(int previous, int current)
+        private void OnLastShotChanged(ShotEvent previous, ShotEvent current)
         {
             // 오너는 입력 시점에 이미 로컬 연출을 재생했다.
-            if (!IsOwner) ShotFired?.Invoke(false);
+            if (!IsOwner && current.Sequence != previous.Sequence) ShotFired?.Invoke(false, current.End);
         }
 
         private void OnHitSequenceChanged(int previous, int current)

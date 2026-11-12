@@ -678,6 +678,14 @@ MonoBehaviour:
   muzzleIntensity: 1.5
   muzzleRange: 2
   muzzleDuration: 0.05
+  tracerMaterial: {fileID: 2100000, guid: 1a7c0c36e0a1ce14d97ef89d9e8d2744, type: 2}
+  tracerSpeed: 220
+  tracerLength: 3
+  tracerWidth: 0.04
+  tracerColor: {r: 1, g: 0.75, b: 0.35, a: 1}
+  tracerMinDistance: 1.5
+  tracerEvery: 1
+  tracerPoolSize: 16
 --- !u!114 &369235882809025359
 MonoBehaviour:
   m_ObjectHideFlags: 0
