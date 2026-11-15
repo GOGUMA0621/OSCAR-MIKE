@@ -22,7 +22,7 @@ All use `Instance` + `DontDestroyOnLoad` (no DI):
 `RuntimeBootstrap` in each scene auto-creates any missing singleton on Awake.
 
 ## Networking Patterns
-- **ServerRpc (9 total)**: `MoveServerRpc` (owner→server, every Update, bundles all input) + `SetReadyServerRpc` + `PlayerLootCarrier.InteractServerRpc` / `ThrowServerRpc` (farming, see Duffel Bag section) + `PlayerWeaponLoadout.SelectSlotServerRpc` / `FireServerRpc` / `ReloadServerRpc` / `SetAimServerRpc` (weapons, see Weapons section) + `PlayerAimPitch.SetPitchServerRpc` (look pitch, only when changed ≥0.3°, max 15/s)
+- **ServerRpc (10 total)**: `MoveServerRpc` (owner→server, every Update, bundles all input) + `SetReadyServerRpc` + `PlayerLootCarrier.InteractServerRpc` / `ThrowServerRpc` (farming, see Duffel Bag section) + `LootRespawnButton.RequestRespawnServerRpc` (RangeCourse table loot, `RequireOwnership = false`) + `PlayerWeaponLoadout.SelectSlotServerRpc` / `FireServerRpc` / `ReloadServerRpc` / `SetAimServerRpc` (weapons, see Weapons section) + `PlayerAimPitch.SetPitchServerRpc` (look pitch, only when changed ≥0.3°, max 15/s)
 - **ClientRpc**: NONE — transform synced via `NetworkTransform`, state via `NetworkVariable`
 - **NetworkVariable write**: always `Server` permission
 - **Player prefab** (`Assets/Prefabs/Player.prefab`) registered in DefaultNetworkPrefabs.asset. Components: `CharacterController`, `NetworkObject`, `NetworkTransform` (Server auth mode), `PlayerInput` (actions: `PlayerActions.inputactions`), `PlayerNetworkController`, `PlayerStamina` (auto via `[RequireComponent]`)
@@ -56,6 +56,12 @@ All use `Instance` + `DontDestroyOnLoad` (no DI):
 - Carrying is a fixed debuff (×0.7 speed, no full sprint), regardless of value. `CanUsePrimaryWeapon == false` while carrying (hook for the future weapon system; `RangeTestGun` already honors it).
 - Hits: `DuffelBagHitbox` on layer `Hitbox` (collides with nothing, raycasts only). `DuffelBag.ServerApplyHit(damage)` removes `ceil(value × damage × 0.005)`. The money FX plays on all peers via the `hitSequence` NetworkVariable.
 - The carried bag is NGO-parented to the player (`TrySetParent`). It is released on death and in `OnNetworkPreDespawn`.
+
+## Table Loot — RangeCourse (`Assets/Scripts/Items/TableLoot/`)
+- The east room of RangeCourse (x 51–90, z −9–43; entrance gap in the west wall at x≈50.9, z −0.7–3.6) has 12 `item table` objects with `LootTableSurface` (BoxCollider top, `itemCount` 2–4, `edgeInset`).
+- Per table: `grade` (`LootTableGrade` 일반/고급/희귀/영웅/전설) and `allowedCategories` (`LootCategoryMask` flags, Nothing = all), both in `LootTableGrade.cs`. Gizmo colour shows the grade.
+- `TableLootSpawner` (GameObject `Table Loot Spawner`, server-only MonoBehaviour) uses `CatalogLootTable` (+ optional `zone` for `allowedZoneIds`; it does not use `LootTable.TryRoll` or an economy profile). Per item: (1) a value tier 1–5 (tier t = valueSteps 2t−1..2t) is rolled with the table grade's `gradeWeights` row (defaults 일반 60/25/10/4/1, 고급 35/35/20/8/2, 희귀 15/30/30/18/7, 영웅 5/15/30/30/20, 전설 0/5/20/35/40). Tiers with no allowed item are dropped and the rest renormalised; if nothing is left, it falls back to the highest available tier. (2) An item that can produce that tier is picked by `SpawnWeight`. `SimulateTierCounts(table, n)` is an editor/debug helper. The spawner places each item so its renderer bottom touches the tabletop, without overlap. It spawns once when the host starts (polled in `Update`, like `DuffelBagSpawner`). `ServerRespawn()` despawns its own items still lying around (picked-up items are already despawned) and rolls a new set.
+- `LootRespawnButton` (GameObject `Loot Respawn Button`, in-scene `NetworkObject`, on the outer face of the west wall next to the entrance): the local player looks at it within 2.5 m and presses F (`Interact`) → `RequestRespawnServerRpc` (server checks distance, alive, 2 s cooldown). IMGUI prompt "[F] 아이템 재스폰"; the cap press anim plays on all peers via `pressSequence`. F also reaches `PlayerLootCarrier` (no target → deposits into your own bag if you carry one).
 
 ## Weapons (`Assets/Scripts/Weapons/`)
 - Throwables are out of scope for now. Two slots: **Primary** (1, M4A1) and **Secondary** (2, Glock 17), both given on spawn.
