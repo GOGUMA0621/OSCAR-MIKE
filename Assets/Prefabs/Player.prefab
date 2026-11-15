@@ -163,6 +163,8 @@ GameObject:
   - component: {fileID: 3504509958098214168}
   - component: {fileID: 2227850669625267885}
   - component: {fileID: 1106417520980513812}
+  - component: {fileID: 5612434487440689200}
+  - component: {fileID: 1217274081226541007}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -370,6 +372,30 @@ MonoBehaviour:
       m_Calls: []
     m_ActionId: e142456e-a01a-4a78-9513-f88fdf9c618d
     m_ActionName: 'Keyboard&Mouse/LeanRight[/Keyboard/e]'
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: d7c19e0c-6b79-4a31-a891-9db33fb5d6c6
+    m_ActionName: 'Keyboard&Mouse/Throw[/Keyboard/g]'
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: c0351edf-1ec8-4f4a-8299-24bc2d05b001
+    m_ActionName: 'Keyboard&Mouse/PrimaryWeapon[/Keyboard/1]'
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: b9677fb6-4e7a-41f2-be81-73e85608c9b4
+    m_ActionName: 'Keyboard&Mouse/SecondaryWeapon[/Keyboard/2]'
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: d63c264e-21a5-45c1-93ad-73490a8edfa5
+    m_ActionName: 'Keyboard&Mouse/Fire[/Mouse/leftButton]'
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 47f2ba66-acf1-4b4f-a2cf-40314ad6bade
+    m_ActionName: 'Keyboard&Mouse/Reload[/Keyboard/r]'
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: b3d5a4c3-1604-477c-bdca-42219dfba6ae
+    m_ActionName: 'Keyboard&Mouse/Aim[/Mouse/rightButton]'
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Keyboard&Mouse
@@ -387,7 +413,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Unity.Netcode.Runtime::Unity.Netcode.NetworkObject
-  GlobalObjectIdHash: 3220978244
+  GlobalObjectIdHash: 503952023
   InScenePlacedSourceGlobalObjectIdHash: 0
   DeferredDespawnTick: 0
   Ownership: 1
@@ -635,6 +661,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::OskarMike.UI.PlayerLootHud
   font: {fileID: 11400000, guid: fbff3d51ba2da114f81d30bc57b14e3f, type: 2}
   lossFlashDuration: 1.2
+  slotSize: 88
+  cellSpacing: 8
+  bottomMargin: 28
+  firstSlotKey: 3
 --- !u!114 &7760140278280903218
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -818,6 +848,51 @@ MonoBehaviour:
   maxCorrection: 90
   unarmedPitchRatio: 0.5
   boneWeights: {x: 0.35, y: 0.4, z: 0.25}
+  leanDistance: 0.22
+  maxLeanAngle: 30
+  leanWeights: {x: 0.6, y: 0.3, z: 0.1}
+  leanSpeed: 5
+--- !u!114 &5612434487440689200
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8097309021167318534}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8ba945675f3931944a210e494841a1a5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::OskarMike.Items.PlayerHotbarInput
+  itemSlotActionNames:
+  - ItemSlot1
+  - ItemSlot2
+  - ItemSlot3
+  - ItemSlot4
+  holsterActionName: Holster
+  cycleActionName: CycleSlot
+  cycleCooldown: 0.08
+  pendingHold: 0.35
+--- !u!114 &1217274081226541007
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8097309021167318534}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d6134f9932a55a945bbc16a20a49ff1e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::OskarMike.Items.PlayerHeldItemView
+  worldOffset: {x: -0.05, y: 0, z: 0.12}
+  maxWorldSize: 0.45
+  fallbackWorldOffset: {x: 0.25, y: 1.1, z: 0.35}
+  viewOffset: {x: 0.3, y: -0.26, z: 0.62}
+  viewEuler: {x: 5, y: -20, z: 0}
+  maxViewSize: 0.6
+  drawDrop: 0.2
+  drawSpeed: 6
 --- !u!1001 &548867802774830947
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -164,6 +164,8 @@ GameObject:
   - component: {fileID: 2219691813032773812}
   - component: {fileID: 4864388355634960308}
   - component: {fileID: 3590361025853290272}
+  - component: {fileID: 6170137585922071288}
+  - component: {fileID: 6333525035871255574}
   m_Layer: 0
   m_Name: TestPlayer
   m_TagString: Untagged
@@ -649,6 +651,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::OskarMike.UI.PlayerLootHud
   font: {fileID: 11400000, guid: fbff3d51ba2da114f81d30bc57b14e3f, type: 2}
   lossFlashDuration: 1.2
+  slotSize: 88
+  cellSpacing: 8
+  bottomMargin: 28
+  firstSlotKey: 3
 --- !u!114 &8437091170171065977
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -832,6 +838,51 @@ MonoBehaviour:
   maxCorrection: 90
   unarmedPitchRatio: 0.5
   boneWeights: {x: 0.35, y: 0.4, z: 0.25}
+  leanDistance: 0.22
+  maxLeanAngle: 30
+  leanWeights: {x: 0.6, y: 0.3, z: 0.1}
+  leanSpeed: 5
+--- !u!114 &6170137585922071288
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3719018710315703022}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8ba945675f3931944a210e494841a1a5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::OskarMike.Items.PlayerHotbarInput
+  itemSlotActionNames:
+  - ItemSlot1
+  - ItemSlot2
+  - ItemSlot3
+  - ItemSlot4
+  holsterActionName: Holster
+  cycleActionName: CycleSlot
+  cycleCooldown: 0.08
+  pendingHold: 0.35
+--- !u!114 &6333525035871255574
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3719018710315703022}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d6134f9932a55a945bbc16a20a49ff1e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::OskarMike.Items.PlayerHeldItemView
+  worldOffset: {x: -0.05, y: 0, z: 0.12}
+  maxWorldSize: 0.45
+  fallbackWorldOffset: {x: 0.25, y: 1.1, z: 0.35}
+  viewOffset: {x: 0.3, y: -0.26, z: 0.62}
+  viewEuler: {x: 5, y: -20, z: 0}
+  maxViewSize: 0.17
+  drawDrop: 0.2
+  drawSpeed: 6
 --- !u!1001 &3022576739495417411
 PrefabInstance:
   m_ObjectHideFlags: 0

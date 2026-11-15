@@ -8,14 +8,17 @@ using UnityEngine.InputSystem;
 namespace OskarMike.Items
 {
     /// <summary>
-    /// 플레이어의 파밍 상태 (개인 슬롯 N칸 + 손 1개 + 더플백 운반).
+    /// 플레이어의 파밍 상태 (개인 슬롯 N칸 핫바 + 선택 슬롯 + 더플백 운반).
     ///
     /// [오너] F(Interact) / G(Throw) 입력 → 카메라 레이캐스트로 대상 탐색 → ServerRpc.
+    ///        슬롯 선택(3~6·휠·X)은 PlayerHotbarInput 이 <see cref="RequestSelectSlot"/> 로 요청한다.
     /// [서버] 거리/상태 재검증 후 줍기·투입·메기·던지기 처리. 상태는 NetworkVariable/NetworkList 로 동기화.
     ///
-    /// F : 아이템 → 슬롯(빈칸) 또는 손 / 더플백(땅·동료) → 내 아이템 전부 투입, 없으면 메기
+    /// 슬롯은 고정 칸(빈 칸 = 빈 항목)이고, selectedSlot ≥ 0 이면 그 칸을 손에 든 상태(무기는 집어넣음, 빈 칸이면 빈손).
+    /// F : 아이템 → 손이 비었으면 손(선택 칸)에, 아이템을 들고 있으면 빈 칸에 넣고 그 아이템을 듦,
+    ///     무기를 들고 있으면 빈 칸에만 넣음 / 더플백(땅·동료) → 내 아이템 전부 투입, 없으면 메기
     ///     대상 없음 + 더플백 착용 중 → 내 더플백에 투입
-    /// G : 더플백 착용 시 던지기 (앉기/엎드리기면 발밑에 내려놓기), 아니면 손 아이템 내려놓기
+    /// G : 손에 든 아이템 내려놓기, 없으면 더플백 던지기 (앉기/엎드리기면 발밑에 내려놓기)
     /// </summary>
     [DisallowMultipleComponent]
     [RequireComponent(typeof(PlayerNetworkController))]
@@ -38,8 +41,9 @@ namespace OskarMike.Items
 
         private readonly NetworkList<LootSlotEntry> slots = new NetworkList<LootSlotEntry>(
             null, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Server);
-        private readonly NetworkVariable<LootSlotEntry> hand = new NetworkVariable<LootSlotEntry>(
-            default, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Server);
+        // -1 = 무기를 든 상태, 0..slotCount-1 = 그 슬롯을 손에 든 상태 (빈 칸이면 빈손)
+        private readonly NetworkVariable<sbyte> selectedSlot = new NetworkVariable<sbyte>(
+            NoSlot, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Server);
         private readonly NetworkVariable<ulong> carriedBagId = new NetworkVariable<ulong>(
             DuffelBag.NoCarrier, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Server);
 
@@ -56,12 +60,26 @@ namespace OskarMike.Items
 
         private readonly RaycastHit[] hitBuffer = new RaycastHit[16];
 
+        public const sbyte NoSlot = -1;
+
         // ── 공개 상태 ──────────────────────────────────────
         public int SlotCount => slotCount;
-        public int UsedSlots => slots.Count;
-        public bool HasHandItem => !hand.Value.IsEmpty;
-        public LootSlotEntry HandItem => hand.Value;
-        public bool HasAnyItem => slots.Count > 0 || HasHandItem;
+        public int UsedSlots
+        {
+            get
+            {
+                int used = 0;
+                for (int i = 0; i < slots.Count; i++) if (!slots[i].IsEmpty) used++;
+                return used;
+            }
+        }
+        /// <summary>-1 = 무기를 든 상태, 0 이상 = 손에 든 슬롯 번호.</summary>
+        public int SelectedSlot => selectedSlot.Value;
+        /// <summary>아이템 슬롯을 선택해 무기를 집어넣은 상태 (빈손 포함).</summary>
+        public bool WeaponHolstered => selectedSlot.Value >= 0;
+        public bool HasHandItem => WeaponHolstered && !GetSlot(selectedSlot.Value).IsEmpty;
+        public LootSlotEntry HandItem => WeaponHolstered ? GetSlot(selectedSlot.Value) : default;
+        public bool HasAnyItem => UsedSlots > 0;
         public bool IsCarryingBag => carriedBagId.Value != DuffelBag.NoCarrier;
         /// <summary>무기 훅: 더플백 착용 중에는 보조무장(권총)만 사용 가능.</summary>
         public bool CanUsePrimaryWeapon => !IsCarryingBag;
@@ -70,13 +88,14 @@ namespace OskarMike.Items
         {
             get
             {
-                long sum = HasHandItem ? hand.Value.Price : 0;
-                for (int i = 0; i < slots.Count; i++) sum += slots[i].Price;
+                long sum = 0;
+                for (int i = 0; i < slots.Count; i++) if (!slots[i].IsEmpty) sum += slots[i].Price;
                 return (int)System.Math.Min(sum, int.MaxValue);
             }
         }
 
-        public LootSlotEntry GetSlot(int index) => slots[index];
+        /// <summary>슬롯 내용 (범위 밖·동기화 전이면 빈 항목).</summary>
+        public LootSlotEntry GetSlot(int index) => index >= 0 && index < slots.Count ? slots[index] : default;
 
         /// <summary>운반 중인 더플백 (모든 피어에서 조회 가능, 없으면 null).</summary>
         public DuffelBag CarriedBag
@@ -120,7 +139,13 @@ namespace OskarMike.Items
 
         public override void OnNetworkSpawn()
         {
-            if (IsServer && health != null) health.Died += ServerOnDied;
+            if (IsServer)
+            {
+                if (health != null) health.Died += ServerOnDied;
+                slots.Clear();
+                for (int i = 0; i < slotCount; i++) slots.Add(default);
+                selectedSlot.Value = NoSlot;
+            }
 #if ENABLE_INPUT_SYSTEM
             if (IsOwner && playerInput != null && playerInput.actions != null)
             {
@@ -225,8 +250,8 @@ namespace OskarMike.Items
         {
             if (item != null)
             {
-                if (slots.Count < slotCount) return InteractPromptKind.PickUp;
-                return HasHandItem ? InteractPromptKind.SlotsFull : InteractPromptKind.PickUpToHand;
+                if (FindPickUpSlot() < 0) return InteractPromptKind.SlotsFull;
+                return WeaponHolstered ? InteractPromptKind.PickUpToHand : InteractPromptKind.PickUp;
             }
             if (bag != null)
             {
@@ -238,9 +263,37 @@ namespace OskarMike.Items
             return InteractPromptKind.None;
         }
 
+        /// <summary>
+        /// 오너: 손에 들 슬롯 선택 요청 (-1 = 무기로 복귀). 무기 전환(1/2)은 PlayerWeaponLoadout 이 처리하고
+        /// 서버에서 <see cref="ServerHolster"/> 를 호출한다.
+        /// </summary>
+        public void RequestSelectSlot(int index)
+        {
+            if (!IsSpawned || !IsOwner) return;
+            if (index < NoSlot || index >= slotCount || index == selectedSlot.Value) return;
+            SelectSlotServerRpc((sbyte)index);
+        }
+
+        /// <summary>줍기 대상 칸: 빈손이면 선택 칸, 아니면 첫 빈 칸 (없으면 -1).</summary>
+        private int FindPickUpSlot()
+        {
+            int selected = selectedSlot.Value;
+            if (selected >= 0 && selected < slots.Count && slots[selected].IsEmpty) return selected;
+            for (int i = 0; i < slots.Count; i++) if (slots[i].IsEmpty) return i;
+            return -1;
+        }
+
         // ══════════════════════════════════════════════════
         // ServerRpc
         // ══════════════════════════════════════════════════
+
+        [ServerRpc]
+        private void SelectSlotServerRpc(sbyte index)
+        {
+            if (!ServerCanAct()) return;
+            if (index < NoSlot || index >= slotCount) return;
+            selectedSlot.Value = index;
+        }
 
         [ServerRpc]
         private void InteractServerRpc(NetworkObjectReference targetRef, bool hasTarget)
@@ -280,14 +333,14 @@ namespace OskarMike.Items
             if (float.IsNaN(lookDirection.x) || float.IsNaN(lookDirection.y) || float.IsNaN(lookDirection.z)) return;
             lookDirection = Vector3.ClampMagnitude(lookDirection, 1f);
 
-            if (serverCarriedBag != null)
+            if (HasHandItem)
+            {
+                ServerDropHandItem(lookDirection);
+            }
+            else if (serverCarriedBag != null)
             {
                 bool standing = controller == null || controller.Posture == PlayerPosture.Stand;
                 ServerReleaseBag(lookDirection, standing);
-            }
-            else if (HasHandItem)
-            {
-                ServerDropHandItem(lookDirection);
             }
         }
 
@@ -310,10 +363,11 @@ namespace OskarMike.Items
             // 서버는 RPC 를 순서대로 처리하므로 먼저 도착한 요청만 IsSpawned 를 통과한다.
             if (item == null || !item.IsSpawned) return;
 
-            var entry = LootSlotEntry.From(item);
-            if (slots.Count < slotCount) slots.Add(entry);
-            else if (!HasHandItem) hand.Value = entry;
-            else return;
+            int target = FindPickUpSlot();
+            if (target < 0) return;
+            slots[target] = LootSlotEntry.From(item);
+            // 아이템(또는 빈손)을 들고 있었다면 방금 주운 아이템을 손에 든다. 무기를 들고 있으면 슬롯에만 넣는다.
+            if (WeaponHolstered) selectedSlot.Value = (sbyte)target;
 
             item.NetworkObject.Despawn(true);
         }
@@ -322,8 +376,8 @@ namespace OskarMike.Items
         {
             if (bag == null || !bag.IsSpawned || !HasAnyItem) return;
             int total = CarriedItemsValue;
-            slots.Clear();
-            hand.Value = default;
+            for (int i = 0; i < slots.Count; i++) slots[i] = default;
+            selectedSlot.Value = NoSlot;   // 다 넣었으면 무기로 복귀
             bag.ServerDeposit(total);
         }
 
@@ -337,7 +391,8 @@ namespace OskarMike.Items
 
         private void ServerDropHandItem(Vector3 lookDirection)
         {
-            LootSlotEntry entry = hand.Value;
+            int index = selectedSlot.Value;
+            LootSlotEntry entry = GetSlot(index);
             if (entry.IsEmpty) return;
 
             LootItemDefinition definition = FindDefinition(entry.ItemId.ToString());
@@ -360,10 +415,11 @@ namespace OskarMike.Items
             }
             lootItem.InitializeServer(definition.ItemId, entry.ValueSteps, (LootCategory)entry.Category, entry.Price);
             instance.Spawn(true);
-            hand.Value = default;
+            slots[index] = default;   // 선택은 유지 → 빈손 (다음 F 는 바로 손에)
         }
 
-        private LootItemDefinition FindDefinition(string itemId)
+        /// <summary>아이템 ID → 정의 (lootTables 에서 조회, 없으면 null). 모든 피어에서 사용 가능.</summary>
+        public LootItemDefinition FindDefinition(string itemId)
         {
             if (lootTables == null) return null;
             foreach (var table in lootTables)
@@ -382,6 +438,13 @@ namespace OskarMike.Items
         {
             if (serverCarriedBag != null) ServerReleaseBag(transform.forward, false);
             if (HasHandItem) ServerDropHandItem(transform.forward);
+            if (IsSpawned) selectedSlot.Value = NoSlot;
+        }
+
+        /// <summary>서버: 무기 전환(1/2) 시 아이템을 집어넣고 무기를 든다.</summary>
+        public void ServerHolster()
+        {
+            if (IsServer && IsSpawned) selectedSlot.Value = NoSlot;
         }
 
         private void OnValidate()

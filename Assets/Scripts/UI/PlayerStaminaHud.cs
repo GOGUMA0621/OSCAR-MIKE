@@ -57,9 +57,10 @@ namespace OskarMike.UI
             var track = new GameObject("Stamina Track", typeof(RectTransform), typeof(Image));
             track.transform.SetParent(hud.transform, false);
             var trackRect = track.GetComponent<RectTransform>();
-            trackRect.anchorMin = trackRect.anchorMax = new Vector2(0.5f, 0f);
-            trackRect.pivot = new Vector2(0.5f, 0f);
-            trackRect.anchoredPosition = new Vector2(0f, 60f);
+            // 왼쪽 하단 (체력 표시 바로 아래)
+            trackRect.anchorMin = trackRect.anchorMax = Vector2.zero;
+            trackRect.pivot = Vector2.zero;
+            trackRect.anchoredPosition = new Vector2(40f, 40f);
             trackRect.sizeDelta = new Vector2(300f, 16f);
             var background = track.GetComponent<Image>();
             background.color = new Color(0.04f, 0.06f, 0.08f, 0.9f);
@@ -85,7 +86,7 @@ namespace OskarMike.UI
             label = text.GetComponent<TextMeshProUGUI>();
             label.font = font;
             label.fontSize = 22f;
-            label.alignment = TextAlignmentOptions.Center;
+            label.alignment = TextAlignmentOptions.BottomLeft;
             label.color = Color.white;
             label.raycastTarget = false;
         }

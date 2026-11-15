@@ -69,6 +69,8 @@ namespace OskarMike.UI
                     : string.Empty;
                 ammoLabel.text = $"<size=70%>{def.DisplayName}</size>\n<color={magColor}>{ammo.Magazine}</color> <size=70%>/ {ammo.Reserve}</size>{status}";
             }
+            // 아이템을 든 동안에는 무기 정보를 흐리게
+            ammoLabel.alpha = loadout.Holstered ? 0.35f : 1f;
 
             slotLabel.text = SlotText(WeaponSlot.Primary, "주무장") + "     " + SlotText(WeaponSlot.Secondary, "보조무장");
 
@@ -86,7 +88,7 @@ namespace OskarMike.UI
             if (def == null) return $"<color=#666666>[{key}] {label} 없음</color>";
             if (slot == WeaponSlot.Primary && loadout.PrimaryBlocked)
                 return $"<color=#777777>[{key}] {def.DisplayName} (더플백 착용 중)</color>";
-            bool active = loadout.ActiveSlot == slot;
+            bool active = loadout.ActiveSlot == slot && !loadout.Holstered;
             return active ? $"<color=#FFD54A>[{key}] {def.DisplayName}</color>" : $"<color=#BBBBBB>[{key}] {def.DisplayName}</color>";
         }
 

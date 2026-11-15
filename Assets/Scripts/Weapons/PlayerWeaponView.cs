@@ -155,7 +155,8 @@ namespace OskarMike.Weapons
 
             bool owner = loadout.IsOwner;
             bool showView = owner && controller != null && controller.GameplayInputEnabled;
-            int active = (int)loadout.ActiveSlot;
+            // 아이템을 손에 들면 무기 모델을 모두 숨긴다 (-1 = 표시할 무기 없음)
+            int active = loadout.Holstered ? -1 : (int)loadout.ActiveSlot;
 
             if (owner && !ownerLayerApplied) ApplyOwnerLayer();
 
@@ -176,7 +177,7 @@ namespace OskarMike.Weapons
             }
 
             kick = Mathf.MoveTowards(kick, 0f, kickRecoverSpeed * Time.deltaTime);
-            var activeDef = loadout.ActiveDefinition;
+            var activeDef = active >= 0 ? loadout.ActiveDefinition : null;
             var view = active >= 0 && active < 2 ? viewModels[active] : null;
             if (view != null && view.activeSelf && activeDef != null)
             {

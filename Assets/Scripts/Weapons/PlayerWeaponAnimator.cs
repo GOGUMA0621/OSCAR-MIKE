@@ -44,7 +44,8 @@ namespace OskarMike.Weapons
             if (animator == null || animator.runtimeAnimatorController == null) return;
 
             bool dead = health != null && health.Dead;
-            bool armed = loadout != null && loadout.IsSpawned && !dead;
+            // 아이템을 손에 든 동안(무기 집어넣음)은 무기 상체 레이어를 끈다 → 에임 포즈/손 IK 도 같이 꺼짐
+            bool armed = loadout != null && loadout.IsSpawned && !dead && !loadout.Holstered;
             float dt = Time.deltaTime;
 
             upperBodyWeight = Mathf.MoveTowards(upperBodyWeight, armed ? 1f : 0f, upperBodyBlendSpeed * dt);

@@ -159,6 +159,7 @@ namespace OskarMike.Weapons
         private bool aimToggled;          // 토글 모드에서의 조준 상태
         private bool aimRequestSent;      // 서버에 마지막으로 보낸 조준 요청
         private float aimBlend;           // 0 = 지향 사격, 1 = 완전 조준 (연출·퍼짐·감도 보간)
+        private bool wasHolstered;        // 서버·오너 공용: 무기 집어넣음 상태 변화 감지
 
         private readonly RaycastHit[] hitBuffer = new RaycastHit[32];
 
@@ -176,6 +177,8 @@ namespace OskarMike.Weapons
         public WeaponAmmo ActiveAmmo => GetAmmo(activeSlot.Value);
         public bool IsReloading => reloading.Value;
         public bool PrimaryBlocked => lootCarrier != null && !lootCarrier.CanUsePrimaryWeapon;
+        /// <summary>아이템 슬롯(3~6)을 손에 들어 무기를 집어넣은 상태 (모든 피어에서 동기화됨).</summary>
+        public bool Holstered => lootCarrier != null && lootCarrier.WeaponHolstered;
         public bool IsDrawing => Time.timeAsDouble < localReadyAt;
         /// <summary>조준 요청 상태 (모든 피어에서 동기화됨).</summary>
         public bool IsAiming => aiming.Value;
@@ -276,8 +279,34 @@ namespace OskarMike.Weapons
         private void Update()
         {
             if (!IsSpawned) return;
+            UpdateHolster();
             if (IsServer) ServerTick();
             if (IsOwner) OwnerTick();
+        }
+
+        /// <summary>
+        /// 아이템을 들면(집어넣음) 재장전·조준을 끊고, 무기를 다시 들면 꺼내기 시간(DrawTime)을 적용한다.
+        /// 같은 슬롯으로 복귀하면 activeSlot 변경 이벤트가 없으므로 여기서 처리한다.
+        /// </summary>
+        private void UpdateHolster()
+        {
+            bool holstered = Holstered;
+            if (holstered == wasHolstered) return;
+            wasHolstered = holstered;
+
+            double now = Time.timeAsDouble;
+            if (holstered)
+            {
+                aimToggled = false;
+                if (IsServer) reloading.Value = false;
+                return;
+            }
+
+            var def = ActiveDefinition;
+            float draw = def != null ? def.DrawTime : 0f;
+            shotIndex = 0;
+            localReadyAt = now + draw;
+            if (IsServer) serverReadyAt = now + draw;
         }
 
         // ══════════════════════════════════════════════════
@@ -293,6 +322,7 @@ namespace OskarMike.Weapons
 #if ENABLE_INPUT_SYSTEM
             if (primaryAction != null && primaryAction.WasPressedThisFrame()) RequestSlot(WeaponSlot.Primary);
             if (secondaryAction != null && secondaryAction.WasPressedThisFrame()) RequestSlot(WeaponSlot.Secondary);
+            if (Holstered) return;   // 아이템을 든 동안 사격·재장전 불가
             if (reloadAction != null && reloadAction.WasPressedThisFrame()) RequestReload();
 
             var def = ActiveDefinition;
@@ -339,7 +369,7 @@ namespace OskarMike.Weapons
             var def = ActiveDefinition;
             bool want = false;
 #if ENABLE_INPUT_SYSTEM
-            if (canAct && aimAction != null && def != null)
+            if (canAct && aimAction != null && def != null && !Holstered)
             {
                 if (GameSettings.AimMode == AimInputMode.Toggle)
                 {
@@ -369,14 +399,16 @@ namespace OskarMike.Weapons
         private bool CanFireLocally()
         {
             double now = Time.timeAsDouble;
-            if (now < localNextFireAt || now < localReadyAt || reloading.Value) return false;
+            if (now < localNextFireAt || now < localReadyAt || reloading.Value || Holstered) return false;
             if (activeSlot.Value == WeaponSlot.Primary && PrimaryBlocked) return false;
             return MovementAllowsFire();
         }
 
-        private void RequestSlot(WeaponSlot slot)
+        /// <summary>오너: 무장 전환 요청 (아이템을 들고 있으면 같은 슬롯이어도 무기로 복귀).</summary>
+        public void RequestSlot(WeaponSlot slot)
         {
-            if (slot == activeSlot.Value || GetDefinition(slot) == null) return;
+            if (!IsSpawned || !IsOwner) return;
+            if ((slot == activeSlot.Value && !Holstered) || GetDefinition(slot) == null) return;
             if (slot == WeaponSlot.Primary && PrimaryBlocked) return;
             SelectSlotServerRpc(slot);
         }
@@ -399,6 +431,7 @@ namespace OskarMike.Weapons
             if (!IsSpawned || IsDead) return;
             if (slot != WeaponSlot.Primary && slot != WeaponSlot.Secondary) return;
             if (slot == WeaponSlot.Primary && PrimaryBlocked) return;
+            if (lootCarrier != null) lootCarrier.ServerHolster();   // 들고 있던 아이템은 슬롯으로
             ServerSwitchTo(slot);
         }
 
@@ -406,13 +439,13 @@ namespace OskarMike.Weapons
         private void SetAimServerRpc(bool aim)
         {
             if (!IsSpawned) return;
-            aiming.Value = aim && !IsDead;
+            aiming.Value = aim && !IsDead && !Holstered;
         }
 
         [ServerRpc]
         private void ReloadServerRpc()
         {
-            if (!IsSpawned || IsDead || reloading.Value) return;
+            if (!IsSpawned || IsDead || reloading.Value || Holstered) return;
             var def = ActiveDefinition;
             if (def == null || Time.timeAsDouble < serverReadyAt) return;
             var ammo = ActiveAmmo;
@@ -430,7 +463,7 @@ namespace OskarMike.Weapons
 
             var slot = activeSlot.Value;
             var def = GetDefinition(slot);
-            if (def == null || reloading.Value) return;
+            if (def == null || reloading.Value || Holstered) return;
             if (slot == WeaponSlot.Primary && PrimaryBlocked) return;
             if (!MovementAllowsFire()) return;
 
@@ -469,6 +502,7 @@ namespace OskarMike.Weapons
                 if (aiming.Value) aiming.Value = false;
                 return;
             }
+            if (Holstered && aiming.Value) aiming.Value = false;
 
             // 더플백 착용 시 주무장 → 보조무장 강제 전환
             if (activeSlot.Value == WeaponSlot.Primary && PrimaryBlocked && secondary != null)
