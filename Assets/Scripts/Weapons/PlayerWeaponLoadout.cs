@@ -1,5 +1,6 @@
 using System;
 using OskarMike.AI;
+using OskarMike.Core;
 using OskarMike.Items;
 using OskarMike.Network.Player;
 using OskarMike.Testing;
@@ -72,9 +73,11 @@ namespace OskarMike.Weapons
     /// 더플백 착용 중(<see cref="PlayerLootCarrier.CanUsePrimaryWeapon"/> == false)에는 주무장을 쓸 수 없고,
     /// 서버가 자동으로 보조무장으로 전환한다.
     /// </summary>
+    // WeaponRecoil(50) 이 카메라에 반동을 얹은 뒤 그 방향으로 쏜다.
+    [DefaultExecutionOrder(60)]
     [DisallowMultipleComponent]
     [RequireComponent(typeof(PlayerNetworkController))]
-    public sealed class PlayerWeaponLoadout : NetworkBehaviour
+    public sealed class PlayerWeaponLoadout : NetworkBehaviour, IPlayerMovementModifier
     {
         public enum HitFeedback : byte { None, Body, Head }
 
@@ -87,6 +90,7 @@ namespace OskarMike.Weapons
         [SerializeField] private string secondaryActionName = "SecondaryWeapon";
         [SerializeField] private string fireActionName = "Fire";
         [SerializeField] private string reloadActionName = "Reload";
+        [SerializeField] private string aimActionName = "Aim";
 
         [Header("판정")]
         [SerializeField] private LayerMask hitMask = ~0;
@@ -96,6 +100,16 @@ namespace OskarMike.Weapons
         [Min(0.5f)] [SerializeField] private float maxOriginDistance = 2.5f;
         [Tooltip("지연으로 몰려 도착한 사격 RPC 허용 비율 (발사 간격 × (1 - 값))")]
         [Range(0f, 0.5f)] [SerializeField] private float fireIntervalTolerance = 0.25f;
+
+        [Header("스프레이 배율 (무기 공통, 곱연산)")]
+        [Min(0f)] [SerializeField] private float spreadCrouchMultiplier = 0.7f;
+        [Min(0f)] [SerializeField] private float spreadProneMultiplier = 0.5f;
+        [Tooltip("걷기·전술 걷기 중")]
+        [Min(0f)] [SerializeField] private float spreadMovingMultiplier = 1.5f;
+        [Tooltip("점프·낙하 중")]
+        [Min(0f)] [SerializeField] private float spreadAirborneMultiplier = 2.5f;
+        [Tooltip("스태미나 부족·질주 직후 (조준 흔들림 상태)")]
+        [Min(0f)] [SerializeField] private float spreadSwayMultiplier = 1.3f;
 
         private readonly NetworkVariable<WeaponSlot> activeSlot = new NetworkVariable<WeaponSlot>(
             WeaponSlot.Primary, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Server);
@@ -111,11 +125,16 @@ namespace OskarMike.Weapons
         // 오너 히트마커용: (명중 횟수 << 1) | (머리면 1). 값 하나로 순서 문제 없이 부위까지 전달.
         private readonly NetworkVariable<int> hitSequence = new NetworkVariable<int>(
             0, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Server);
+        // 조준 요청 상태 (서버: 이동 속도 감소·질주 불가 / 원격: 추후 3인칭 조준 자세용).
+        private readonly NetworkVariable<bool> aiming = new NetworkVariable<bool>(
+            false, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Server);
 
         private PlayerNetworkController controller;
         private PlayerHealth health;
         private PlayerLootCarrier lootCarrier;
         private Camera localCamera;
+        private WeaponRecoil recoil;
+        private PlayerStamina stamina;
 
 #if ENABLE_INPUT_SYSTEM
         private PlayerInput playerInput;
@@ -123,6 +142,7 @@ namespace OskarMike.Weapons
         private InputAction secondaryAction;
         private InputAction fireAction;
         private InputAction reloadAction;
+        private InputAction aimAction;
 #endif
 
         // 서버 전용
@@ -134,6 +154,11 @@ namespace OskarMike.Weapons
         private double localNextFireAt;
         private double localReadyAt;
         private double localReloadStartedAt;
+        private int shotIndex;            // 연사 카운터 (리코일·스프레이 공용)
+        private double lastLocalShotAt = double.NegativeInfinity;
+        private bool aimToggled;          // 토글 모드에서의 조준 상태
+        private bool aimRequestSent;      // 서버에 마지막으로 보낸 조준 요청
+        private float aimBlend;           // 0 = 지향 사격, 1 = 완전 조준 (연출·퍼짐·감도 보간)
 
         private readonly RaycastHit[] hitBuffer = new RaycastHit[32];
 
@@ -152,6 +177,21 @@ namespace OskarMike.Weapons
         public bool IsReloading => reloading.Value;
         public bool PrimaryBlocked => lootCarrier != null && !lootCarrier.CanUsePrimaryWeapon;
         public bool IsDrawing => Time.timeAsDouble < localReadyAt;
+        /// <summary>조준 요청 상태 (모든 피어에서 동기화됨).</summary>
+        public bool IsAiming => aiming.Value;
+        /// <summary>오너 전용: 0 = 지향 사격, 1 = 완전 조준. 재장전·전환·질주 중에는 0으로 돌아간다.</summary>
+        public float AimBlend => aimBlend;
+
+        // ── IPlayerMovementModifier (서버에서 조회) ────────
+        public float SpeedMultiplier
+        {
+            get
+            {
+                var def = ActiveDefinition;
+                return aiming.Value && def != null ? def.AimMoveSpeedMultiplier : 1f;
+            }
+        }
+        public bool AllowFullSprint => !aiming.Value;
 
         /// <summary>오너 전용: 0~1 재장전 진행도 (재장전 중이 아니면 0).</summary>
         public float ReloadProgress
@@ -178,6 +218,8 @@ namespace OskarMike.Weapons
             health = GetComponent<PlayerHealth>();
             lootCarrier = GetComponent<PlayerLootCarrier>();
             localCamera = GetComponentInChildren<Camera>(true);
+            recoil = GetComponent<WeaponRecoil>();
+            stamina = GetComponent<PlayerStamina>();
 #if ENABLE_INPUT_SYSTEM
             playerInput = GetComponent<PlayerInput>();
 #endif
@@ -206,6 +248,7 @@ namespace OskarMike.Weapons
                 secondaryAction = FindAction(secondaryActionName);
                 fireAction = FindAction(fireActionName);
                 reloadAction = FindAction(reloadActionName);
+                aimAction = FindAction(aimActionName);
             }
 #endif
         }
@@ -217,7 +260,7 @@ namespace OskarMike.Weapons
             lastShot.OnValueChanged -= OnLastShotChanged;
             hitSequence.OnValueChanged -= OnHitSequenceChanged;
 #if ENABLE_INPUT_SYSTEM
-            primaryAction = secondaryAction = fireAction = reloadAction = null;
+            primaryAction = secondaryAction = fireAction = reloadAction = aimAction = null;
 #endif
         }
 
@@ -244,6 +287,7 @@ namespace OskarMike.Weapons
         private void OwnerTick()
         {
             bool canAct = controller != null && controller.GameplayInputEnabled && !IsDead;
+            UpdateAim(canAct);
             if (!canAct) return;
 
 #if ENABLE_INPUT_SYSTEM
@@ -264,14 +308,62 @@ namespace OskarMike.Weapons
             }
             if (!CanFireLocally()) return;
 
-            localNextFireAt = Time.timeAsDouble + def.FireInterval;
+            double now = Time.timeAsDouble;
+            localNextFireAt = now + def.FireInterval;
+            if (now - lastLocalShotAt > def.PatternResetTime) shotIndex = 0;
+
+            // 카메라 방향에는 이미 리코일이 반영돼 있다. 퍼짐은 오너가 계산해 보낸다 → 로컬 트레이서와 서버 판정 방향이 일치.
             Transform eye = localCamera != null ? localCamera.transform : transform;
-            // 퍼짐은 오너가 계산해 보낸다 → 로컬 트레이서와 서버 판정 방향이 일치.
-            Vector3 dir = ApplySpread(eye.forward, def.SpreadDegrees);
+            Vector3 dir = ApplySpread(eye.forward, def.SpreadAt(shotIndex) * SpreadMultiplier());
             ShotImpact impact = Trace(eye.position, dir, def.Range, out _);
             FireServerRpc(eye.position, dir);
             ShotFired?.Invoke(true, impact);
+
+            // 다음 발을 위한 반동: 곡선(n+1) - 곡선(n) + 무작위 좌우
+            if (recoil != null)
+            {
+                Vector2 kick = def.RecoilKick(shotIndex);
+                kick.y += UnityEngine.Random.Range(-def.RecoilRandomYaw, def.RecoilRandomYaw);
+                recoil.Kick(kick, def.RecoilReturnRatio, def.RecoilRecovery);
+            }
+            shotIndex++;
+            lastLocalShotAt = now;
 #endif
+        }
+
+        /// <summary>
+        /// 오너: 우클릭 입력(설정의 홀드/토글)을 읽어 서버에 조준 요청을 보내고, 연출용 aimBlend 를 보간한다.
+        /// </summary>
+        private void UpdateAim(bool canAct)
+        {
+            var def = ActiveDefinition;
+            bool want = false;
+#if ENABLE_INPUT_SYSTEM
+            if (canAct && aimAction != null && def != null)
+            {
+                if (GameSettings.AimMode == AimInputMode.Toggle)
+                {
+                    if (aimAction.WasPressedThisFrame()) aimToggled = !aimToggled;
+                    want = aimToggled;
+                }
+                else
+                {
+                    aimToggled = false;
+                    want = aimAction.IsPressed();
+                }
+            }
+#endif
+            if (!canAct) aimToggled = false;
+            if (want != aimRequestSent)
+            {
+                aimRequestSent = want;
+                SetAimServerRpc(want);
+            }
+
+            // 재장전·전환·질주·파쿠르 중에는 조준 연출을 풀었다가, 끝나면 (요청이 유지되는 한) 다시 조준
+            bool visual = want && !reloading.Value && !IsDrawing && MovementAllowsFire();
+            float duration = def != null ? def.AimTime : 0.15f;
+            aimBlend = Mathf.MoveTowards(aimBlend, visual ? 1f : 0f, Time.deltaTime / Mathf.Max(0.01f, duration));
         }
 
         private bool CanFireLocally()
@@ -308,6 +400,13 @@ namespace OskarMike.Weapons
             if (slot != WeaponSlot.Primary && slot != WeaponSlot.Secondary) return;
             if (slot == WeaponSlot.Primary && PrimaryBlocked) return;
             ServerSwitchTo(slot);
+        }
+
+        [ServerRpc]
+        private void SetAimServerRpc(bool aim)
+        {
+            if (!IsSpawned) return;
+            aiming.Value = aim && !IsDead;
         }
 
         [ServerRpc]
@@ -367,6 +466,7 @@ namespace OskarMike.Weapons
             if (IsDead)
             {
                 if (reloading.Value) reloading.Value = false;
+                if (aiming.Value) aiming.Value = false;
                 return;
             }
 
@@ -522,8 +622,48 @@ namespace OskarMike.Weapons
         // 동기화 콜백
         // ══════════════════════════════════════════════════
 
+        /// <summary>오너: 현재 연사 순번 (마지막 발사 후 patternResetTime 이 지나면 0).</summary>
+        public int ShotIndex
+        {
+            get
+            {
+                var def = ActiveDefinition;
+                return def != null && Time.timeAsDouble - lastLocalShotAt > def.PatternResetTime ? 0 : shotIndex;
+            }
+        }
+
+        /// <summary>오너: 다음 발의 퍼짐(도). HUD 조준점 확산 등에 사용.</summary>
+        public float CurrentSpread
+        {
+            get
+            {
+                var def = ActiveDefinition;
+                return def != null ? def.SpreadAt(ShotIndex) * SpreadMultiplier() : 0f;
+            }
+        }
+
+        /// <summary>자세·이동·스태미나에 따른 스프레이 배율.</summary>
+        private float SpreadMultiplier()
+        {
+            float m = 1f;
+            if (controller != null)
+            {
+                if (controller.Posture == PlayerPosture.Crouch) m *= spreadCrouchMultiplier;
+                else if (controller.Posture == PlayerPosture.Prone) m *= spreadProneMultiplier;
+                var move = controller.MoveState;
+                if (move == PlayerMoveState.Walk || move == PlayerMoveState.TacticalWalk) m *= spreadMovingMultiplier;
+                var action = controller.ActionState;
+                if (action == PlayerActionState.Jumping || action == PlayerActionState.Falling) m *= spreadAirborneMultiplier;
+            }
+            if (stamina != null && stamina.ShouldSway) m *= spreadSwayMultiplier;
+            var def = ActiveDefinition;
+            if (def != null) m *= Mathf.Lerp(1f, def.AimSpreadMultiplier, aimBlend);
+            return m;
+        }
+
         private void OnActiveSlotChanged(WeaponSlot previous, WeaponSlot current)
         {
+            shotIndex = 0;
             var def = GetDefinition(current);
             localReadyAt = Time.timeAsDouble + (def != null ? def.DrawTime : 0f);
             ActiveSlotChanged?.Invoke(current);
@@ -531,7 +671,7 @@ namespace OskarMike.Weapons
 
         private void OnReloadingChanged(bool previous, bool current)
         {
-            if (current) localReloadStartedAt = Time.timeAsDouble;
+            if (current) { localReloadStartedAt = Time.timeAsDouble; shotIndex = 0; }
         }
 
         private void OnLastShotChanged(ShotEvent previous, ShotEvent current)

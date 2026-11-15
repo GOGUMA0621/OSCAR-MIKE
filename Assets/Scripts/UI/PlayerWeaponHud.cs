@@ -74,7 +74,9 @@ namespace OskarMike.UI
 
             bool hit = Time.time < hitMarkerUntil;
             crosshair.text = hit ? "×" : "+";
-            crosshair.color = hit ? (lastHitHead ? new Color(1f, .35f, .35f) : Color.white) : new Color(1f, 1f, 1f, .8f);
+            // 조준 중에는 조준점을 숨기고(가늠자로 조준), 히트마커만 보여 준다.
+            float crosshairAlpha = .8f * (1f - Mathf.Clamp01(loadout.AimBlend * 1.5f));
+            crosshair.color = hit ? (lastHitHead ? new Color(1f, .35f, .35f) : Color.white) : new Color(1f, 1f, 1f, crosshairAlpha);
         }
 
         private string SlotText(WeaponSlot slot, string label)

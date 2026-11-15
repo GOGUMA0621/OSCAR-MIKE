@@ -18,6 +18,7 @@ namespace OskarMike.Weapons
         [SerializeField] private Transform viewRoot;
         [Tooltip("비우면 휴머노이드 오른손 본 (없으면 플레이어 루트)")]
         [SerializeField] private Transform worldAnchor;
+        private Transform handMiddle, handIndex, handLittle;
         [SerializeField] private Vector3 fallbackWorldOffset = new Vector3(0.25f, 1.25f, 0.35f);
 
         [Header("연출")]
@@ -85,6 +86,9 @@ namespace OskarMike.Weapons
         private bool destroying;
         private MaterialPropertyBlock holeBlock;
         private static readonly int BaseMapST = Shader.PropertyToID("_BaseMap_ST");
+        private Camera ownerCamera;
+        private float baseFov = 60f;
+        private bool aimCameraApplied;
 
         private void Awake()
         {
@@ -98,10 +102,15 @@ namespace OskarMike.Weapons
                 var cam = GetComponentInChildren<Camera>(true);
                 if (cam != null) viewRoot = cam.transform;
             }
-            if (worldAnchor == null)
+            ownerCamera = GetComponentInChildren<Camera>(true);
+            if (ownerCamera != null) baseFov = ownerCamera.fieldOfView;
+            var animator = GetComponentInChildren<Animator>(true);
+            if (animator != null && animator.isHuman)
             {
-                var animator = GetComponentInChildren<Animator>(true);
-                if (animator != null && animator.isHuman) worldAnchor = animator.GetBoneTransform(HumanBodyBones.RightHand);
+                if (worldAnchor == null) worldAnchor = animator.GetBoneTransform(HumanBodyBones.RightHand);
+                handMiddle = animator.GetBoneTransform(HumanBodyBones.RightMiddleProximal);
+                handIndex = animator.GetBoneTransform(HumanBodyBones.RightIndexProximal);
+                handLittle = animator.GetBoneTransform(HumanBodyBones.RightLittleProximal);
             }
         }
 
@@ -124,6 +133,18 @@ namespace OskarMike.Weapons
             {
                 if (viewModels[i] != null) Destroy(viewModels[i]);
                 if (worldModels[i] != null) Destroy(worldModels[i]);
+            }
+        }
+
+        /// <summary>현재 보이는 3인칭 총 (없거나 숨김이면 null). LateUpdate 에서 손에 맞춰 정렬된다.</summary>
+        public Transform ActiveWorldModel
+        {
+            get
+            {
+                if (loadout == null || !loadout.IsSpawned) return null;
+                int active = (int)loadout.ActiveSlot;
+                var model = active >= 0 && active < worldModels.Length ? worldModels[active] : null;
+                return model != null && model.activeInHierarchy ? model.transform : null;
             }
         }
 
@@ -161,15 +182,54 @@ namespace OskarMike.Weapons
             {
                 float draw = loadout.IsDrawing ? drawDrop : 0f;
                 float reloadDip = loadout.IsReloading ? Mathf.Sin(loadout.ReloadProgress * Mathf.PI) * 0.12f : 0f;
-                view.transform.localPosition = activeDef.ViewOffset
+                // 조준: 허리 위치 → 가늠자 위치 (부드러운 S 곡선)
+                float aim = Mathf.SmoothStep(0f, 1f, loadout.AimBlend);
+                activeDef.GetAimPose(out Vector3 aimPos, out Quaternion aimRot);
+                Vector3 basePos = Vector3.Lerp(activeDef.ViewOffset, aimPos, aim);
+                Quaternion baseRot = Quaternion.Slerp(activeDef.ViewRotation, aimRot, aim);
+                view.transform.localPosition = basePos
                     + Vector3.down * (draw + reloadDip)
                     + Vector3.back * kick;
                 float kickRatio = activeDef.ViewKick > 0f ? kick / activeDef.ViewKick : 0f;
-                view.transform.localRotation = activeDef.ViewRotation
-                    * Quaternion.Euler(-kickPitchDegrees * kickRatio - reloadDip * 120f, 0f, 0f);
+                view.transform.localRotation = baseRot
+                    * Quaternion.Euler(-kickPitchDegrees * kickRatio * Mathf.Lerp(1f, activeDef.AimKickMultiplier, aim) - reloadDip * 120f, 0f, 0f);
             }
 
+            ApplyAimCamera(showView ? activeDef : null);
+
             if (muzzleRoot != null && muzzleRoot.gameObject.activeSelf && Time.time >= muzzleUntil) muzzleRoot.gameObject.SetActive(false);
+        }
+
+        /// <summary>
+        /// 오너 카메라 조준 연출: 시야각 확대 + 확대 비율 × 설정 감도만큼 시점 감도 감소.
+        /// def == null 이면 기본값으로 되돌린다.
+        /// </summary>
+        private void ApplyAimCamera(WeaponDefinition def)
+        {
+            float blend = def != null ? Mathf.SmoothStep(0f, 1f, loadout.AimBlend) : 0f;
+            if (blend <= 0f)
+            {
+                ResetAimCamera();
+                return;
+            }
+            float fov = Mathf.Lerp(baseFov, def.AimFov, blend);
+            if (ownerCamera != null) ownerCamera.fieldOfView = fov;
+            if (controller != null)
+            {
+                // 화면이 확대된 만큼 같은 손 움직임에 같은 화면상 거리로 움직이도록 tan 비율로 보정
+                float zoomRatio = Mathf.Tan(def.AimFov * 0.5f * Mathf.Deg2Rad) / Mathf.Tan(baseFov * 0.5f * Mathf.Deg2Rad);
+                float aimSensitivity = zoomRatio * OskarMike.Core.GameSettings.AimSensitivity;
+                controller.LookSensitivityMultiplier = Mathf.Lerp(1f, aimSensitivity, blend);
+            }
+            aimCameraApplied = true;
+        }
+
+        private void ResetAimCamera()
+        {
+            if (!aimCameraApplied) return;
+            if (ownerCamera != null) ownerCamera.fieldOfView = baseFov;
+            if (controller != null) controller.LookSensitivityMultiplier = 1f;
+            aimCameraApplied = false;
         }
 
         /// <summary>
@@ -179,8 +239,28 @@ namespace OskarMike.Weapons
         private void AlignWorldModel(Transform model, WeaponDefinition def)
         {
             if (worldAnchor == null) return;
+            if (def.UseHandGrip && TryGetHandFrame(out Quaternion hand))
+            {
+                model.SetPositionAndRotation(worldAnchor.position + hand * def.HandGripOffset, hand * def.HandGripRotation);
+                return;
+            }
             Quaternion body = transform.rotation;
             model.SetPositionAndRotation(worldAnchor.position + body * def.WorldOffset, body * def.WorldRotation);
+        }
+
+        /// <summary>
+        /// 리그(본 로컬 축)에 무관한 손 프레임: +Z = 손목→중지 뿌리, +Y = 손바닥 법선(검지·소지 뿌리 기준).
+        /// 무기 애니메이션 FBX 에서 측정한 HandGripOffset/Rotation 을 다른 휴머노이드 모델에 그대로 쓰기 위함.
+        /// </summary>
+        private bool TryGetHandFrame(out Quaternion rotation)
+        {
+            rotation = Quaternion.identity;
+            if (handMiddle == null || handIndex == null || handLittle == null) return false;
+            Vector3 along = handMiddle.position - worldAnchor.position;
+            Vector3 side = handIndex.position - handLittle.position;
+            if (along.sqrMagnitude < 1e-8f || side.sqrMagnitude < 1e-8f) return false;
+            rotation = Quaternion.LookRotation(along, Vector3.Cross(along.normalized, side.normalized));
+            return true;
         }
 
         private void OnShotFired(bool localPrediction, ShotImpact impact)
@@ -188,7 +268,7 @@ namespace OskarMike.Weapons
             var def = loadout.ActiveDefinition;
             if (def == null) return;
             int active = (int)loadout.ActiveSlot;
-            if (localPrediction) kick = def.ViewKick;
+            if (localPrediction) kick = def.ViewKick * Mathf.Lerp(1f, def.AimKickMultiplier, loadout.AimBlend);
 
             // 오너는 1인칭 총구, 원격은 3인칭 총구에서 플래시 + 궤적. 탄착 효과는 궤적이 도착할 때 재생.
             GameObject model = loadout.IsOwner ? viewModels[active] : worldModels[active];
@@ -365,6 +445,7 @@ namespace OskarMike.Weapons
 
         private void SetAllInactive()
         {
+            ResetAimCamera();
             for (int i = 0; i < 2; i++)
             {
                 if (viewModels[i] != null) viewModels[i].SetActive(false);

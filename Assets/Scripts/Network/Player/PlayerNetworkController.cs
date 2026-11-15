@@ -136,7 +136,7 @@ namespace OskarMike.Network.Player
         private PlayerStamina        stamina;
         private PlayerHealth         health;
         private Camera               localCamera;
-        private IPlayerMovementModifier movementModifier; // 더플백 운반 등 (선택)
+        private IPlayerMovementModifier[] movementModifiers = System.Array.Empty<IPlayerMovementModifier>(); // 더플백 운반, 조준 등 (선택, 여러 개면 곱/AND)
 
         // ── 오너 클라이언트 전용 ───────────────────────────
         private float localVerticalRotation = 0f;
@@ -145,6 +145,8 @@ namespace OskarMike.Network.Player
         private Vector3 cameraBaseLocalPos;
         private bool gameplayInputEnabled = false;
         public bool GameplayInputEnabled => gameplayInputEnabled;
+        /// <summary>오너 전용 시점 감도 배율 (조준 등 외부 컴포넌트가 설정, 1 = 기본).</summary>
+        public float LookSensitivityMultiplier { get; set; } = 1f;
 
 #if ENABLE_INPUT_SYSTEM
         private PlayerInput  playerInput;
@@ -195,7 +197,7 @@ namespace OskarMike.Network.Player
             stamina             = GetComponent<PlayerStamina>();
             health              = GetComponent<PlayerHealth>();
             localCamera         = GetComponentInChildren<Camera>(true);
-            movementModifier    = GetComponent<IPlayerMovementModifier>();
+            movementModifiers   = GetComponents<IPlayerMovementModifier>();
             InitializeCharacterControllerHeight();
 #if ENABLE_INPUT_SYSTEM
             playerInput = GetComponent<PlayerInput>();
@@ -268,7 +270,7 @@ namespace OskarMike.Network.Player
         {
             Vector2 moveInput  = ReadMoveInput();
             Vector2 lookInput  = ReadLookInput();
-            float   yawDelta   = lookInput.x * mouseSensitivity * Time.deltaTime;
+            float   yawDelta   = lookInput.x * mouseSensitivity * LookSensitivityMultiplier * Time.deltaTime;
             bool    jumpPressed   = ReadButtonOnce(ref jumpAction);
             // The existing Alt action selects tactical walk; unmodified movement is slow walk.
             bool    isWalking     = !ReadButtonHeld(walkAction);
@@ -536,7 +538,7 @@ namespace OskarMike.Network.Player
                    && moveInput.sqrMagnitude >= 0.01f
                    && stamina != null
                    && stamina.CanFullSprint
-                   && (movementModifier == null || movementModifier.AllowFullSprint);
+                   && ModifiersAllowFullSprint();
         }
 
         private bool CanJump(bool jumpPressed)
@@ -754,7 +756,7 @@ namespace OskarMike.Network.Player
         private void HandleLocalCameraPitch()
         {
             Vector2 lookInput = ReadLookInput();
-            localVerticalRotation -= lookInput.y * mouseSensitivity * Time.deltaTime;
+            localVerticalRotation -= lookInput.y * mouseSensitivity * LookSensitivityMultiplier * Time.deltaTime;
             localVerticalRotation  = Mathf.Clamp(localVerticalRotation, -80f, 80f);
 
             Transform camT = cameraHolder != null ? cameraHolder : localCamera?.transform;
@@ -826,8 +828,15 @@ namespace OskarMike.Network.Player
 
         private float GetSpeed()
         {
-            float multiplier = movementModifier != null ? Mathf.Max(0f, movementModifier.SpeedMultiplier) : 1f;
+            float multiplier = 1f;
+            foreach (var modifier in movementModifiers) multiplier *= Mathf.Max(0f, modifier.SpeedMultiplier);
             return GetBaseSpeed() * multiplier;
+        }
+
+        private bool ModifiersAllowFullSprint()
+        {
+            foreach (var modifier in movementModifiers) if (!modifier.AllowFullSprint) return false;
+            return true;
         }
 
         private float GetBaseSpeed()
