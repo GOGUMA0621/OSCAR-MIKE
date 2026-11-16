@@ -34,12 +34,12 @@ namespace OskarMike.EditorTools
                 Check(root.GetComponent<OskarMike.Network.Player.PlayerAnimatorParameters>() != null, "Parameter bridge connected");
                 Check(!root.GetComponents<MonoBehaviour>().Any(s => s != null && s.GetType().Name == "PlayerAnimationPresenter"), "Legacy presenter removed");
                 anim.SetInteger("Action", 0); anim.SetInteger("Posture", 0);
-                anim.SetFloat("Speed", 1.2f); Advance(anim, .3f);
+                anim.SetFloat("Speed", 1f); Advance(anim, .3f);
                 Check(anim.GetCurrentAnimatorStateInfo(0).IsName("StandingLocomotion"), "Standing state");
                 Check(anim.GetCurrentAnimatorClipInfo(0).Any(c => c.clip.name == "Walk" && c.weight > .95f), "Speed selects Walk");
-                anim.SetFloat("Speed", 4.5f); Advance(anim, .3f);
+                anim.SetFloat("Speed", 5f); Advance(anim, .3f);
                 Check(anim.GetCurrentAnimatorClipInfo(0).Any(c => c.clip.name == "Sprint" && c.weight > .95f), "Speed selects Sprint");
-                anim.SetInteger("Posture", 1); anim.SetFloat("Speed", .65f); Advance(anim, .4f);
+                anim.SetInteger("Posture", 1); anim.SetFloat("Speed", .7f); Advance(anim, .4f);
                 Check(anim.GetCurrentAnimatorStateInfo(0).IsName("CrouchEnter"), "Crouch entry not cut at 0.25 seconds");
                 Advance(anim, 1.2f);
                 Check(anim.GetCurrentAnimatorStateInfo(0).IsName("CrouchLocomotion"), "Crouch entry completes");

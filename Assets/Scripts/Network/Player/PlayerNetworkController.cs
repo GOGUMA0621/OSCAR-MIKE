@@ -35,10 +35,10 @@ namespace OskarMike.Network.Player
 
         // ── 이동 설정 ──────────────────────────────────────
         [Header("Move Speed")]
-        [SerializeField] private float speedWalkStand = 1.2f;
-        [SerializeField] private float speedTacticalWalkStand = 2.4f;
-        [SerializeField] private float speedFullSprintStand = 4.5f;
-        [SerializeField] private float speedWalkCrouch = 0.65f;
+        [SerializeField] private float speedWalkStand = 1.0f;
+        [SerializeField] private float speedTacticalWalkStand = 3.3f;
+        [SerializeField] private float speedFullSprintStand = 5.0f;
+        [SerializeField] private float speedWalkCrouch = 0.7f;
         [SerializeField] private float speedWalkProne  = 0.3f;
 
         [Header("Jump & Gravity")]

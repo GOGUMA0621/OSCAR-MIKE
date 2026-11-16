@@ -441,10 +441,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::OskarMike.Network.Player.PlayerNetworkController
   ShowTopMostFoldoutHeaderGroup: 1
-  speedWalkStand: 1.2
-  speedTacticalWalkStand: 2.4
-  speedFullSprintStand: 4.5
-  speedWalkCrouch: 0.65
+  speedWalkStand: 1
+  speedTacticalWalkStand: 3.3
+  speedFullSprintStand: 5
+  speedWalkCrouch: 0.7
   speedWalkProne: 0.3
   jumpHeight: 1.2
   gravity: -15
