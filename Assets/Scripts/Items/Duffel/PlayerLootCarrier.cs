@@ -16,15 +16,16 @@ namespace OskarMike.Items
     ///
     /// 슬롯은 고정 칸(빈 칸 = 빈 항목)이고, selectedSlot ≥ 0 이면 그 칸을 손에 든 상태(무기는 집어넣음, 빈 칸이면 빈손).
     /// F : 아이템 → 손이 비었으면 손(선택 칸)에, 아이템을 들고 있으면 빈 칸에 넣고 그 아이템을 듦,
-    ///     무기를 들고 있으면 빈 칸에만 넣음 / 더플백(땅·동료) → 내 아이템 전부 투입, 없으면 메기
-    ///     대상 없음 + 더플백 착용 중 → 내 더플백에 투입
+    ///     무기를 들고 있으면 빈 칸에만 넣음 / 더플백(땅·동료) → 손에 든 아이템 1개만 투입 (다음 아이템을 자동으로 듦),
+    ///     손에 든 게 없으면 메기 / 대상 없음 + 더플백 착용 중 → 손에 든 아이템을 내 더플백에 투입
     /// G : 손에 든 아이템 내려놓기, 없으면 더플백 던지기 (앉기/엎드리기면 발밑에 내려놓기)
     /// </summary>
     [DisallowMultipleComponent]
     [RequireComponent(typeof(PlayerNetworkController))]
     public sealed class PlayerLootCarrier : NetworkBehaviour, IPlayerMovementModifier
     {
-        public enum InteractPromptKind : byte { None, PickUp, PickUpToHand, SlotsFull, Deposit, Shoulder, Throw }
+        // HoldToDeposit: 더플백을 보고 있고 슬롯에 아이템이 있지만 손에 든 아이템이 없음 (안내만)
+        public enum InteractPromptKind : byte { None, PickUp, PickUpToHand, SlotsFull, Deposit, Shoulder, Throw, HoldToDeposit }
 
         [Header("슬롯")]
         [Range(1, 8)] [SerializeField] private int slotCount = 4;
@@ -255,11 +256,15 @@ namespace OskarMike.Items
             }
             if (bag != null)
             {
-                if (HasAnyItem) return InteractPromptKind.Deposit;
+                if (HasHandItem) return InteractPromptKind.Deposit;
                 if (!bag.IsCarried && !IsCarryingBag) return InteractPromptKind.Shoulder;
-                return InteractPromptKind.None;
+                return HasAnyItem ? InteractPromptKind.HoldToDeposit : InteractPromptKind.None;
             }
-            if (IsCarryingBag) return HasAnyItem ? InteractPromptKind.Deposit : InteractPromptKind.Throw;
+            if (IsCarryingBag)
+            {
+                if (HasHandItem) return InteractPromptKind.Deposit;
+                return HasAnyItem ? InteractPromptKind.HoldToDeposit : InteractPromptKind.Throw;
+            }
             return InteractPromptKind.None;
         }
 
@@ -302,8 +307,8 @@ namespace OskarMike.Items
 
             if (!hasTarget || !targetRef.TryGet(out NetworkObject target) || target == null)
             {
-                // 대상 없음: 착용 중인 더플백에 투입
-                if (serverCarriedBag != null) ServerDepositAll(serverCarriedBag);
+                // 대상 없음: 손에 든 아이템을 착용 중인 더플백에 투입
+                if (serverCarriedBag != null) ServerDepositHandItem(serverCarriedBag);
                 return;
             }
 
@@ -317,7 +322,7 @@ namespace OskarMike.Items
 
             if (target.TryGetComponent(out DuffelBag bag))
             {
-                if (HasAnyItem) ServerDepositAll(bag);
+                if (HasHandItem) ServerDepositHandItem(bag);
                 else if (!bag.IsCarried && serverCarriedBag == null && bag.ServerAttach(NetworkObject))
                 {
                     serverCarriedBag = bag;
@@ -372,13 +377,25 @@ namespace OskarMike.Items
             item.NetworkObject.Despawn(true);
         }
 
-        private void ServerDepositAll(DuffelBag bag)
+        /// <summary>
+        /// 손에 든 아이템 하나만 더플백에 넣는다. 그다음 남은 아이템 칸(오른쪽 우선, 순환)을 들고,
+        /// 남은 게 없으면 무기로 복귀한다 → F 를 반복해 하나씩 넣을 수 있다.
+        /// </summary>
+        private void ServerDepositHandItem(DuffelBag bag)
         {
-            if (bag == null || !bag.IsSpawned || !HasAnyItem) return;
-            int total = CarriedItemsValue;
-            for (int i = 0; i < slots.Count; i++) slots[i] = default;
-            selectedSlot.Value = NoSlot;   // 다 넣었으면 무기로 복귀
-            bag.ServerDeposit(total);
+            if (bag == null || !bag.IsSpawned || !HasHandItem) return;
+            int index = selectedSlot.Value;
+            int value = slots[index].Price;
+            slots[index] = default;
+
+            sbyte next = NoSlot;
+            for (int step = 1; step < slots.Count; step++)
+            {
+                int i = (index + step) % slots.Count;
+                if (!slots[i].IsEmpty) { next = (sbyte)i; break; }
+            }
+            selectedSlot.Value = next;
+            bag.ServerDeposit(value);
         }
 
         private void ServerReleaseBag(Vector3 lookDirection, bool throwBag)

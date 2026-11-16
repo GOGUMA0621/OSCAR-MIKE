@@ -163,7 +163,8 @@ namespace OskarMike.UI
                 PlayerLootCarrier.InteractPromptKind.PickUp => "[F] 줍기",
                 PlayerLootCarrier.InteractPromptKind.PickUpToHand => "[F] 주워서 들기",
                 PlayerLootCarrier.InteractPromptKind.SlotsFull => "슬롯이 가득 찼습니다",
-                PlayerLootCarrier.InteractPromptKind.Deposit => "[F] 더플백에 넣기" + bagValue,
+                PlayerLootCarrier.InteractPromptKind.Deposit => "[F] 손에 든 아이템 더플백에 넣기" + bagValue,
+                PlayerLootCarrier.InteractPromptKind.HoldToDeposit => "[3~6] 넣을 아이템을 손에 드세요" + bagValue,
                 PlayerLootCarrier.InteractPromptKind.Shoulder => "[F] 더플백 메기" + bagValue,
                 PlayerLootCarrier.InteractPromptKind.Throw => "[G] 더플백 던지기  ·  앉은 상태에서 [G] 내려놓기",
                 _ => string.Empty
