@@ -107,7 +107,7 @@ MonoBehaviour:
     m_Bits: 1
   m_VolumeTrigger: {fileID: 0}
   m_VolumeFrameworkUpdateModeOption: 2
-  m_RenderPostProcessing: 0
+  m_RenderPostProcessing: 1
   m_Antialiasing: 0
   m_AntialiasingQuality: 2
   m_StopNaN: 0
@@ -928,10 +928,10 @@ MonoBehaviour:
   firstPersonMesh: {fileID: 4300000, guid: 4ae721c87a576cf4292fa62554e4d2fa, type: 2}
   visibleLayer: Default
   straighten: 1
+  neckClearance: 0.15
   maxPushBack: 0.6
   chestFrontDepth: 0.14
   edgeMargin: 0.03
---- !u!1001 &548867802774830947
 --- !u!114 &8440147427325171144
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -945,6 +945,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::OskarMike.AI.Testing.EnemyAITestPlayer
   ShowTopMostFoldoutHeaderGroup: 1
+--- !u!1001 &548867802774830947
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -1024,7 +1025,6 @@ PrefabInstance:
       propertyPath: m_Controller
       value: 
       objectReference: {fileID: 9100000, guid: bec2e48ea65088d4caf8fee48a22e42d, type: 2}
-    m_RemovedComponents: []
     - target: {fileID: 5866666021909216657, guid: f1e8e1bfafe7fa241ba6b4181f3eba85, type: 3}
       propertyPath: m_CullingMode
       value: 0
@@ -1033,6 +1033,7 @@ PrefabInstance:
       propertyPath: m_ApplyRootMotion
       value: 0
       objectReference: {fileID: 0}
+    m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
