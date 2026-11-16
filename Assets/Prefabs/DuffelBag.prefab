@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 7501330312491123129}
   - component: {fileID: 3190614925563339311}
   - component: {fileID: 9025483994287479111}
+  - component: {fileID: 5706782160550036564}
   m_Layer: 0
   m_Name: DuffelBag
   m_TagString: Untagged
@@ -172,7 +173,7 @@ MonoBehaviour:
   ShowTopMostFoldoutHeaderGroup: 1
   carrySpeedMultiplier: 0.7
   blockFullSprint: 1
-  carryLocalPosition: {x: 0, y: 1.25, z: -0.25}
+  carryLocalPosition: {x: -0.22, y: 0.95, z: 0}
   carryLocalEuler: {x: 0, y: 0, z: 0}
   throwSpeed: 6
   throwUpSpeed: 2
@@ -182,6 +183,38 @@ MonoBehaviour:
   hitEffectLifetime: 3
   physicsColliders:
   - {fileID: 3190614925563339311}
+--- !u!114 &5706782160550036564
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 887390267132925562}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 43040c822170b1b448f4c0cbac9e65e5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::OskarMike.Items.DuffelBagWornVisual
+  visual: {fileID: 0}
+  hitbox: {fileID: 0}
+  hipOffset: {x: -0.27, y: -0.02, z: 0}
+  wornEuler: {x: 0, y: -90, z: 8}
+  wornScale: 0.7
+  bagAnchor: {x: 0.3, y: 0.16, z: 0}
+  chestPath:
+  - {x: -0.05, y: -0.057, z: 0.128}
+  - {x: 0.05, y: 0.103, z: 0.152}
+  - {x: 0.11, y: 0.213, z: 0.106}
+  - {x: 0.12, y: 0.27, z: -0.026}
+  - {x: 0.1, y: 0.17, z: -0.133}
+  - {x: 0, y: 0.02, z: -0.12}
+  - {x: -0.12, y: -0.12, z: -0.13}
+  gripPathPosition: 0.5
+  gripEuler: {x: 0, y: 0, z: 0}
+  strapWidth: 0.04
+  strapThickness: 0.01
+  samplesPerSegment: 6
+  strapMaterial: {fileID: 0}
 --- !u!1 &1907857071986337448
 GameObject:
   m_ObjectHideFlags: 0

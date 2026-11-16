@@ -27,6 +27,8 @@ namespace OskarMike.Items
         [Min(0f)] [SerializeField] private float throwSpeed = 6f;
         [Min(0f)] [SerializeField] private float throwUpSpeed = 2f;
         [Min(0f)] [SerializeField] private float dropForwardOffset = 0.6f;
+        [Tooltip("던진/내려놓은 직후 운반자와 충돌을 무시하는 시간 (초)")]
+        [Min(0f)] [SerializeField] private float throwIgnoreCarrierTime = 0.3f;
 
         [Header("피격")]
         [Tooltip("데미지 1당 현재 가치에서 잃는 비율 (0.005 = 0.5%)")]
@@ -85,6 +87,7 @@ namespace OskarMike.Items
         {
             hitSequence.OnValueChanged -= OnHitSequenceChanged;
             carrierObjectId.OnValueChanged -= OnCarrierChanged;
+            RestoreCarrierCollisions();
         }
 
         // ══════════════════════════════════════════════════
@@ -127,9 +130,16 @@ namespace OskarMike.Items
             carrierObjectId.Value = NoCarrier;
             if (networkTransform != null) networkTransform.InLocalSpace = false;
 
-            transform.position = origin + Vector3.up * (throwBag ? 1.3f : 0.4f) + flat * dropForwardOffset;
-            transform.rotation = Quaternion.LookRotation(flat, Vector3.up);
+            Vector3 position = origin + Vector3.up * (throwBag ? 1.3f : 0.4f) + flat * dropForwardOffset;
+            Quaternion rotation = Quaternion.LookRotation(flat, Vector3.up);
+            transform.SetPositionAndRotation(position, rotation);
+            // autoSyncTransforms 가 꺼져 있어 transform 만 옮기면 Rigidbody 는 메고 있던(허리) 위치에서 시뮬레이션을 시작한다
+            // → 운반자 캡슐과 겹쳐 최대 속도로 옆으로 튕겨 나간다. 물리 위치도 같이 맞춘다.
+            body.position = position;
+            body.rotation = rotation;
             ApplyCarryPhysics(false);
+            // 움직이며 던질 때 자기 몸에 걸리지 않도록 잠깐 운반자와의 충돌을 무시한다
+            if (carrier != null) IgnoreCarrierBriefly(carrier);
 
             Vector3 velocity = Vector3.zero;
             if (throwBag)
@@ -165,6 +175,41 @@ namespace OskarMike.Items
         // ══════════════════════════════════════════════════
 
         private void OnCarrierChanged(ulong previous, ulong current) => ApplyCarryPhysics(current != NoCarrier);
+
+        private Coroutine ignoreRoutine;
+        private Collider[] ignoredCarrierColliders = Array.Empty<Collider>();
+
+        private void IgnoreCarrierBriefly(Transform carrier)
+        {
+            RestoreCarrierCollisions();
+            ignoredCarrierColliders = carrier.GetComponentsInChildren<Collider>(true);
+            SetCarrierCollisionIgnored(true);
+            ignoreRoutine = StartCoroutine(RestoreCarrierCollisionsLater());
+        }
+
+        private System.Collections.IEnumerator RestoreCarrierCollisionsLater()
+        {
+            yield return new WaitForSeconds(throwIgnoreCarrierTime);
+            ignoreRoutine = null;
+            RestoreCarrierCollisions();
+        }
+
+        private void RestoreCarrierCollisions()
+        {
+            if (ignoreRoutine != null) { StopCoroutine(ignoreRoutine); ignoreRoutine = null; }
+            SetCarrierCollisionIgnored(false);
+            ignoredCarrierColliders = Array.Empty<Collider>();
+        }
+
+        private void SetCarrierCollisionIgnored(bool ignore)
+        {
+            foreach (var mine in physicsColliders)
+            {
+                if (mine == null) continue;
+                foreach (var theirs in ignoredCarrierColliders)
+                    if (theirs != null) Physics.IgnoreCollision(mine, theirs, ignore);
+            }
+        }
 
         private void ApplyCarryPhysics(bool carried)
         {

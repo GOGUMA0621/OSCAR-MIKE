@@ -1,3 +1,4 @@
+using OskarMike.Items;
 using UnityEngine;
 
 namespace OskarMike.Weapons
@@ -9,6 +10,9 @@ namespace OskarMike.Weapons
     /// (WeaponDefinition.SupportHandOffset/Rotation)에 맞춘다.
     /// 애니메이션이 만들어진 몸(HumanDummy_F)에서는 목표가 원래 포즈와 같아 거의 변화가 없고,
     /// 체형이 다른 모델에서 왼손이 총에서 뜨거나 파고드는 것을 막는다. 팔꿈치는 애니메이션의 굽힘 평면을 유지한다.
+    ///
+    /// 더플백을 메고 권총(보조무장)을 든 동안에는 왼손이 총 대신 가슴 앞 가방끈을 잡는다
+    /// (DuffelBagWornVisual.TryGetStrapGrip) → 한 손이 막혀 권총만 쓴다는 것을 보여 준다.
     /// </summary>
     [DisallowMultipleComponent]
     [DefaultExecutionOrder(100)]
@@ -19,15 +23,20 @@ namespace OskarMike.Weapons
         [SerializeField] private PlayerWeaponLoadout loadout;
         [Tooltip("최대 IK 가중치. 실제 가중치 = 이 값 × UpperBody 레이어 가중치")]
         [Range(0f, 1f)] [SerializeField] private float maxWeight = 1f;
+        [Tooltip("총 ↔ 가방끈 목표 전환 시간 (초)")]
+        [Min(0.01f)] [SerializeField] private float strapBlendTime = 0.2f;
 
         private Transform upperArm, lowerArm, hand, middle, index, little;
         private int upperBodyLayer = -1;
+        private PlayerLootCarrier lootCarrier;
+        private float strapBlend;   // 0 = 총 보조손, 1 = 가방끈
 
         private void Awake()
         {
             if (animator == null) animator = GetComponentInChildren<Animator>(true);
             if (view == null) view = GetComponent<PlayerWeaponView>();
             if (loadout == null) loadout = GetComponent<PlayerWeaponLoadout>();
+            lootCarrier = GetComponent<PlayerLootCarrier>();
             if (animator == null || !animator.isHuman) return;
             upperArm = animator.GetBoneTransform(HumanBodyBones.LeftUpperArm);
             lowerArm = animator.GetBoneTransform(HumanBodyBones.LeftLowerArm);
@@ -43,20 +52,55 @@ namespace OskarMike.Weapons
             if (upperArm == null || lowerArm == null || hand == null || view == null || loadout == null) return;
             var gun = view.ActiveWorldModel;
             var def = loadout.ActiveDefinition;
-            if (gun == null || def == null || !def.UseSupportHandIK) return;
+
+            // 더플백 + 권총: 왼손은 가방끈
+            bool hasStrap = TryGetStrapGrip(out Vector3 strapPosition, out Quaternion strapRotation);
+            bool wantStrap = hasStrap && gun != null && loadout.ActiveSlot == WeaponSlot.Secondary && !loadout.Holstered;
+            strapBlend = Mathf.MoveTowards(strapBlend, wantStrap ? 1f : 0f, Time.deltaTime / strapBlendTime);
+            if (!hasStrap) strapBlend = 0f;
+
+            bool hasGun = gun != null && def != null && def.UseSupportHandIK;
+            if (!hasGun && strapBlend <= 0f) return;
 
             float weight = maxWeight * (upperBodyLayer >= 0 ? animator.GetLayerWeight(upperBodyLayer) : 1f);
             if (weight <= 0.001f) return;
 
-            Vector3 targetPosition = gun.position + gun.rotation * def.SupportHandOffset;
+            Vector3 targetPosition;
+            Quaternion targetFrame;
+            if (hasGun)
+            {
+                targetPosition = gun.position + gun.rotation * def.SupportHandOffset;
+                targetFrame = gun.rotation * def.SupportHandRotation;
+                if (strapBlend > 0f)
+                {
+                    targetPosition = Vector3.Lerp(targetPosition, strapPosition, strapBlend);
+                    targetFrame = Quaternion.Slerp(targetFrame, strapRotation, strapBlend);
+                }
+            }
+            else
+            {
+                targetPosition = strapPosition;
+                targetFrame = strapRotation;
+                weight *= strapBlend;
+            }
+
             SolveTwoBone(upperArm, lowerArm, hand, Vector3.Lerp(hand.position, targetPosition, weight));
 
             if (TryGetHandFrame(out Quaternion frame))
             {
-                Quaternion targetFrame = gun.rotation * def.SupportHandRotation;
                 Quaternion solved = targetFrame * Quaternion.Inverse(frame) * hand.rotation;
                 hand.rotation = Quaternion.Slerp(hand.rotation, solved, weight);
             }
+        }
+
+        private bool TryGetStrapGrip(out Vector3 position, out Quaternion rotation)
+        {
+            position = default;
+            rotation = Quaternion.identity;
+            if (lootCarrier == null || !lootCarrier.IsSpawned || !lootCarrier.IsCarryingBag) return false;
+            var bag = lootCarrier.CarriedBag;
+            if (bag == null || !bag.TryGetComponent(out DuffelBagWornVisual worn)) return false;
+            return worn.TryGetStrapGrip(out position, out rotation);
         }
 
         /// <summary>PlayerWeaponView.TryGetHandFrame 과 같은 정의의 왼손 프레임.</summary>

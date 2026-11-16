@@ -166,6 +166,8 @@ GameObject:
   - component: {fileID: 3590361025853290272}
   - component: {fileID: 6170137585922071288}
   - component: {fileID: 6333525035871255574}
+  - component: {fileID: 412226198049124262}
+  - component: {fileID: 8395338284464373743}
   m_Layer: 0
   m_Name: TestPlayer
   m_TagString: Untagged
@@ -801,6 +803,7 @@ MonoBehaviour:
   view: {fileID: 632914945904831108}
   loadout: {fileID: 8437091170171065977}
   maxWeight: 1
+  strapBlendTime: 0.2
 --- !u!114 &4864388355634960308
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -883,6 +886,40 @@ MonoBehaviour:
   maxViewSize: 0.17
   drawDrop: 0.2
   drawSpeed: 6
+--- !u!114 &412226198049124262
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3719018710315703022}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a13f04e980ae1334cbc3399452ad0ad7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::OskarMike.Weapons.PlayerSlungWeaponView
+  backOffset: {x: 0, y: 0.12, z: -0.17}
+  muzzleDirection: {x: -0.55, y: 0.83, z: 0}
+  gripToCenter: 0.18
+  roll: 0
+--- !u!114 &8395338284464373743
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3719018710315703022}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 07b3be92e46f5eb4ebe9b513877658c0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::OskarMike.Network.Player.FirstPersonBodyView
+  firstPersonMesh: {fileID: 4300000, guid: 4ae721c87a576cf4292fa62554e4d2fa, type: 2}
+  visibleLayer: Default
+  straighten: 1
+  maxPushBack: 0.6
+  chestFrontDepth: 0.14
+  edgeMargin: 0.03
 --- !u!1001 &3022576739495417411
 PrefabInstance:
   m_ObjectHideFlags: 0
