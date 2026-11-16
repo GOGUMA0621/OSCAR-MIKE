@@ -16,7 +16,7 @@ namespace OskarMike.Network.Player.EditorTools
     {
         private const string Folder = "Assets/Models/FirstPerson";
         private const float Threshold = 0.5f;
-        private static readonly string[] PrefabPaths = { "Assets/Prefabs/Player.prefab", "Assets/AI/Prefabs/TestPlayer.prefab" };
+        private static readonly string[] PrefabPaths = { "Assets/Prefabs/Player.prefab" };
 
         // 어깨(쇄골)까지 지운다: 카메라 바로 옆이라 남기면 팔을 뗀 단면이 눈앞에 크게 보인다.
         private static readonly HumanBodyBones[] RemovedRoots =

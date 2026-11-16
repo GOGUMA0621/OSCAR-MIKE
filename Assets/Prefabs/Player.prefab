@@ -167,6 +167,7 @@ GameObject:
   - component: {fileID: 1217274081226541007}
   - component: {fileID: 4971983337802898824}
   - component: {fileID: 5065210811225296849}
+  - component: {fileID: 8440147427325171144}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -893,7 +894,7 @@ MonoBehaviour:
   fallbackWorldOffset: {x: 0.25, y: 1.1, z: 0.35}
   viewOffset: {x: 0.3, y: -0.26, z: 0.62}
   viewEuler: {x: 5, y: -20, z: 0}
-  maxViewSize: 0.6
+  maxViewSize: 0.17
   drawDrop: 0.2
   drawSpeed: 6
 --- !u!114 &4971983337802898824
@@ -931,6 +932,19 @@ MonoBehaviour:
   chestFrontDepth: 0.14
   edgeMargin: 0.03
 --- !u!1001 &548867802774830947
+--- !u!114 &8440147427325171144
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8097309021167318534}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fa10476c94b087543a181515e27b8903, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::OskarMike.AI.Testing.EnemyAITestPlayer
+  ShowTopMostFoldoutHeaderGroup: 1
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -1011,6 +1025,14 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 9100000, guid: bec2e48ea65088d4caf8fee48a22e42d, type: 2}
     m_RemovedComponents: []
+    - target: {fileID: 5866666021909216657, guid: f1e8e1bfafe7fa241ba6b4181f3eba85, type: 3}
+      propertyPath: m_CullingMode
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5866666021909216657, guid: f1e8e1bfafe7fa241ba6b4181f3eba85, type: 3}
+      propertyPath: m_ApplyRootMotion
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []

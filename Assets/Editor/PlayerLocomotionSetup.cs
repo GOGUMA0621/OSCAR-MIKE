@@ -118,7 +118,6 @@ namespace OskarMike.EditorTools
             }
             EditorUtility.SetDirty(controller);
             WirePrefab("Assets/Prefabs/Player.prefab");
-            WirePrefab("Assets/AI/Prefabs/TestPlayer.prefab");
             AssetDatabase.SaveAssets();
             Debug.Log("LOCOMOTION_CONFIGURED: Animator transitions and three speed trees; legacy presenter removed from prefabs.");
         }
