@@ -1,0 +1,208 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 08144ddec7b3c2741bca3344387d3c37, type: 3}
+  m_Name: Weapon_M4A1
+  m_EditorClassIdentifier: Assembly-CSharp::OskarMike.Weapons.WeaponDefinition
+  weaponId: m4a1
+  displayName: M4A1
+  slot: 0
+  damage: 20
+  fireInterval: 0.1
+  automatic: 1
+  range: 300
+  spreadDegrees: 0.4
+  recoilPitchCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 137
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 5
+      value: 3.2
+      inSlope: 0.52
+      outSlope: 0.52
+      tangentMode: 137
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 10
+      value: 5.2
+      inSlope: 0.25333333
+      outSlope: 0.25333333
+      tangentMode: 137
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 20
+      value: 7
+      inSlope: 0.13000003
+      outSlope: 0.13000003
+      tangentMode: 137
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 30
+      value: 7.8
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 137
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  recoilYawCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 137
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 8
+      value: 0.2
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 137
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 14
+      value: -1.2
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 137
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 20
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 137
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 25
+      value: -0.6
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 137
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 30
+      value: 0.8
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 137
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  recoilCurveScale: 1
+  recoilRandomYaw: 0.15
+  recoilRecovery: 8
+  recoilReturnRatio: 0.8
+  spreadCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0.04
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 137
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 3.8600922
+      value: 0.24139404
+      inSlope: 0.055179194
+      outSlope: 0.055179194
+      tangentMode: 137
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 12.954513
+      value: 0.7548195
+      inSlope: 0.035193756
+      outSlope: 0.035193756
+      tangentMode: 137
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 29.828003
+      value: 1.1553024
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 137
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  patternResetTime: 0.35
+  magazineSize: 30
+  startingReserve: 90
+  reloadTime: 2.3
+  drawTime: 0.6
+  viewModelPrefab: {fileID: 4805077088663528612, guid: d4ae2b24c03ad6e4c8562ba1e7cb3893, type: 3}
+  viewOffset: {x: 0.16, y: -0.17, z: 0.3}
+  viewEuler: {x: 0, y: 0, z: 0}
+  viewMuzzle: {x: 0, y: 0.052, z: 0.602}
+  viewKick: 0.04
+  sightRear: {x: 0.00025, y: 0.12425, z: 0.02}
+  sightFront: {x: 0, y: 0.1162, z: 0.4247}
+  aimEyeRelief: 0.11
+  aimViewOffset: {x: 0.0013, y: -0.122, z: 0.1}
+  aimFov: 50
+  aimTime: 0.2
+  aimSpreadMultiplier: 0.3
+  aimMoveSpeedMultiplier: 0.6
+  aimKickMultiplier: 0.35
+  worldModelPrefab: {fileID: 4805077088663528612, guid: d4ae2b24c03ad6e4c8562ba1e7cb3893, type: 3}
+  worldOffset: {x: 0, y: 0.02, z: 0.06}
+  worldEuler: {x: 0, y: 0, z: 0}
+  worldMuzzle: {x: 0, y: 0.052, z: 0.602}
+  useHandGrip: 1
+  handGripOffset: {x: 0.0324, y: 0.0369, z: 0.1109}
+  handGripEuler: {x: 350.0589, y: 2.5405831, z: 262.83423}
+  useSupportHandIK: 1
+  supportHandOffset: {x: -0.099, y: 0.031, z: 0.242}
+  supportHandEuler: {x: 7.8, y: 46.8, z: 135.6}

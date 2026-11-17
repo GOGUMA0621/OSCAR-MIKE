@@ -345,7 +345,7 @@ Light:
   serializedVersion: 12
   m_Type: 1
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Intensity: 1.2
+  m_Intensity: 1
   m_Range: 10
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
@@ -1262,7 +1262,7 @@ MonoBehaviour:
   NetworkConfig:
     ProtocolVersion: 0
     NetworkTransport: {fileID: 939843382}
-    PlayerPrefab: {fileID: 3719018710315703022, guid: 54aadcd52fafa3046a80c35750bdc2cd, type: 3}
+    PlayerPrefab: {fileID: 8097309021167318534, guid: 140405a8a27965f4a9a79838f08f198a, type: 3}
     Prefabs:
       NetworkPrefabsLists:
       - {fileID: 11400000, guid: 51cde32612f189441936798c41207eb2, type: 2}

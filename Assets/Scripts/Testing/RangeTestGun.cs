@@ -26,6 +26,8 @@ namespace OskarMike.Testing
         private float kick;
         private GUIStyle text;
         private bool inRange;
+        // 플레이어에 네트워크 무장(PlayerWeaponLoadout)이 있으면 테스트 총은 쓰지 않고 표시/F5 초기화만 담당한다.
+        private bool NetworkWeapons => player != null && player.GetComponent<OskarMike.Weapons.PlayerWeaponLoadout>() != null;
 
         private bool Ready()
         {
@@ -48,8 +50,8 @@ namespace OskarMike.Testing
             inRange = pickupPoint != null && Vector3.Distance(player.transform.position, pickupPoint.position) < 3f;
             if (Keyboard.current != null)
             {
-                if (inRange && Keyboard.current.eKey.wasPressedThisFrame) EquipAndRefill();
-                if (Keyboard.current.rKey.wasPressedThisFrame) BeginReload();
+                if (!NetworkWeapons && inRange && Keyboard.current.eKey.wasPressedThisFrame) EquipAndRefill();
+                if (!NetworkWeapons && Keyboard.current.rKey.wasPressedThisFrame) BeginReload();
                 if (Keyboard.current.f5Key.wasPressedThisFrame)
                     foreach (var target in targets) if (target != null) target.ResetTarget();
             }
@@ -66,7 +68,7 @@ namespace OskarMike.Testing
 
         public bool EquipAndRefill()
         {
-            if (!Ready() || pickupPoint == null || Vector3.Distance(player.transform.position, pickupPoint.position) >= 3f) return false;
+            if (!Ready() || NetworkWeapons || pickupPoint == null || Vector3.Distance(player.transform.position, pickupPoint.position) >= 3f) return false;
             Equipped = true; Magazine = 30; Reserve = 90; reloadAt = 0;
             if (held == null && weaponModel != null)
             {
@@ -94,9 +96,12 @@ namespace OskarMike.Testing
 
         public bool Fire(Vector3 origin, Vector3 direction)
         {
-            if (!Ready() || !Equipped || Reloading || Magazine <= 0 || Time.timeAsDouble < nextShot) return false;
+            if (!Ready() || NetworkWeapons || !Equipped || Reloading || Magazine <= 0 || Time.timeAsDouble < nextShot) return false;
             if (player.MoveState == PlayerMoveState.FullSprint || player.ActionState == PlayerActionState.Vaulting ||
                 player.ActionState == PlayerActionState.Diving || player.ActionState == PlayerActionState.Sliding) return false;
+            // 더플백 착용 중에는 주무장(소총) 사용 불가 — 보조무장(권총)만 허용.
+            var lootCarrier = player.GetComponent<OskarMike.Items.PlayerLootCarrier>();
+            if (lootCarrier != null && !lootCarrier.CanUsePrimaryWeapon) { LastResult = "더플백 착용 중 · 권총만 사용 가능"; return false; }
             nextShot = Time.timeAsDouble + .1; Magazine--; kick = .07f;
             LastResult = "빗나감";
             var hits = Physics.RaycastAll(origin, direction, 350f, ~0, QueryTriggerInteraction.Ignore);
@@ -108,6 +113,11 @@ namespace OskarMike.Testing
                 if (box != null && box.target != null && box.target.ApplyHit(20f, box.region))
                 {
                     LastResult = box.target.name + " / " + box.target.LastHit;
+                    markerUntil = Time.timeAsDouble + .15;
+                }
+                else if (hit.collider.GetComponent<OskarMike.Items.DuffelBagHitbox>() is { bag: { } bag } && bag.ServerApplyHit(20f))
+                {
+                    LastResult = "더플백 명중 · -" + bag.LastLoss.ToString("N0") + "원 (남은 가치 " + bag.StoredValue.ToString("N0") + "원)";
                     markerUntil = Time.timeAsDouble + .15;
                 }
                 else LastResult = "장애물 명중";
@@ -130,9 +140,10 @@ namespace OskarMike.Testing
                 GUI.Box(new Rect(12, 12, 570, 160), "");
                 GUI.Label(new Rect(24, 18, 550, 26), "사격장 · 로컬 호스트 테스트", text);
                 GUI.Label(new Rect(24, 46, 550, 26), !ready ? "호스트 플레이어를 기다리는 중입니다." :
+                    NetworkWeapons ? "1 주무장 · 2 보조무장 · 좌클릭 발사 · R 재장전 · F5 더미 초기화" :
                     Equipped ? "좌클릭 발사 · R 재장전 · F5 더미 초기화" : "왼쪽 총기대에서 E 키로 총을 받으세요.", text);
-                GUI.Label(new Rect(24, 74, 550, 26), Equipped ? "탄약 " + Magazine + " / " + Reserve + (Reloading ? " · 재장전 중..." : "") : "총기 미장착 · 총기대 (-4, 3)", text);
-                GUI.Label(new Rect(24, 102, 550, 26), inRange ? "E : 소총 지급 / 탄약 보충" : "몸 20 / 머리 40 · 더미 파괴 후 3초 복구", text);
+                GUI.Label(new Rect(24, 74, 550, 26), NetworkWeapons ? "더플백 착용 시 보조무장만 사용 가능" : Equipped ? "탄약 " + Magazine + " / " + Reserve + (Reloading ? " · 재장전 중..." : "") : "총기 미장착 · 총기대 (-4, 3)", text);
+                GUI.Label(new Rect(24, 102, 550, 26), inRange && !NetworkWeapons ? "E : 소총 지급 / 탄약 보충" : "몸 20 / 머리 40 · 더미 파괴 후 3초 복구", text);
                 GUI.Label(new Rect(24, 130, 550, 26), LastResult, text);
             }
             finally { GUI.matrix = previous; }

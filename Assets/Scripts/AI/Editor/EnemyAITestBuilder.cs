@@ -148,9 +148,9 @@ namespace OskarMike.AI.Editor
             var contents = PrefabUtility.LoadPrefabContents(source);
             var emitter = contents.GetComponent<PlayerFootstepEmitter>() ?? contents.AddComponent<PlayerFootstepEmitter>();
             emitter.walk = noises[0]; emitter.sprint = noises[1]; emitter.crouch = noises[2]; emitter.prone = noises[3];
-            PrefabUtility.SaveAsPrefabAsset(contents, source);
+            // One player prefab for every scene; EnemyAITestPlayer only acts in the EnemyAITest scene.
             if (contents.GetComponent<EnemyAITestPlayer>() == null) contents.AddComponent<EnemyAITestPlayer>();
-            var result = PrefabUtility.SaveAsPrefabAsset(contents, Root + "/Prefabs/TestPlayer.prefab");
+            var result = PrefabUtility.SaveAsPrefabAsset(contents, source);
             PrefabUtility.UnloadPrefabContents(contents); return result;
         }
         private static GameObject BuildEnemy(BehaviorGraph graph)

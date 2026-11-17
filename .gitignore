@@ -103,3 +103,10 @@ InitTestScene*.unity*
 
 # Unity package lock (auto-generated, causes merge conflicts)
 Packages/packages-lock.json
+
+# Claude Code MCP config (local)
+.mcp.json
+
+# Editor/play-mode screenshots (never committed)
+/Assets/Screenshots/
+/Assets/Screenshots.meta

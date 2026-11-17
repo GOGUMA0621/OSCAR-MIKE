@@ -27,9 +27,9 @@ namespace OskarMike.EditorTools
 
             var sm = controller.layers[0].stateMachine;
             var standing = Tree(controller, sm, "StandingLocomotion", new[] { "Idle", "Walk", "TacticalRun", "Sprint" },
-                new[] { 0f, 1.2f, 2.4f, 4.5f }, new[] { 1f, 1f, .85f, 1.2f }, new Vector3(300, 0));
+                new[] { 0f, 1f, 3.3f, 5f }, new[] { 1f, 1.2f, .66f, 1f }, new Vector3(300, 0));
             var crouching = Tree(controller, sm, "CrouchLocomotion", new[] { "CrouchIdle", "CrouchWalk" },
-                new[] { 0f, .65f }, new[] { 1f, 1f }, new Vector3(600, 140));
+                new[] { 0f, .7f }, new[] { 1f, 1f }, new Vector3(600, 140));
             var prone = Tree(controller, sm, "ProneLocomotion", new[] { "ProneIdle", "Crawl" },
                 new[] { 0f, .3f }, new[] { 1f, 1f }, new Vector3(600, 300));
             var crouchEnter = State(sm, "CrouchEnter", new Vector3(300, 140));
@@ -118,7 +118,6 @@ namespace OskarMike.EditorTools
             }
             EditorUtility.SetDirty(controller);
             WirePrefab("Assets/Prefabs/Player.prefab");
-            WirePrefab("Assets/AI/Prefabs/TestPlayer.prefab");
             AssetDatabase.SaveAssets();
             Debug.Log("LOCOMOTION_CONFIGURED: Animator transitions and three speed trees; legacy presenter removed from prefabs.");
         }

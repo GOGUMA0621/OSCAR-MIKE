@@ -23,22 +23,27 @@ namespace OskarMike.UI
             if (!visible) { if (hud != null) hud.SetActive(false); return; }
             if (hud == null)
             {
-                hud = new GameObject("체력 표시", typeof(RectTransform), typeof(Canvas));
+                hud = new GameObject("체력 표시", typeof(RectTransform), typeof(Canvas), typeof(UnityEngine.UI.CanvasScaler));
                 hud.transform.SetParent(transform, false);
                 var canvas = hud.GetComponent<Canvas>();
                 canvas.renderMode = RenderMode.ScreenSpaceOverlay;
                 canvas.sortingOrder = 21;
+                // 스태미나 HUD 와 같은 1080p 기준 스케일 (왼쪽 하단에 함께 배치)
+                var scaler = hud.GetComponent<UnityEngine.UI.CanvasScaler>();
+                scaler.uiScaleMode = UnityEngine.UI.CanvasScaler.ScaleMode.ScaleWithScreenSize;
+                scaler.referenceResolution = new Vector2(1920f, 1080f);
+                scaler.matchWidthOrHeight = 0.5f;
                 var text = new GameObject("체력", typeof(RectTransform), typeof(TextMeshProUGUI));
                 text.transform.SetParent(hud.transform, false);
                 var rect = text.GetComponent<RectTransform>();
-                rect.anchorMin = rect.anchorMax = new Vector2(.5f, 0);
-                rect.pivot = new Vector2(.5f, 0);
-                rect.anchoredPosition = new Vector2(0, 110);
-                rect.sizeDelta = new Vector2(600, 60);
+                rect.anchorMin = rect.anchorMax = Vector2.zero;
+                rect.pivot = Vector2.zero;
+                rect.anchoredPosition = new Vector2(40, 98);
+                rect.sizeDelta = new Vector2(600, 40);
                 label = text.GetComponent<TextMeshProUGUI>();
                 label.font = font;
                 label.fontSize = 24;
-                label.alignment = TextAlignmentOptions.Center;
+                label.alignment = TextAlignmentOptions.BottomLeft;
                 label.raycastTarget = false;
             }
             hud.SetActive(true);

@@ -1,4 +1,3 @@
-using OskarMike.AI.Testing;
 using OskarMike.Network.Player;
 using OskarMike.UI;
 using TMPro;
@@ -23,13 +22,10 @@ namespace OskarMike.Editor
                     AssetDatabase.LoadAssetAtPath<TMP_FontAsset>("Assets/Fonts/Pretendard-Regular SDF.asset");
                 serialized.ApplyModifiedPropertiesWithoutUndo();
                 PrefabUtility.SaveAsPrefabAsset(root, playerPath);
-                // TestPlayer is a generated copy; retain its GUID and its test input adapter.
-                if (root.GetComponent<EnemyAITestPlayer>() == null) root.AddComponent<EnemyAITestPlayer>();
-                PrefabUtility.SaveAsPrefabAsset(root, "Assets/AI/Prefabs/TestPlayer.prefab");
             }
             finally { PrefabUtility.UnloadPrefabContents(root); }
             AssetDatabase.SaveAssets();
-            Debug.Log("[체력] 제품/AI 테스트 플레이어 연결 완료");
+            Debug.Log("[체력] 플레이어 연결 완료");
         }
     }
 }
